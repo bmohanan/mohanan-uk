@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Letter Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: #2a2a32; color: var(--bmc-ink); font-family: var(--bmc-sans); }
+
+  /* on-screen toolbar */
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bmc-bg);
+    color: var(--bmc-fg);
+    border-bottom: 1px solid var(--bmc-line);
+    padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--bmc-mono); font-size: 12px;
+  }
+  .toolbar a { color: var(--bmc-cyan); text-decoration: none; }
+  .toolbar .right { display: flex; gap: 8px; }
+  .toolbar button {
+    font-family: var(--bmc-mono); font-size: 11px;
+    background: rgba(255,255,255,.04); color: var(--bmc-fg);
+    border: 1px solid var(--bmc-line); padding: 6px 12px;
+    border-radius: 4px; cursor: pointer;
+  }
+  .toolbar button:hover { background: rgba(255,255,255,.08); }
+
+  /* A4 page */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 28px auto;
+    background: var(--bmc-paper);
+    color: var(--bmc-ink);
+    padding: 24mm 22mm 22mm;
+    box-shadow: 0 16px 60px -16px rgba(0,0,0,.5);
+    box-sizing: border-box;
+    position: relative;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  /* —— letterhead —— */
+  .letterhead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 14mm;
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+    margin-bottom: 12mm;
+  }
+  .letterhead .lock {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .letterhead .lock .name { font-size: 17pt; font-weight: 600; letter-spacing: -.01em; color: var(--bmc-ink); }
+  .letterhead .lock .tag { font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-ink-muted); margin-top: 2px; letter-spacing: .02em; }
+  .letterhead .sender {
+    text-align: right;
+    font-family: var(--bmc-mono);
+    font-size: 9pt;
+    color: var(--bmc-ink-2);
+    line-height: 1.6;
+  }
+  .letterhead .sender b { color: var(--bmc-ink); font-weight: 600; }
+  .letterhead .sender a { color: var(--bmc-ink); text-decoration: none; }
+
+  /* —— meta block (date + ref) —— */
+  .meta {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content 1fr;
+    gap: 6px 20px;
+    margin-bottom: 10mm;
+    font-size: 10pt;
+  }
+  .meta dt { font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-ink-muted); }
+  .meta dd { margin: 0; color: var(--bmc-ink); }
+  .meta dd[contenteditable]:focus { outline: 2px solid var(--bmc-grad-1); outline-offset: 2px; }
+
+  /* —— addressee —— */
+  .addressee {
+    margin-bottom: 8mm;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .addressee b { font-weight: 600; }
+
+  /* —— subject —— */
+  .subject {
+    font-weight: 600;
+    font-size: 12pt;
+    margin-bottom: 6mm;
+    color: var(--bmc-ink);
+  }
+  .subject::before {
+    content: "Re:";
+    font-family: var(--bmc-mono);
+    font-size: 10pt;
+    color: var(--bmc-ink-muted);
+    margin-right: 8px;
+  }
+
+  /* —— body —— */
+  .body p { margin: 0 0 5mm; text-wrap: pretty; }
+  .body p[contenteditable]:focus { outline: 2px solid var(--bmc-grad-1); outline-offset: 2px; border-radius: 2px; }
+  .body em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; color: var(--bmc-ink); }
+  .body strong { font-weight: 600; }
+
+  /* —— scope-block (statement of work bullets) —— */
+  .scope {
+    margin: 6mm 0;
+    padding: 6mm 8mm;
+    background: var(--bmc-paper-2);
+    border-left: 3px solid;
+    border-image: var(--bmc-gradient) 1;
+    border-radius: 0 4px 4px 0;
+  }
+  .scope h4 {
+    margin: 0 0 3mm;
+    font-family: var(--bmc-mono); font-size: 9pt;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--bmc-ink-muted); font-weight: 600;
+  }
+  .scope ul {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 2mm;
+  }
+  .scope ul li {
+    display: grid; grid-template-columns: 18px 1fr;
+    gap: 8px; font-size: 10.5pt; line-height: 1.5;
+  }
+  .scope ul li::before {
+    content: "→";
+    font-family: var(--bmc-mono);
+    color: var(--bmc-grad-2);
+    font-weight: 600;
+  }
+
+  /* —— commercial line —— */
+  .commercial {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 6mm 0;
+    border: 1px solid var(--bmc-line-ink-2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .commercial .col {
+    padding: 5mm 6mm;
+    border-right: 1px solid var(--bmc-line-ink);
+  }
+  .commercial .col:last-child { border-right: none; }
+  .commercial .lbl {
+    font-family: var(--bmc-mono); font-size: 9pt;
+    color: var(--bmc-ink-muted); letter-spacing: .08em;
+    text-transform: uppercase; margin-bottom: 1mm;
+  }
+  .commercial .val {
+    font-size: 16pt; font-weight: 700; letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .commercial .val.grad {
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .commercial .sub {
+    font-size: 9pt; color: var(--bmc-ink-muted); margin-top: 1mm;
+  }
+
+  /* —— sign-off —— */
+  .signoff {
+    margin-top: 12mm;
+  }
+  .signoff .sign-name {
+    font-family: var(--bmc-serif); font-style: italic; font-weight: 500;
+    font-size: 24pt;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin: 4mm 0 1mm;
+    line-height: 1;
+  }
+  .signoff .sign-role {
+    font-size: 10pt; color: var(--bmc-ink-2);
+  }
+  .signoff .sign-role b { color: var(--bmc-ink); font-weight: 600; }
+
+  /* —— footer —— */
+  .pagefooter {
+    position: absolute;
+    bottom: 14mm; left: 22mm; right: 22mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--bmc-line-ink);
+    display: flex; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 8pt;
+    color: var(--bmc-ink-muted);
+  }
+
+  /* —— print —— */
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      width: 100%;
+      min-height: 100vh;
+      page-break-after: always;
+    }
+    @page { size: A4; margin: 0; }
+    .scope, .commercial { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .signoff .sign-name, .commercial .val.grad { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>// <a href="Brand Kit.html">brand-kit</a> / letter-template.html — print to PDF or paste into Word as the canonical letterhead</span>
+  <div class="right">
+    <button onclick="window.print()">⎙ Print / Save as PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- letterhead -->
+  <div class="letterhead">
+    <div class="lock">
+      <div class="bmc-badge bmc-badge--lg"><span class="t">~</span>bmc</div>
+      <div>
+        <div class="name">Bimal Mohanan Consulting</div>
+        <div class="tag">// cloud transformation · FinOps · operational excellence</div>
+      </div>
+    </div>
+    <div class="sender">
+      <b>Bimal Mohanan</b><br/>
+      Principal<br/>
+      <br/>
+      11 Westferry Circus<br/>
+      London E14 4HD<br/>
+      United Kingdom<br/>
+      <br/>
+      <a href="mailto:hello@mohanan.uk">hello@mohanan.uk</a><br/>
+      <a href="https://mohanan.uk">mohanan.uk</a>
+    </div>
+  </div>
+
+  <!-- meta -->
+  <dl class="meta">
+    <dt>Date</dt><dd contenteditable="true">25 May 2026</dd>
+    <dt>Ref</dt><dd contenteditable="true">BMC-LT-2026-05-014</dd>
+    <dt>Engagement</dt><dd contenteditable="true">Cloud Cost &amp; Commitment Review</dd>
+    <dt>Period</dt><dd contenteditable="true">Jun – Aug 2026</dd>
+  </dl>
+
+  <!-- addressee -->
+  <div class="addressee" contenteditable="true">
+    <b>Helena Voss</b><br/>
+    Chief Financial Officer<br/>
+    Northwind Energy plc<br/>
+    1 Cathedral Square<br/>
+    Bristol BS1 5DD
+  </div>
+
+  <!-- subject -->
+  <div class="subject" contenteditable="true">Statement of Work — Cloud Cost &amp; Commitment Review (Northwind · Jun 2026)</div>
+
+  <!-- body -->
+  <div class="body">
+    <p contenteditable="true">Dear Helena,</p>
+    <p contenteditable="true">Thank you for the time on Wednesday. Following the conversation between yourself, Marcus, and the platform team, this letter sets out the proposed engagement to take a clear, commercially-honest look at <em>Northwind</em>'s AWS and Azure run-rate — and a credible plan to bring it back into line.</p>
+    <p contenteditable="true">In short: we believe there is between <strong>22%</strong> and <strong>30%</strong> of measurable annual saving available to Northwind across the two clouds, recoverable inside a single quarter, without de-scoping the programme that's currently in flight.</p>
+
+    <div class="scope">
+      <h4>// scope of work</h4>
+      <ul>
+        <li>Spend &amp; commitment baseline across AWS (eu-west-2, us-east-1) and Azure (uksouth, westeurope) for the trailing 90 days.</li>
+        <li>Top-20 recommendation backlog — right-size, lifecycle, modernise, retire — prioritised by net annual saving and effort.</li>
+        <li>Reserved Instances, Savings Plans and Azure Hybrid Benefit plan, sized to ≤85% of rolling baseline.</li>
+        <li>Executive read-out plus a working session with the platform &amp; data teams to land the first wave.</li>
+      </ul>
+    </div>
+
+    <p contenteditable="true">The work runs in three phases over six elapsed weeks. We embed inside Northwind's existing standups — no parallel governance, no shadow programme. Your team owns the changes; we own the analysis and the commercial shape.</p>
+
+    <!-- commercial summary -->
+    <div class="commercial">
+      <div class="col">
+        <div class="lbl">// fee</div>
+        <div class="val">£24,000</div>
+        <div class="sub">fixed · ex-VAT · phased ½ / ½</div>
+      </div>
+      <div class="col">
+        <div class="lbl">// target saving</div>
+        <div class="val grad">£640k+</div>
+        <div class="sub">annualised · post-implementation</div>
+      </div>
+      <div class="col">
+        <div class="lbl">// payback</div>
+        <div class="val">≤ 5 mo</div>
+        <div class="sub">commercial breakeven</div>
+      </div>
+    </div>
+
+    <p contenteditable="true">A counter-signed copy of this letter and the attached scope-of-work appendix will form the engagement contract. Standard BMC terms (NDA, IP, data-handling) follow as Appendix B; happy to red-line as needed.</p>
+    <p contenteditable="true">If the above looks right, drop me a note and I'll send the calendar invites for week 1. If there's anything you'd like to shape differently — phasing, scope, commercial structure — let's get on a call this week.</p>
+    <p contenteditable="true">With thanks,</p>
+  </div>
+
+  <!-- sign-off -->
+  <div class="signoff">
+    <div class="sign-name">Bimal Mohanan</div>
+    <div class="sign-role"><b>Bimal Mohanan</b> · Principal · Bimal Mohanan Consulting</div>
+  </div>
+
+  <div class="pagefooter">
+    <span>Bimal Mohanan Consulting · registered in England &amp; Wales</span>
+    <span>mohanan.uk · hello@mohanan.uk</span>
+    <span>1 / 1</span>
+  </div>
+
+</div>
+
+</body>
+</html>

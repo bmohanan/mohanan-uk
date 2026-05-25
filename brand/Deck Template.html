@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Deck Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: #000; color: var(--bmc-fg); font-family: var(--bmc-sans); }
+
+  deck-stage { --slide-bg: var(--bmc-bg); }
+
+  /* ===== slide base ===== */
+  section.slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    background: var(--bmc-bg);
+    color: var(--bmc-fg);
+    overflow: hidden;
+    padding: 80px 96px;
+    box-sizing: border-box;
+    font-family: var(--bmc-sans);
+  }
+  /* dotted grid */
+  section.slide::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  section.slide > *:not(.s-head):not(.s-foot) { position: relative; z-index: 1; }
+
+  /* ===== slide chrome (header & footer) ===== */
+  .s-head {
+    position: absolute; top: 36px; left: 96px; right: 96px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 2;
+  }
+  .s-head .lock { display: flex; align-items: center; gap: 14px; }
+  .s-head .name {
+    font-family: var(--bmc-sans); font-weight: 600; font-size: 24px;
+  }
+  .s-head .sec {
+    font-family: var(--bmc-mono); font-size: 18px; color: var(--bmc-fg-muted);
+  }
+
+  .s-foot {
+    position: absolute; bottom: 36px; left: 96px; right: 96px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 18px; color: var(--bmc-fg-dim);
+    z-index: 2;
+  }
+  .s-foot .grad-rule {
+    flex: 1; height: 1px; margin: 0 24px;
+    background: linear-gradient(90deg, var(--bmc-grad-1), var(--bmc-grad-2) 50%, var(--bmc-grad-3));
+    opacity: .35;
+  }
+
+  /* ===== TITLE SLIDE ===== */
+  section.slide.s-title { display: grid; grid-template-rows: 1fr auto; padding-top: 180px; }
+  .s-title .label {
+    font-family: var(--bmc-mono); font-size: 18px; color: var(--bmc-cyan);
+    letter-spacing: .06em; margin-bottom: 28px;
+  }
+  .s-title .label span { color: var(--bmc-fg-dim); margin: 0 12px; }
+  .s-title h1 {
+    font-size: 200px; font-weight: 700;
+    letter-spacing: -.04em; line-height: .92;
+    margin: 0; max-width: 1500px;
+    text-wrap: balance;
+  }
+  .s-title h1 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; }
+  .s-title h1 .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .s-title .sub {
+    margin-top: 36px;
+    font-size: 28px; color: var(--bmc-fg-2); max-width: 1100px; line-height: 1.4;
+  }
+  .s-title .meta {
+    display: flex; gap: 16px; margin-top: 80px;
+  }
+
+  /* ===== DIVIDER SLIDE ===== */
+  .s-divider {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    background:
+      radial-gradient(80% 80% at 50% 50%, rgba(106,61,245,.18) 0%, rgba(7,7,11,1) 70%),
+      var(--bmc-bg);
+  }
+  .s-divider .label {
+    font-family: var(--bmc-mono); font-size: 22px;
+    color: var(--bmc-cyan); letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 32px;
+  }
+  .s-divider h2 {
+    font-size: 220px; font-weight: 700; letter-spacing: -.04em;
+    line-height: .92; margin: 0;
+    text-wrap: balance;
+  }
+  .s-divider h2 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ===== CONTENT SLIDE ===== */
+  section.slide.s-content { display: grid; grid-template-rows: auto 1fr; gap: 56px; padding-top: 180px; }
+  .s-content h2 {
+    font-size: 84px; font-weight: 700; letter-spacing: -.025em;
+    line-height: 1.02; margin: 0; max-width: 1500px;
+  }
+  .s-content h2 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; }
+  .s-content h2 .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .s-content .body {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .s-content .body p {
+    font-size: 30px; color: var(--bmc-fg-2); line-height: 1.45;
+    margin: 0 0 24px; text-wrap: pretty;
+  }
+  .s-content .body p b { color: var(--bmc-fg); font-weight: 600; }
+  .s-content .body p:last-child { color: var(--bmc-fg-muted); }
+
+  /* feature list */
+  .feat-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 22px; }
+  .feat-list li {
+    display: grid; grid-template-columns: 80px 1fr; gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--bmc-line);
+  }
+  .feat-list li:first-child { border-top: 1px solid var(--bmc-line); }
+  .feat-list li:last-child { border-bottom: 1px solid var(--bmc-line); }
+  .feat-list .n {
+    font-family: var(--bmc-mono); font-size: 20px; color: var(--bmc-cyan);
+    padding-top: 6px; letter-spacing: .08em;
+  }
+  .feat-list h3 { margin: 0 0 8px; font-size: 28px; font-weight: 600; letter-spacing: -.01em; }
+  .feat-list p  { margin: 0; font-size: 20px; color: var(--bmc-fg-muted); line-height: 1.45; }
+
+  /* ===== TWO-UP / SPLIT ===== */
+  section.slide.s-split { padding-top: 180px; display: grid; grid-template-rows: auto 1fr; gap: 48px; }
+  .s-split h2 { font-size: 64px; font-weight: 700; letter-spacing: -.025em; margin: 0; }
+  .s-split .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .s-split .col {
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: 24px;
+    padding: 48px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .s-split .col .tag {
+    font-family: var(--bmc-mono); font-size: 18px; color: var(--bmc-cyan);
+    letter-spacing: .08em;
+  }
+  .s-split .col h3 { font-size: 56px; font-weight: 700; letter-spacing: -.025em; margin: 0; line-height: 1; }
+  .s-split .col h3 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .s-split .col p { margin: 0; font-size: 22px; color: var(--bmc-fg-2); line-height: 1.45; }
+  .s-split .col ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .s-split .col ul li { font-family: var(--bmc-mono); font-size: 18px; color: var(--bmc-fg-2); display: grid; grid-template-columns: 24px 1fr; gap: 12px; }
+  .s-split .col ul li::before { content: "~"; color: var(--bmc-cyan); }
+  .s-split .col .big-stat { font-size: 140px; font-weight: 700; letter-spacing: -.04em; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; margin-top: auto; }
+  .s-split .col .big-stat-lbl { font-family: var(--bmc-mono); font-size: 16px; color: var(--bmc-fg-muted); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* ===== DATA SLIDE ===== */
+  section.slide.s-data { padding-top: 180px; display: grid; grid-template-rows: auto auto 1fr; gap: 40px; }
+  .s-data h2 { font-size: 56px; font-weight: 700; letter-spacing: -.025em; margin: 0; }
+  .s-data .data-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bmc-line);
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--bmc-surface);
+  }
+  .s-data .data-cell {
+    padding: 48px;
+    border-right: 1px solid var(--bmc-line);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .s-data .data-cell:last-child { border-right: none; }
+  .s-data .data-cell .lbl { font-family: var(--bmc-mono); font-size: 16px; color: var(--bmc-fg-muted); letter-spacing: .1em; text-transform: uppercase; }
+  .s-data .data-cell .val { font-size: 96px; font-weight: 700; letter-spacing: -.03em; line-height: 1; color: var(--bmc-fg); }
+  .s-data .data-cell .val.grad { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .s-data .data-cell .desc { font-size: 18px; color: var(--bmc-fg-muted); line-height: 1.45; margin-top: 8px; }
+
+  /* big bar visual */
+  .bar-row { display: grid; grid-template-columns: 220px 1fr 140px; align-items: center; gap: 24px; font-size: 22px; padding: 18px 0; border-top: 1px solid var(--bmc-line); }
+  .bar-row:last-child { border-bottom: 1px solid var(--bmc-line); }
+  .bar-row .nm { color: var(--bmc-fg); }
+  .bar-row .barwrap { position: relative; height: 12px; background: rgba(255,255,255,.05); border-radius: 6px; overflow: hidden; }
+  .bar-row .barwrap i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bmc-gradient); border-radius: 6px; }
+  .bar-row .v { font-family: var(--bmc-mono); text-align: right; color: var(--bmc-fg); }
+
+  /* ===== QUOTE ===== */
+  .s-quote {
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 0 200px;
+  }
+  .s-quote .qmark {
+    font-family: var(--bmc-serif); font-size: 280px; font-weight: 900;
+    line-height: .7; background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: -40px;
+  }
+  .s-quote blockquote {
+    margin: 0; font-family: var(--bmc-serif); font-weight: 500;
+    font-size: 96px; line-height: 1.1; letter-spacing: -.02em;
+    max-width: 1500px;
+    text-wrap: pretty;
+  }
+  .s-quote blockquote em { font-style: italic; }
+  .s-quote .attr {
+    margin-top: 48px;
+    font-family: var(--bmc-mono); font-size: 22px; color: var(--bmc-fg-muted);
+  }
+  .s-quote .attr b { color: var(--bmc-fg); font-weight: 500; }
+
+  /* ===== CLOSE ===== */
+  .s-close {
+    background:
+      radial-gradient(80% 80% at 50% 50%, rgba(209,54,230,.16) 0%, rgba(7,7,11,1) 70%),
+      var(--bmc-bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .s-close .label { font-family: var(--bmc-mono); font-size: 22px; color: var(--bmc-cyan); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 28px; }
+  .s-close h2 { font-size: 180px; font-weight: 700; letter-spacing: -.04em; line-height: .95; margin: 0; max-width: 1500px; }
+  .s-close h2 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .s-close .ct { margin-top: 60px; display: flex; gap: 56px; align-items: center; font-family: var(--bmc-mono); font-size: 22px; color: var(--bmc-fg-2); }
+  .s-close .ct b { color: var(--bmc-fg); font-weight: 500; }
+
+  /* big mark variant */
+  .bmc-badge--mega {
+    width: 320px; height: 320px;
+    border-radius: 72px;
+    font-size: 96px;
+    box-shadow:
+      0 16px 60px -16px rgba(170, 60, 230, .55),
+      0 0 0 1px rgba(255,255,255,.06) inset;
+  }
+</style>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Cover slide. Open with the headline and the room. Mention the date, the audience name. Keep this on screen until everyone's settled.",
+  "Section divider. Pause for two beats. The job of this slide is to reset the room's attention, not to be read.",
+  "Three practices. Strategy, FinOps, Delivery. Frame each as one sentence — then move on. The detail is in the back-up deck.",
+  "The two clouds. Don't pick a side. The point is that the consultancy is bilingual — AWS and Azure on the same page, in the same voice.",
+  "Numbers slide. Read the big number, give the context, move on. Do not read the small print to them.",
+  "Quote slide. Read it slowly. Pause. Then attribute. Trust the typography to do the rest.",
+  "Close. Call to action — book the call. Surface the email and diary link. Stop talking."
+]
+</script>
+</head>
+<body>
+
+<script src="brand/deck-stage.js"></script>
+
+<deck-stage>
+
+  <!-- ========= 01 TITLE ========= -->
+  <section class="slide s-title" data-screen-label="01 Title">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// title</span>
+    </div>
+
+    <div>
+      <div class="label">$ <span style="color:var(--bmc-fg-dim)">~/</span>bmc<span>·</span>capabilities.md</div>
+      <h1>Make the cloud<br/><em>pay back</em> the <span class="g">promise.</span></h1>
+      <p class="sub">Cloud transformation, FinOps and operational excellence for AWS &amp; Azure enterprises. Strategy, delivery and the commercial fluency to do both.</p>
+      <div class="meta">
+        <span class="bmc-chip"><span style="color:var(--bmc-cyan)">~</span> London · United Kingdom</span>
+        <span class="bmc-chip">est. 2026</span>
+        <span class="bmc-chip">deck v1.0</span>
+      </div>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>mohanan.uk</span>
+    </div>
+  </section>
+
+  <!-- ========= 02 DIVIDER ========= -->
+  <section class="slide s-divider" data-screen-label="02 Section">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// 01 — section</span>
+    </div>
+
+    <div style="padding: 0 0 0 0;">
+      <div class="label">// chapter 01</div>
+      <h2>What we <em>do</em>.</h2>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>02</span>
+    </div>
+  </section>
+
+  <!-- ========= 03 CONTENT ========= -->
+  <section class="slide s-content" data-screen-label="03 Practices">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// 01 — what we do</span>
+    </div>
+
+    <h2>Three practices,<br/>one <em>commercial</em> <span class="g">lens</span>.</h2>
+
+    <div class="body">
+      <ul class="feat-list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>Cloud strategy &amp; pre-sales</h3>
+            <p>Help vendors win and enterprises choose. RFPs, TCO models, executive narratives.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>FinOps &amp; unit economics</h3>
+            <p>Turn the bill into a P&amp;L. Per-customer, per-feature cost — and the commitments that lock the savings in.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>Delivery &amp; operational excellence</h3>
+            <p>Landing zones, incident review, interim leadership — the unglamorous middle of a cloud programme.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div>
+        <p>BMC is the consultancy a CTO calls when the cloud bill stops making sense, or when a vendor is selling more than the team can land.</p>
+        <p>Two hyperscalers, one voice — bilingual <b>AWS</b> and <b>Azure</b>, with the commercial fluency to talk to <b>CFOs</b> and <b>SREs</b> in the same paragraph.</p>
+      </div>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>03</span>
+    </div>
+  </section>
+
+  <!-- ========= 04 SPLIT (Two Clouds) ========= -->
+  <section class="slide s-split" data-screen-label="04 Two Clouds">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// 02 — platforms</span>
+    </div>
+
+    <h2>Bilingual across the <em style="font-style:italic;font-family:var(--bmc-serif);font-weight:500;">two</em> clouds that matter.</h2>
+
+    <div class="cols">
+      <div class="col">
+        <span class="tag">// AWS</span>
+        <h3>The <em>scale</em><br/>cloud.</h3>
+        <p>Where global delivery, deep service breadth and the most mature FinOps tooling live. Where most workloads still default to.</p>
+        <ul>
+          <li>EKS · Fargate · EC2 Graviton</li>
+          <li>Aurora · RDS · Athena</li>
+          <li>Compute &amp; SageMaker Savings Plans</li>
+          <li>Cost Explorer · CUR · FOCUS</li>
+        </ul>
+        <div style="margin-top:auto;">
+          <div class="big-stat">£24m</div>
+          <div class="big-stat-lbl">// advised annually · UK + EMEA</div>
+        </div>
+      </div>
+      <div class="col">
+        <span class="tag">// Azure</span>
+        <h3>The <em>enterprise</em><br/>cloud.</h3>
+        <p>Where M365, Active Directory and the licence-asset model already live. Where boardroom CIOs ask the most questions.</p>
+        <ul>
+          <li>AKS · Container Apps · VMSS</li>
+          <li>SQL DB · Synapse · Fabric</li>
+          <li>Reserved Capacity + Hybrid Benefit</li>
+          <li>Cost Management · Advisor</li>
+        </ul>
+        <div style="margin-top:auto;">
+          <div class="big-stat">£16m</div>
+          <div class="big-stat-lbl">// advised annually · UK + EMEA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>04</span>
+    </div>
+  </section>
+
+  <!-- ========= 05 DATA ========= -->
+  <section class="slide s-data" data-screen-label="05 Numbers">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// 03 — proof</span>
+    </div>
+
+    <h2>What the last <em style="font-style:italic;font-family:var(--bmc-serif);font-weight:500;">fourteen</em> engagements looked like.</h2>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <span class="lbl">// engagements</span>
+        <span class="val">14</span>
+        <span class="desc">Cost &amp; commitment reviews delivered FY24–FY26.</span>
+      </div>
+      <div class="data-cell">
+        <span class="lbl">// avg. saving</span>
+        <span class="val grad">28%</span>
+        <span class="desc">Median net annual saving on covered run-rate.</span>
+      </div>
+      <div class="data-cell">
+        <span class="lbl">// payback</span>
+        <span class="val">4mo</span>
+        <span class="desc">Median commercial payback on advisory + buy-down fees.</span>
+      </div>
+      <div class="data-cell">
+        <span class="lbl">// recommended</span>
+        <span class="val">93%</span>
+        <span class="desc">Of last-12-month clients booked a follow-on engagement.</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="bar-row"><span class="nm">EC2 &amp; VM right-size</span><div class="barwrap"><i style="width:84%"></i></div><span class="v">£480k / yr</span></div>
+      <div class="bar-row"><span class="nm">Savings Plans + RIs</span><div class="barwrap"><i style="width:96%"></i></div><span class="v">£640k / yr</span></div>
+      <div class="bar-row"><span class="nm">SQL · Aurora · Hybrid Benefit</span><div class="barwrap"><i style="width:62%"></i></div><span class="v">£310k / yr</span></div>
+      <div class="bar-row"><span class="nm">Storage · network · hygiene</span><div class="barwrap"><i style="width:38%"></i></div><span class="v">£180k / yr</span></div>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>05</span>
+    </div>
+  </section>
+
+  <!-- ========= 06 QUOTE ========= -->
+  <section class="slide s-quote" data-screen-label="06 Quote">
+    <div class="s-head">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// testimonial</span>
+    </div>
+
+    <div class="qmark">"</div>
+    <blockquote>
+      BMC found <em>£840k</em> of annual savings in the first month — and the diligence to land them in the second.
+    </blockquote>
+    <div class="attr">— <b>CTO</b> · UK-listed SaaS · post-engagement Q4 2025</div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>06</span>
+    </div>
+  </section>
+
+  <!-- ========= 07 CLOSE ========= -->
+  <section class="slide s-close" data-screen-label="07 Close">
+    <div class="s-head" style="left:96px;right:96px;">
+      <div class="lock">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="name">Bimal Mohanan Consulting</span>
+      </div>
+      <span class="sec">// close</span>
+    </div>
+
+    <div class="label">// next step</div>
+    <h2>Let's <em>talk</em><br/>numbers.</h2>
+
+    <div class="ct">
+      <span><b>hello@mohanan.uk</b></span>
+      <span style="opacity:.3">·</span>
+      <span><b>cal.com/bmc</b></span>
+      <span style="opacity:.3">·</span>
+      <span><b>London · UK</b></span>
+    </div>
+
+    <div class="s-foot">
+      <span>BMC · capabilities</span>
+      <span class="grad-rule"></span>
+      <span>07 / 07</span>
+    </div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>

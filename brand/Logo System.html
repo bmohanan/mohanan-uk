@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Logo System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-bg); color: var(--bmc-fg); font-family: var(--bmc-sans); }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 0);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 56px 48px 120px; }
+
+  /* breadcrumb header */
+  .crumb { display: flex; justify-content: space-between; align-items: center; padding-bottom: 28px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 56px; font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-dim); }
+  .crumb a { color: var(--bmc-cyan); text-decoration: none; }
+  .crumb .here { color: var(--bmc-fg); }
+
+  h1 { font-size: 48px; font-weight: 700; letter-spacing: -.025em; margin: 0 0 14px; line-height: 1.05; text-wrap: pretty; }
+  h1 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; }
+  .lede { color: var(--bmc-fg-muted); font-size: 17px; max-width: 60ch; line-height: 1.55; margin: 0 0 80px; }
+
+  /* section */
+  .sec { margin-bottom: 80px; }
+  .sec > header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--bmc-line); }
+  .sec > header h2 { margin: 0; font-size: 13px; font-family: var(--bmc-mono); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--bmc-fg-muted); }
+  .sec > header .idx { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+
+  /* primary mark hero */
+  .primary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    overflow: hidden;
+    background: var(--bmc-surface);
+    margin-bottom: 24px;
+  }
+  .primary .face { display: flex; align-items: center; justify-content: center; padding: 72px; min-height: 380px; }
+  .primary .face.dark { background: var(--bmc-bg); }
+  .primary .face.paper { background: var(--bmc-paper); }
+  .primary .face .cap {
+    position: absolute; margin-top: 200px;
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+  }
+  .primary .face.paper .cap { color: var(--bmc-ink-muted); }
+
+  .anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .anatomy .ctx {
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    padding: 24px;
+  }
+  .anatomy h3 { font-family: var(--bmc-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--bmc-fg-muted); margin: 0 0 16px; }
+  .anatomy ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--bmc-fg-2); line-height: 1.5; }
+  .anatomy li { display: grid; grid-template-columns: 90px 1fr; gap: 14px; }
+  .anatomy li span { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-cyan); padding-top: 2px; }
+
+  /* lockups grid */
+  .lockups { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lockup-cell {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    padding: 48px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    min-height: 200px;
+  }
+  .lockup-cell.dark { background: var(--bmc-bg); }
+  .lockup-cell.paper { background: var(--bmc-paper); }
+  .lockup-cell .cap { position: absolute; bottom: 14px; left: 18px; font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+  .lockup-cell.paper .cap { color: var(--bmc-ink-muted); }
+
+  /* sizes table */
+  .sizes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    background: var(--bmc-surface);
+    overflow: hidden;
+  }
+  .size-cell {
+    padding: 32px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    border-right: 1px solid var(--bmc-line);
+  }
+  .size-cell:last-child { border-right: none; }
+  .size-cell .meta {
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+    text-align: center; line-height: 1.6;
+  }
+  .size-cell .meta b { color: var(--bmc-fg-2); font-weight: 500; display: block; }
+
+  /* monochrome row */
+  .mono-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .mono-cell {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .mono-cell.dark { background: var(--bmc-bg); }
+  .mono-cell.paper { background: var(--bmc-paper); }
+  .mono-cell.inverse { background: var(--bmc-ink); }
+  .mono-cell .cap { position: absolute; bottom: 14px; left: 18px; font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+  .mono-cell.paper .cap { color: var(--bmc-ink-muted); }
+
+  /* white-on-anything badge */
+  .bmc-badge--mono-white {
+    background: transparent !important;
+    border: 1.5px solid #fff;
+    color: #fff;
+  }
+  .bmc-badge--mono-white::after { display: none; }
+
+  .bmc-badge--mono-ink {
+    background: transparent !important;
+    border: 1.5px solid var(--bmc-ink);
+    color: var(--bmc-ink);
+  }
+  .bmc-badge--mono-ink::after { display: none; }
+
+  .bmc-badge--solid-ink {
+    background: var(--bmc-ink) !important;
+    color: #fff;
+  }
+  .bmc-badge--solid-ink::after { display: none; }
+
+  /* clear space */
+  .clear-space { position: relative; padding: 60px; display: flex; align-items: center; justify-content: center; background: var(--bmc-surface); border: 1px solid var(--bmc-line); border-radius: var(--bmc-r); }
+  .clear-space .frame {
+    position: relative; padding: 60px;
+    background: repeating-linear-gradient(45deg, rgba(70,217,200,.05) 0 6px, transparent 6px 12px);
+    border-radius: 30px;
+  }
+  .clear-space .frame::before {
+    content: ""; position: absolute; inset: 0;
+    border: 1px dashed rgba(70,217,200,.3);
+    border-radius: 30px;
+  }
+  .clear-space .label {
+    position: absolute;
+    font-family: var(--bmc-mono); font-size: 10px; color: var(--bmc-cyan);
+  }
+  .clear-space .label.t { top: 24px; left: 50%; transform: translateX(-50%); }
+  .clear-space .label.b { bottom: 24px; left: 50%; transform: translateX(-50%); }
+  .clear-space .label.l { left: 16px; top: 50%; transform: translateY(-50%); }
+  .clear-space .label.r { right: 16px; top: 50%; transform: translateY(-50%); }
+
+  /* favicons + avatars row */
+  .platform { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .platform-card {
+    border: 1px solid var(--bmc-line); border-radius: var(--bmc-r);
+    padding: 24px; background: var(--bmc-surface);
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .platform-card .meta { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-muted); text-align: center; }
+  .platform-card .meta b { color: var(--bmc-fg); font-weight: 500; display: block; }
+  /* circular avatar */
+  .bmc-avatar {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    background: var(--bmc-gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--bmc-mono); font-weight: 500; font-size: 26px;
+    color: #fff;
+    letter-spacing: -.04em;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 28px -8px rgba(170, 60, 230, .55);
+  }
+  .bmc-avatar::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+  }
+  .bmc-avatar .t { opacity: .72; margin-right: 2px; }
+
+  .bmc-favicon {
+    width: 32px; height: 32px;
+    border-radius: 7px;
+    background: var(--bmc-gradient);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: var(--bmc-mono); font-weight: 500; font-size: 10px;
+    position: relative; overflow: hidden;
+  }
+  .bmc-favicon::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+  }
+  .bmc-favicon .t { opacity: .72; margin-right: 1px; }
+
+  /* DO/DONT */
+  .dodont { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .dd {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    background: var(--bmc-surface);
+    overflow: hidden;
+  }
+  .dd .face { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; background: var(--bmc-bg); position: relative; }
+  .dd .tag {
+    position: absolute; top: 12px; left: 12px;
+    font-family: var(--bmc-mono); font-size: 11px;
+    padding: 2px 8px; border-radius: 4px;
+    background: rgba(74, 222, 128, .12); color: var(--bmc-green);
+  }
+  .dd.no .tag { background: rgba(239, 107, 107, .12); color: #ef6b6b; }
+  .dd .desc { padding: 14px 16px; font-size: 13px; color: var(--bmc-fg-2); line-height: 1.45; }
+
+  /* "broken" badge variants for don't section */
+  .bad-skew { transform: skewX(-12deg); }
+  .bad-shadow { box-shadow: 8px 8px 0 #ff00ff !important; }
+  .bad-color { background: linear-gradient(135deg, #f59e0b, #84cc16, #06b6d4) !important; }
+</style>
+</head>
+<body>
+
+<main>
+
+  <div class="crumb">
+    <span><a href="Brand Kit.html">brand-kit</a> / <span class="here">logo-system</span></span>
+    <span>v1.0 · 25 May 2026</span>
+  </div>
+
+  <h1>The <em>~bmc</em> mark.</h1>
+  <p class="lede">A terminal-style monogram on the gradient that defines the brand. The tilde nods to home directories and command-line fluency — the consultancy that ships from a prompt, not a slide.</p>
+
+  <!-- 01 primary -->
+  <section class="sec">
+    <header><h2>// 01 — Primary mark</h2><span class="idx">brand/logo/primary</span></header>
+    <div class="primary">
+      <div class="face dark">
+        <div class="bmc-badge bmc-badge--xl bmc-badge--glow"><span class="t">~</span>bmc</div>
+      </div>
+      <div class="face paper">
+        <div class="bmc-badge bmc-badge--xl"><span class="t">~</span>bmc</div>
+      </div>
+    </div>
+    <div class="anatomy">
+      <div class="ctx">
+        <h3>// anatomy</h3>
+        <ul>
+          <li><span>shape</span><span>Rounded square. Radius scales linearly with the side — 12px @ 52, 38px @ 168.</span></li>
+          <li><span>fill</span><span>Linear gradient 135° · #6a3df5 → #d136e6 @ 55% → #3a7df5.</span></li>
+          <li><span>glaze</span><span>Radial highlight from top-left, ~22% white, fades by 55%.</span></li>
+          <li><span>type</span><span>JetBrains Mono 500, lowercase, letterspacing −.04em.</span></li>
+          <li><span>tilde</span><span>Always rendered at 72% opacity, separated by .08em.</span></li>
+        </ul>
+      </div>
+      <div class="ctx">
+        <h3>// behaviour</h3>
+        <ul>
+          <li><span>on dark</span><span>Add the glow shadow — magenta-purple, 8px down, blurred 28px.</span></li>
+          <li><span>on paper</span><span>Drop the glow. Gradient is enough; no flat-fill replacement needed.</span></li>
+          <li><span>small</span><span>Below 24px, drop to the favicon / single-character fallback.</span></li>
+          <li><span>print</span><span>Gradient prints clean on coated stock. For uncoated, use the monochrome ink variant.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 lockups -->
+  <section class="sec">
+    <header><h2>// 02 — Lockups</h2><span class="idx">brand/logo/lockup</span></header>
+    <div class="lockups">
+      <div class="lockup-cell dark">
+        <div class="bmc-lockup">
+          <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+          <div class="bmc-lockup__wordmark" style="gap:3px;">
+            <div class="bmc-lockup__name" style="font-size:20px;">Bimal Mohanan</div>
+            <div class="bmc-lockup__tag">Consulting · est. 2026</div>
+          </div>
+        </div>
+        <span class="cap">horizontal · on dark</span>
+      </div>
+      <div class="lockup-cell paper">
+        <div class="bmc-lockup bmc-lockup--ink">
+          <div class="bmc-badge bmc-badge--lg"><span class="t">~</span>bmc</div>
+          <div class="bmc-lockup__wordmark" style="gap:3px;">
+            <div class="bmc-lockup__name" style="font-size:20px;">Bimal Mohanan</div>
+            <div class="bmc-lockup__tag">Consulting · est. 2026</div>
+          </div>
+        </div>
+        <span class="cap">horizontal · on paper</span>
+      </div>
+      <div class="lockup-cell dark">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+          <div style="text-align:center;">
+            <div style="font-weight:600;font-size:20px;">Bimal Mohanan</div>
+            <div style="font-family:var(--bmc-mono);font-size:11px;color:var(--bmc-fg-muted);letter-spacing:.04em;">CONSULTING</div>
+          </div>
+        </div>
+        <span class="cap">stacked · on dark</span>
+      </div>
+      <div class="lockup-cell paper">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <div class="bmc-badge bmc-badge--lg"><span class="t">~</span>bmc</div>
+          <div style="text-align:center;color:var(--bmc-ink);">
+            <div style="font-weight:600;font-size:20px;">Bimal Mohanan</div>
+            <div style="font-family:var(--bmc-mono);font-size:11px;color:var(--bmc-ink-muted);letter-spacing:.04em;">CONSULTING</div>
+          </div>
+        </div>
+        <span class="cap">stacked · on paper</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 sizes -->
+  <section class="sec">
+    <header><h2>// 03 — Size system</h2><span class="idx">brand/logo/sizes</span></header>
+    <div class="sizes">
+      <div class="size-cell">
+        <div class="bmc-badge bmc-badge--xs"><span class="t">~</span></div>
+        <div class="meta"><b>24px · favicon</b>~ tilde only<br/>radius 6</div>
+      </div>
+      <div class="size-cell">
+        <div class="bmc-badge bmc-badge--sm"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>32px · favicon</b>full mark<br/>radius 8</div>
+      </div>
+      <div class="size-cell">
+        <div class="bmc-badge bmc-badge--md bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>52px · navbar</b>primary use<br/>radius 12</div>
+      </div>
+      <div class="size-cell">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>96px · header</b>cover art<br/>radius 22</div>
+      </div>
+      <div class="size-cell">
+        <div class="bmc-badge bmc-badge--xl bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>168px · hero</b>oversized<br/>radius 38</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 monochrome -->
+  <section class="sec">
+    <header><h2>// 04 — Monochrome &amp; reverse</h2><span class="idx">brand/logo/mono</span></header>
+    <div class="mono-row">
+      <div class="mono-cell dark">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--mono-white"><span class="t">~</span>bmc</div>
+        <span class="cap">outline · white</span>
+      </div>
+      <div class="mono-cell paper">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--mono-ink"><span class="t">~</span>bmc</div>
+        <span class="cap">outline · ink</span>
+      </div>
+      <div class="mono-cell inverse">
+        <div class="bmc-badge bmc-badge--lg" style="background:#fff !important; color: var(--bmc-ink);"><span class="t">~</span>bmc</div>
+        <span class="cap">solid · white</span>
+      </div>
+      <div class="mono-cell paper">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--solid-ink"><span class="t">~</span>bmc</div>
+        <span class="cap">solid · ink</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 clear-space -->
+  <section class="sec">
+    <header><h2>// 05 — Clear space &amp; minimums</h2><span class="idx">brand/logo/space</span></header>
+    <div class="clear-space">
+      <div class="frame">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <span class="label t">↑ ½× height</span>
+        <span class="label b">↓ ½× height</span>
+        <span class="label l">←</span>
+        <span class="label r">→</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:13px;color:var(--bmc-fg-muted);max-width:60ch;line-height:1.55;">
+      Reserve at least <b style="color:var(--bmc-fg)">½ the badge height</b> of clear space on every side. Never place type, rules, or other marks inside this zone. Minimum legible size: <b style="color:var(--bmc-fg)">24px</b> on screen, <b style="color:var(--bmc-fg)">8mm</b> in print.
+    </p>
+  </section>
+
+  <!-- 06 platform -->
+  <section class="sec">
+    <header><h2>// 06 — Platform applications</h2><span class="idx">brand/logo/platform</span></header>
+    <div class="platform">
+      <div class="platform-card">
+        <div class="bmc-favicon"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>Favicon · 32×32</b>tabs, bookmarks</div>
+      </div>
+      <div class="platform-card">
+        <div class="bmc-avatar"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>LinkedIn · 96×96</b>round avatar</div>
+      </div>
+      <div class="platform-card">
+        <div class="bmc-avatar" style="border-radius:18px;"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>App icon · iOS</b>squircle 18r</div>
+      </div>
+      <div class="platform-card">
+        <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+        <div class="meta"><b>OG card · 1200×630</b>centered, 1/3 scale</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 do/dont -->
+  <section class="sec">
+    <header><h2>// 07 — Do &amp; don't</h2><span class="idx">brand/logo/rules</span></header>
+    <div class="dodont">
+      <div class="dd">
+        <div class="face">
+          <span class="tag">DO</span>
+          <div class="bmc-badge bmc-badge--lg bmc-badge--glow"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">Use the badge at its native aspect ratio with the gradient and glow on dark surfaces.</div>
+      </div>
+      <div class="dd no">
+        <div class="face">
+          <span class="tag">DON'T</span>
+          <div class="bmc-badge bmc-badge--lg bad-skew"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">Don't skew, rotate, or stretch the mark. Lay it flat or don't lay it.</div>
+      </div>
+      <div class="dd no">
+        <div class="face">
+          <span class="tag">DON'T</span>
+          <div class="bmc-badge bmc-badge--lg bad-color"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">Don't recolour the gradient. The three stops are the brand.</div>
+      </div>
+      <div class="dd">
+        <div class="face">
+          <span class="tag">DO</span>
+          <div class="bmc-badge bmc-badge--lg bmc-badge--mono-white"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">Use the outline variants when you can't reproduce the gradient — single-colour print, stamp, embroidery.</div>
+      </div>
+      <div class="dd no">
+        <div class="face">
+          <span class="tag">DON'T</span>
+          <div class="bmc-badge bmc-badge--lg bad-shadow"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">No drop-shadows, no offset duplicates, no Photoshop effects. The glow is the only shadow.</div>
+      </div>
+      <div class="dd no">
+        <div class="face">
+          <span class="tag">DON'T</span>
+          <div class="bmc-badge bmc-badge--lg" style="border-radius:50% !important;"><span class="t">~</span>bmc</div>
+        </div>
+        <div class="desc">Don't change the shape. The rounded square is part of the mark; circles are for avatars only.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top:80px;padding-top:28px;border-top:1px solid var(--bmc-line);display:flex;justify-content:space-between;font-family:var(--bmc-mono);font-size:11px;color:var(--bmc-fg-dim);">
+    <span><a href="Brand Kit.html" style="color:var(--bmc-cyan);text-decoration:none;">← brand kit</a></span>
+    <span>BMC · Logo System · v1.0</span>
+  </footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · C Mark</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-bg); color: var(--bmc-fg); font-family: var(--bmc-sans); }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+
+  main { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 56px 48px 96px; }
+
+  /* crumb */
+  .crumb {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 24px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 64px;
+    font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-dim);
+  }
+  .crumb a { color: var(--bmc-cyan); text-decoration: none; }
+  .crumb .here { color: var(--bmc-fg); }
+
+  /* eyebrow */
+  .eyebrow {
+    font-family: var(--bmc-mono); font-size: 13px;
+    color: var(--bmc-cyan); letter-spacing: .08em;
+    margin-bottom: 24px;
+  }
+  .eyebrow span { color: var(--bmc-fg-dim); margin: 0 10px; }
+
+  /* HERO ==================================================== */
+  .hero {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-xl);
+    background:
+      radial-gradient(80% 60% at 50% 40%, rgba(106,61,245,.18) 0%, transparent 70%),
+      var(--bmc-surface);
+    padding: 96px 64px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* The C: gradient letterform, no enclosing box */
+  .c-glyph {
+    font-family: var(--bmc-mono);
+    font-weight: 500;
+    font-size: 520px;
+    line-height: .82;
+    letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    display: inline-block;
+    margin: 0;
+    text-shadow: 0 0 80px rgba(170, 60, 230, .35);
+    filter: drop-shadow(0 16px 40px rgba(170, 60, 230, .25));
+  }
+
+  /* hero metadata strip below */
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    background: var(--bmc-surface);
+    overflow: hidden;
+    margin-bottom: 80px;
+  }
+  .hero-meta .cell {
+    padding: 22px 24px;
+    border-right: 1px solid var(--bmc-line);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .hero-meta .cell:last-child { border-right: none; }
+  .hero-meta .lbl {
+    font-family: var(--bmc-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: .12em;
+    color: var(--bmc-fg-muted);
+  }
+  .hero-meta .val { font-size: 18px; font-weight: 600; color: var(--bmc-fg); letter-spacing: -.01em; }
+  .hero-meta .val.grad { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero-meta .sub { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+
+  /* SECTION HEADER ========================================== */
+  .sec { margin-bottom: 64px; }
+  .sec > header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--bmc-line);
+  }
+  .sec > header h2 {
+    margin: 0; font-family: var(--bmc-mono); font-size: 12px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--bmc-fg-muted);
+    font-weight: 500;
+  }
+  .sec > header h2 b { color: var(--bmc-fg); font-weight: 600; }
+  .sec > header .idx { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+
+  /* SURFACES grid =========================================== */
+  .surfaces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .surf {
+    border-radius: var(--bmc-r-lg);
+    overflow: hidden;
+    border: 1px solid var(--bmc-line);
+    aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .surf .cap { position: absolute; bottom: 14px; left: 18px; font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+  .surf.dark { background: var(--bmc-bg); }
+  .surf.paper { background: var(--bmc-paper); }
+  .surf.paper .cap { color: var(--bmc-ink-muted); }
+  .surf.inverse { background: var(--bmc-ink); }
+
+  .c-medium {
+    font-family: var(--bmc-mono);
+    font-weight: 500;
+    font-size: 260px;
+    line-height: .82;
+    letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    margin: 0;
+  }
+  .surf.paper .c-medium { filter: saturate(1); }
+  .surf.inverse .c-medium { filter: brightness(1.1); }
+
+  /* SCALE row =============================================== */
+  .scales {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    border: 1px solid var(--bmc-line); border-radius: var(--bmc-r);
+    background: var(--bmc-surface);
+    overflow: hidden;
+  }
+  .scale-cell {
+    padding: 36px 24px;
+    border-right: 1px solid var(--bmc-line);
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .scale-cell:last-child { border-right: none; }
+  .scale-cell .meta {
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+    text-align: center; line-height: 1.6;
+  }
+  .scale-cell .meta b { color: var(--bmc-fg-2); font-weight: 500; display: block; }
+
+  .c-glyph-sized {
+    font-family: var(--bmc-mono);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  .c-12  { font-size: 12px; }
+  .c-24  { font-size: 24px; }
+  .c-48  { font-size: 48px; }
+  .c-96  { font-size: 96px; }
+  .c-200 { font-size: 200px; }
+
+  /* USAGE row =============================================== */
+  .usage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .use {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    background: var(--bmc-surface);
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .use .tag {
+    font-family: var(--bmc-mono); font-size: 11px;
+    letter-spacing: .1em; color: var(--bmc-cyan); text-transform: uppercase;
+  }
+  .use h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+  .use p { margin: 0; color: var(--bmc-fg-muted); font-size: 13px; line-height: 1.55; }
+  .use .demo {
+    margin-top: 10px;
+    aspect-ratio: 16/9;
+    background: var(--bmc-bg);
+    border: 1px solid var(--bmc-line);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .use .demo.paper { background: var(--bmc-paper); }
+
+  /* example: cover composition */
+  .cover-comp {
+    width: 100%; height: 100%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: end;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  .cover-comp .ttl {
+    font-family: var(--bmc-sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--bmc-fg);
+    align-self: end;
+  }
+  .cover-comp .ttl em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;}
+  .cover-comp .big-c {
+    text-align: right;
+    font-family: var(--bmc-mono); font-weight: 500;
+    font-size: 110px; line-height: .8; letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* example: avatar */
+  .av-demo {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--bmc-bg);
+    border: 1px solid var(--bmc-line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--bmc-mono); font-weight: 500;
+    font-size: 42px; line-height: 1; letter-spacing: -.04em;
+    background-image: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .av-stack { display: flex; gap: 12px; }
+
+  /* example: watermark */
+  .watermark-bg {
+    width: 100%; height: 100%;
+    position: relative;
+    background: var(--bmc-bg);
+    overflow: hidden;
+  }
+  .watermark-bg .wm {
+    position: absolute; right: -30px; bottom: -60px;
+    font-family: var(--bmc-mono); font-weight: 500;
+    font-size: 240px; line-height: .82; letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    opacity: .25;
+  }
+  .watermark-bg .ttl {
+    position: absolute; top: 18px; left: 18px;
+    font-family: var(--bmc-mono); font-size: 10px; color: var(--bmc-cyan); letter-spacing: .08em;
+  }
+  .watermark-bg .body {
+    position: absolute; top: 36px; left: 18px;
+    font-family: var(--bmc-sans); font-weight: 600; font-size: 13px; color: var(--bmc-fg);
+    line-height: 1.2; max-width: 60%;
+  }
+
+  /* FOOTER ================================================== */
+  footer.cm {
+    margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--bmc-line);
+    display: flex; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+  }
+  footer.cm a { color: var(--bmc-cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<main>
+
+  <div class="crumb">
+    <span><a href="Brand Kit.html">brand-kit</a> / <span class="here">c-mark</span></span>
+    <span>v1.0 · 25 May 2026</span>
+  </div>
+
+  <div class="eyebrow">$ <span style="color:var(--bmc-fg-dim)">~/</span>marks<span>·</span>cat c.md</div>
+
+  <!-- ================== HERO ================== -->
+  <div class="hero">
+    <div class="c-glyph">C</div>
+  </div>
+
+  <div class="hero-meta">
+    <div class="cell">
+      <span class="lbl">// glyph</span>
+      <span class="val">C</span>
+      <span class="sub">JetBrains Mono 500, matches ~bmc</span>
+    </div>
+    <div class="cell">
+      <span class="lbl">// fill</span>
+      <span class="val grad">brand gradient</span>
+      <span class="sub">box dissolves · colour becomes the letter</span>
+    </div>
+    <div class="cell">
+      <span class="lbl">// role</span>
+      <span class="val">accent mark</span>
+      <span class="sub">consultancy initial — sub-brand &amp; covers</span>
+    </div>
+    <div class="cell">
+      <span class="lbl">// pairs with</span>
+      <span class="val">~bmc</span>
+      <span class="sub">never replaces the primary</span>
+    </div>
+  </div>
+
+  <!-- ================== SURFACES ================== -->
+  <section class="sec">
+    <header><h2>// 01 — <b>On every surface</b></h2><span class="idx">marks/c/surfaces</span></header>
+    <div class="surfaces">
+      <div class="surf dark">
+        <div class="c-medium">C</div>
+        <span class="cap">on night · primary</span>
+      </div>
+      <div class="surf paper">
+        <div class="c-medium">C</div>
+        <span class="cap">on paper · gradient holds</span>
+      </div>
+      <div class="surf inverse">
+        <div class="c-medium">C</div>
+        <span class="cap">on ink · max contrast</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== SCALE ================== -->
+  <section class="sec">
+    <header><h2>// 02 — <b>Scale system</b></h2><span class="idx">marks/c/scale</span></header>
+    <div class="scales">
+      <div class="scale-cell">
+        <div class="c-glyph-sized c-12">C</div>
+        <div class="meta"><b>12px · inline</b>caption mark<br/>body-flow</div>
+      </div>
+      <div class="scale-cell">
+        <div class="c-glyph-sized c-24">C</div>
+        <div class="meta"><b>24px · numeral</b>list / nav<br/>accent</div>
+      </div>
+      <div class="scale-cell">
+        <div class="c-glyph-sized c-48">C</div>
+        <div class="meta"><b>48px · drop-cap</b>opening<br/>paragraph</div>
+      </div>
+      <div class="scale-cell">
+        <div class="c-glyph-sized c-96">C</div>
+        <div class="meta"><b>96px · header</b>page<br/>opener</div>
+      </div>
+      <div class="scale-cell">
+        <div class="c-glyph-sized c-200">C</div>
+        <div class="meta"><b>200px+ · cover</b>oversized<br/>hero</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== USAGE ================== -->
+  <section class="sec">
+    <header><h2>// 03 — <b>Where it lives</b></h2><span class="idx">marks/c/usage</span></header>
+    <div class="usage">
+      <div class="use">
+        <span class="tag">// use 01</span>
+        <h3>Document covers</h3>
+        <p>Oversized in the bottom-right corner of proposals, cost reviews, decks. The C anchors the page; the title sits opposite.</p>
+        <div class="demo">
+          <div class="cover-comp">
+            <div class="ttl">Cloud cost<br/><em>review</em>.</div>
+            <div class="big-c">C</div>
+          </div>
+        </div>
+      </div>
+      <div class="use">
+        <span class="tag">// use 02</span>
+        <h3>Section markers &amp; drop-caps</h3>
+        <p>As an opening cap on long-form paragraphs or as the chapter mark in proposals. Always gradient, never solid.</p>
+        <div class="demo paper" style="padding:22px;align-items:flex-start;justify-content:flex-start;">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;">
+            <div style="font-family:var(--bmc-mono);font-weight:500;font-size:64px;line-height:.85;letter-spacing:-.04em;background:var(--bmc-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;">C</div>
+            <div style="font-size:10px;color:var(--bmc-ink-2);line-height:1.5;padding-top:2px;">loud transformation,<br/>FinOps and operational<br/>excellence — for AWS<br/>and Azure enterprises.</div>
+          </div>
+        </div>
+      </div>
+      <div class="use">
+        <span class="tag">// use 03</span>
+        <h3>Watermark on backgrounds</h3>
+        <p>At ~25% opacity, bleeding off the corner of a page or slide. Adds depth without competing with the primary <code>~bmc</code> mark.</p>
+        <div class="demo">
+          <div class="watermark-bg">
+            <span class="ttl">// memo</span>
+            <div class="body">Quarterly<br/>cost review</div>
+            <div class="wm">C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== RULES ================== -->
+  <section class="sec">
+    <header><h2>// 04 — <b>Rules of the C</b></h2><span class="idx">marks/c/rules</span></header>
+    <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:14px;line-height:1.55;">
+      <li style="border:1px solid var(--bmc-line);border-radius:var(--bmc-r);padding:18px 22px;color:var(--bmc-fg-2);"><span style="font-family:var(--bmc-mono);font-size:11px;color:var(--bmc-cyan);">+ DO</span><br/><b style="color:var(--bmc-fg);font-weight:600;">Always</b> render the C as gradient letterform — never as a solid colour.</li>
+      <li style="border:1px solid var(--bmc-line);border-radius:var(--bmc-r);padding:18px 22px;color:var(--bmc-fg-2);"><span style="font-family:var(--bmc-mono);font-size:11px;color:var(--bmc-cyan);">+ DO</span><br/>Pair with <code style="font-family:var(--bmc-mono);color:var(--bmc-fg);">~bmc</code> on the opposite corner so the system reads at a glance.</li>
+      <li style="border:1px solid var(--bmc-line);border-radius:var(--bmc-r);padding:18px 22px;color:var(--bmc-fg-2);"><span style="font-family:var(--bmc-mono);font-size:11px;color:#ef6b6b;">− DON'T</span><br/>Don't outline, fill-in, or trace a box around the C. The point is the box is gone.</li>
+      <li style="border:1px solid var(--bmc-line);border-radius:var(--bmc-r);padding:18px 22px;color:var(--bmc-fg-2);"><span style="font-family:var(--bmc-mono);font-size:11px;color:#ef6b6b;">− DON'T</span><br/>Don't use the C standalone where the audience doesn't already know "BMC" — use the lockup instead.</li>
+    </ul>
+  </section>
+
+  <footer class="cm">
+    <span><a href="Brand Kit.html">← brand kit</a> · <a href="Logo System.html">logo system</a></span>
+    <span>BMC · C Mark · v1.0 · 2026</span>
+  </footer>
+
+</main>
+
+</body>
+</html>

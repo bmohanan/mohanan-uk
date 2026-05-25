@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Monthly Cloud Cost Review</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-paper-2); color: var(--bmc-ink); font-family: var(--bmc-sans); }
+
+  /* —— page chrome —— */
+  .sheet-frame {
+    max-width: 1280px;
+    margin: 32px auto;
+    background: var(--bmc-paper);
+    border: 1px solid var(--bmc-line-ink-2);
+    box-shadow: 0 20px 60px -30px rgba(0,0,0,.18);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  /* spreadsheet "ribbon" */
+  .ribbon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--bmc-paper-2);
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+    font-family: var(--bmc-mono);
+    font-size: 11px;
+    color: var(--bmc-ink-muted);
+  }
+  .ribbon .tabs { display: flex; gap: 2px; }
+  .ribbon .tab {
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: var(--bmc-ink-muted);
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .ribbon .tab.active {
+    background: var(--bmc-paper);
+    color: var(--bmc-ink);
+    border-color: var(--bmc-line-ink-2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .ribbon .actions { display: flex; gap: 8px; align-items: center; }
+  .ribbon button {
+    font-family: var(--bmc-mono);
+    font-size: 11px;
+    border: 1px solid var(--bmc-line-ink-2);
+    background: #fff;
+    color: var(--bmc-ink);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .ribbon button:hover { background: var(--bmc-paper-2); }
+
+  /* —— header band —— */
+  .doc-header {
+    padding: 28px 48px 32px;
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 32px;
+    align-items: end;
+  }
+  .doc-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    color: var(--bmc-ink);
+  }
+  .doc-header h1 em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; }
+  .doc-header .sub {
+    margin-top: 8px;
+    font-family: var(--bmc-mono);
+    font-size: 12px;
+    color: var(--bmc-ink-muted);
+  }
+  .doc-header .meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 18px;
+    font-size: 12px;
+  }
+  .doc-header .meta dt { font-family: var(--bmc-mono); color: var(--bmc-ink-muted); }
+  .doc-header .meta dd { margin: 0; color: var(--bmc-ink); font-weight: 500; }
+  .doc-header .meta dd[contenteditable]:focus { outline: 2px solid var(--bmc-grad-1); outline-offset: 2px; }
+
+  /* —— KPI strip —— */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+  }
+  .kpi {
+    padding: 22px 28px;
+    border-right: 1px solid var(--bmc-line-ink);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kpi:last-child { border-right: none; }
+  .kpi .label {
+    font-family: var(--bmc-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--bmc-ink-muted);
+  }
+  .kpi .value {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--bmc-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi .delta {
+    font-family: var(--bmc-mono);
+    font-size: 11px;
+    color: var(--bmc-cyan-dim);
+  }
+  .kpi .delta.down { color: #c5341e; }
+  .kpi .delta.up   { color: #2c7a3f; }
+  .kpi .delta.grad {
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
+
+  /* —— sheet section —— */
+  .sheet-section { padding: 28px 48px 40px; }
+  .sheet-section + .sheet-section { padding-top: 8px; }
+
+  .section-h {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-h h2 {
+    margin: 0;
+    font-family: var(--bmc-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--bmc-ink-muted);
+    font-weight: 500;
+  }
+  .section-h h2 b { color: var(--bmc-ink); font-weight: 600; }
+  .section-h .right { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-ink-muted); }
+
+  /* —— tables —— */
+  table.bmc {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.bmc th {
+    text-align: left;
+    font-family: var(--bmc-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #fff;
+    background: var(--bmc-ink);
+    padding: 10px 12px;
+    font-weight: 500;
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  table.bmc th:last-child { border-right: none; }
+  table.bmc th.num { text-align: right; }
+  table.bmc td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--bmc-line-ink);
+    color: var(--bmc-ink);
+    background: #fff;
+  }
+  table.bmc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.bmc td.muted { color: var(--bmc-ink-muted); }
+  table.bmc tr:nth-child(even) td { background: var(--bmc-paper); }
+  table.bmc td[contenteditable]:focus { outline: 2px solid var(--bmc-grad-1); outline-offset: -2px; background: #fff !important; }
+  table.bmc tr.total td {
+    background: var(--bmc-paper-2) !important;
+    font-weight: 700;
+    border-top: 2px solid var(--bmc-ink);
+    border-bottom: 1px solid var(--bmc-ink);
+  }
+  /* cloud chips inside cells */
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--bmc-mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--bmc-line-ink-2);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .pill.aws { color: #d97706; border-color: rgba(217,119,6,.4); background: rgba(217,119,6,.08); }
+  .pill.az  { color: #0369a1; border-color: rgba(3,105,161,.35); background: rgba(3,105,161,.08); }
+  .pill.eff-low  { color: #2c7a3f; border-color: rgba(44,122,63,.4); background: rgba(44,122,63,.08); }
+  .pill.eff-med  { color: #b45309; border-color: rgba(180,83,9,.4); background: rgba(180,83,9,.08); }
+  .pill.eff-hi   { color: #b91c1c; border-color: rgba(185,28,28,.4); background: rgba(185,28,28,.08); }
+  .pill.committed { color: #4f46e5; border-color: rgba(79,70,229,.35); background: rgba(79,70,229,.08); }
+
+  /* savings bar inside cell */
+  .savebar {
+    position: relative;
+    height: 6px;
+    background: var(--bmc-paper-2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .savebar i {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--bmc-gradient);
+    border-radius: 3px;
+  }
+
+  /* —— two-col split for spend by cloud —— */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 4px;
+  }
+  .cloud-card {
+    border: 1px solid var(--bmc-line-ink-2);
+    border-radius: var(--bmc-r);
+    overflow: hidden;
+    background: #fff;
+  }
+  .cloud-card .ch {
+    padding: 14px 18px;
+    background: var(--bmc-paper-2);
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cloud-card .ch .name {
+    font-family: var(--bmc-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--bmc-ink);
+    font-weight: 600;
+  }
+  .cloud-card .ch .total {
+    font-family: var(--bmc-mono);
+    font-size: 13px;
+    color: var(--bmc-ink);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .cloud-card .ch .total small { color: var(--bmc-ink-muted); font-weight: 400; margin-left: 6px; }
+
+  .stack {
+    padding: 0;
+  }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr 1.4fr;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    border-bottom: 1px solid var(--bmc-line-ink);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-row .svc { color: var(--bmc-ink); }
+  .stack-row .amt { font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-ink); text-align: right; }
+  .stack-row .barwrap {
+    position: relative;
+    height: 8px;
+    background: var(--bmc-paper-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stack-row .barwrap i {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+  }
+  .stack-row.aws .barwrap i { background: linear-gradient(90deg, #f59e0b, #d97706); }
+  .stack-row.az  .barwrap i { background: linear-gradient(90deg, #0ea5e9, #0369a1); }
+
+  /* —— call-out cards —— */
+  .callouts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .callout {
+    padding: 20px;
+    border-radius: var(--bmc-r);
+    border: 1px solid var(--bmc-line-ink-2);
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--bmc-gradient);
+  }
+  .callout .label {
+    font-family: var(--bmc-mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: .12em;
+    color: var(--bmc-ink-muted); margin-bottom: 6px;
+  }
+  .callout .h {
+    font-size: 18px; font-weight: 700; color: var(--bmc-ink);
+    letter-spacing: -.01em; line-height: 1.2; margin-bottom: 10px;
+  }
+  .callout .h em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;}
+  .callout .body { font-size: 13px; color: var(--bmc-ink-2); line-height: 1.55; }
+
+  /* —— footer band —— */
+  .doc-footer {
+    padding: 22px 48px;
+    background: var(--bmc-paper-2);
+    border-top: 1px solid var(--bmc-line-ink-2);
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-ink-muted);
+  }
+
+  /* print */
+  @media print {
+    @page { size: A4 landscape; margin: 10mm; }
+    body { background: #fff; }
+    .sheet-frame { box-shadow: none; border: none; margin: 0; max-width: none; }
+    .ribbon { display: none; }
+    table.bmc th { background: var(--bmc-ink) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .kpi .value { color: var(--bmc-ink); }
+    .callout::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet-frame">
+
+  <!-- Ribbon -->
+  <div class="ribbon">
+    <div class="tabs">
+      <div class="tab active">summary</div>
+      <div class="tab">aws-detail</div>
+      <div class="tab">azure-detail</div>
+      <div class="tab">savings-plan</div>
+      <div class="tab">notes</div>
+    </div>
+    <div class="actions">
+      <button onclick="exportCSV()">⤓ CSV</button>
+      <button onclick="window.print()">⎙ Print</button>
+      <button onclick="recalc()">∑ Recalculate</button>
+    </div>
+  </div>
+
+  <!-- Doc header -->
+  <div class="doc-header">
+    <div>
+      <div class="bmc-lockup bmc-lockup--ink" style="margin-bottom:18px;">
+        <div class="bmc-badge bmc-badge--md"><span class="t">~</span>bmc</div>
+        <div class="bmc-lockup__wordmark">
+          <div class="bmc-lockup__name">Bimal Mohanan Consulting</div>
+          <div class="bmc-lockup__tag">FinOps · cost &amp; commitment review</div>
+        </div>
+      </div>
+      <h1>Monthly cloud cost <em>review</em>.</h1>
+      <div class="sub">// AWS + Azure · run-rate, recommendations &amp; committed-use plan</div>
+    </div>
+    <dl class="meta">
+      <dt>Client</dt><dd contenteditable="true">Northwind Energy plc</dd>
+      <dt>Period</dt><dd contenteditable="true">May 2026</dd>
+      <dt>Prepared</dt><dd>BMC · FinOps practice</dd>
+      <dt>Ref</dt><dd contenteditable="true">BMC-FN-2026-05-001</dd>
+      <dt>Currency</dt><dd>GBP (£) · net of VAT</dd>
+    </dl>
+  </div>
+
+  <!-- KPI strip -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">// monthly spend</div>
+      <div class="value" id="kpi-spend">£284,610</div>
+      <div class="delta up">▲ 4.2% vs Apr · within plan</div>
+    </div>
+    <div class="kpi">
+      <div class="label">// identified savings</div>
+      <div class="value grad" id="kpi-save">£71,940</div>
+      <div class="delta grad" id="kpi-save-pct">25.3% of run-rate</div>
+    </div>
+    <div class="kpi">
+      <div class="label">// commitment coverage</div>
+      <div class="value">62%</div>
+      <div class="delta down">target ≥ 80% — gap to close</div>
+    </div>
+    <div class="kpi">
+      <div class="label">// payback</div>
+      <div class="value">4.1 months</div>
+      <div class="delta">on advisory + buy-down</div>
+    </div>
+  </div>
+
+  <!-- Spend by cloud -->
+  <div class="sheet-section">
+    <div class="section-h">
+      <h2>// 01 — <b>Spend by cloud · top services</b></h2>
+      <div class="right">may 2026 · on-demand equivalent</div>
+    </div>
+    <div class="split">
+      <div class="cloud-card">
+        <div class="ch">
+          <span class="name"><span class="pill aws">AWS</span> &nbsp; eu-west-2 · us-east-1</span>
+          <span class="total" id="aws-total">£168,420 <small>/ mo</small></span>
+        </div>
+        <div class="stack">
+          <div class="stack-row aws"><span class="svc">EC2 — m6i / c7i compute</span><span class="amt">£62,810</span><div class="barwrap"><i style="width:88%"></i></div></div>
+          <div class="stack-row aws"><span class="svc">RDS / Aurora PostgreSQL</span><span class="amt">£34,920</span><div class="barwrap"><i style="width:62%"></i></div></div>
+          <div class="stack-row aws"><span class="svc">S3 · Standard + IA</span><span class="amt">£18,640</span><div class="barwrap"><i style="width:42%"></i></div></div>
+          <div class="stack-row aws"><span class="svc">CloudFront + DataXfer</span><span class="amt">£14,210</span><div class="barwrap"><i style="width:30%"></i></div></div>
+          <div class="stack-row aws"><span class="svc">EKS + Fargate</span><span class="amt">£12,480</span><div class="barwrap"><i style="width:24%"></i></div></div>
+          <div class="stack-row aws"><span class="svc">All other (Lambda, SQS, …)</span><span class="amt">£25,360</span><div class="barwrap"><i style="width:48%"></i></div></div>
+        </div>
+      </div>
+      <div class="cloud-card">
+        <div class="ch">
+          <span class="name"><span class="pill az">AZURE</span> &nbsp; uksouth · westeurope</span>
+          <span class="total" id="az-total">£116,190 <small>/ mo</small></span>
+        </div>
+        <div class="stack">
+          <div class="stack-row az"><span class="svc">VMs — D-series &amp; E-series</span><span class="amt">£41,360</span><div class="barwrap"><i style="width:84%"></i></div></div>
+          <div class="stack-row az"><span class="svc">SQL Database — vCore GP</span><span class="amt">£28,740</span><div class="barwrap"><i style="width:64%"></i></div></div>
+          <div class="stack-row az"><span class="svc">AKS + Container Apps</span><span class="amt">£14,260</span><div class="barwrap"><i style="width:38%"></i></div></div>
+          <div class="stack-row az"><span class="svc">Storage · Blob Hot/Cool</span><span class="amt">£11,840</span><div class="barwrap"><i style="width:30%"></i></div></div>
+          <div class="stack-row az"><span class="svc">Front Door + Bandwidth</span><span class="amt">£8,920</span><div class="barwrap"><i style="width:22%"></i></div></div>
+          <div class="stack-row az"><span class="svc">All other (Functions, ASB, …)</span><span class="amt">£11,070</span><div class="barwrap"><i style="width:26%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendations table -->
+  <div class="sheet-section">
+    <div class="section-h">
+      <h2>// 02 — <b>Recommendations</b> · prioritised by net annual saving</h2>
+      <div class="right">all rates inclusive of region uplift · 12-mo view</div>
+    </div>
+    <table class="bmc" id="recs">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Recommendation</th>
+          <th>Cloud</th>
+          <th>Lever</th>
+          <th class="num">Monthly £</th>
+          <th class="num">Annual £</th>
+          <th class="num">% of run-rate</th>
+          <th>Effort</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="muted">01</td>
+          <td>3-yr Compute Savings Plan — covers steady EC2 + Fargate baseline</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill committed">Savings Plan</span></td>
+          <td class="num" contenteditable="true" data-key="m">18,420</td>
+          <td class="num save-y">£221,040</td>
+          <td class="num">6.5%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>Platform Eng</td>
+        </tr>
+        <tr>
+          <td class="muted">02</td>
+          <td>3-yr Reserved Instances · SQL Database vCore — uksouth</td>
+          <td><span class="pill az">Azure</span></td>
+          <td><span class="pill committed">RI</span></td>
+          <td class="num" contenteditable="true" data-key="m">9,860</td>
+          <td class="num save-y">£118,320</td>
+          <td class="num">3.5%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>DBA team</td>
+        </tr>
+        <tr>
+          <td class="muted">03</td>
+          <td>RDS Reserved Instance · Aurora PostgreSQL · r6g.4xlarge ×6</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill committed">RDS RI</span></td>
+          <td class="num" contenteditable="true" data-key="m">7,640</td>
+          <td class="num save-y">£91,680</td>
+          <td class="num">2.7%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>Data Platform</td>
+        </tr>
+        <tr>
+          <td class="muted">04</td>
+          <td>Right-size 38 over-provisioned VMs — D8 → D4 · auto-shutdown dev</td>
+          <td><span class="pill az">Azure</span></td>
+          <td><span class="pill">Right-size</span></td>
+          <td class="num" contenteditable="true" data-key="m">8,280</td>
+          <td class="num save-y">£99,360</td>
+          <td class="num">2.9%</td>
+          <td><span class="pill eff-med">medium</span></td>
+          <td>App teams</td>
+        </tr>
+        <tr>
+          <td class="muted">05</td>
+          <td>S3 lifecycle · Standard → IA → Glacier IR for cold logs (&gt;90d)</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill">Lifecycle</span></td>
+          <td class="num" contenteditable="true" data-key="m">5,210</td>
+          <td class="num save-y">£62,520</td>
+          <td class="num">1.8%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>BMC delivery</td>
+        </tr>
+        <tr>
+          <td class="muted">06</td>
+          <td>Migrate 12 EC2 → Graviton (m6i → m7g) on stateless services</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill">Modernise</span></td>
+          <td class="num" contenteditable="true" data-key="m">6,880</td>
+          <td class="num save-y">£82,560</td>
+          <td class="num">2.4%</td>
+          <td><span class="pill eff-med">medium</span></td>
+          <td>Platform Eng</td>
+        </tr>
+        <tr>
+          <td class="muted">07</td>
+          <td>Azure Hybrid Benefit · apply existing SQL Server licences (BYOL)</td>
+          <td><span class="pill az">Azure</span></td>
+          <td><span class="pill">Licence</span></td>
+          <td class="num" contenteditable="true" data-key="m">4,620</td>
+          <td class="num save-y">£55,440</td>
+          <td class="num">1.6%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>Procurement</td>
+        </tr>
+        <tr>
+          <td class="muted">08</td>
+          <td>CloudFront price-class step-down + Origin Shield consolidation</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill">Network</span></td>
+          <td class="num" contenteditable="true" data-key="m">2,940</td>
+          <td class="num save-y">£35,280</td>
+          <td class="num">1.0%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>BMC delivery</td>
+        </tr>
+        <tr>
+          <td class="muted">09</td>
+          <td>Idle Front Door / Blob containers cleanup — orphaned dev tenants</td>
+          <td><span class="pill az">Azure</span></td>
+          <td><span class="pill">Hygiene</span></td>
+          <td class="num" contenteditable="true" data-key="m">1,840</td>
+          <td class="num save-y">£22,080</td>
+          <td class="num">0.6%</td>
+          <td><span class="pill eff-low">low</span></td>
+          <td>App teams</td>
+        </tr>
+        <tr>
+          <td class="muted">10</td>
+          <td>EKS karpenter consolidation + spot for non-prod async workers</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td><span class="pill">Schedule</span></td>
+          <td class="num" contenteditable="true" data-key="m">6,250</td>
+          <td class="num save-y">£75,000</td>
+          <td class="num">2.2%</td>
+          <td><span class="pill eff-hi">high</span></td>
+          <td>SRE</td>
+        </tr>
+        <tr class="total">
+          <td></td>
+          <td colspan="3">Total identified savings</td>
+          <td class="num" id="recs-m-tot">71,940</td>
+          <td class="num" id="recs-y-tot">£863,280</td>
+          <td class="num"><span id="recs-pct">25.3%</span></td>
+          <td colspan="2">payback ~4.1mo on £24k advisory + buy-down fees</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Commitment plan -->
+  <div class="sheet-section">
+    <div class="section-h">
+      <h2>// 03 — <b>Commitment plan</b> · Reserved Instances &amp; Savings Plans</h2>
+      <div class="right">3-yr no-upfront · break-even ≤ 5 months on each tranche</div>
+    </div>
+    <table class="bmc">
+      <thead>
+        <tr>
+          <th>Commitment</th>
+          <th>Cloud</th>
+          <th>Resource</th>
+          <th>Term</th>
+          <th>Payment</th>
+          <th class="num">On-demand £/mo</th>
+          <th class="num">Committed £/mo</th>
+          <th class="num">Saving %</th>
+          <th class="num">Annual saving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Compute Savings Plan</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td>EC2 m6i/c7i + Fargate baseline · £42k/mo</td>
+          <td>3 yr</td>
+          <td>No-upfront</td>
+          <td class="num">42,000</td>
+          <td class="num">23,580</td>
+          <td class="num">43.9% <div class="savebar"><i style="width:44%"></i></div></td>
+          <td class="num">£221,040</td>
+        </tr>
+        <tr>
+          <td>Reserved Instance</td>
+          <td><span class="pill aws">AWS</span></td>
+          <td>Aurora PostgreSQL r6g.4xlarge ×6</td>
+          <td>3 yr</td>
+          <td>Partial-upfront</td>
+          <td class="num">18,200</td>
+          <td class="num">10,560</td>
+          <td class="num">42.0% <div class="savebar"><i style="width:42%"></i></div></td>
+          <td class="num">£91,680</td>
+        </tr>
+        <tr>
+          <td>SQL Reserved Capacity</td>
+          <td><span class="pill az">Azure</span></td>
+          <td>SQL DB vCore GP · uksouth · 24 vCore</td>
+          <td>3 yr</td>
+          <td>Monthly</td>
+          <td class="num">23,400</td>
+          <td class="num">13,540</td>
+          <td class="num">42.1% <div class="savebar"><i style="width:42%"></i></div></td>
+          <td class="num">£118,320</td>
+        </tr>
+        <tr>
+          <td>VM Reserved Instance</td>
+          <td><span class="pill az">Azure</span></td>
+          <td>D16s_v5 ×14 · uksouth (after right-size)</td>
+          <td>3 yr</td>
+          <td>Monthly</td>
+          <td class="num">19,800</td>
+          <td class="num">12,210</td>
+          <td class="num">38.3% <div class="savebar"><i style="width:38%"></i></div></td>
+          <td class="num">£91,080</td>
+        </tr>
+        <tr>
+          <td>Azure Hybrid Benefit</td>
+          <td><span class="pill az">Azure</span></td>
+          <td>SQL Server BYOL · 18 cores</td>
+          <td>n/a</td>
+          <td>Licence applied</td>
+          <td class="num">9,800</td>
+          <td class="num">5,180</td>
+          <td class="num">47.1% <div class="savebar"><i style="width:47%"></i></div></td>
+          <td class="num">£55,440</td>
+        </tr>
+        <tr class="total">
+          <td colspan="5">Total committed-use programme</td>
+          <td class="num">113,200</td>
+          <td class="num">65,070</td>
+          <td class="num">42.5%</td>
+          <td class="num">£577,560</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Call-outs -->
+  <div class="sheet-section">
+    <div class="section-h">
+      <h2>// 04 — <b>Notes from the FinOps lead</b></h2>
+      <div class="right">findings → priority actions for next month</div>
+    </div>
+    <div class="callouts">
+      <div class="callout">
+        <div class="label">// finding 01</div>
+        <div class="h">Coverage is the<br/><em>biggest lever.</em></div>
+        <div class="body">You're 62% covered against a target of ≥80%. Buying the AWS Compute SP and Azure SQL RI alone moves you to 78% and unlocks £339k/yr — before a single workload is changed.</div>
+      </div>
+      <div class="callout">
+        <div class="label">// finding 02</div>
+        <div class="h">SQL is over-<br/><em>provisioned</em>.</div>
+        <div class="body">Aurora and Azure SQL are sized for peak that lasts ~4 hours/day. Reserved capacity + Hybrid Benefit pulls steady-state cost down by ~44% with no perf impact on the workload profile we modelled.</div>
+      </div>
+      <div class="callout">
+        <div class="label">// finding 03</div>
+        <div class="h">Don't<br/><em>over-commit.</em></div>
+        <div class="body">We've sized commitments to ~85% of the 90-day rolling baseline. The remaining 15% stays on-demand to absorb the seasonality you flagged — Black Friday + year-end batch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <span>BMC · Bimal Mohanan Consulting · mohanan.uk</span>
+    <span>Confidential — Northwind Energy plc · do not redistribute</span>
+    <span>page 1 / 1</span>
+  </div>
+
+</div>
+
+<script>
+  // —— editable cells recalc the totals ——
+  const fmtGBP = n => n.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+  function parseN(s) { return parseFloat(String(s).replace(/[£,\s]/g,'')) || 0; }
+
+  function recalc() {
+    const rows = document.querySelectorAll('#recs tbody tr:not(.total)');
+    let mTot = 0;
+    rows.forEach(r => {
+      const monthlyCell = r.querySelector('[data-key="m"]');
+      const m = parseN(monthlyCell.textContent);
+      mTot += m;
+      const yCell = r.querySelector('.save-y');
+      yCell.textContent = '£' + fmtGBP(m * 12);
+      // also update the % col (next sibling of save-y)
+      const pctCell = yCell.nextElementSibling;
+      const runRate = 284610;
+      pctCell.textContent = ((m / runRate) * 100).toFixed(1) + '%';
+    });
+    document.getElementById('recs-m-tot').textContent = fmtGBP(mTot);
+    document.getElementById('recs-y-tot').textContent = '£' + fmtGBP(mTot * 12);
+    const runRate = 284610;
+    const pct = ((mTot / runRate) * 100).toFixed(1) + '%';
+    document.getElementById('recs-pct').textContent = pct;
+    document.getElementById('kpi-save').textContent = '£' + fmtGBP(mTot);
+    document.getElementById('kpi-save-pct').textContent = pct + ' of run-rate';
+  }
+
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    el.addEventListener('input', recalc);
+    el.addEventListener('blur', recalc);
+  });
+
+  function exportCSV() {
+    const rows = [];
+    rows.push(['#','Recommendation','Cloud','Lever','Monthly £','Annual £','% of run-rate','Effort','Owner']);
+    document.querySelectorAll('#recs tbody tr').forEach(tr => {
+      const cells = [...tr.querySelectorAll('td')].map(td => td.textContent.trim().replace(/\s+/g,' '));
+      rows.push(cells);
+    });
+    const csv = rows.map(r => r.map(c => `"${c.replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bmc-cost-review-recommendations.csv';
+    a.click();
+  }
+
+  // tabs are illustrative — keep them visual-only for now
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

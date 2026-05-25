@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mohanan.uk · Logo Explorations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #07070b; color: #e8e8ee; font-family: 'Inter', system-ui, sans-serif; }
+  /* shared logo styles */
+  .badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6a3df5 0%, #d136e6 55%, #3a7df5 100%);
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+    pointer-events: none;
+  }
+  .badge.glow {
+    box-shadow: 0 8px 28px -8px rgba(170, 60, 230, .55),
+                0 0 0 1px rgba(255,255,255,.06) inset;
+  }
+  /* preview panel context */
+  .context {
+    background: radial-gradient(120% 80% at 50% 0%, #0e0e16 0%, #07070b 70%);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #cfd2dc;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .context .name { font-weight: 600; color: #f3f4f8; }
+  .context .pill {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #9aa0b4;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .artboard-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding: 36px 28px 26px;
+    background: #0a0a10;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .hero-badge {
+    width: 168px;
+    height: 168px;
+    border-radius: 38px;
+    font-size: 78px;
+    font-weight: 700;
+    letter-spacing: -2px;
+  }
+  .small-row { display: flex; align-items: center; gap: 14px; }
+  .badge-52 {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+  }
+  .badge-32 {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+  }
+  .caption {
+    margin-top: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #7d8298;
+    text-align: center;
+    line-height: 1.55;
+  }
+  .caption b { color: #d9dbe6; font-weight: 600; }
+
+  /* ===== Logo variant specifics ===== */
+  /* 01 BMC clean — Inter sans, tight */
+  .v-bmc-clean { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -2px; }
+  .v-bmc-clean.hero-badge { font-size: 58px; }
+  .v-bmc-clean.badge-52 { font-size: 17px; letter-spacing: -.5px; font-weight: 700; }
+  .v-bmc-clean.badge-32 { font-size: 11px; letter-spacing: -.3px; }
+
+  /* 02 BMC serif — Fraunces */
+  .v-bmc-serif { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -3px; }
+  .v-bmc-serif.hero-badge { font-size: 64px; }
+  .v-bmc-serif.badge-52 { font-size: 18px; letter-spacing: -1px; font-weight: 800; }
+  .v-bmc-serif.badge-32 { font-size: 11px; letter-spacing: -.5px; font-weight: 800; }
+
+  /* 03 bmc lowercase mono */
+  .v-bmc-mono { font-family: 'JetBrains Mono', monospace; font-weight: 600; letter-spacing: -2px; }
+  .v-bmc-mono.hero-badge { font-size: 50px; letter-spacing: -3px; }
+  .v-bmc-mono.badge-52 { letter-spacing: -.4px; font-size: 14px; }
+  .v-bmc-mono.badge-32 { letter-spacing: -.3px; font-size: 9px; }
+
+  /* 04 ~bmc terminal */
+  .v-tilde { font-family: 'JetBrains Mono', monospace; font-weight: 500; letter-spacing: -1px; }
+  .v-tilde .t { opacity: .7; margin-right: 2px; }
+  .v-tilde.hero-badge { font-size: 42px; letter-spacing: -2px; }
+  .v-tilde.badge-52 { font-size: 12px; }
+  .v-tilde.badge-32 { font-size: 8px; }
+
+  /* 05 stacked B / MC */
+  .v-stacked { font-family: 'Inter', sans-serif; flex-direction: column; gap: 0; line-height: .82; font-weight: 800; letter-spacing: -3px; }
+  .v-stacked.hero-badge { font-size: 70px; }
+  .v-stacked.badge-52 { font-size: 22px; letter-spacing: -1px; }
+  .v-stacked.badge-32 { font-size: 13px; letter-spacing: -.5px; }
+  .v-stacked .top { transform: translateY(2px); }
+  .v-stacked .bot { transform: translateY(-2px); letter-spacing: -.04em; }
+
+  /* 06 slash B·M·C */
+  .v-slash { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -1px; gap: 4px; }
+  .v-slash .sl { font-weight: 300; opacity: .5; }
+  .v-slash.hero-badge { font-size: 44px; }
+  .v-slash.badge-52 { font-size: 13px; gap: 1px; }
+  .v-slash.badge-32 { font-size: 8px; gap: 0; }
+
+  /* 07 BMC corner — small initials grouped */
+  .v-corner { font-family: 'Fraunces', serif; font-weight: 900; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 0 .18em .12em; box-sizing: border-box; }
+  .v-corner .big { font-size: 1em; line-height: .85; letter-spacing: -.08em; }
+  .v-corner .tiny { font-family: 'JetBrains Mono', monospace; font-size: .22em; font-weight: 600; letter-spacing: .12em; opacity: .85; margin-bottom: .35em; }
+  .v-corner.hero-badge { font-size: 96px; }
+  .v-corner.badge-52 { font-size: 30px; padding: 0 .14em .1em; }
+  .v-corner.badge-32 { font-size: 18px; padding: 0 .14em .08em; }
+
+  /* 08 chevron / cloud abstract using SVG */
+  .v-mark svg { width: 62%; height: 62%; }
+  .v-mark.badge-52 svg { width: 60%; height: 60%; }
+  .v-mark.badge-32 svg { width: 58%; height: 58%; }
+
+  /* canvas section title */
+  .intro {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 32px 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .intro h1 { font-size: 32px; margin: 0 0 8px; font-weight: 700; letter-spacing: -.5px; }
+  .intro h1 span { background: linear-gradient(135deg, #b487ff, #ff6dd0 55%, #6cb1ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .intro p { color: #9aa0b4; margin: 0; max-width: 720px; line-height: 1.55; }
+  .intro .meta {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .intro .meta span {
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: #cfd2dc;
+  }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; margin-right: 6px; vertical-align: -2px; background: linear-gradient(135deg, #6a3df5, #d136e6 55%, #3a7df5); }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono', monospace;font-size:12px;color:#7d8298;margin-bottom:14px;">
+    <a href="Brand Kit.html" style="color:#46d9c8;text-decoration:none;">← brand-kit</a>
+    <span>/</span>
+    <span style="color:#cfd2dc;">archive</span>
+    <span>/</span>
+    <span>logo-explorations</span>
+  </div>
+  <h1>mohanan.uk · <span>BMC logo explorations</span></h1>
+  <p>Archive of the eight monogram directions explored for <b style="color:#cfd2dc;font-weight:600">Bimal Mohanan Consulting</b>. <b style="color:#46d9c8;font-weight:500;font-family:'JetBrains Mono',monospace;">~bmc (variant 04)</b> was chosen as the primary mark — see the <a href="Logo System.html" style="color:#46d9c8;text-decoration:none;">Logo System</a> for the full lockup set, sizes, monochrome variants and rules. Kept on file for future iterations or sub-brand work.</p>
+  <div class="meta">
+    <span style="border-color:rgba(70,217,200,.3);color:#46d9c8;"><span class="swatch"></span>~bmc · chosen</span>
+    <span>same gradient</span>
+    <span>radius · 12 / 38</span>
+    <span>8 variants explored</span>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+  const { DesignCanvas, DCSection, DCArtboard } = window;
+
+  // ---- shared bits ----
+  const Context = ({ children }) => (
+    <div className="context">
+      {children}
+      <span className="name">Bimal Mohanan <span style={{color:'#7d8298', fontWeight:400}}>Consultancy</span></span>
+      <span className="pill">navbar · 52px</span>
+    </div>
+  );
+
+  const Artboard = ({ caption, capTitle, children, hero, mid, mini }) => (
+    <div className="artboard-body">
+      {hero}
+      <Context>{mid}</Context>
+      <div className="small-row" style={{gap: 18}}>
+        {mini}
+        <div style={{fontFamily:'JetBrains Mono, monospace', fontSize:11, color:'#7d8298'}}>favicon · 32px</div>
+      </div>
+      <div className="caption"><b>{capTitle}</b><br/>{caption}</div>
+    </div>
+  );
+
+  // SVG chevron-bracket mark (variant 08) — abstract BMC
+  const MarkSVG = () => (
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* B-arc on left, M-peak in middle, C-arc on right — abstracted */}
+      <path d="M14 18 V46" stroke="white" strokeWidth="5.5" strokeLinecap="round"/>
+      <path d="M14 18 Q24 18 24 26 Q24 32 18 32 Q26 32 26 39 Q26 46 14 46" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      <path d="M32 46 V22 L40 36 L48 22 V46" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+
+  // ---- variants ----
+  const variants = [
+    {
+      id: 'bmc-clean',
+      label: '01 · BMC sans',
+      title: 'BMC — Inter',
+      caption: 'Inter 700, tightened. Direct successor to the current mark — three letters, same voice, slightly heavier presence.',
+      cls: 'v-bmc-clean',
+      render: () => 'BMC',
+    },
+    {
+      id: 'bmc-serif',
+      label: '02 · BMC Fraunces',
+      title: 'Serif monogram',
+      caption: 'Fraunces 900, heavily tracked-in. Borrows the editorial weight of your headline typeface — confident, consultancy-feeling.',
+      cls: 'v-bmc-serif',
+      render: () => 'BMC',
+    },
+    {
+      id: 'bmc-mono',
+      label: '03 · bmc lowercase',
+      title: 'Terminal lowercase',
+      caption: 'JetBrains Mono, lowercase, tight. Mirrors the ~tag chips already scattered across the page.',
+      cls: 'v-bmc-mono',
+      render: () => 'bmc',
+    },
+    {
+      id: 'tilde-bmc',
+      label: '04 · ~bmc',
+      title: '~bmc prompt',
+      caption: 'Tilde-prefix nod to your home-directory chips. Reads as a path the user could cd into.',
+      cls: 'v-tilde',
+      render: () => (<><span className="t">~</span>bmc</>),
+    },
+    {
+      id: 'stacked',
+      label: '05 · B / mc stacked',
+      title: 'Stacked',
+      caption: 'B above mc, ultra-tight, mixed case. Reads as a tiny logotype block — Bimal on top, the consultancy underneath.',
+      cls: 'v-stacked',
+      render: () => (<><span className="top">B</span><span className="bot">mc</span></>),
+    },
+    {
+      id: 'slash',
+      label: '06 · B·M·C slash',
+      title: 'Slash separators',
+      caption: 'Three letters divided by hair-thin slashes — the same slash that already separates your tagline phrases.',
+      cls: 'v-slash',
+      render: () => (<>B<span className="sl">/</span>M<span className="sl">/</span>C</>),
+    },
+    {
+      id: 'corner',
+      label: '07 · M with BMC tag',
+      title: 'Anchored corner',
+      caption: 'Single Fraunces M dominates; "BMC" sits tiny and mono-cased above. The M is the brand, the chips are the signature.',
+      cls: 'v-corner',
+      render: () => (<><span className="tiny">BMC</span><span className="big">M</span></>),
+    },
+    {
+      id: 'mark',
+      label: '08 · BMC abstract mark',
+      title: 'Letterless mark',
+      caption: 'Pure mark — abstracted B + M + C ligature, no readable letters. Holds up smallest; pairs with the wordmark beside it.',
+      cls: 'v-mark',
+      render: () => <MarkSVG />,
+    },
+  ];
+
+  const makeBadge = (v, sizeCls, extraStyle={}) => (
+    <div className={`badge glow ${sizeCls} ${v.cls}`} style={extraStyle}>
+      {v.render(sizeCls)}
+    </div>
+  );
+
+  const App = () => (
+    <DesignCanvas initialZoom={0.75} background="#07070b">
+      <DCSection id="monograms" title="Monogram directions" subtitle="All use the same rounded-square badge + purple→magenta→blue gradient. Pick a typographic personality.">
+        {variants.map(v => (
+          <DCArtboard key={v.id} id={v.id} label={v.label} width={360} height={520}>
+            <Artboard
+              capTitle={v.title}
+              caption={v.caption}
+              hero={makeBadge(v, 'hero-badge')}
+              mid={makeBadge(v, 'badge-52')}
+              mini={makeBadge(v, 'badge-32')}
+            />
+          </DCArtboard>
+        ))}
+      </DCSection>
+    </DesignCanvas>
+  );
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

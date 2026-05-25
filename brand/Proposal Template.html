@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Proposal Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: #2a2a32; color: var(--bmc-ink); font-family: var(--bmc-sans); }
+
+  /* toolbar */
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bmc-bg); color: var(--bmc-fg);
+    border-bottom: 1px solid var(--bmc-line);
+    padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--bmc-mono); font-size: 12px;
+  }
+  .toolbar a { color: var(--bmc-cyan); text-decoration: none; }
+  .toolbar button {
+    font-family: var(--bmc-mono); font-size: 11px;
+    background: rgba(255,255,255,.04); color: var(--bmc-fg);
+    border: 1px solid var(--bmc-line); padding: 6px 12px;
+    border-radius: 4px; cursor: pointer;
+  }
+  .toolbar button:hover { background: rgba(255,255,255,.08); }
+
+  /* A4 page shell */
+  .page {
+    width: 210mm; min-height: 297mm;
+    margin: 28px auto;
+    background: var(--bmc-paper);
+    color: var(--bmc-ink);
+    box-shadow: 0 16px 60px -16px rgba(0,0,0,.5);
+    box-sizing: border-box;
+    position: relative;
+    font-size: 11pt;
+    line-height: 1.55;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page.body {
+    padding: 22mm 22mm 26mm;
+  }
+
+  /* —— page header / footer (common) —— */
+  .ph {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid var(--bmc-line-ink);
+    margin-bottom: 10mm;
+    font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-ink-muted);
+  }
+  .ph .lock { display: flex; align-items: center; gap: 10px; }
+  .ph .lock .name { font-family: var(--bmc-sans); font-weight: 600; font-size: 10pt; color: var(--bmc-ink); }
+  .pf {
+    position: absolute;
+    bottom: 14mm; left: 22mm; right: 22mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--bmc-line-ink);
+    display: flex; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 8pt; color: var(--bmc-ink-muted);
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover {
+    background: var(--bmc-bg);
+    color: var(--bmc-fg);
+    padding: 22mm;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  .cover::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(60% 40% at 80% 20%, rgba(106,61,245,.25) 0%, transparent 60%),
+                radial-gradient(60% 40% at 20% 80%, rgba(58,125,245,.18) 0%, transparent 60%),
+                radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 100% 100%, 100% 100%, 28px 28px;
+    pointer-events: none;
+  }
+  .cover > * { position: relative; z-index: 1; }
+  .cover .ph { border-color: var(--bmc-line); color: var(--bmc-fg-muted); }
+  .cover .ph .lock .name { color: var(--bmc-fg); }
+
+  .cover .center {
+    align-self: center;
+  }
+  .cover .label {
+    font-family: var(--bmc-mono); font-size: 11pt; color: var(--bmc-cyan);
+    letter-spacing: .06em; margin-bottom: 6mm;
+  }
+  .cover .label span { color: var(--bmc-fg-dim); margin: 0 8px; }
+  .cover h1 {
+    margin: 0;
+    font-size: 64pt;
+    font-weight: 700;
+    line-height: .96;
+    letter-spacing: -.025em;
+    color: var(--bmc-fg);
+    text-wrap: balance;
+  }
+  .cover h1 em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; }
+  .cover h1 .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .cover .lede {
+    margin-top: 10mm;
+    font-size: 14pt;
+    color: var(--bmc-fg-2);
+    line-height: 1.4;
+    max-width: 140mm;
+  }
+
+  .cover .stamp {
+    margin-top: 14mm;
+    display: grid; grid-template-columns: max-content 1fr; gap: 4mm 16mm;
+    font-family: var(--bmc-mono); font-size: 10pt;
+    align-content: start;
+  }
+  .cover .stamp dt { color: var(--bmc-fg-dim); }
+  .cover .stamp dd { color: var(--bmc-fg); margin: 0; }
+
+  .cover .pf {
+    position: relative; border-color: var(--bmc-line); color: var(--bmc-fg-muted); margin-top: 12mm;
+    border-top: 1px solid var(--bmc-line);
+    bottom: auto; left: 0; right: 0;
+  }
+
+  /* ===== BODY PAGE ===== */
+  h2.section {
+    margin: 0 0 6mm;
+    font-size: 26pt; font-weight: 700; letter-spacing: -.02em; line-height: 1.05;
+    color: var(--bmc-ink);
+  }
+  h2.section em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; }
+  h2.section .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .eyebrow {
+    font-family: var(--bmc-mono); font-size: 9pt;
+    color: var(--bmc-ink-muted); letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 3mm;
+  }
+
+  p { margin: 0 0 4mm; text-wrap: pretty; }
+  .body p[contenteditable]:focus { outline: 2px solid var(--bmc-grad-1); outline-offset: 2px; border-radius: 2px; }
+  .body em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; color: var(--bmc-ink); }
+  .body strong { font-weight: 600; }
+
+  /* —— two-col layout —— */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8mm; margin: 6mm 0;
+  }
+  .two-col .card {
+    border: 1px solid var(--bmc-line-ink-2);
+    border-radius: 6px;
+    padding: 6mm;
+    background: var(--bmc-paper-2);
+  }
+  .two-col .card h4 {
+    margin: 0 0 3mm;
+    font-family: var(--bmc-mono); font-size: 9pt; letter-spacing: .1em;
+    color: var(--bmc-ink-muted); text-transform: uppercase;
+  }
+  .two-col .card .big {
+    font-size: 22pt; font-weight: 700; letter-spacing: -.01em;
+    margin-bottom: 2mm; font-variant-numeric: tabular-nums;
+  }
+  .two-col .card .big.grad { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .two-col .card .sub { font-size: 10pt; color: var(--bmc-ink-2); line-height: 1.4; }
+
+  /* —— timeline —— */
+  .phases {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm;
+    margin: 6mm 0;
+  }
+  .phase {
+    border: 1px solid var(--bmc-line-ink-2);
+    border-radius: 6px;
+    padding: 6mm;
+    position: relative;
+  }
+  .phase::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--bmc-gradient);
+    border-radius: 6px 0 0 6px;
+  }
+  .phase .n {
+    font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-ink-muted);
+    letter-spacing: .1em; margin-bottom: 2mm;
+  }
+  .phase h4 { margin: 0 0 2mm; font-size: 14pt; font-weight: 600; }
+  .phase p { font-size: 10pt; color: var(--bmc-ink-2); margin: 0 0 3mm; line-height: 1.45; }
+  .phase ul {
+    margin: 0; padding: 0; list-style: none;
+    font-size: 9pt; color: var(--bmc-ink-2); line-height: 1.5;
+  }
+  .phase ul li {
+    display: grid; grid-template-columns: 12px 1fr; gap: 6px;
+  }
+  .phase ul li::before { content: "→"; color: var(--bmc-grad-2); font-family: var(--bmc-mono); }
+
+  /* —— deliverables table —— */
+  table.bmc-tbl {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 10pt;
+    margin: 4mm 0;
+  }
+  table.bmc-tbl th {
+    background: var(--bmc-ink); color: #fff;
+    font-family: var(--bmc-mono); font-size: 8pt;
+    text-transform: uppercase; letter-spacing: .08em;
+    text-align: left; padding: 3mm 4mm;
+    font-weight: 500;
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  table.bmc-tbl th:last-child { border-right: none; }
+  table.bmc-tbl th.num { text-align: right; }
+  table.bmc-tbl td {
+    padding: 3mm 4mm; border-bottom: 1px solid var(--bmc-line-ink);
+    vertical-align: top;
+  }
+  table.bmc-tbl tr:nth-child(even) td { background: var(--bmc-paper-2); }
+  table.bmc-tbl td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.bmc-tbl tr.total td {
+    background: var(--bmc-paper-2);
+    border-top: 2px solid var(--bmc-ink);
+    border-bottom: 1px solid var(--bmc-ink);
+    font-weight: 700;
+  }
+
+  /* —— commercial banner (footer of proposal) —— */
+  .commercial-final {
+    margin-top: 8mm;
+    background: var(--bmc-ink);
+    color: var(--bmc-fg);
+    border-radius: 8px;
+    padding: 8mm;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8mm;
+  }
+  .commercial-final h3 { margin: 0 0 2mm; font-size: 20pt; font-weight: 700; letter-spacing: -.01em; }
+  .commercial-final h3 em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;}
+  .commercial-final p { margin: 0; color: var(--bmc-fg-muted); font-size: 10pt; max-width: 110mm; }
+  .commercial-final .number {
+    text-align: right;
+    font-size: 36pt; font-weight: 700; letter-spacing: -.02em;
+    line-height: 1;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .commercial-final .number small { display: block; font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-fg-muted); margin-top: 1mm; -webkit-text-fill-color: var(--bmc-fg-muted); }
+
+  /* —— signature page —— */
+  .sig-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12mm;
+    margin-top: 12mm;
+  }
+  .sig {
+    border-top: 1px solid var(--bmc-ink);
+    padding-top: 4mm;
+  }
+  .sig .role { font-family: var(--bmc-mono); font-size: 9pt; color: var(--bmc-ink-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3mm; }
+  .sig .name { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; font-size: 22pt; color: var(--bmc-ink); margin-bottom: 1mm; line-height: 1; }
+  .sig .ttl { font-size: 10pt; color: var(--bmc-ink-2); }
+  .sig .blank {
+    height: 24mm;
+    border-bottom: 1px solid var(--bmc-line-ink-2);
+    margin-bottom: 2mm;
+  }
+
+  /* —— TOC bar at top of body pages —— */
+  .toc-bar {
+    font-family: var(--bmc-mono); font-size: 8pt; color: var(--bmc-ink-muted);
+    letter-spacing: .04em;
+    margin-bottom: 6mm;
+  }
+  .toc-bar b { color: var(--bmc-ink); font-weight: 600; }
+
+  /* —— print —— */
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .page {
+      margin: 0; box-shadow: none;
+      width: 210mm; min-height: 297mm;
+    }
+    @page { size: A4; margin: 0; }
+    .cover, .phase::before, table.bmc-tbl th, .commercial-final, h2.section .g, em, .big.grad, .sub .grad {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>// <a href="Brand Kit.html">brand-kit</a> / proposal-template.html — print to PDF (A4, no margins) for the canonical proposal</span>
+  <button onclick="window.print()">⎙ Print / Save as PDF</button>
+</div>
+
+<!-- ============== PAGE 1 · COVER ============== -->
+<div class="page cover">
+  <div class="ph">
+    <div class="lock">
+      <div class="bmc-badge bmc-badge--sm bmc-badge--glow"><span class="t">~</span>bmc</div>
+      <span class="name">Bimal Mohanan Consulting</span>
+    </div>
+    <span>proposal · 001 · confidential</span>
+  </div>
+
+  <div class="center">
+    <div class="label">$ <span style="color:var(--bmc-fg-dim)">~/</span>proposals<span>·</span>cat northwind.md</div>
+    <h1>A cloud you can<br/><em>afford</em> to <span class="g">scale.</span></h1>
+    <p class="lede">A six-week FinOps engagement to bring Northwind Energy's AWS &amp; Azure run-rate back into line — and put the commitments in place to keep it there.</p>
+    <dl class="stamp">
+      <dt>Prepared for</dt><dd>Northwind Energy plc · Helena Voss, CFO</dd>
+      <dt>Prepared by</dt><dd>Bimal Mohanan · Principal, BMC</dd>
+      <dt>Ref</dt><dd>BMC-PR-2026-05-001</dd>
+      <dt>Issued</dt><dd>25 May 2026 · v1.0</dd>
+      <dt>Valid until</dt><dd>30 June 2026</dd>
+    </dl>
+  </div>
+
+  <div class="pf">
+    <span>BMC · proposal · cover</span>
+    <span>mohanan.uk · hello@mohanan.uk</span>
+    <span>01 / 04</span>
+  </div>
+</div>
+
+<!-- ============== PAGE 2 · EXEC SUMMARY ============== -->
+<div class="page body">
+  <div class="ph">
+    <div class="lock">
+      <div class="bmc-badge bmc-badge--sm"><span class="t">~</span>bmc</div>
+      <span class="name">Bimal Mohanan Consulting</span>
+    </div>
+    <span>Proposal · BMC-PR-2026-05-001</span>
+  </div>
+
+  <div class="toc-bar">// <b>01</b> Executive Summary &nbsp;·&nbsp; 02 Approach &nbsp;·&nbsp; 03 Scope &amp; Deliverables &nbsp;·&nbsp; 04 Commercials</div>
+
+  <div class="eyebrow">// 01 — executive summary</div>
+  <h2 class="section">The headline:<br/>between <em class="g">22%</em> and <em class="g">30%</em> of annual<br/>cloud spend is recoverable.</h2>
+
+  <div class="body">
+    <p>Northwind currently spends approximately <strong>£285k/month</strong> across AWS and Azure. From the data-room sample, three things are clear: <strong>commitment coverage is low</strong>, <strong>SQL is over-provisioned</strong>, and the platform's growth has out-paced the FinOps practice that should be matching it.</p>
+    <p>BMC has run this engagement fourteen times in the last two years. The median outcome is a <em>28%</em> reduction in steady-state cloud cost, landed within six weeks of kickoff, with a commercial payback of under five months on the advisory fee.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h4>// today</h4>
+      <div class="big">£285k / mo</div>
+      <div class="sub">Combined AWS + Azure run-rate. 62% commitment coverage against an ≥80% target. Three workstreams flagged as over-provisioned by Cost Explorer / Azure Advisor.</div>
+    </div>
+    <div class="card">
+      <h4>// after BMC</h4>
+      <div class="big grad">£213k / mo</div>
+      <div class="sub">Target steady-state after the six-week engagement. £71k/month of identified savings landed; 78% coverage; runbook handed to platform team.</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p>This proposal sets out the approach, scope, commercial terms and timeline. The accompanying cost-review worksheet (<em>BMC-FN-2026-05-001</em>) shows the line-item evidence behind the numbers above.</p>
+  </div>
+
+  <div class="pf">
+    <span>BMC · proposal</span>
+    <span>Confidential — Northwind Energy plc</span>
+    <span>02 / 04</span>
+  </div>
+</div>
+
+<!-- ============== PAGE 3 · APPROACH + SCOPE ============== -->
+<div class="page body">
+  <div class="ph">
+    <div class="lock">
+      <div class="bmc-badge bmc-badge--sm"><span class="t">~</span>bmc</div>
+      <span class="name">Bimal Mohanan Consulting</span>
+    </div>
+    <span>Proposal · BMC-PR-2026-05-001</span>
+  </div>
+
+  <div class="toc-bar">01 Executive Summary &nbsp;·&nbsp; // <b>02</b> Approach &nbsp;·&nbsp; // <b>03</b> Scope &amp; Deliverables &nbsp;·&nbsp; 04 Commercials</div>
+
+  <div class="eyebrow">// 02 — approach</div>
+  <h2 class="section">Six weeks. Three <em>phases</em>. No parallel governance.</h2>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="n">// PHASE 01 · WEEKS 1–2</div>
+      <h4>Read the bill.</h4>
+      <p>Baseline the trailing 90 days. Map workloads to services. Surface the top-20 lines.</p>
+      <ul>
+        <li>CUR + Azure exports ingested</li>
+        <li>Tag-coverage audit</li>
+        <li>Unit-economics baseline</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="n">// PHASE 02 · WEEKS 3–4</div>
+      <h4>Land the easy wins.</h4>
+      <p>Right-size, lifecycle, retire. Anything that doesn't need a committed-use plan, ship now.</p>
+      <ul>
+        <li>VM &amp; EC2 right-size</li>
+        <li>S3 / Blob lifecycle</li>
+        <li>Orphan-resource cleanup</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="n">// PHASE 03 · WEEKS 5–6</div>
+      <h4>Lock the savings.</h4>
+      <p>Buy the Savings Plans / RIs / Hybrid Benefit sized to ≤85% of the new baseline. Hand over.</p>
+      <ul>
+        <li>3-yr SP &amp; RI purchase</li>
+        <li>Azure Hybrid Benefit</li>
+        <li>Runbook + monthly review</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:8mm;">// 03 — scope &amp; deliverables</div>
+
+  <table class="bmc-tbl">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Deliverable</th>
+        <th>Format</th>
+        <th>Phase</th>
+        <th class="num">Effort (days)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>D1</td><td>Cost &amp; commitment baseline · 90 days · AWS + Azure</td><td>Worksheet (.xlsx + html)</td><td>01</td><td class="num">4</td></tr>
+      <tr><td>D2</td><td>Top-20 recommendation backlog · sized, prioritised, owned</td><td>Backlog (Jira-importable)</td><td>01</td><td class="num">2</td></tr>
+      <tr><td>D3</td><td>Architecture review · top-5 services by cost</td><td>Memo (.pdf)</td><td>02</td><td class="num">3</td></tr>
+      <tr><td>D4</td><td>Right-size &amp; lifecycle landing</td><td>PRs + change tickets</td><td>02</td><td class="num">6</td></tr>
+      <tr><td>D5</td><td>Reserved Instances &amp; Savings Plan proposal · 3-yr horizon</td><td>Plan (.xlsx + memo)</td><td>03</td><td class="num">3</td></tr>
+      <tr><td>D6</td><td>Azure Hybrid Benefit licence-map</td><td>Memo + procurement note</td><td>03</td><td class="num">1</td></tr>
+      <tr><td>D7</td><td>Runbook + monthly review cadence · handover to platform</td><td>Runbook (.md + dashboards)</td><td>03</td><td class="num">2</td></tr>
+      <tr><td>D8</td><td>Executive read-out · CFO + CTO + platform leads</td><td>Deck (.pptx)</td><td>03</td><td class="num">1</td></tr>
+      <tr class="total"><td colspan="4">Total — committed effort</td><td class="num">22 days</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pf">
+    <span>BMC · proposal</span>
+    <span>Confidential — Northwind Energy plc</span>
+    <span>03 / 04</span>
+  </div>
+</div>
+
+<!-- ============== PAGE 4 · COMMERCIAL + SIGN ============== -->
+<div class="page body">
+  <div class="ph">
+    <div class="lock">
+      <div class="bmc-badge bmc-badge--sm"><span class="t">~</span>bmc</div>
+      <span class="name">Bimal Mohanan Consulting</span>
+    </div>
+    <span>Proposal · BMC-PR-2026-05-001</span>
+  </div>
+
+  <div class="toc-bar">01 Executive Summary &nbsp;·&nbsp; 02 Approach &nbsp;·&nbsp; 03 Scope &amp; Deliverables &nbsp;·&nbsp; // <b>04</b> Commercials</div>
+
+  <div class="eyebrow">// 04 — commercials</div>
+  <h2 class="section">Fixed fee. <em>One</em> change-control clause. <em>No</em> surprises.</h2>
+
+  <div class="body">
+    <p>BMC bills on a fixed-fee, phased basis. Half on counter-signature; half on completion of phase 02. Out-of-scope work is added by written change request, never by stealth.</p>
+  </div>
+
+  <table class="bmc-tbl">
+    <thead>
+      <tr>
+        <th>Line</th>
+        <th>Item</th>
+        <th>Phase</th>
+        <th class="num">Days</th>
+        <th class="num">Rate (£)</th>
+        <th class="num">Subtotal (£)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Principal · Bimal Mohanan</td><td>01–03</td><td class="num">14</td><td class="num">1,250</td><td class="num">17,500</td></tr>
+      <tr><td>02</td><td>Associate · FinOps analyst</td><td>01–02</td><td class="num">6</td><td class="num">800</td><td class="num">4,800</td></tr>
+      <tr><td>03</td><td>Associate · platform engineer</td><td>02</td><td class="num">4</td><td class="num">900</td><td class="num">3,600</td></tr>
+      <tr><td>04</td><td>Tooling &amp; sundries (CUR ingest, dashboards)</td><td>01–03</td><td class="num">—</td><td class="num">—</td><td class="num">500</td></tr>
+      <tr class="total"><td colspan="5">Fixed fee · ex-VAT (UK · GB-registered)</td><td class="num">£26,400</td></tr>
+      <tr class="total"><td colspan="5">Negotiated round-down · counter-signed by 30 Jun 2026</td><td class="num">£24,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="commercial-final">
+    <div>
+      <h3>Bottom line: <em>£24k</em> for <em>£640k+</em> of recoverable spend.</h3>
+      <p>Fixed fee, paid in two tranches. Engagement runs six weeks. Commercial payback inside five months on the savings plan alone — sooner if the right-size landings clear in phase 02.</p>
+    </div>
+    <div class="number">≤ 5 mo<small>commercial payback</small></div>
+  </div>
+
+  <!-- signatures -->
+  <div class="sig-grid">
+    <div class="sig">
+      <div class="role">// for Northwind Energy plc</div>
+      <div class="blank"></div>
+      <div class="name">Helena Voss</div>
+      <div class="ttl">Chief Financial Officer · date __________</div>
+    </div>
+    <div class="sig">
+      <div class="role">// for BMC</div>
+      <div class="blank" style="background:linear-gradient(135deg, rgba(106,61,245,.08), rgba(58,125,245,.08));"></div>
+      <div class="name">Bimal Mohanan</div>
+      <div class="ttl">Principal, Bimal Mohanan Consulting · 25 May 2026</div>
+    </div>
+  </div>
+
+  <div class="pf">
+    <span>BMC · proposal</span>
+    <span>Confidential — Northwind Energy plc</span>
+    <span>04 / 04</span>
+  </div>
+</div>
+
+</body>
+</html>

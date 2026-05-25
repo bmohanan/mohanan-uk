@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Company Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-bg); color: var(--bmc-fg); font-family: var(--bmc-sans); }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+
+  main { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 56px 48px 80px; }
+
+  /* —— top bar —— */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 24px; border-bottom: 1px solid var(--bmc-line);
+    margin-bottom: 56px;
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+  }
+  .topbar a { color: var(--bmc-cyan); text-decoration: none; }
+
+  /* —— hero —— */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr .9fr;
+    gap: 64px;
+    align-items: end;
+    margin-bottom: 72px;
+  }
+  .hero .label {
+    font-family: var(--bmc-mono);
+    font-size: 12px;
+    color: var(--bmc-cyan);
+    letter-spacing: .04em;
+    margin-bottom: 18px;
+  }
+  .hero .label span { color: var(--bmc-fg-dim); margin: 0 8px; }
+  .hero h1 {
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: .98;
+    margin: 0 0 0;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; }
+  .hero h1 .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .right {
+    color: var(--bmc-fg-2);
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 44ch;
+    text-wrap: pretty;
+  }
+  .hero .right b { color: var(--bmc-fg); font-weight: 600; }
+  .hero .right .cta {
+    margin-top: 22px;
+    display: flex; gap: 10px;
+  }
+
+  /* —— stat strip —— */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin: 0 0 80px;
+    border-top: 1px solid var(--bmc-line);
+    border-bottom: 1px solid var(--bmc-line);
+  }
+  .stat { padding: 28px 0; border-right: 1px solid var(--bmc-line); padding-right: 24px; padding-left: 24px; }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat .v {
+    font-size: 44px; font-weight: 700; letter-spacing: -.03em;
+    line-height: 1; background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat .l {
+    font-family: var(--bmc-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--bmc-fg-muted); margin-top: 10px;
+  }
+  .stat .s { font-size: 13px; color: var(--bmc-fg-2); margin-top: 8px; line-height: 1.4; }
+
+  /* —— section header —— */
+  .sec { margin-bottom: 72px; }
+  .sec > header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--bmc-line);
+  }
+  .sec > header h2 {
+    margin: 0; font-family: var(--bmc-mono); font-size: 12px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--bmc-fg-muted);
+    font-weight: 500;
+  }
+  .sec > header h2 b { color: var(--bmc-fg); font-weight: 600; }
+  .sec > header .idx { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+
+  /* —— what we do —— */
+  .practices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .practice {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    padding: 28px;
+    background: var(--bmc-surface);
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .practice::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--bmc-gradient);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s;
+  }
+  .practice:hover::before { transform: scaleX(1); }
+  .practice .n { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-cyan); letter-spacing: .1em; }
+  .practice h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; }
+  .practice h3 em { font-style: italic; font-family: var(--bmc-serif); font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .practice p { margin: 0; color: var(--bmc-fg-muted); font-size: 14px; line-height: 1.55; }
+  .practice ul { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .practice ul li { font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-2); display: flex; gap: 8px; }
+  .practice ul li::before { content: "~"; color: var(--bmc-cyan); }
+
+  /* —— engagement models —— */
+  .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--bmc-line); border-radius: var(--bmc-r-lg); overflow: hidden; background: var(--bmc-surface); }
+  .model { padding: 28px; border-right: 1px solid var(--bmc-line); display: flex; flex-direction: column; gap: 14px; }
+  .model:last-child { border-right: none; }
+  .model .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .model .price { font-size: 28px; font-weight: 700; letter-spacing: -.02em; color: var(--bmc-fg); font-variant-numeric: tabular-nums; }
+  .model .price em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; font-size: 18px; color: var(--bmc-fg-muted); }
+  .model .per { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+  .model h3 { margin: 0; font-size: 16px; font-weight: 600; }
+  .model .desc { color: var(--bmc-fg-muted); font-size: 13px; line-height: 1.5; }
+  .model ul { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--bmc-fg-2); }
+  .model ul li { display: grid; grid-template-columns: 14px 1fr; gap: 6px; line-height: 1.5; }
+  .model ul li::before { content: "+"; color: var(--bmc-cyan); font-family: var(--bmc-mono); }
+
+  /* —— platforms band —— */
+  .platforms {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .plat {
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    padding: 22px;
+    background: var(--bmc-surface);
+  }
+  .plat .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .plat .head .name { font-weight: 600; font-size: 15px; }
+  .plat .head .pill { font-family: var(--bmc-mono); font-size: 10px; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--bmc-line); color: var(--bmc-fg-muted); }
+  .plat ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .plat li {
+    font-family: var(--bmc-mono); font-size: 11px;
+    color: var(--bmc-fg-2);
+    padding: 3px 9px; border-radius: 4px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--bmc-line);
+  }
+
+  /* —— how we work (timeline) —— */
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; gap: 16px; }
+  .timeline::before {
+    content: ""; position: absolute; top: 18px; left: 16px; right: 16px; height: 1px;
+    background: linear-gradient(90deg, var(--bmc-grad-1), var(--bmc-grad-2) 50%, var(--bmc-grad-3));
+    opacity: .4;
+    z-index: 0;
+  }
+  .step { position: relative; z-index: 1; }
+  .step .dot {
+    width: 14px; height: 14px;
+    border-radius: 50%; background: var(--bmc-gradient);
+    margin: 11px auto 0;
+    box-shadow: 0 0 0 4px var(--bmc-bg), 0 0 12px rgba(170,60,230,.5);
+    position: relative;
+  }
+  .step .lbl { font-family: var(--bmc-mono); font-size: 10px; color: var(--bmc-fg-dim); text-align: center; margin-top: 16px; letter-spacing: .08em; }
+  .step h4 { text-align: center; font-size: 14px; font-weight: 600; margin: 8px 0 6px; }
+  .step p { text-align: center; font-size: 12px; color: var(--bmc-fg-muted); margin: 0; line-height: 1.5; }
+
+  /* —— contact —— */
+  .contact {
+    display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px;
+    padding: 36px;
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    background: linear-gradient(135deg, rgba(106,61,245,.06) 0%, rgba(209,54,230,.04) 55%, rgba(58,125,245,.06) 100%);
+    align-items: center;
+  }
+  .contact h3 {
+    margin: 0 0 12px;
+    font-size: 32px; font-weight: 700; letter-spacing: -.025em; line-height: 1.05;
+  }
+  .contact h3 em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .contact p { margin: 0; color: var(--bmc-fg-muted); font-size: 14px; line-height: 1.55; max-width: 52ch; }
+  .contact dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 18px; row-gap: 10px; font-size: 14px; }
+  .contact dt { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); padding-top: 2px; }
+  .contact dd { margin: 0; color: var(--bmc-fg); }
+  .contact dd a { color: var(--bmc-cyan); text-decoration: none; }
+
+  /* —— footer —— */
+  footer.ov {
+    margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--bmc-line);
+    display: flex; justify-content: space-between;
+    font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
+  }
+
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body { background: var(--bmc-bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body::before { display: none; }
+    main { padding: 0; max-width: none; }
+    .hero h1 { font-size: 56px; }
+    .stats .v { font-size: 36px; }
+    .practice, .model, .plat { break-inside: avoid; }
+    .sec { margin-bottom: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+  <div class="topbar">
+    <span><a href="Brand Kit.html">brand-kit</a> / <span style="color:var(--bmc-fg)">company-overview</span></span>
+    <span>v1.0 · 25 May 2026</span>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="label">$ <span style="color:var(--bmc-fg-dim)">~/</span>bmc<span>·</span>cat overview.md</div>
+      <h1>Make the cloud<br/><em>pay back</em> the <span class="g">promise.</span></h1>
+    </div>
+    <div class="right">
+      <p>
+        <b>Bimal Mohanan Consulting</b> partners with AWS &amp; Azure enterprises across the UK and EMEA &mdash; bringing the strategy, delivery and commercial fluency to turn hyperscaler bills into measurable business outcomes.
+      </p>
+      <p style="margin-top:12px;">Pre-sales through go-live: cost optimisation, unit economics, incident review, managed services and the day-two leadership most cloud programmes forget to budget for.</p>
+      <div class="cta">
+        <a class="bmc-btn" href="#contact">Book a call →</a>
+        <a class="bmc-btn bmc-btn--ghost" href="Cost Review.html">See a sample review →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="v">13<sup style="font-size:.5em;background:none;-webkit-text-fill-color:initial;color:var(--bmc-fg-muted);">+</sup></div>
+      <div class="l">years in cloud</div>
+      <div class="s">AWS, Azure &amp; Oracle programmes since 2013.</div>
+    </div>
+    <div class="stat">
+      <div class="v">£40m<sup style="font-size:.5em;background:none;-webkit-text-fill-color:initial;color:var(--bmc-fg-muted);">+</sup></div>
+      <div class="l">cloud spend advised</div>
+      <div class="s">FY-cumulative across UK &amp; EMEA enterprises.</div>
+    </div>
+    <div class="stat">
+      <div class="v">~28%</div>
+      <div class="l">avg. savings unlocked</div>
+      <div class="s">Median across the last 14 cost-optimisation engagements.</div>
+    </div>
+    <div class="stat">
+      <div class="v">2</div>
+      <div class="l">hyperscalers · 1 voice</div>
+      <div class="s">AWS &amp; Azure side-by-side — strategy, not preference.</div>
+    </div>
+  </div>
+
+  <!-- 01 What we do -->
+  <section class="sec">
+    <header><h2>// 01 — <b>What we do</b></h2><span class="idx">overview/practice</span></header>
+    <div class="practices">
+      <div class="practice">
+        <div class="n">// practice 01</div>
+        <h3>Cloud <em>strategy</em> &amp; pre-sales</h3>
+        <p>Help technology vendors and system integrators win — and help enterprises choose well. Solution architecture, commercial shape, executive narrative.</p>
+        <ul>
+          <li>RFP / RFI response leadership</li>
+          <li>Cloud business cases &amp; TCO</li>
+          <li>Hyperscaler co-sell motion</li>
+          <li>Workshop facilitation</li>
+        </ul>
+      </div>
+      <div class="practice">
+        <div class="n">// practice 02</div>
+        <h3>FinOps &amp; <em>unit economics</em></h3>
+        <p>Turn the bill into a P&amp;L. Per-customer, per-feature, per-team cost — so product, finance and engineering finally agree on what "good" looks like.</p>
+        <ul>
+          <li>Cost &amp; commitment reviews</li>
+          <li>Reserved Instances &amp; Savings Plans</li>
+          <li>Showback / chargeback modelling</li>
+          <li>Cost-per-transaction baselines</li>
+        </ul>
+      </div>
+      <div class="practice">
+        <div class="n">// practice 03</div>
+        <h3>Delivery &amp; <em>operational</em> excellence</h3>
+        <p>The unglamorous middle of a cloud programme — landing zones, incident review, runbooks, leadership coverage when the original team has rolled off.</p>
+        <ul>
+          <li>Programme &amp; delivery leadership</li>
+          <li>Landing-zone &amp; platform engineering</li>
+          <li>Incident review &amp; PIRs</li>
+          <li>Interim head-of-cloud cover</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Platforms -->
+  <section class="sec">
+    <header><h2>// 02 — <b>Platforms &amp; tooling</b></h2><span class="idx">overview/stack</span></header>
+    <div class="platforms">
+      <div class="plat">
+        <div class="head"><span class="name">Hyperscalers</span><span class="pill">primary</span></div>
+        <ul>
+          <li>AWS</li><li>Microsoft Azure</li><li>Oracle Cloud</li>
+          <li>EKS · AKS</li><li>Fargate · Container Apps</li>
+          <li>Aurora · Azure SQL · RDS</li>
+        </ul>
+      </div>
+      <div class="plat">
+        <div class="head"><span class="name">FinOps &amp; observability</span><span class="pill">finops</span></div>
+        <ul>
+          <li>Cost Explorer</li><li>Azure Cost Management</li>
+          <li>CUR / focus-spec</li><li>Apptio Cloudability</li>
+          <li>Datadog · NewRelic</li><li>Grafana · Prometheus</li>
+        </ul>
+      </div>
+      <div class="plat">
+        <div class="head"><span class="name">Delivery &amp; IaC</span><span class="pill">delivery</span></div>
+        <ul>
+          <li>Terraform · CDK</li><li>Bicep · ARM</li>
+          <li>GitHub Actions</li><li>Azure DevOps</li>
+          <li>ServiceNow · Jira</li><li>Confluence</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 How we work -->
+  <section class="sec">
+    <header><h2>// 03 — <b>How we work</b></h2><span class="idx">overview/process</span></header>
+    <div class="timeline">
+      <div class="step">
+        <div class="lbl">WEEK 0</div>
+        <div class="dot"></div>
+        <h4>Listen</h4>
+        <p>One call. Read your last cost &amp; incident reports. No NDAs theatre.</p>
+      </div>
+      <div class="step">
+        <div class="lbl">WEEK 1</div>
+        <div class="dot"></div>
+        <h4>Scope</h4>
+        <p>SoW in plain English. Day rate or fixed-fee — your call.</p>
+      </div>
+      <div class="step">
+        <div class="lbl">WEEK 2–4</div>
+        <div class="dot"></div>
+        <h4>Find</h4>
+        <p>Read the bill, map the architecture, prioritise by net saving.</p>
+      </div>
+      <div class="step">
+        <div class="lbl">WEEK 4–8</div>
+        <div class="dot"></div>
+        <h4>Land</h4>
+        <p>Implement with your team, not around them. Daily standup, weekly burn-down.</p>
+      </div>
+      <div class="step">
+        <div class="lbl">WEEK 8+</div>
+        <div class="dot"></div>
+        <h4>Hand over</h4>
+        <p>Runbooks, dashboards, two months of office hours. Then we leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Engagement models -->
+  <section class="sec">
+    <header><h2>// 04 — <b>Engagement models</b></h2><span class="idx">overview/commercials</span></header>
+    <div class="models">
+      <div class="model">
+        <h3>Cost review</h3>
+        <div class="price-row"><span class="price">£12k</span><span class="per">fixed · 2 weeks</span></div>
+        <div class="desc">A one-shot FinOps deep-dive on a single cloud account or subscription.</div>
+        <ul>
+          <li>Spend &amp; commitment baseline</li>
+          <li>Top-20 savings backlog</li>
+          <li>RI / SP / Hybrid Benefit plan</li>
+          <li>Read-out to exec + tech leads</li>
+        </ul>
+      </div>
+      <div class="model">
+        <h3>Advisory retainer</h3>
+        <div class="price-row"><span class="price">£8k</span><span class="per">/month · rolling</span></div>
+        <div class="desc">Fractional cloud advisor for CTO / Head of Platform — no minimum term beyond 90 days.</div>
+        <ul>
+          <li>Weekly working session</li>
+          <li>Architecture &amp; commercial reviews</li>
+          <li>Pre-sales support on demand</li>
+          <li>Slack / Teams access M–F</li>
+        </ul>
+      </div>
+      <div class="model">
+        <h3>Delivery lead</h3>
+        <div class="price-row"><span class="price">£1,250</span><span class="per">/day · 4-day min</span></div>
+        <div class="desc">Embed for a defined programme — interim cover or sustained delivery leadership.</div>
+        <ul>
+          <li>Programme leadership</li>
+          <li>Vendor &amp; SI management</li>
+          <li>Steering-committee reporting</li>
+          <li>Outcome-based bonus optional</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Contact -->
+  <section class="sec" id="contact">
+    <header><h2>// 05 — <b>Get in touch</b></h2><span class="idx">overview/contact</span></header>
+    <div class="contact">
+      <div>
+        <h3>Let's <em>talk numbers.</em></h3>
+        <p>If you're staring at a bill that no longer makes sense, or selling cloud into a buyer who wants to know what it actually costs to run — that's the conversation.</p>
+        <p style="margin-top:12px;font-family:var(--bmc-mono);font-size:12px;color:var(--bmc-cyan);">// London · United Kingdom · open to the world</p>
+      </div>
+      <dl>
+        <dt>email</dt><dd><a href="mailto:hello@mohanan.uk">hello@mohanan.uk</a></dd>
+        <dt>www</dt><dd><a href="https://mohanan.uk">mohanan.uk</a></dd>
+        <dt>linkedin</dt><dd><a href="#">/in/bimalmohanan</a></dd>
+        <dt>diary</dt><dd><a href="#">cal.com/bmc</a></dd>
+        <dt>based</dt><dd>London E14, United Kingdom</dd>
+        <dt>vat</dt><dd>GB · registered</dd>
+      </dl>
+    </div>
+  </section>
+
+  <footer class="ov">
+    <span><a href="Brand Kit.html" style="color:var(--bmc-cyan);text-decoration:none;">← brand kit</a></span>
+    <span>BMC · Company Overview · v1.0 · 2026</span>
+  </footer>
+
+</main>
+
+</body>
+</html>

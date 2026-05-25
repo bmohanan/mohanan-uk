@@ -1,0 +1,184 @@
+/* =========================================================
+   BMC · Bimal Mohanan Consulting — Brand Tokens
+   Single source of truth for color, type, spacing, surfaces.
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap");
+
+:root {
+  /* —— Brand gradient (purple → magenta → blue) —— */
+  --bmc-grad-1: #6a3df5;
+  --bmc-grad-2: #d136e6;
+  --bmc-grad-3: #3a7df5;
+  --bmc-gradient: linear-gradient(135deg, var(--bmc-grad-1) 0%, var(--bmc-grad-2) 55%, var(--bmc-grad-3) 100%);
+  --bmc-gradient-soft: linear-gradient(135deg, rgba(106,61,245,.18) 0%, rgba(209,54,230,.14) 55%, rgba(58,125,245,.18) 100%);
+
+  /* —— Dark surfaces —— */
+  --bmc-bg:        #07070b;
+  --bmc-surface:   #0e0e16;
+  --bmc-surface-2: #15151f;
+  --bmc-line:      rgba(255,255,255,.08);
+  --bmc-line-soft: rgba(255,255,255,.04);
+
+  /* —— Text on dark —— */
+  --bmc-fg:        #f3f4f8;
+  --bmc-fg-2:      #cfd2dc;
+  --bmc-fg-muted:  #9aa0b4;
+  --bmc-fg-dim:    #6b7088;
+
+  /* —— Accents (terminal cyan + status green) —— */
+  --bmc-cyan:      #46d9c8;
+  --bmc-cyan-dim:  #2aa9a0;
+  --bmc-green:     #4ade80;
+
+  /* —— Light surfaces (print, docs) —— */
+  --bmc-paper:        #fafaf7;
+  --bmc-paper-2:      #f1f1ec;
+  --bmc-ink:          #131319;
+  --bmc-ink-2:        #3a3a48;
+  --bmc-ink-muted:    #6b6b7a;
+  --bmc-line-ink:     rgba(19,19,25,.10);
+  --bmc-line-ink-2:   rgba(19,19,25,.18);
+
+  /* —— Type stacks —— */
+  --bmc-sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --bmc-mono:  "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --bmc-serif: "Fraunces", "Times New Roman", serif;
+
+  /* —— Radii —— */
+  --bmc-r-sm: 6px;
+  --bmc-r:    12px;
+  --bmc-r-lg: 18px;
+  --bmc-r-xl: 28px;
+}
+
+/* =========================================================
+   Logo system
+   ~bmc badge (primary) + wordmark + lockups
+   ========================================================= */
+
+.bmc-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bmc-gradient);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: var(--bmc-mono);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+.bmc-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+  pointer-events: none;
+}
+.bmc-badge .t { opacity: .72; margin-right: .08em; }
+
+/* Size presets */
+.bmc-badge--xs { width: 24px; height: 24px; border-radius: 6px;  font-size: 9px;  }
+.bmc-badge--sm { width: 32px; height: 32px; border-radius: 8px;  font-size: 11px; }
+.bmc-badge--md { width: 52px; height: 52px; border-radius: 12px; font-size: 15px; }
+.bmc-badge--lg { width: 96px; height: 96px; border-radius: 22px; font-size: 28px; }
+.bmc-badge--xl { width: 168px; height: 168px; border-radius: 38px; font-size: 50px; }
+
+.bmc-badge--glow {
+  box-shadow:
+    0 8px 28px -8px rgba(170, 60, 230, .55),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+}
+
+/* Lockup: badge + wordmark side-by-side */
+.bmc-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.bmc-lockup__wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.bmc-lockup__name {
+  font-family: var(--bmc-sans);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -.01em;
+  color: var(--bmc-fg);
+}
+.bmc-lockup__tag {
+  font-family: var(--bmc-mono);
+  font-size: 11px;
+  color: var(--bmc-fg-muted);
+  letter-spacing: .02em;
+}
+.bmc-lockup--ink .bmc-lockup__name { color: var(--bmc-ink); }
+.bmc-lockup--ink .bmc-lockup__tag  { color: var(--bmc-ink-muted); }
+
+/* =========================================================
+   Utility chips & buttons used across templates
+   ========================================================= */
+
+.bmc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--bmc-mono);
+  font-size: 11px;
+  color: var(--bmc-fg-2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--bmc-line);
+  background: rgba(255,255,255,.02);
+  white-space: nowrap;
+}
+.bmc-chip--status::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bmc-green);
+  box-shadow: 0 0 8px var(--bmc-green);
+}
+.bmc-chip--ink {
+  color: var(--bmc-ink-2);
+  border-color: var(--bmc-line-ink-2);
+  background: rgba(19,19,25,.03);
+}
+
+.bmc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--bmc-sans);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--bmc-gradient);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 24px -10px rgba(170, 60, 230, .55);
+}
+.bmc-btn--ghost {
+  background: transparent;
+  color: var(--bmc-fg);
+  border: 1px solid var(--bmc-line);
+  box-shadow: none;
+}
+
+/* =========================================================
+   Gradient text helper
+   ========================================================= */
+
+.bmc-grad-text {
+  background: var(--bmc-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
