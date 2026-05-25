@@ -10,10 +10,10 @@
        CUSTOMIZE: Meta tags
        Change name, role, and description here for SEO + sharing.
   ========================================================== -->
-  <title>Bimal Mohanan — Cloud Transformation Leader | Azure &amp; Hybrid Cloud</title>
-  <meta name="description" content="Bimal Mohanan — cloud transformation leader with 13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership. Cost optimisation and managed-services excellence for UK and EMEA enterprises." />
+  <title>Bimal Mohanan — Cloud Transformation Leader | AWS &amp; Azure</title>
+  <meta name="description" content="Bimal Mohanan — cloud transformation leader with 13+ years across AWS, Azure and hybrid cloud, technical pre-sales and delivery leadership. FinOps, cost optimisation and managed-services excellence for UK and EMEA enterprises." />
   <meta name="author" content="Bimal Mohanan" />
-  <meta name="keywords" content="Bimal Mohanan, Cloud Transformation Leader, Microsoft Azure, Hybrid Cloud, Pre-Sales, Azure Cost Optimisation, Managed Services, London, EMEA" />
+  <meta name="keywords" content="Bimal Mohanan, Cloud Transformation Leader, AWS, Microsoft Azure, Multi-cloud, Hybrid Cloud, FinOps, Cloud Unit Economics, Pre-Sales, Cost Optimisation, Managed Services, London, EMEA" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://mohanan.uk/" />
 
@@ -27,7 +27,7 @@
   <!-- Open Graph (LinkedIn, Facebook, WhatsApp, Slack, iMessage) -->
   <meta property="og:site_name" content="Bimal Mohanan" />
   <meta property="og:title" content="Bimal Mohanan — Cloud Transformation Leader" />
-  <meta property="og:description" content="13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership — for UK and EMEA enterprises." />
+  <meta property="og:description" content="13+ years across AWS, Azure and hybrid cloud, technical pre-sales and delivery leadership — for UK and EMEA enterprises." />
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://mohanan.uk/" />
   <meta property="og:locale" content="en_GB" />
@@ -36,14 +36,14 @@
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Bimal Mohanan — Cloud Transformation Leader. Azure &amp; Hybrid Cloud. Pre-Sales · Delivery." />
+  <meta property="og:image:alt" content="Bimal Mohanan — Cloud Transformation Leader. AWS &amp; Azure. Pre-Sales · Delivery." />
   <meta property="profile:first_name" content="Bimal" />
   <meta property="profile:last_name" content="Mohanan" />
 
   <!-- Twitter / X card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bimal Mohanan — Cloud Transformation Leader" />
-  <meta name="twitter:description" content="13+ years across Microsoft Azure, hybrid cloud, pre-sales and delivery leadership — UK &amp; EMEA." />
+  <meta name="twitter:description" content="13+ years across AWS, Azure and hybrid cloud, pre-sales and delivery leadership — UK &amp; EMEA." />
   <meta name="twitter:image" content="https://mohanan.uk/og-image.png" />
   <meta name="twitter:image:alt" content="Bimal Mohanan — Cloud Transformation Leader" />
 
@@ -57,7 +57,7 @@
     "givenName": "Bimal",
     "familyName": "Mohanan",
     "jobTitle": "Cloud Transformation Leader",
-    "description": "Cloud transformation leader with 13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership for UK and EMEA enterprises.",
+    "description": "Cloud transformation leader with 13+ years across AWS, Azure and hybrid cloud, technical pre-sales and delivery leadership for UK and EMEA enterprises. FinOps and cloud unit economics practitioner.",
     "url": "https://mohanan.uk/",
     "image": "https://mohanan.uk/photo.jpg",
     "email": "mailto:bimal@mohanan.uk",
@@ -68,14 +68,29 @@
       "addressCountry": "GB"
     },
     "knowsAbout": [
+      "Amazon Web Services",
+      "AWS FinOps",
+      "AWS Cost Explorer",
+      "AWS Savings Plans",
+      "AWS Reserved Instances",
       "Microsoft Azure",
+      "Azure FinOps",
+      "Azure Cost Management",
+      "Azure Reservations",
+      "Multi-cloud Strategy",
       "Hybrid Cloud",
       "Cloud Transformation",
+      "FinOps",
+      "FinOps Foundation",
+      "Cloud Unit Economics",
+      "Cost Allocation",
+      "Cloud Cost Optimisation",
+      "Anomaly Detection",
       "Technical Pre-Sales",
-      "Azure Cost Optimisation",
       "Managed Services",
       "Cloud Adoption",
-      "Cross-Functional Leadership"
+      "Cross-Functional Leadership",
+      "Psychological Safety"
     ],
     "sameAs": [
       "https://www.linkedin.com/in/bimalmohanan/"
@@ -498,6 +513,23 @@
       color: var(--text-2);
       line-height: 1.7;
     }
+    .hero-tagline strong { color: var(--text-1); font-weight: 600; }
+    /* Personal "ci/cd" coda — italic, lighter, smaller. The metaphor
+       (continuous integration of self) is on-brand and worth letting
+       breathe on its own line. */
+    .hero-tagline-coda {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(12px, 1.2vw, 14px);
+      color: var(--text-3);
+      letter-spacing: 0.02em;
+    }
+    .hero-tagline-coda::before {
+      content: "▸ ";
+      color: var(--accent-cyan);
+      margin-right: 2px;
+    }
 
     .hero-ctas {
       display: flex;
@@ -565,10 +597,18 @@
       animation: bobble 6s ease-in-out infinite;
     }
     .float-chip span { color: var(--accent-cyan); }
-    .float-chip:nth-child(1) { top: 10%; left: 4%; animation-delay: 0s; }
-    .float-chip:nth-child(2) { top: 24%; right: 2%; animation-delay: -1.5s; }
-    .float-chip:nth-child(3) { bottom: 22%; left: 6%; animation-delay: -3s; }
-    .float-chip:nth-child(4) { bottom: 12%; right: 8%; animation-delay: -4.5s; }
+    .float-chip:nth-child(1)  { top:  6%; left:  6%; animation-delay:  0s;   }
+    .float-chip:nth-child(2)  { top: 18%; right: 6%; animation-delay: -0.5s; }
+    .float-chip:nth-child(3)  { top: 34%; left:  6%; animation-delay: -1.0s; }
+    .float-chip:nth-child(4)  { top: 46%; right: 6%; animation-delay: -1.5s; }
+    .float-chip:nth-child(5)  { top: 60%; left:  6%; animation-delay: -2.0s; }
+    .float-chip:nth-child(6)  { top: 72%; right: 8%; animation-delay: -2.5s; }
+    .float-chip:nth-child(7)  { top: 84%; left:  8%; animation-delay: -3.0s; }
+    .float-chip:nth-child(8)  { top: 90%; right:18%; animation-delay: -3.5s; }
+    .float-chip:nth-child(9)  { top:  6%; right:18%; animation-delay: -4.0s; }
+    .float-chip:nth-child(10) { top: 22%; left:18%; animation-delay: -4.5s; }
+    .float-chip:nth-child(11) { top: 78%; right:24%; animation-delay: -5.0s; }
+    .float-chip:nth-child(12) { top: 12%; left:24%; animation-delay: -5.5s; }
     @keyframes bobble {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-10px); }
@@ -820,229 +860,6 @@
       color: transparent;
       line-height: 1;
       letter-spacing: -0.04em;
-    }
-
-    /* =====================================================================
-       ENDORSEMENTS — LinkedIn-style detailed skill breakdown
-       Three categories (Industry Knowledge / Tools / Interpersonal),
-       each with a flex-wrap of skill pills. Pills are visually tiered
-       by endorsement count — the more endorsements, the brighter the
-       pill. Special badges call out highly-skilled endorsers,
-       LinkedIn skill assessments, and current-role assignments.
-    ===================================================================== */
-    .endorsements-block {
-      margin-top: 72px;
-      padding-top: 56px;
-      border-top: 1px solid var(--glass-border);
-    }
-    .endorsements-head {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 40px;
-    }
-    .endorsements-head h3 {
-      font-size: clamp(26px, 3.6vw, 36px);
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 10px;
-    }
-    .endorsements-head p {
-      color: var(--text-3);
-      font-size: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.04em;
-    }
-
-    .endorsements-legend {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-3);
-      letter-spacing: 0.04em;
-    }
-    .endorsements-legend span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .legend-dot {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .legend-dot.tier-1 { background: linear-gradient(135deg, #00d9ff, #b15cff); box-shadow: 0 0 8px rgba(0,217,255,0.6); }
-    .legend-dot.tier-2 { background: rgba(0,217,255,0.5); }
-    .legend-dot.tier-3 { background: rgba(255,255,255,0.25); }
-    .legend-dot.tier-4 { background: rgba(255,255,255,0.12); }
-
-    .skill-cats {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    .skill-cat {
-      padding: 26px 28px 30px;
-      border-radius: var(--radius-lg);
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-    }
-    .skill-cat-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 22px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .skill-cat-icon {
-      width: 40px; height: 40px;
-      border-radius: 11px;
-      background: var(--grad-soft);
-      border: 1px solid var(--glass-border);
-      display: grid; place-items: center;
-      color: var(--accent-cyan);
-      flex-shrink: 0;
-    }
-    .skill-cat-icon svg { width: 18px; height: 18px; }
-    .skill-cat-meta { flex: 1; }
-    .skill-cat-meta h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-    .skill-cat-meta p {
-      font-size: 12px;
-      color: var(--text-3);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.04em;
-    }
-    .skill-cat-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-cyan);
-      letter-spacing: 0.1em;
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(0, 217, 255, 0.08);
-      border: 1px solid rgba(0, 217, 255, 0.2);
-      flex-shrink: 0;
-    }
-
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .skill-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px 7px 14px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--glass-border);
-      font-size: 13px;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      cursor: default;
-      position: relative;
-    }
-    .skill-pill:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(0, 217, 255, 0.35);
-    }
-
-    .skill-name {
-      color: var(--text-1);
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .skill-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-cyan);
-      background: rgba(0, 217, 255, 0.1);
-      padding: 2px 7px;
-      border-radius: 999px;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-    }
-
-    .skill-flag {
-      display: inline-grid;
-      place-items: center;
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      font-size: 10px;
-      flex-shrink: 0;
-    }
-    .skill-flag svg { width: 12px; height: 12px; }
-    .skill-flag--top {
-      color: var(--accent-gold);
-      filter: drop-shadow(0 0 4px rgba(255, 209, 102, 0.6));
-    }
-    .skill-flag--check {
-      color: #4ade80;
-    }
-    .skill-flag--bcn {
-      background: rgba(14, 124, 194, 0.18);
-      color: #6ec5ff;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      font-size: 9px;
-      letter-spacing: 0.02em;
-      width: auto;
-      padding: 1px 6px;
-      border-radius: 4px;
-    }
-
-    /* Tiered pill weight by endorsement count */
-    .skill-pill.tier-1 {
-      background: linear-gradient(135deg, rgba(0,217,255,0.14), rgba(177,92,255,0.1));
-      border-color: rgba(0,217,255,0.45);
-      box-shadow: 0 0 24px -10px rgba(0, 217, 255, 0.45);
-    }
-    .skill-pill.tier-1 .skill-name { font-weight: 600; }
-    .skill-pill.tier-1 .skill-count {
-      background: rgba(0, 217, 255, 0.2);
-      color: #5feaff;
-    }
-    .skill-pill.tier-2 {
-      background: rgba(0,217,255,0.05);
-      border-color: rgba(0,217,255,0.22);
-    }
-    .skill-pill.tier-4 {
-      opacity: 0.78;
-    }
-    .skill-pill.tier-4 .skill-count {
-      color: var(--text-3);
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .skill-pill.tier-5 {
-      opacity: 0.55;
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-    .skill-pill.tier-5 .skill-name { font-weight: 400; }
-    .skill-pill.tier-5 .skill-count { display: none; }
-
-    @media (max-width: 720px) {
-      .skill-cat { padding: 22px 18px 24px; }
-      .skill-cat-meta h4 { font-size: 16px; }
-      .skill-pill { font-size: 12.5px; padding: 6px 10px 6px 12px; }
     }
 
     /* =====================================================================
@@ -1844,6 +1661,22 @@
       color: transparent;
       padding: 0 2px;
     }
+    /* "I read the board. I choose this on purpose." — the strategic-
+       literacy beat. Mid-size italic cyan, sits between the giant
+       multiplier line and the smaller goal coda so the rhythm goes
+       big → tight → soft. Cyan italics signal it's a chosen stance,
+       not a slogan. */
+    .ps-manifesto-aside {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(15px, 1.7vw, 18px);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent-cyan);
+      letter-spacing: 0.005em;
+      margin: 18px 0 22px;
+      text-shadow: 0 0 24px rgba(0, 217, 255, 0.18);
+    }
+
     .ps-manifesto-coda {
       font-size: clamp(15px, 1.5vw, 17px);
       line-height: 1.55;
@@ -2183,10 +2016,23 @@
   ========================================================== -->
   <section class="hero" id="home">
     <div class="hero-floats" aria-hidden="true">
-      <div class="float-chip"><span>~</span> azure</div>
+      <!-- Order matches .float-chip:nth-child positions in CSS:
+           short labels sit at tight right-edge positions (2, 4, 6, 10, 12),
+           longer labels sit at left-edge or interior positions. All
+           12 chips reflect current relevance — AWS + Azure + Oracle
+           focus, FinOps practice, and the TechOps/leadership remit. -->
+      <div class="float-chip"><span>~</span> managed-services</div>
+      <div class="float-chip"><span>~</span> aws</div>
       <div class="float-chip"><span>~</span> cost-optimisation</div>
-      <div class="float-chip"><span>~</span> delivery</div>
+      <div class="float-chip"><span>~</span> azure</div>
+      <div class="float-chip"><span>~</span> unit-economics</div>
       <div class="float-chip"><span>~</span> emea</div>
+      <div class="float-chip"><span>~</span> incident-review</div>
+      <div class="float-chip"><span>~</span> oracle</div>
+      <div class="float-chip"><span>~</span> pre-sales</div>
+      <div class="float-chip"><span>~</span> finops</div>
+      <div class="float-chip"><span>~</span> leadership</div>
+      <div class="float-chip"><span>~</span> delivery</div>
     </div>
 
     <div class="container">
@@ -2202,11 +2048,11 @@
         </h1>
 
         <div class="hero-role reveal delay-2">
-          Cloud Transformation Leader <span class="sep">/</span> Azure &amp; Hybrid Cloud <span class="sep">/</span> Pre-Sales · Delivery
+          Cloud Transformation Leader <span class="sep">/</span> AWS &amp; Azure <span class="sep">/</span> Pre-Sales · Delivery
         </div>
 
         <p class="hero-tagline reveal delay-3">
-          13+ years turning Microsoft Azure strategy into measurable business outcomes — across pre-sales, delivery, cost optimisation and managed-services leadership for UK and EMEA enterprises.
+          13+ years across <strong>AWS, Azure and Oracle</strong> &mdash; turning strategy into measurable business outcomes through pre-sales, delivery, FinOps, cost optimisation, managed services, incident review and leadership for UK and EMEA enterprises.<br/><span class="hero-tagline-coda">PaaS and SaaS, new patterns every week. My own ci/cd.</span>
         </p>
 
         <div class="hero-ctas reveal delay-4">
@@ -2262,10 +2108,11 @@
           <h2>Cloud, delivered.</h2>
           <p>
             I'm Bimal — an accomplished technology leader with a 13+ year track record across cloud
-            transformation, technical pre-sales and delivery leadership in Microsoft Azure and hybrid
-            cloud. I've built my career at the intersection of deep platform fluency and the commercial
-            conversations that move enterprise buyers — at Microsoft itself, at major partners
-            (SoftwareONE, BCN, Akkodis), and at customers (Oracle, BT) across the UK and EMEA.
+            transformation, technical pre-sales and delivery leadership. Microsoft Azure heritage,
+            now operating across AWS and Azure at scale. I've built my career at the intersection of
+            deep platform fluency and the commercial conversations that move enterprise buyers — at
+            Microsoft itself, at major partners (SoftwareONE, BCN, Akkodis), and at customers
+            (Oracle, BT) across the UK and EMEA.
           </p>
           <p>
             What I do best is lead cross-functional teams to deliver enterprise-scale cloud with
@@ -2304,7 +2151,7 @@
       <div class="section-head reveal">
         <div class="eyebrow">Core competencies</div>
         <h2 class="section-title">What I bring to the table</h2>
-        <p class="section-sub">Strategy, delivery and the commercial fluency to make Microsoft Azure pay back its promise.</p>
+        <p class="section-sub">Strategy, delivery and the commercial fluency to make AWS and Azure pay back their promise.</p>
       </div>
 
       <div class="bento">
@@ -2384,8 +2231,8 @@
           <div class="bento-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 6v2m0 8v2"/></svg>
           </div>
-          <h3 class="bento-title">Azure Cost Optimisation &amp; Governance</h3>
-          <p class="bento-desc">Burn-rate monitoring, consumption forecasting, FinOps governance and the guardrails that keep Azure spend honest as it scales.</p>
+          <h3 class="bento-title">FinOps &amp; Cloud Cost Optimisation</h3>
+          <p class="bento-desc">Cross-cloud FinOps practice on <strong>AWS and Azure</strong>: tagging taxonomies, cost allocation, unit economics, Savings Plans / Reservations &amp; Commitments, Cost Explorer + Cost Management, anomaly detection, rightsizing and the guardrails that keep multi-cloud spend honest as it scales.</p>
           <div class="bento-tags">
             <span class="tag">FinOps</span>
             <span class="tag">Governance</span>
@@ -2410,312 +2257,6 @@
         </div>
       </div>
 
-      <!-- =========================================================
-           SKILLS &amp; ENDORSEMENTS — peer-validated detail
-           Three LinkedIn-style categories. Pills are tiered by
-           endorsement count (20+, 10-19, 3-9, 1-2, 0). Special
-           flags: ★ = highly-skilled endorser, ✓ = LinkedIn Skill
-           Assessment passed, BCN = current-role skill.
-      ========================================================== -->
-      <div class="endorsements-block">
-        <div class="endorsements-head reveal">
-          <h3>Endorsed across the network</h3>
-          <p>50 skills · validated by colleagues at Microsoft, SoftwareONE, BT, BCN and beyond</p>
-        </div>
-
-        <div class="endorsements-legend reveal delay-1">
-          <span><span class="legend-dot tier-1"></span>20+ endorsements</span>
-          <span><span class="legend-dot tier-2"></span>10–19</span>
-          <span><span class="legend-dot tier-3"></span>3–9</span>
-          <span><span class="legend-dot tier-4"></span>1–2</span>
-          <span><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent-gold);"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>highly-skilled endorser</span>
-          <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>LinkedIn Skill Assessment</span>
-        </div>
-
-        <div class="skill-cats">
-
-          <!-- ============ Industry Knowledge ============ -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-head">
-              <div class="skill-cat-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-7"/></svg>
-              </div>
-              <div class="skill-cat-meta">
-                <h4>Industry Knowledge</h4>
-                <p>Domain depth and commercial fluency</p>
-              </div>
-              <div class="skill-cat-count">36 skills</div>
-            </div>
-            <div class="skill-list">
-
-              <span class="skill-pill tier-1" title="36 endorsements · Endorsed by Gurmail Singh (highly skilled) and 4 colleagues at Microsoft">
-                <span class="skill-name">Pre-sales</span>
-                <span class="skill-count">36</span>
-                <span class="skill-flag skill-flag--top" title="Endorsed by a highly-skilled peer">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-1" title="31 endorsements · Endorsed by Gurmail Singh (highly skilled) and 4 colleagues at Microsoft">
-                <span class="skill-name">Enterprise Software</span>
-                <span class="skill-count">31</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-1" title="21 endorsements · Endorsed by Gurmail Singh and 2 others (highly skilled) and 2 colleagues at Microsoft">
-                <span class="skill-name">Solution Selling</span>
-                <span class="skill-count">21</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-1" title="20 endorsements · 7 colleagues at SoftwareONE">
-                <span class="skill-name">CRM</span>
-                <span class="skill-count">20</span>
-              </span>
-
-              <span class="skill-pill tier-2" title="18 endorsements · 4 colleagues at Microsoft">
-                <span class="skill-name">SaaS</span>
-                <span class="skill-count">18</span>
-              </span>
-
-              <span class="skill-pill tier-2" title="13 endorsements · Endorsed by Ross Macdonald (highly skilled) and 6 colleagues at SoftwareONE">
-                <span class="skill-name">Software Licensing</span>
-                <span class="skill-count">13</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-2" title="12 endorsements · 5 colleagues at SoftwareONE">
-                <span class="skill-name">Sales</span>
-                <span class="skill-count">12</span>
-              </span>
-
-              <span class="skill-pill tier-2" title="11 endorsements · 4 colleagues at SoftwareONE">
-                <span class="skill-name">Management</span>
-                <span class="skill-count">11</span>
-              </span>
-
-              <span class="skill-pill tier-2" title="11 endorsements · Endorsed by Lord Mervin Soh (highly skilled) and 3 colleagues at Microsoft">
-                <span class="skill-name">Microsoft Technologies</span>
-                <span class="skill-count">11</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-1" title="Cloud Consultant at BCN · Endorsed by Gurmail Singh and 1 other (highly skilled) and 4 colleagues at BT Group">
-                <span class="skill-name">Cloud Computing</span>
-                <span class="skill-flag skill-flag--bcn" title="Skill from current role">@BCN</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-3" title="8 endorsements · 3 colleagues at SoftwareONE">
-                <span class="skill-name">Account Management</span>
-                <span class="skill-count">8</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="7 endorsements · 3 colleagues at SoftwareONE">
-                <span class="skill-name">Microsoft Products</span>
-                <span class="skill-count">7</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="6 endorsements · 3 colleagues at SoftwareONE">
-                <span class="skill-name">Business Development</span>
-                <span class="skill-count">6</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="5 endorsements · 3 colleagues at SoftwareONE">
-                <span class="skill-name">Partner Management</span>
-                <span class="skill-count">5</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="5 endorsements · 2 colleagues at SoftwareONE">
-                <span class="skill-name">Professional Services</span>
-                <span class="skill-count">5</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="4 endorsements">
-                <span class="skill-name">Customer Service</span>
-                <span class="skill-count">4</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="4 endorsements">
-                <span class="skill-name">Sales Process</span>
-                <span class="skill-count">4</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements">
-                <span class="skill-name">ITIL</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements · 2 colleagues at SoftwareONE">
-                <span class="skill-name">IT Service Management</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements">
-                <span class="skill-name">Data Center</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements">
-                <span class="skill-name">Software as a Service (SaaS)</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements · 2 colleagues at SoftwareONE">
-                <span class="skill-name">Customer Relationship Management (CRM)</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="2 endorsements">
-                <span class="skill-name">Security</span>
-                <span class="skill-count">2</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Microsoft Licensing</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Managed Services</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Channel Partners</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Strategy</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">IT Strategy</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Consulting</span>
-                <span class="skill-count">1</span>
-              </span>
-
-              <span class="skill-pill tier-5"><span class="skill-name">Direct Sales</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Business Intelligence</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Information Technology</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Software Industry</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Resellers</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">PaaS</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Microsoft Certified Professional</span></span>
-            </div>
-          </div>
-
-          <!-- ============ Tools & Technologies ============ -->
-          <div class="skill-cat reveal delay-1">
-            <div class="skill-cat-head">
-              <div class="skill-cat-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-              </div>
-              <div class="skill-cat-meta">
-                <h4>Tools &amp; Technologies</h4>
-                <p>Platforms, products, certifications</p>
-              </div>
-              <div class="skill-cat-count">11 skills</div>
-            </div>
-            <div class="skill-list">
-
-              <span class="skill-pill tier-2" title="15 endorsements · 2 colleagues at Microsoft">
-                <span class="skill-name">VMware</span>
-                <span class="skill-count">15</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="7 endorsements · Passed LinkedIn Skill Assessment · 2 colleagues at Microsoft">
-                <span class="skill-name">Windows Server</span>
-                <span class="skill-count">7</span>
-                <span class="skill-flag skill-flag--check" title="Passed LinkedIn Skill Assessment">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-3" title="5 endorsements · 3 colleagues at SoftwareONE">
-                <span class="skill-name">Citrix</span>
-                <span class="skill-count">5</span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements · Endorsed by Devesh Mardania (highly skilled)">
-                <span class="skill-name">Networking</span>
-                <span class="skill-count">3</span>
-                <span class="skill-flag skill-flag--top">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-3" title="3 endorsements">
-                <span class="skill-name">Microsoft Office</span>
-                <span class="skill-count">3</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="2 endorsements">
-                <span class="skill-name">Network Administration</span>
-                <span class="skill-count">2</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="2 endorsements">
-                <span class="skill-name">Office 365</span>
-                <span class="skill-count">2</span>
-              </span>
-
-              <span class="skill-pill tier-4" title="Cloud Consultant at BCN · Passed LinkedIn Skill Assessment · 1 endorsement">
-                <span class="skill-name">Microsoft Azure</span>
-                <span class="skill-count">1</span>
-                <span class="skill-flag skill-flag--bcn" title="Skill from current role">@BCN</span>
-                <span class="skill-flag skill-flag--check" title="Passed LinkedIn Skill Assessment">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                </span>
-              </span>
-
-              <span class="skill-pill tier-5"><span class="skill-name">Computer Hardware</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Hyper-V</span></span>
-              <span class="skill-pill tier-5"><span class="skill-name">Storage</span></span>
-            </div>
-          </div>
-
-          <!-- ============ Interpersonal Skills ============ -->
-          <div class="skill-cat reveal delay-2">
-            <div class="skill-cat-head">
-              <div class="skill-cat-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-              </div>
-              <div class="skill-cat-meta">
-                <h4>Interpersonal Skills</h4>
-                <p>How I show up with people</p>
-              </div>
-              <div class="skill-cat-count">2 skills</div>
-            </div>
-            <div class="skill-list">
-              <span class="skill-pill tier-4" title="2 endorsements">
-                <span class="skill-name">Team Leadership</span>
-                <span class="skill-count">2</span>
-              </span>
-              <span class="skill-pill tier-4" title="1 endorsement">
-                <span class="skill-name">Leadership</span>
-                <span class="skill-count">1</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2728,8 +2269,8 @@
     <div class="container">
       <div class="section-head reveal">
         <div class="eyebrow">Experience</div>
-        <h2 class="section-title">Selected roles &amp; engagements</h2>
-        <p class="section-sub">14+ years across Microsoft, the partner ecosystem and global enterprises — selling, building, delivering and now leading cloud at scale.</p>
+        <h2 class="section-title">My History &amp; Growth</h2>
+        <p class="section-sub">14+ years across Microsoft, the partner ecosystem and global enterprises — selling, building, delivering and now leading cloud at scale across AWS and Azure. Every chapter shaped the next.</p>
       </div>
 
       <div class="timeline">
@@ -2747,16 +2288,26 @@
               <span>Akkodis</span>
             </div>
             <p class="tl-desc">
-              Leading the TechOps Practice &mdash; modernising how enterprise clients run cloud
-              operations, automation and delivery at scale. Building teams around three things in
-              parallel: technical excellence, deliberate culture (psychological safety, shared
-              accountability, continuous learning) and FinOps maturity &mdash; cost allocation,
-              unit economics, rightsizing and forecasting embedded into how engineers think, not
-              bolted on after. Partnering with C-suite to redesign operating models that turn
-              cloud spend into strategic advantage. Multi-cloud, multi-operating-model exposure
-              over 13+ years has sharpened how I read both the technology and the business
-              &mdash; and made this the chapter I&rsquo;m built for right now. I mentor practice
-              leaders, build internal tooling, and push what TechOps can be. Won&rsquo;t stop.
+              Leading the TechOps Practice as <strong>Practice Lead</strong> &mdash; modernising
+              how enterprise clients run cloud operations, automation and delivery at scale
+              across <strong>AWS and Azure</strong>. Growth mode: scaling the team, capabilities
+              and playbook as enterprise demand widens, with line management across a larger
+              multi-disciplinary group. Building that team around three things in parallel:
+              technical excellence, deliberate culture (psychological safety, shared
+              accountability, continuous learning) and <strong>FinOps maturity on both clouds</strong>
+              &mdash; tagging taxonomies, cost allocation, unit economics (cost-per-transaction
+              and cost-per-customer frameworks), Savings Plans &amp; Reserved Instances on AWS,
+              Reservations &amp; Commitments on Azure, anomaly detection, rightsizing and
+              forecasting embedded into how engineers think, not bolted on after. Sitting
+              alongside FinOps as parallel investments: <strong>incident review discipline
+              and security automation</strong> &mdash; because resilience and cost honesty
+              compound. Partnering with C-suite to redesign operating models that turn cloud
+              spend into strategic advantage; outcomes measured in delivery velocity, cost
+              efficiency, quality and talent retention. Multi-cloud, multi-operating-model
+              exposure over 13+ years has sharpened how I read both the technology and the
+              business &mdash; and made this the chapter I&rsquo;m built for right now.
+              I mentor practice leaders, build internal tooling, and push what TechOps can be.
+              Won&rsquo;t stop.
             </p>
             <blockquote class="tl-quote">
               <p>&ldquo;Working with Bimal as my manager was transformative. He creates real psychological safety while driving high standards.&rdquo;</p>
@@ -2765,11 +2316,14 @@
             <div class="tl-tags">
               <span class="tag">TechOps</span>
               <span class="tag">Practice Leadership</span>
-              <span class="tag">FinOps</span>
+              <span class="tag">Team Scaling</span>
+              <span class="tag">AWS FinOps</span>
+              <span class="tag">Azure FinOps</span>
               <span class="tag">Unit Economics</span>
               <span class="tag">Cost Allocation</span>
+              <span class="tag">Incident Review</span>
+              <span class="tag">Security Automation</span>
               <span class="tag">Psychological Safety</span>
-              <span class="tag">Culture Design</span>
             </div>
           </div>
         </div>
@@ -3133,6 +2687,7 @@
 
       <aside class="ps-manifesto reveal delay-4">
         <p class="ps-manifesto-body">Psychological safety isn&rsquo;t softness &mdash; it&rsquo;s the <em class="ps-multiplier">multiplier</em> that turns talented individuals into an unstoppable team.</p>
+        <p class="ps-manifesto-aside">I read the board. I choose this on purpose.</p>
         <p class="ps-manifesto-coda">My goal is to create the kind of environment where people feel safe enough to be bold.</p>
       </aside>
     </div>
@@ -3170,10 +2725,12 @@
             </span>
             <h3 class="now-card-title">Building</h3>
           </div>
-          <p class="now-card-desc">Practical tooling for the day-to-day work &mdash; the gaps I keep finding in Azure cost governance and FinOps enablement, turned into things teams can actually run.</p>
+          <p class="now-card-desc">Practical tooling for the day-to-day work &mdash; the gaps I keep finding in <strong>AWS and Azure</strong> cost governance and FinOps enablement, turned into things teams can actually run.</p>
           <ul class="now-tags">
             <li>Cost allocation automation</li>
             <li>Anomaly detection</li>
+            <li>AWS &middot; Cost Explorer + CUR</li>
+            <li>Azure &middot; Cost Management</li>
             <li>Unit-economics reporting</li>
             <li>AEP / AEM integrations</li>
           </ul>
@@ -3464,7 +3021,7 @@
       <div class="section-head reveal">
         <div class="eyebrow">Get in touch</div>
         <h2 class="section-title">Let's build something resilient.</h2>
-        <p class="section-sub">Open to cloud leadership, advisory and senior consulting engagements across Microsoft Azure, hybrid cloud and enterprise managed services.</p>
+        <p class="section-sub">Open to cloud leadership, advisory and senior consulting engagements across AWS, Azure, hybrid cloud and enterprise managed services.</p>
       </div>
 
       <div class="contact-grid">
