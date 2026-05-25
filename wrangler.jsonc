@@ -1,0 +1,15 @@
+// Cloudflare Workers — Static Assets config for mohanan.uk
+// The site is a single-file HTML build, so we just serve everything
+// in the repo root as static assets. No build step, no Worker script.
+//
+// Deploy is triggered by Cloudflare's git-connected build pipeline
+// (Build command: blank, Deploy command: npx wrangler deploy).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mohanan-uk",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}
