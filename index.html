@@ -1174,6 +1174,14 @@
     .cal-frame.is-ready .cal-loading { opacity: 0; }
     .cal-frame iframe {
       width: 100% !important;
+      /* Cal.com renders the booking widget at ~900px and centers it inside
+         the iframe's own page (which has a white background). On a wide
+         desktop the iframe stretches well beyond that, so the white
+         gutters bleed through on the left/right. Cap the iframe to the
+         widget's natural width and centre it — the .cal-frame's dark
+         glass background then shows on the sides instead of white. */
+      max-width: 920px;
+      margin: 0 auto;
       border: 0;
       display: block;
       position: relative;
