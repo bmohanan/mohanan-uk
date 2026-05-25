@@ -2,8 +2,9 @@
 // The site is a single-file HTML build, so we just serve everything
 // in the repo root as static assets. No build step, no Worker script.
 //
-// Deploy is triggered by Cloudflare's git-connected build pipeline
-// (Build command: blank, Deploy command: npx wrangler deploy).
+// Deploy: `npx wrangler deploy` from the repo root.
+// (The previous git-connected Pages build pipeline is being retired
+// in favour of this Worker; routes below claim the apex + www for it.)
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mohanan-uk",
@@ -11,5 +12,9 @@
   "assets": {
     "directory": "./",
     "not_found_handling": "404-page"
-  }
+  },
+  "routes": [
+    { "pattern": "mohanan.uk", "custom_domain": true },
+    { "pattern": "www.mohanan.uk", "custom_domain": true }
+  ]
 }
