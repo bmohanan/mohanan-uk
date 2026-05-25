@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05070d" />
+
+  <title>ITAM and FinOps Programmes That Fund Themselves &mdash; Bimal Mohanan</title>
+  <meta name="description" content="Most ITAM and FinOps programmes lose credibility because they treat cost avoidance as a saving. Here's how to structure a self-funding model that recycles real savings into the next phase &mdash; without asking finance for another pound." />
+
+  <link rel="canonical" href="https://mohanan.uk/insights/itam-finops-self-funding/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ITAM and FinOps Programmes That Fund Themselves" />
+  <meta property="og:description" content="A self-funding model for ITAM and FinOps: how 20% reinvestment, hard transactable savings, and converged ITAM+FinOps stewardship turn cost-centre programmes into compounding capability." />
+  <meta property="og:url" content="https://mohanan.uk/insights/itam-finops-self-funding/" />
+  <meta property="og:image" content="https://mohanan.uk/og-image.png" />
+  <meta property="og:site_name" content="Bimal Mohanan &mdash; BMC" />
+  <meta property="article:author" content="Bimal Mohanan" />
+  <meta property="article:section" content="ITAM &amp; FinOps" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ITAM and FinOps Programmes That Fund Themselves" />
+  <meta name="twitter:description" content="A self-funding model for ITAM and FinOps that recycles real savings into the next phase &mdash; without another approval cycle." />
+  <meta name="twitter:image" content="https://mohanan.uk/og-image.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/favicon.svg" color="#b15cff" />
+
+  <!-- Fonts: same trio as the main site for visual continuity. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Tokens lifted from the main site so the article shares its
+         visual language without depending on a separate stylesheet. */
+      --bg-0: #05070d;
+      --bg-1: #0b0f17;
+      --text-1: #f5f7fb;
+      --text-2: #c6cbd6;
+      --text-3: #8a94a6;
+      --accent-cyan: #00d9ff;
+      --accent-purple: #b15cff;
+      --accent-magenta: #ff2ec8;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-bg-strong: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-strong: rgba(255, 255, 255, 0.14);
+      --grad-primary: linear-gradient(135deg, #00d9ff 0%, #b15cff 50%, #ff2ec8 100%);
+      --grad-text: linear-gradient(135deg, #ffffff 0%, #b1d8ff 50%, #b15cff 100%);
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      --shadow-card: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--glass-border);
+      --read-width: 720px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background:
+        radial-gradient(1200px 600px at 12% 8%, rgba(0, 217, 255, 0.08), transparent 60%),
+        radial-gradient(900px 500px at 92% 96%, rgba(177, 92, 255, 0.10), transparent 55%),
+        var(--bg-0);
+      color: var(--text-1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* --- Nav (lightweight version of the main site nav) --- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 7, 13, 0.7);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.04em;
+      box-shadow: 0 0 24px rgba(177, 92, 255, 0.4);
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-3);
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .nav-back:hover {
+      color: var(--text-1);
+      border-color: var(--glass-border-strong);
+      background: var(--glass-bg-strong);
+    }
+    .nav-back svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* --- Article shell --- */
+    .article {
+      max-width: var(--read-width);
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    .article-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.25);
+      margin-bottom: 24px;
+    }
+    .article-eyebrow::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    .article-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .article-dek {
+      font-size: clamp(17px, 1.6vw, 20px);
+      color: var(--text-2);
+      line-height: 1.55;
+      margin-bottom: 32px;
+      max-width: 640px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 56px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+    }
+    .article-meta-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-1);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+    .article-meta-author .author-mark {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+    .article-meta-divider { color: var(--glass-border-strong); }
+
+    /* --- Body typography --- */
+    .article-body p {
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--text-2);
+      margin-bottom: 22px;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+    .article-body p:first-of-type::first-letter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.4em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.9;
+      padding: 6px 12px 0 0;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .article-body h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px, 2.6vw, 30px);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--text-1);
+      margin: 56px 0 18px;
+      position: relative;
+      padding-left: 18px;
+    }
+    .article-body h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.35em;
+      bottom: 0.35em;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--grad-primary);
+    }
+    .article-body em { font-style: italic; color: var(--text-1); }
+    .article-body strong { color: var(--text-1); font-weight: 600; }
+    .article-body a {
+      color: var(--accent-cyan);
+      border-bottom: 1px solid rgba(0, 217, 255, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .article-body a:hover { color: #5fe9ff; border-bottom-color: var(--accent-cyan); }
+
+    /* Editor's note / aside — the "verify these figures" parenthetical
+       gets its own treatment so it reads as a margin note, not body. */
+    .article-aside {
+      margin: 28px 0 22px;
+      padding: 18px 22px;
+      border-left: 3px solid var(--accent-cyan);
+      background: rgba(0, 217, 255, 0.05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-2);
+      font-style: italic;
+    }
+    .article-aside-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      font-style: normal;
+      margin-bottom: 6px;
+    }
+
+    /* --- Closing CTA card --- */
+    .article-cta {
+      margin-top: 64px;
+      padding: 32px 32px 28px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .article-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 217, 255, 0.10), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(177, 92, 255, 0.10), transparent 60%);
+    }
+    .article-cta > * { position: relative; z-index: 1; }
+    .article-cta-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+    .article-cta-body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(18px, 1.8vw, 22px);
+      line-height: 1.4;
+      color: var(--text-1);
+      margin-bottom: 22px;
+    }
+    .article-cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary {
+      background: var(--grad-primary);
+      color: #0a0a1a;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px -10px rgba(0, 217, 255, 0.4);
+    }
+    .btn-ghost {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border-strong);
+      color: var(--text-1);
+    }
+    .btn-ghost:hover {
+      background: var(--glass-bg-strong);
+      border-color: rgba(0, 217, 255, 0.4);
+    }
+    .btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* --- Foot --- */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--glass-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .article-footer a {
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .article-footer a:hover { color: var(--accent-cyan); }
+
+    /* --- Responsive nips --- */
+    @media (max-width: 640px) {
+      .article { padding: 40px 20px 80px; }
+      .article-body p { font-size: 17px; }
+      .article-body h2 { margin-top: 44px; }
+      .article-cta { padding: 24px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="brand" aria-label="Home &mdash; Bimal Mohanan">
+        <span class="brand-mark">~bmc</span>
+        <span>Bimal Mohanan</span>
+      </a>
+      <a href="/" class="nav-back" aria-label="Back to mohanan.uk">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to mohanan.uk
+      </a>
+    </div>
+  </nav>
+
+  <article class="article">
+    <header class="article-head">
+      <div class="article-eyebrow">Insights &middot; ITAM &amp; FinOps</div>
+      <h1 class="article-title">ITAM and FinOps Programmes That Fund Themselves</h1>
+      <p class="article-dek">
+        Most ITAM and FinOps programmes lose credibility because they treat cost avoidance as a
+        saving. Here's how to structure a self-funding model that recycles real savings into the
+        next phase &mdash; without asking finance for another pound.
+      </p>
+      <div class="article-meta">
+        <span class="article-meta-author">
+          <span class="author-mark" aria-hidden="true">BM</span>
+          Bimal Mohanan
+        </span>
+        <span class="article-meta-divider">&middot;</span>
+        <span>May 2026</span>
+        <span class="article-meta-divider">&middot;</span>
+        <span>~10 min read</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p>
+        I've spent enough time on both sides of the managed service relationship to recognise the
+        pattern. The pitch rarely changes: commit the budget, trust the methodology, and the
+        transformation will follow. The capability you're paying for doesn't exist yet, but the
+        slides are excellent.
+      </p>
+
+      <p>
+        What follows is predictable. You spend the next several quarters defending an investment
+        that hasn't yet produced anything you can point a CFO at, while the programme runs in
+        permanent survival mode. I've watched this happen across multiple organisations, and the
+        cause is almost never the ambition or the methodology. It's the economics.
+      </p>
+
+      <p>
+        When you position ITAM or FinOps as a cost centre that needs continuous budget allocation,
+        you're working against the grain of how organisations actually behave. Finance resists
+        ongoing spend on capabilities whose value isn't immediately legible. That resistance is
+        rational, and no amount of conviction in the approach overcomes it.
+      </p>
+
+      <p>
+        So the question worth asking is a different one. Can these programmes fund their own
+        evolution out of the savings they generate &mdash; real money that was leaving the
+        organisation and now isn't, recycled into the next phase without another approval cycle?
+        In my experience, they can, provided you're disciplined about what counts as a saving and
+        how you structure the arrangement before any work begins.
+      </p>
+
+      <p>Here is how that works in practice.</p>
+
+      <h2>Cost avoidance is not a saving, and finance knows it</h2>
+
+      <p>
+        Most ITAM and FinOps programmes lose credibility with finance teams for one reason: they
+        present cost avoidance as if it were the same thing as a saving.
+      </p>
+
+      <p>
+        &ldquo;We could have spent this, but now we won't&rdquo; holds up right until someone in
+        finance asks the obvious questions. Was this budgeted? Was it contracted? Or was it spend
+        that was never going to happen anyway? Cost avoidance doesn't free up capital, reduce a
+        budget line, or release money for reallocation. It's a useful number for a report and very
+        little else.
+      </p>
+
+      <p>
+        When I talk about a self-funding model, I mean <strong>direct cost savings only</strong>:
+        a hard reduction in expenditure that was contracted, budgeted, and actively flowing out of
+        the business. Money you can track precisely, account for in real budget terms, and
+        demonstrably reinvest without going back for fresh approval. That distinction shapes
+        everything downstream &mdash; the stakeholder agreements, the measurement framework, and
+        the reinvestment mechanics.
+      </p>
+
+      <h2>The 20% reinvestment model</h2>
+
+      <p>
+        The model rests on a straightforward principle. When you identify and actually transact a
+        genuine cost reduction, <strong>20% flows back into the programme</strong>. The other 80%
+        returns to the business.
+      </p>
+
+      <p>
+        That percentage is deliberate. It sits below the threshold where finance teams start to
+        push back on reinvestment, but it's substantial enough to fund meaningful capability.
+        Finance gets immediate relief on four-fifths of the saving. The programme gets sustained,
+        self-generated funding from the remaining fifth.
+      </p>
+
+      <p>
+        The critical move is to <em>agree this structure before any analysis starts</em> &mdash;
+        not after you've delivered value and find yourself negotiating from a weaker position.
+        Before examining a single contract, you put budget reality on the table. You ingest actual
+        spend data, run it against usage telemetry, and set savings targets based on what the data
+        shows rather than what you'd like it to show. You quantify what is genuinely transactable
+        given the contractual and operational constraints, not what looks impressive on a chart.
+      </p>
+
+      <p>
+        When stakeholders understand the success criteria up front, the 20% is baked into the
+        original agreement. It stops being a point of contention later.
+      </p>
+
+      <h2>Getting organisations to show you the truth</h2>
+
+      <p>
+        The biggest source of friction in this work isn't technical. It's persuading an
+        organisation to be honest about how it actually spends.
+      </p>
+
+      <p>
+        There's real institutional discomfort here &mdash; embarrassment about waste, uncertainty
+        about whether the asset inventory is accurate, and a protective instinct around budget
+        data that might expose past decisions. People are understandably reluctant to surface the
+        shadow IT, the contracts nobody fully understands, the licence sprawl everyone suspects,
+        and the vendor relationships where they sense they're being over-extracted but can't prove
+        it.
+      </p>
+
+      <p>
+        The way through is to make their success the objective. Not to position yourself as the
+        rescuer, and not to extract maximum commercial value. The aim is to make them look
+        credible to their CFO, their CIO, and their procurement leadership. When people believe
+        you're genuinely there to improve their standing rather than demonstrate your own
+        cleverness, the defensiveness drops and they start telling you where the problems actually
+        are.
+      </p>
+
+      <h2>Most &ldquo;savings&rdquo; can't actually be transacted</h2>
+
+      <p>
+        Here's a failure mode that quietly destroys credibility: identifying savings that cannot
+        be converted into budget relief.
+      </p>
+
+      <p>
+        I've seen licence position analyses that reveal significant over-licensing. The client
+        gets excited, leadership starts planning how to redeploy the capital, and then the
+        contractual reality lands &mdash; they're locked into a multi-year enterprise agreement
+        with committed spend that can't be reduced mid-term. You may have spotted &pound;500,000
+        in unused licences, but if you're obligated to keep paying for another 24 months, that
+        isn't a saving you can transact today. It's intelligence for the next renewal.
+      </p>
+
+      <p>
+        This is why the <strong>contract analysis has to come before any savings commitment</strong>.
+        You examine the terms, the licence use rights, the exit clauses, and the renewal windows,
+        and you separate what can be executed now from what's contractually trapped until a
+        specific window opens. The FinOps Foundation has noted that organisations have absorbed
+        substantial audit penalties precisely because they lacked visibility into unused or poorly
+        managed licences. This discipline is what separates a programme that delivers real budget
+        relief from one that produces good-looking reports and nothing else.
+      </p>
+
+      <h2>When the savings aren't where you expected</h2>
+
+      <p>
+        When the savings don't materialise where you first projected, that isn't a failure &mdash;
+        it's a normal part of discovery, provided you can move quickly to the next opportunity.
+      </p>
+
+      <p>
+        The analytical platform we use, Acuity, lets us test multiple hypotheses in parallel. If
+        one area proves less promising under scrutiny, we move to the next candidate without
+        losing momentum, which keeps stakeholder confidence intact during a phase that would
+        otherwise feel uncertain.
+      </p>
+
+      <p>
+        The aggregate picture confirms the opportunity is real and large. The figures circulating
+        in the industry &mdash; averages in the order of &pound;18 million a year wasted on unused
+        SaaS licences, with large enterprises losing far more on licences generating no productive
+        value &mdash; point to a problem of genuine scale. The question was never <em>whether</em>
+        the waste exists. It's whether you can locate it, quantify it precisely, and transact it
+        within the contractual constraints you actually face.
+      </p>
+
+      <aside class="article-aside">
+        <span class="article-aside-label">Editor's note</span>
+        Worth verifying these figures against current source data before publishing &mdash; they're
+        widely quoted but the underlying methodology varies, and your credibility rests on them
+        holding up.
+      </aside>
+
+      <h2>The first win sets the trajectory</h2>
+
+      <p>
+        The whole programme depends on demonstrating capability quickly in the first phase. The
+        fastest we've gone from initial data ingestion to a validated, presentable result was
+        <strong>72 hours</strong>: a 12% cloud cost reduction, transactability confirmed,
+        presented to stakeholders while the engagement still had energy behind it.
+      </p>
+
+      <p>
+        That early win does three things. It validates the analytical approach, it builds trust
+        through demonstrated competence rather than promises, and it creates the momentum needed
+        to secure buy-in for the longer journey. From there the model compounds &mdash; the first
+        win funds the second phase, the second funds the third, and the third builds the internal
+        capability that sustains everything afterwards without external justification. Scope
+        expands organically: more spend categories, a broader analytical view, the next priorities
+        identified during discovery. The programme grows on the back of the value it generates.
+      </p>
+
+      <h2>Why self-funding programmes stall, and how to prevent it</h2>
+
+      <p>
+        I've seen self-funding programmes lose momentum after the first or second phase despite
+        delivering genuine savings. The cause is consistent: no coherent roadmap beyond the
+        immediate win, and no real stakeholder commitment to the multi-phase journey.
+      </p>
+
+      <p>
+        What determines whether a programme compounds or fades is how clearly you've defined
+        success &mdash; not vague aspirations about maturity, but concrete outcomes tied to how
+        each stakeholder is actually evaluated. The ITAM manager is usually measured on asset
+        visibility and compliance. Finance is measured on cost reduction. Procurement is measured
+        on contract savings. If you structure the programme to deliver measurable progress against
+        all three, with live monthly reporting each of them can take upwards, then everyone sees
+        it as instrumental to their own success. At that point it stops needing defensive
+        justification.
+      </p>
+
+      <p>
+        You will hit moments where priorities conflict &mdash; a compliance improvement that
+        temporarily raises costs, against a procurement lead measured on quarterly savings. The
+        resolution is transparency about the trade-off. If everyone bought into the long-term
+        journey at the outset, they'll show flexibility when you put the sequencing and the
+        expected payoff timeline clearly in front of them. That transparency is what lets a
+        programme survive leadership changes and budget pressure.
+      </p>
+
+      <h2>Why converging ITAM and FinOps multiplies the value</h2>
+
+      <p>
+        There's a structural reason to converge these two disciplines rather than run them
+        separately. Gartner has projected that by the end of 2026 the majority of enterprises with
+        mature cloud strategies will unify their FinOps and ITAM functions under integrated
+        governance.
+      </p>
+
+      <p>
+        ITAM gives you visibility into on-premises infrastructure and traditional software
+        licensing. FinOps gives you visibility into cloud consumption and dynamic resource
+        optimisation. Together they cover ground that neither sees in isolation. The self-funding
+        model works precisely because you aren't confined to one domain &mdash; when licence
+        optimisation hits a contractual wall, you pivot to cloud cost reduction; when cloud
+        savings plateau, you move to vendor renegotiation. That breadth is what gives the
+        programme its durability.
+      </p>
+
+      <h2>What you're actually building</h2>
+
+      <p>
+        You're not buying a cost-reduction service. You're building institutional capability.
+      </p>
+
+      <p>
+        The self-funding structure turns ITAM and FinOps from time-bound projects into
+        capabilities that compound across cycles. Each phase builds technical expertise, sharpens
+        the analytical process, strengthens stakeholder relationships, and widens the scope of
+        what can be governed effectively. The 20% reinvestment funds organisational learning and
+        capability transfer &mdash; the institutional muscle memory that keeps the discipline
+        alive long after the formal engagement ends.
+      </p>
+
+      <p>
+        Rather than creating a permanent dependency on external expertise, you're building
+        internal capability that becomes genuinely self-sustaining. The programme doesn't need
+        ongoing justification because it visibly generates more value than it consumes, in hard
+        budget terms finance can see.
+      </p>
+
+      <p>
+        The organisations that understand this don't just reduce IT spend. They build an advantage
+        through better asset stewardship and sharper resource allocation, free up capital for
+        strategic investment instead of letting it leak through inefficiency, and reposition their
+        IT teams as value generators rather than cost centres under perpetual scrutiny.
+      </p>
+
+      <p>
+        And they do it <em>without asking finance for another pound</em>.
+      </p>
+
+      <div class="article-cta">
+        <div class="article-cta-label">Build this with me</div>
+        <p class="article-cta-body">
+          If you're structuring an ITAM or FinOps programme and want a self-funding model that
+          finance will actually sign off on, the easiest way in is a 30-minute call.
+        </p>
+        <div class="article-cta-actions">
+          <a href="/#schedule" class="btn btn-primary">
+            Book a 30-min call
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="/#contact" class="btn btn-ghost">Send a message</a>
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <span>By Bimal Mohanan &middot; CEO, BMC &mdash; Bimal Mohanan Consulting</span>
+        <span><a href="/">&larr; mohanan.uk</a></span>
+      </footer>
+    </div>
+  </article>
+
+</body>
+</html>
