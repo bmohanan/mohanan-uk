@@ -1,0 +1,45 @@
+# macOS junk
+.DS_Store
+.DS_Store?
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Node (in case we ever add tooling that uses it)
+node_modules/
+
+# Cloudflare Wrangler state — should NEVER be committed
+.wrangler/
+.dev.vars
+
+# Build artifacts
+dist/
+build/
+
+# OG card source HTML — used locally to re-render og-image.png via
+# headless Chrome; not meant to be served publicly. The rendered
+# PNG (og-image.png) is what gets deployed.
+og-image.html
