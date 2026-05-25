@@ -22,7 +22,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="mask-icon" href="/favicon.svg" color="#00d9ff" />
+  <link rel="mask-icon" href="/favicon.svg" color="#b15cff" />
 
   <!-- Open Graph (LinkedIn, Facebook, WhatsApp, Slack, iMessage) -->
   <meta property="og:site_name" content="Bimal Mohanan" />
@@ -150,7 +150,15 @@
 
       /* Layout */
       --container-max: 1240px;
+      --container-max-xl: 1440px;
       --section-py: clamp(80px, 12vw, 140px);
+    }
+
+    /* Widen the canvas on large desktop displays — the user wanted
+       more horizontal real estate on Mac/PC browsers without
+       letting line lengths balloon on narrow laptops. */
+    @media (min-width: 1400px) {
+      :root { --container-max: var(--container-max-xl); }
     }
 
     /* =====================================================================
@@ -288,6 +296,10 @@
       background: rgba(0, 217, 255, 0.08);
       border: 1px solid rgba(0, 217, 255, 0.25);
       margin-bottom: 18px;
+      /* Prevent the pill from stretching when its parent is a flex
+         column (e.g. .about-text). inline-flex alone isn't enough —
+         flex children default to align-items: stretch. */
+      align-self: flex-start;
     }
     .eyebrow::before {
       content: "";
@@ -356,16 +368,47 @@
       font-size: 16px;
       letter-spacing: -0.01em;
     }
+    /* BMC brand mark — purple → magenta gradient square with "~bmc"
+       in white mono. Matches the brand-kit primary mark. The same
+       .brand-mark class is reused in the footer lockup at a larger
+       size via .brand-mark--lg. */
     .brand-mark {
-      width: 32px; height: 32px;
-      border-radius: 10px;
-      background: var(--grad-primary);
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
       display: grid; place-items: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      color: #0a0a1a;
-      box-shadow: var(--glow-cyan);
+      color: #ffffff;
+      letter-spacing: -0.04em;
+      box-shadow: 0 0 24px rgba(177, 92, 255, 0.4);
+    }
+    .brand-mark--lg {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      font-size: 15px;
+      letter-spacing: -0.05em;
+      box-shadow: 0 0 32px rgba(177, 92, 255, 0.45);
+    }
+    /* CEO pill — vertical chip to the right of the navbar wordmark.
+       Height matches the brand-mark so the lockup reads as one unit. */
+    .brand-ceo {
+      display: inline-flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 11px;
+      margin-left: 6px;
+      border-radius: var(--radius-pill);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-magenta);
+      background: rgba(255, 46, 200, 0.1);
+      border: 1px solid rgba(255, 46, 200, 0.35);
+      box-shadow: 0 0 14px rgba(255, 46, 200, 0.18);
     }
 
     .nav-links {
@@ -453,28 +496,6 @@
       margin: 0 auto;
       text-align: center;
       position: relative;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      border-radius: var(--radius-pill);
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      font-size: 13px;
-      color: var(--text-2);
-      margin-bottom: 32px;
-    }
-    .hero-badge-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 12px #4ade80;
-      animation: pulse 2s ease-in-out infinite;
     }
 
     .hero-title {
@@ -689,14 +710,14 @@
       background-size: 24px 24px;
     }
     .profile-initials {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: clamp(72px, 12vw, 120px);
-      background: var(--grad-primary);
+      font-size: clamp(48px, 8vw, 84px);
+      background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.06em;
       position: relative;
       z-index: 1;
     }
@@ -720,17 +741,33 @@
 
     .profile-meta {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 14px;
       margin-top: 20px;
       padding: 14px 16px;
       border-radius: var(--radius-md);
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--glass-border);
     }
-    .profile-meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .profile-meta-item { display: flex; flex-direction: column; gap: 4px; }
     .profile-meta-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.15em; font-family: 'JetBrains Mono', monospace; }
     .profile-meta-val   { font-size: 13px; color: var(--text-1); font-weight: 500; }
+    .profile-meta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .profile-meta-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-2);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      letter-spacing: 0.02em;
+    }
 
     .about-text { display: flex; flex-direction: column; gap: 20px; }
     .about-text h2 {
@@ -741,7 +778,15 @@
       color: transparent;
       margin-bottom: 8px;
     }
-    .about-text p { color: var(--text-2); font-size: 16px; line-height: 1.8; }
+    /* Long-form body copy: flush both edges (left + right). */
+    .about-text p {
+      color: var(--text-2);
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
 
     .about-stats {
       display: grid;
@@ -867,9 +912,12 @@
     ===================================================================== */
     .timeline {
       position: relative;
-      max-width: 920px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 0 0 40px;
+    }
+    @media (min-width: 1400px) {
+      .timeline { max-width: 1200px; }
     }
     .timeline::before {
       content: "";
@@ -934,7 +982,15 @@
       font-size: 15px;
       margin-bottom: 14px;
     }
-    .tl-desc { color: var(--text-2); font-size: 14.5px; line-height: 1.7; margin-bottom: 14px; }
+    .tl-desc {
+      color: var(--text-2);
+      font-size: 14.5px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
 
     /* Inline quote pull-out — anchors a specific testimonial to the
        role it relates to. Cyan left rail + soft cyan glow on the
@@ -1033,6 +1089,9 @@
       font-size: 14.5px;
       line-height: 1.75;
       flex: 1;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
     }
     .quote-author {
       display: flex;
@@ -1089,7 +1148,12 @@
       overflow: hidden;
       background: rgba(0, 0, 0, 0.25);
       z-index: 1;
+      transition: min-height 0.3s ease;
     }
+    /* Once the iframe is in the DOM, drop the placeholder height so the
+       frame conforms to whatever height Cal.com sets via postMessage —
+       otherwise the iframe's default white page bleeds through below. */
+    .cal-frame.is-ready { min-height: 0; }
     .cal-loading {
       position: absolute;
       inset: 0;
@@ -1110,8 +1174,8 @@
     .cal-frame.is-ready .cal-loading { opacity: 0; }
     .cal-frame iframe {
       width: 100% !important;
-      min-height: 640px !important;
       border: 0;
+      display: block;
       position: relative;
       z-index: 2;
     }
@@ -1227,6 +1291,71 @@
     .contact-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.18em; font-family: 'JetBrains Mono', monospace; }
     .contact-val { font-size: 16px; color: var(--text-1); font-weight: 500; overflow-wrap: anywhere; }
 
+    /* Growth-mindset credo — pull-quote above the contact grid.
+       Mirrors the .now-stance pattern (gradient border, pill label,
+       emphasized phrase) but uses a cyan → magenta palette so it
+       reads as a distinct beat from the green FinOps stance. */
+    .contact-credo {
+      max-width: 880px;
+      margin: 0 auto 40px;
+      padding: 28px 32px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(var(--bg-1), var(--bg-1)) padding-box,
+        linear-gradient(135deg, rgba(0,217,255,0.45), rgba(177,92,255,0.4) 60%, rgba(255,46,200,0.35)) border-box;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-credo::after {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 100% 0%, rgba(0,217,255,0.10), transparent 55%);
+    }
+    .contact-credo > * { position: relative; z-index: 1; }
+    .contact-credo-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(0,217,255,0.08);
+      border: 1px solid rgba(0,217,255,0.25);
+      margin-bottom: 14px;
+    }
+    .contact-credo-body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.5;
+      color: var(--text-1);
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      margin: 0 0 12px;
+    }
+    .contact-credo-em {
+      font-style: italic;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00d9ff, #ff2ec8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .contact-credo-coda {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--glass-border);
+    }
+    @media (max-width: 720px) {
+      .contact-credo { padding: 24px 22px; margin: 0 auto 32px; }
+    }
+
     .contact-form-card {
       padding: 32px;
       border-radius: var(--radius-lg);
@@ -1312,22 +1441,118 @@
     }
 
     /* =====================================================================
-       FOOTER
+       FOOTER — four-column brand grid + bottom bar
     ===================================================================== */
     footer {
-      padding: 56px 0 40px;
+      padding: 64px 0 32px;
       border-top: 1px solid var(--glass-border);
       margin-top: 80px;
     }
-    .footer-inner {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    /* Footer horizontal lockup: BMC mark + two-line wordmark.
+       Mirrors the brand-kit "horizontal lockup · on dark" variant. */
+    .footer-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+    .footer-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .footer-wordmark-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.01em;
+    }
+    .footer-wordmark-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-3);
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-2);
+      margin: 0 0 14px;
+      max-width: 420px;
+    }
+    .footer-location {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .footer-col-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-2);
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: var(--accent-cyan); }
+    .footer-tags {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .footer-tags li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-3);
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+    .footer-bottom {
       display: flex;
       flex-wrap: wrap;
       gap: 24px;
       align-items: center;
       justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--glass-border);
     }
     .footer-meta { color: var(--text-3); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
     .footer-socials { display: flex; gap: 10px; }
+    @media (max-width: 880px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
     .social {
       width: 42px; height: 42px;
       border-radius: 12px;
@@ -1692,6 +1917,13 @@
        closing line. Uses a green accent for "now" to signal currency
        without colliding with the cyan/gold/magenta system above.
     ===================================================================== */
+    /* Tighten the vertical gap between the leadership manifesto and
+       the "Same fire." opener — leaves a natural home for partner /
+       customer logos in between without burning a full section-padding
+       of vertical air. */
+    #leadership { padding-bottom: clamp(40px, 5vw, 60px); }
+    #now { padding-top: clamp(40px, 5vw, 60px); }
+
     .eyebrow--now {
       color: #4ade80;
       background: rgba(74, 222, 128, 0.08);
@@ -1972,9 +2204,10 @@
   ========================================================== -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#home" class="brand" aria-label="Home">
-        <span class="brand-mark">BM</span>
+      <a href="#home" class="brand" aria-label="Home — BMC, Bimal Mohanan Consulting">
+        <span class="brand-mark">~bmc</span>
         <span>Bimal Mohanan</span>
+        <span class="brand-ceo" aria-label="CEO of BMC">CEO</span>
       </a>
 
       <ul class="nav-links">
@@ -2037,11 +2270,6 @@
 
     <div class="container">
       <div class="hero-inner">
-        <div class="hero-badge reveal">
-          <span class="hero-badge-dot"></span>
-          Available for new engagements · UK
-        </div>
-
         <h1 class="hero-title reveal delay-1">
           <span class="line-1">Bimal</span>
           <span class="line-2">Mohanan</span>
@@ -2088,7 +2316,7 @@
                  onerror gracefully hides the broken-image icon if the file is missing,
                  falling back to the gradient initials underneath. -->
             <img src="./photo.jpg" alt="Bimal Mohanan" class="profile-img" onerror="this.remove()" />
-            <div class="profile-initials">BM</div>
+            <div class="profile-initials">~bmc</div>
           </div>
           <div class="profile-meta">
             <div class="profile-meta-item">
@@ -2096,8 +2324,22 @@
               <span class="profile-meta-val">London, UK</span>
             </div>
             <div class="profile-meta-item">
+              <span class="profile-meta-label">CEO</span>
+              <span class="profile-meta-val">BMC &mdash; Bimal Mohanan Consulting</span>
+            </div>
+            <div class="profile-meta-item">
               <span class="profile-meta-label">Focus</span>
-              <span class="profile-meta-val">Azure · Delivery</span>
+              <div class="profile-meta-chips">
+                <span class="profile-meta-chip">AWS</span>
+                <span class="profile-meta-chip">Azure</span>
+                <span class="profile-meta-chip">Hybrid Cloud</span>
+                <span class="profile-meta-chip">FinOps</span>
+                <span class="profile-meta-chip">Unit Economics</span>
+                <span class="profile-meta-chip">Pre-Sales</span>
+                <span class="profile-meta-chip">Managed Services</span>
+                <span class="profile-meta-chip">Psychological Safety</span>
+                <span class="profile-meta-chip">TechOps</span>
+              </div>
             </div>
           </div>
         </div>
@@ -2996,7 +3238,7 @@
                data-cal-link="mohanan/30-catch-up"
                data-cal-origin="https://www.cal.eu"
                data-cal-embed-src="https://app.cal.eu/embed/embed.js"
-               style="width:100%;height:100%;min-height:640px;">
+               style="width:100%;">
             <div class="cal-loading">
               <div class="cal-loading-spinner"></div>
               <span>Loading calendar…</span>
@@ -3023,6 +3265,20 @@
         <h2 class="section-title">Let's build something resilient.</h2>
         <p class="section-sub">Open to cloud leadership, advisory and senior consulting engagements across AWS, Azure, hybrid cloud and enterprise managed services.</p>
       </div>
+
+      <!-- Growth-mindset credo — sits above the contact grid as a
+           pull-quote. Frames the form: "if it's broken, tell me." -->
+      <aside class="contact-credo reveal delay-1">
+        <div class="contact-credo-label">Growth mindset</div>
+        <p class="contact-credo-body">
+          The best feedback I&rsquo;ve ever received is <em class="contact-credo-em">negative feedback</em> &mdash;
+          it identifies my room for improvement. That&rsquo;s the growth-mindset mentality.
+          Otherwise you never truly understood it in the first place.
+        </p>
+        <p class="contact-credo-coda">
+          So if you&rsquo;ve got something &mdash; or you want to show me it&rsquo;s broken &mdash; let me know. Thank you.
+        </p>
+      </aside>
 
       <div class="contact-grid">
         <!-- Contact cards (direct links) -->
@@ -3126,9 +3382,64 @@
   ========================================================== -->
   <footer>
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-lockup">
+            <span class="brand-mark brand-mark--lg" aria-hidden="true">~bmc</span>
+            <div class="footer-wordmark">
+              <span class="footer-wordmark-name">Bimal Mohanan</span>
+              <span class="footer-wordmark-sub">Consulting</span>
+            </div>
+          </div>
+          <p class="footer-tagline">
+            Bimal Mohanan Consulting &mdash; cloud transformation, FinOps and operational
+            excellence for AWS &amp; Azure enterprises. Strategy, delivery and the
+            commercial fluency to make hyperscalers pay back their promise.
+          </p>
+          <p class="footer-location">London &middot; United Kingdom &middot; Open to UK &amp; EMEA engagements</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#now">Now</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Engage</h4>
+          <ul class="footer-links">
+            <li><a href="#schedule">Schedule a 30-min call</a></li>
+            <li><a href="#contact">Send a message</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#cdafa4a0aca18da0a2a5aca3aca3e3b8a6"><span class="__cf_email__" data-cfemail="cdafa4a0aca18da0a2a5aca3aca3e3b8a6">[email&#160;protected]</span></a></li>
+            <li><a href="tel:+447301288711">+44 7301 288 711</a></li>
+            <li><a href="https://www.linkedin.com/in/bimalmohanan/" target="_blank" rel="noopener">LinkedIn &mdash; /in/bimalmohanan</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Focus</h4>
+          <ul class="footer-tags">
+            <li>AWS</li>
+            <li>Azure</li>
+            <li>Hybrid Cloud</li>
+            <li>FinOps</li>
+            <li>Unit Economics</li>
+            <li>Managed Services</li>
+            <li>Pre-Sales</li>
+            <li>Psychological Safety</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
         <div class="footer-meta">
-          © <span id="year">2026</span> Bimal Mohanan · Crafted in the UK
+          BMC &mdash; Bimal Mohanan Consulting &middot; &copy; <span id="year">2026</span> &middot; Crafted in the UK
         </div>
         <div class="footer-socials">
           <a class="social" href="https://www.linkedin.com/in/bimalmohanan/" target="_blank" rel="noopener" aria-label="LinkedIn">
