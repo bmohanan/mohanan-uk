@@ -1,0 +1,3794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050510" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- =========================================================
+       CUSTOMIZE: Meta tags
+       Change name, role, and description here for SEO + sharing.
+  ========================================================== -->
+  <title>Bimal Mohanan — Cloud Transformation Leader | Azure &amp; Hybrid Cloud</title>
+  <meta name="description" content="Bimal Mohanan — cloud transformation leader with 13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership. Cost optimisation and managed-services excellence for UK and EMEA enterprises." />
+  <meta name="author" content="Bimal Mohanan" />
+  <meta name="keywords" content="Bimal Mohanan, Cloud Transformation Leader, Microsoft Azure, Hybrid Cloud, Pre-Sales, Azure Cost Optimisation, Managed Services, London, EMEA" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://mohanan.uk/" />
+
+  <!-- Favicons (inline SVG + fallback ico). The SVG uses the same neon gradient
+       so the browser-tab mark stays on-brand on dark mode. -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/favicon.svg" color="#00d9ff" />
+
+  <!-- Open Graph (LinkedIn, Facebook, WhatsApp, Slack, iMessage) -->
+  <meta property="og:site_name" content="Bimal Mohanan" />
+  <meta property="og:title" content="Bimal Mohanan — Cloud Transformation Leader" />
+  <meta property="og:description" content="13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership — for UK and EMEA enterprises." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://mohanan.uk/" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:image" content="https://mohanan.uk/og-image.png" />
+  <meta property="og:image:secure_url" content="https://mohanan.uk/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Bimal Mohanan — Cloud Transformation Leader. Azure &amp; Hybrid Cloud. Pre-Sales · Delivery." />
+  <meta property="profile:first_name" content="Bimal" />
+  <meta property="profile:last_name" content="Mohanan" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bimal Mohanan — Cloud Transformation Leader" />
+  <meta name="twitter:description" content="13+ years across Microsoft Azure, hybrid cloud, pre-sales and delivery leadership — UK &amp; EMEA." />
+  <meta name="twitter:image" content="https://mohanan.uk/og-image.png" />
+  <meta name="twitter:image:alt" content="Bimal Mohanan — Cloud Transformation Leader" />
+
+  <!-- Structured data: Person schema for richer Google / LinkedIn results.
+       sameAs links the LinkedIn profile so search engines tie the entity together. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Bimal Mohanan",
+    "givenName": "Bimal",
+    "familyName": "Mohanan",
+    "jobTitle": "Cloud Transformation Leader",
+    "description": "Cloud transformation leader with 13+ years across Microsoft Azure, hybrid cloud, technical pre-sales and delivery leadership for UK and EMEA enterprises.",
+    "url": "https://mohanan.uk/",
+    "image": "https://mohanan.uk/photo.jpg",
+    "email": "mailto:bimal@mohanan.uk",
+    "telephone": "+44-7301-288711",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "London",
+      "addressCountry": "GB"
+    },
+    "knowsAbout": [
+      "Microsoft Azure",
+      "Hybrid Cloud",
+      "Cloud Transformation",
+      "Technical Pre-Sales",
+      "Azure Cost Optimisation",
+      "Managed Services",
+      "Cloud Adoption",
+      "Cross-Functional Leadership"
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/bimalmohanan/"
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Space Grotesk (futuristic display) + Inter (clean body) + JetBrains Mono (tech accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================================
+       THEME TOKENS
+       Tweak these CSS variables to change the entire palette in one place.
+    ===================================================================== */
+    :root {
+      /* Surfaces */
+      --bg-0: #050510;
+      --bg-1: #0a0a1a;
+      --bg-2: #0e1024;
+
+      /* Glass */
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-bg-strong: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-border-strong: rgba(255, 255, 255, 0.18);
+
+      /* Text */
+      --text-1: rgba(255, 255, 255, 0.96);
+      --text-2: rgba(255, 255, 255, 0.7);
+      --text-3: rgba(255, 255, 255, 0.5);
+      --text-mute: rgba(255, 255, 255, 0.35);
+
+      /* Neon accents */
+      --accent-cyan: #00d9ff;
+      --accent-purple: #b15cff;
+      --accent-magenta: #ff2ec8;
+      --accent-gold: #ffd166;
+
+      /* Gradients */
+      --grad-primary: linear-gradient(135deg, #00d9ff 0%, #b15cff 50%, #ff2ec8 100%);
+      --grad-soft: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(177,92,255,0.15));
+      --grad-text: linear-gradient(135deg, #ffffff 0%, #b1d8ff 50%, #b15cff 100%);
+
+      /* Effects */
+      --glow-cyan: 0 0 30px rgba(0, 217, 255, 0.45);
+      --glow-purple: 0 0 30px rgba(177, 92, 255, 0.45);
+      --shadow-card: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--glass-border);
+
+      /* Spacing rhythm */
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+
+      /* Layout */
+      --container-max: 1240px;
+      --section-py: clamp(80px, 12vw, 140px);
+    }
+
+    /* =====================================================================
+       RESET / BASE
+    ===================================================================== */
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-1);
+      background: var(--bg-0);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: 0; background: transparent; color: inherit; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -0.02em; }
+    p { margin: 0; }
+    ::selection { background: rgba(0, 217, 255, 0.3); color: #fff; }
+
+    /* =====================================================================
+       BACKGROUND LAYERS
+       Three stacked layers create depth:
+       1. Dark base gradient
+       2. Animated grid (perspective-like)
+       3. Floating colored "orbs" (blurred radial gradients)
+    ===================================================================== */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-base {
+      background:
+        radial-gradient(ellipse 90% 60% at 20% 0%, rgba(0, 217, 255, 0.08), transparent 60%),
+        radial-gradient(ellipse 80% 50% at 80% 100%, rgba(177, 92, 255, 0.1), transparent 60%),
+        linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 50%, var(--bg-0) 100%);
+    }
+
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+      animation: gridDrift 30s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      from { background-position: 0 0, 0 0; }
+      to   { background-position: 60px 60px, 60px 60px; }
+    }
+
+    .bg-orbs::before,
+    .bg-orbs::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: orbFloat 18s ease-in-out infinite;
+    }
+    .bg-orbs::before {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, var(--accent-cyan), transparent 60%);
+      top: -80px; left: -120px;
+    }
+    .bg-orbs::after {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, var(--accent-purple), transparent 60%);
+      bottom: -120px; right: -140px;
+      animation-delay: -9s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50%      { transform: translate(40px, 30px); }
+    }
+
+    /* Subtle noise texture for "filmic" depth */
+    .bg-noise {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      mix-blend-mode: overlay;
+      opacity: 0.4;
+    }
+
+    /* =====================================================================
+       LAYOUT
+    ===================================================================== */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: var(--section-py) 0;
+      position: relative;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.25);
+      margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .section-title {
+      font-size: clamp(34px, 5vw, 56px);
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: var(--text-2);
+      font-size: clamp(15px, 1.6vw, 17px);
+    }
+
+    /* =====================================================================
+       NAVBAR
+    ===================================================================== */
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 1200px;
+      z-index: 50;
+      transition: top 0.3s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px 12px 22px;
+      border-radius: var(--radius-pill);
+      background: rgba(10, 10, 26, 0.55);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .nav.scrolled .nav-inner {
+      background: rgba(10, 10, 26, 0.8);
+      border-color: var(--glass-border-strong);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .brand-mark {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: var(--grad-primary);
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0a0a1a;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text-1); background: rgba(255,255,255,0.05); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--grad-primary);
+      color: #0a0a1a;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--glow-cyan); }
+
+    .nav-toggle {
+      display: none;
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+    }
+    .nav-toggle svg { width: 20px; height: 20px; }
+
+    /* Mobile menu drawer */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      padding: 100px 24px 32px;
+      background: rgba(5, 5, 16, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+      visibility: hidden;
+    }
+    .mobile-menu.open { transform: translateY(0); visibility: visible; }
+    .mobile-menu ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .mobile-menu a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* =====================================================================
+       HERO
+    ===================================================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 32px;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 12px #4ade80;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero-title {
+      font-size: clamp(48px, 9vw, 120px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .hero-title .line-1 {
+      display: block;
+      color: var(--text-1);
+    }
+    .hero-title .line-2 {
+      display: block;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+    }
+
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(14px, 1.6vw, 16px);
+      color: var(--accent-cyan);
+      letter-spacing: 0.06em;
+      margin-bottom: 24px;
+    }
+    .hero-role .sep { color: var(--text-mute); margin: 0 10px; }
+
+    .hero-tagline {
+      max-width: 640px;
+      margin: 0 auto 40px;
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 26px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn svg { width: 18px; height: 18px; transition: transform 0.2s ease; }
+    .btn:hover svg { transform: translateX(3px); }
+
+    .btn-primary {
+      background: var(--grad-primary);
+      color: #0a0a1a;
+      box-shadow: 0 10px 30px -10px rgba(0, 217, 255, 0.5);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px -10px rgba(0, 217, 255, 0.8), 0 0 30px rgba(177, 92, 255, 0.4);
+    }
+
+    .btn-ghost {
+      background: var(--glass-bg);
+      color: var(--text-1);
+      border: 1px solid var(--glass-border-strong);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: var(--glass-bg-strong);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Floating tech badges around hero */
+    .hero-floats {
+      position: absolute;
+      inset: -40px;
+      pointer-events: none;
+    }
+    .float-chip {
+      position: absolute;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-2);
+      animation: bobble 6s ease-in-out infinite;
+    }
+    .float-chip span { color: var(--accent-cyan); }
+    .float-chip:nth-child(1) { top: 10%; left: 4%; animation-delay: 0s; }
+    .float-chip:nth-child(2) { top: 24%; right: 2%; animation-delay: -1.5s; }
+    .float-chip:nth-child(3) { bottom: 22%; left: 6%; animation-delay: -3s; }
+    .float-chip:nth-child(4) { bottom: 12%; right: 8%; animation-delay: -4.5s; }
+    @keyframes bobble {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-3);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .scroll-cue svg { width: 14px; height: 14px; animation: bobble 2s ease-in-out infinite; }
+
+    /* =====================================================================
+       ABOUT
+    ===================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .profile-card {
+      position: relative;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,217,255,0.1), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       CUSTOMIZE: Profile photo
+       Replace the .profile-avatar block below with:
+         <img src="./photo.jpg" alt="Bimal Mohanan" class="profile-img" />
+       and add `.profile-img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:22px; }`
+    ========================================================== */
+    .profile-avatar {
+      aspect-ratio: 1;
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 30%, rgba(0,217,255,0.5), transparent 60%),
+        radial-gradient(ellipse 60% 80% at 70% 70%, rgba(177,92,255,0.5), transparent 60%),
+        linear-gradient(135deg, #0e1024, #1a1140);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-border-strong);
+    }
+    .profile-avatar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .profile-initials {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(72px, 12vw, 120px);
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Profile photo — swaps in for the gradient BM placeholder.
+       Drop a JPG into /tmp/portfolio/photo.jpg and it appears here.
+       object-position keeps the face in frame even if the original
+       is a landscape / full-body shot (the avatar tile is square,
+       so we crop to the upper-third where the face sits). */
+    .profile-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 28%;
+      border-radius: 22px;
+      z-index: 2;
+      filter: contrast(1.02) saturate(1.05);
+    }
+
+    .profile-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--glass-border);
+    }
+    .profile-meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .profile-meta-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.15em; font-family: 'JetBrains Mono', monospace; }
+    .profile-meta-val   { font-size: 13px; color: var(--text-1); font-weight: 500; }
+
+    .about-text { display: flex; flex-direction: column; gap: 20px; }
+    .about-text h2 {
+      font-size: clamp(34px, 5vw, 52px);
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+    .about-text p { color: var(--text-2); font-size: 16px; line-height: 1.8; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .about-stat {
+      padding: 18px 16px;
+      border-radius: var(--radius-md);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .about-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .about-stat-label { font-size: 12px; color: var(--text-3); margin-top: 6px; letter-spacing: 0.04em; }
+
+    /* =====================================================================
+       SKILLS — Bento Grid
+    ===================================================================== */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(180px, auto);
+      gap: 16px;
+    }
+
+    .bento-card {
+      position: relative;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .bento-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0,217,255,0.4), transparent 50%, rgba(177,92,255,0.3));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .bento-card:hover {
+      transform: translateY(-4px);
+      background: var(--glass-bg-strong);
+    }
+    .bento-card:hover::before { opacity: 1; }
+
+    .bento-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--grad-soft);
+      border: 1px solid var(--glass-border);
+      display: grid; place-items: center;
+      color: var(--accent-cyan);
+    }
+    .bento-icon svg { width: 22px; height: 22px; }
+
+    .bento-title { font-size: 18px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+    .bento-desc { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+
+    .bento-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .tag {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-2);
+    }
+
+    /* Bento layout — span definitions */
+    .bento-card.span-3 { grid-column: span 3; }
+    .bento-card.span-2 { grid-column: span 2; }
+    .bento-card.span-4 { grid-column: span 4; }
+    .bento-card.row-2  { grid-row: span 2; }
+
+    .bento-feature {
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(0,217,255,0.15), transparent 60%),
+        radial-gradient(ellipse 80% 60% at 10% 90%, rgba(177,92,255,0.15), transparent 60%),
+        var(--glass-bg-strong);
+    }
+
+    .bento-big-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    /* =====================================================================
+       ENDORSEMENTS — LinkedIn-style detailed skill breakdown
+       Three categories (Industry Knowledge / Tools / Interpersonal),
+       each with a flex-wrap of skill pills. Pills are visually tiered
+       by endorsement count — the more endorsements, the brighter the
+       pill. Special badges call out highly-skilled endorsers,
+       LinkedIn skill assessments, and current-role assignments.
+    ===================================================================== */
+    .endorsements-block {
+      margin-top: 72px;
+      padding-top: 56px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .endorsements-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+    .endorsements-head h3 {
+      font-size: clamp(26px, 3.6vw, 36px);
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    .endorsements-head p {
+      color: var(--text-3);
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .endorsements-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+    }
+    .endorsements-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-dot.tier-1 { background: linear-gradient(135deg, #00d9ff, #b15cff); box-shadow: 0 0 8px rgba(0,217,255,0.6); }
+    .legend-dot.tier-2 { background: rgba(0,217,255,0.5); }
+    .legend-dot.tier-3 { background: rgba(255,255,255,0.25); }
+    .legend-dot.tier-4 { background: rgba(255,255,255,0.12); }
+
+    .skill-cats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .skill-cat {
+      padding: 26px 28px 30px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+    }
+    .skill-cat-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .skill-cat-icon {
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      background: var(--grad-soft);
+      border: 1px solid var(--glass-border);
+      display: grid; place-items: center;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .skill-cat-icon svg { width: 18px; height: 18px; }
+    .skill-cat-meta { flex: 1; }
+    .skill-cat-meta h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .skill-cat-meta p {
+      font-size: 12px;
+      color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+    .skill-cat-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px 7px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      font-size: 13px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+      position: relative;
+    }
+    .skill-pill:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(0, 217, 255, 0.35);
+    }
+
+    .skill-name {
+      color: var(--text-1);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .skill-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .skill-flag {
+      display: inline-grid;
+      place-items: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .skill-flag svg { width: 12px; height: 12px; }
+    .skill-flag--top {
+      color: var(--accent-gold);
+      filter: drop-shadow(0 0 4px rgba(255, 209, 102, 0.6));
+    }
+    .skill-flag--check {
+      color: #4ade80;
+    }
+    .skill-flag--bcn {
+      background: rgba(14, 124, 194, 0.18);
+      color: #6ec5ff;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 9px;
+      letter-spacing: 0.02em;
+      width: auto;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* Tiered pill weight by endorsement count */
+    .skill-pill.tier-1 {
+      background: linear-gradient(135deg, rgba(0,217,255,0.14), rgba(177,92,255,0.1));
+      border-color: rgba(0,217,255,0.45);
+      box-shadow: 0 0 24px -10px rgba(0, 217, 255, 0.45);
+    }
+    .skill-pill.tier-1 .skill-name { font-weight: 600; }
+    .skill-pill.tier-1 .skill-count {
+      background: rgba(0, 217, 255, 0.2);
+      color: #5feaff;
+    }
+    .skill-pill.tier-2 {
+      background: rgba(0,217,255,0.05);
+      border-color: rgba(0,217,255,0.22);
+    }
+    .skill-pill.tier-4 {
+      opacity: 0.78;
+    }
+    .skill-pill.tier-4 .skill-count {
+      color: var(--text-3);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .skill-pill.tier-5 {
+      opacity: 0.55;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .skill-pill.tier-5 .skill-name { font-weight: 400; }
+    .skill-pill.tier-5 .skill-count { display: none; }
+
+    @media (max-width: 720px) {
+      .skill-cat { padding: 22px 18px 24px; }
+      .skill-cat-meta h4 { font-size: 16px; }
+      .skill-pill { font-size: 12.5px; padding: 6px 10px 6px 12px; }
+    }
+
+    /* =====================================================================
+       EXPERIENCE — Vertical Timeline
+    ===================================================================== */
+    .timeline {
+      position: relative;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 0 0 40px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 8px; bottom: 8px;
+      left: 12px;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.5) 10%, rgba(177, 92, 255, 0.5) 90%, transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: -34px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--bg-0);
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.15), var(--glow-cyan);
+    }
+
+    .tl-card {
+      padding: 24px 28px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    }
+    .tl-card:hover {
+      transform: translateX(6px);
+      background: var(--glass-bg-strong);
+      border-color: var(--glass-border-strong);
+    }
+
+    .tl-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+    }
+    .tl-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-mute); }
+    .tl-meta .loc { color: var(--text-3); }
+
+    .tl-role { font-size: 22px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; margin-bottom: 4px; }
+    .tl-company {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-2);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .tl-desc { color: var(--text-2); font-size: 14.5px; line-height: 1.7; margin-bottom: 14px; }
+
+    /* Inline quote pull-out — anchors a specific testimonial to the
+       role it relates to. Cyan left rail + soft cyan glow on the
+       background reinforce the recommendation accent. */
+    .tl-quote {
+      margin: 0 0 14px;
+      padding: 14px 16px 14px 18px;
+      border-left: 2px solid var(--accent-cyan);
+      background: linear-gradient(90deg, rgba(0,217,255,0.07), rgba(0,217,255,0.01) 70%);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .tl-quote p {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-1);
+      font-style: italic;
+      letter-spacing: 0.005em;
+    }
+    .tl-quote cite {
+      display: block;
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-style: normal;
+      color: var(--accent-cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* Company logo badges next to each timeline role.
+       Each badge is a small rounded tile with the brand colour + initials.
+       Microsoft uses its real 4-square logo (the .tl-logo--ms variant). */
+    .tl-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #fff;
+      letter-spacing: -0.02em;
+      box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+    .tl-logo--ms { background: #fff; padding: 6px; }
+    .tl-logo--ms svg { width: 100%; height: 100%; display: block; }
+    .tl-logo--akkodis { background: #F2A900; color: #001528; }
+    .tl-logo--bcn { background: #0E7CC2; }
+    .tl-logo--oracle { background: #C74634; font-size: 16px; }
+    .tl-logo--livingstone { background: #00857C; }
+    .tl-logo--bt { background: #5514B4; font-size: 13px; }
+    .tl-logo--softwareone { background: #DA291C; }
+
+    /* =====================================================================
+       TESTIMONIALS — Quote cards
+    ===================================================================== */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .quote-card {
+      position: relative;
+      padding: 32px 28px 28px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .quote-card:hover {
+      transform: translateY(-4px);
+      background: var(--glass-bg-strong);
+      border-color: var(--glass-border-strong);
+    }
+    .quote-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 56px;
+      line-height: 0.6;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .quote-body {
+      color: var(--text-2);
+      font-size: 14.5px;
+      line-height: 1.75;
+      flex: 1;
+    }
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .quote-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--grad-soft);
+      border: 1px solid var(--glass-border-strong);
+      display: grid; place-items: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-cyan);
+    }
+    .quote-meta { display: flex; flex-direction: column; gap: 2px; }
+    .quote-name { font-size: 14px; font-weight: 600; color: var(--text-1); }
+    .quote-role { font-size: 12px; color: var(--text-3); }
+
+    /* =====================================================================
+       SCHEDULE — Cal.com inline embed
+       Embeds Cal.com's booking widget inside a glass card.
+       Bookings made here automatically land in his iCloud calendar
+       (configured one-time inside Cal.com → Apps → Apple Calendar).
+    ===================================================================== */
+    .schedule-card {
+      padding: 12px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .schedule-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0,217,255,0.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(177,92,255,0.08), transparent 60%);
+      pointer-events: none;
+    }
+    .cal-frame {
+      position: relative;
+      min-height: 640px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 1;
+    }
+    .cal-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    /* When the iframe is present, fade the loading state out so the
+       Cal.com widget shows through. Class is added by the loader JS. */
+    .cal-frame.is-ready .cal-loading { opacity: 0; }
+    .cal-frame iframe {
+      width: 100% !important;
+      min-height: 640px !important;
+      border: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .cal-loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid rgba(0, 217, 255, 0.2);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Belt-and-braces escape hatch for the Cal embed.
+       Always visible beneath the iframe so visitors on strict-tracker
+       browsers or a slow embed load still have a clear way through. */
+    .cal-fallback {
+      margin: 18px auto 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-3);
+      letter-spacing: 0.01em;
+    }
+    .cal-fallback a {
+      color: var(--accent-cyan);
+      font-weight: 500;
+      margin-left: 6px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.35);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .cal-fallback a:hover {
+      color: #5fe9ff;
+      border-bottom-color: var(--accent-cyan);
+    }
+
+    .schedule-perks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .perk {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .perk-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--grad-soft);
+      display: grid; place-items: center;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .perk-icon svg { width: 16px; height: 16px; }
+    .perk-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .perk-title { font-size: 13px; font-weight: 600; color: var(--text-1); }
+    .perk-sub { font-size: 11px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+
+    @media (max-width: 720px) {
+      .schedule-perks { grid-template-columns: 1fr; }
+    }
+
+    /* =====================================================================
+       CONTACT
+    ===================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+    }
+
+    .contact-cards { display: flex; flex-direction: column; gap: 12px; }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 24px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-card:hover {
+      transform: translateY(-2px);
+      background: var(--glass-bg-strong);
+      border-color: rgba(0, 217, 255, 0.4);
+      box-shadow: 0 10px 30px -10px rgba(0, 217, 255, 0.25);
+    }
+    .contact-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: var(--grad-soft);
+      border: 1px solid var(--glass-border);
+      display: grid; place-items: center;
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 22px; height: 22px; }
+    .contact-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .contact-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.18em; font-family: 'JetBrains Mono', monospace; }
+    .contact-val { font-size: 16px; color: var(--text-1); font-weight: 500; overflow-wrap: anywhere; }
+
+    .contact-form-card {
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: var(--shadow-card);
+    }
+    .contact-form-card h3 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .contact-form-card p { color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 8px;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--glass-border);
+      color: var(--text-1);
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
+    }
+    .field textarea { min-height: 120px; resize: vertical; }
+
+    /* Form-submit status banner — appears inline after submit. */
+    .form-status {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .form-status.is-pending {
+      display: block;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      color: var(--text-2);
+    }
+    .form-status.is-success {
+      display: block;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      color: #4ade80;
+    }
+    .form-status.is-error {
+      display: block;
+      background: rgba(255, 99, 99, 0.1);
+      border: 1px solid rgba(255, 99, 99, 0.4);
+      color: #ff8a8a;
+    }
+
+    /* Honeypot field — invisible bot trap. Real users never see/fill this. */
+    .honeypot {
+      position: absolute;
+      left: -10000px;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    /* =====================================================================
+       FOOTER
+    ===================================================================== */
+    footer {
+      padding: 56px 0 40px;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 80px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-meta { color: var(--text-3); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: grid; place-items: center;
+      color: var(--text-2);
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    .social:hover {
+      color: var(--accent-cyan);
+      border-color: rgba(0, 217, 255, 0.5);
+      background: rgba(0, 217, 255, 0.08);
+      transform: translateY(-2px);
+    }
+    .social svg { width: 18px; height: 18px; }
+
+    /* =====================================================================
+       SCROLL-IN ANIMATIONS
+       Initial state set on .reveal; .reveal.in flips them on.
+       Wired up via IntersectionObserver below.
+    ===================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+    .reveal.delay-4 { transition-delay: 0.4s; }
+
+    /* =====================================================================
+       LEADERSHIP LESSONS
+       Two-up cards (positive / shadow) over a full-width summary card.
+       Matches the existing glass-card system; accents differ per column
+       so the eye reads "what shaped me" then "what I refuse to do".
+    ===================================================================== */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .lesson-card {
+      position: relative;
+      padding: 36px 32px 32px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .lesson-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 0% 0%, var(--lesson-glow, rgba(0,217,255,0.18)), transparent 55%);
+      opacity: 0.7;
+      transition: opacity 0.35s ease;
+    }
+    .lesson-card > * { position: relative; z-index: 1; }
+    .lesson-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--glass-border-strong);
+    }
+    .lesson-card:hover::before { opacity: 1; }
+
+    .lesson-card--positive { --lesson-glow: rgba(0, 217, 255, 0.22); }
+    .lesson-card--shadow   { --lesson-glow: rgba(255, 209, 102, 0.18); }
+
+    .lesson-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      padding: 8px 14px 8px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      margin-bottom: 22px;
+    }
+    .lesson-pip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+    }
+    .lesson-pip svg { width: 14px; height: 14px; }
+    .lesson-pip--up {
+      background: rgba(0,217,255,0.12);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(0,217,255,0.35);
+    }
+    .lesson-pip--alert {
+      background: rgba(255,209,102,0.12);
+      color: var(--accent-gold);
+      box-shadow: 0 0 14px rgba(255,209,102,0.30);
+    }
+
+    .lesson-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .lesson-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .lesson-list li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 12px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--lesson-bullet, var(--accent-cyan));
+      box-shadow: 0 0 10px var(--lesson-bullet, var(--accent-cyan));
+    }
+    .lesson-card--shadow .lesson-list li::before {
+      --lesson-bullet: var(--accent-gold);
+    }
+    .lesson-list li strong {
+      display: block;
+      color: var(--text-1);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+
+    /* The closing summary card — full width, gradient border treatment
+       so it visually concludes the section. */
+    .lesson-summary {
+      position: relative;
+      padding: 40px 44px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(var(--bg-1), var(--bg-1)) padding-box,
+        linear-gradient(135deg, rgba(0,217,255,0.55), rgba(177,92,255,0.45) 55%, rgba(255,46,200,0.40)) border-box;
+      border: 1px solid transparent;
+      box-shadow: 0 30px 80px -30px rgba(0,217,255,0.18), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      overflow: hidden;
+    }
+    .lesson-summary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(177,92,255,0.16), transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(0,217,255,0.14), transparent 50%);
+    }
+    .lesson-summary > * { position: relative; z-index: 1; }
+    .lesson-summary-head { margin-bottom: 18px; }
+    .lesson-summary-eyebrow {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(0,217,255,0.08);
+      border: 1px solid rgba(0,217,255,0.25);
+    }
+    .lesson-summary-body {
+      font-size: clamp(17px, 1.6vw, 19px);
+      line-height: 1.65;
+      color: var(--text-1);
+      margin: 0 0 18px;
+      letter-spacing: -0.005em;
+    }
+    .lesson-summary-coda {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text-2);
+      margin: 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .lesson-plus {
+      display: inline-block;
+      width: 22px; height: 22px;
+      line-height: 22px;
+      text-align: center;
+      margin: 0 4px;
+      border-radius: 50%;
+      background: var(--grad-primary);
+      color: #0a0a1a;
+      font-weight: 700;
+      font-size: 14px;
+      vertical-align: 2px;
+    }
+
+    /* =====================================================================
+       PSYCHOLOGICAL SAFETY — deep-dive sub-block of leadership.
+       Reuses .lesson-card, adds a third magenta variant for "what I
+       commit to", plus a centred manifesto block at the foot.
+    ===================================================================== */
+    .ps-divider {
+      height: 1px;
+      width: 100%;
+      max-width: 200px;
+      margin: 56px auto 48px;
+      background: linear-gradient(90deg, transparent, rgba(0,217,255,0.45), rgba(177,92,255,0.45), transparent);
+      position: relative;
+    }
+    .ps-divider::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 16px var(--accent-cyan), 0 0 32px rgba(0,217,255,0.5);
+      transform: translate(-50%, -50%);
+    }
+
+    .ps-head { text-align: center; margin-bottom: 36px; }
+    .eyebrow--soft {
+      color: var(--accent-magenta);
+      background: rgba(255,46,200,0.08);
+      border-color: rgba(255,46,200,0.25);
+    }
+    .eyebrow--soft .dot,
+    .eyebrow--soft::before {
+      background: var(--accent-magenta);
+      box-shadow: 0 0 10px var(--accent-magenta);
+    }
+    .ps-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 3.6vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 14px 0 16px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ps-intro {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+    .ps-lede {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    .ps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 32px 0 48px;
+    }
+
+    /* Third variant — commitment / forward-looking */
+    .lesson-card--commit { --lesson-glow: rgba(255, 46, 200, 0.22); }
+    .lesson-card--commit .lesson-list li::before {
+      --lesson-bullet: var(--accent-magenta);
+    }
+    .lesson-pip--commit {
+      background: rgba(255,46,200,0.14);
+      color: var(--accent-magenta);
+      box-shadow: 0 0 14px rgba(255,46,200,0.35);
+    }
+
+    /* Terse variant — no bold lead-in, tighter rhythm. Used inside
+       the PS grid where each line is a single beat. */
+    .lesson-list--terse { gap: 12px; }
+    .lesson-list--terse li { font-size: 14.5px; line-height: 1.55; }
+
+    .ps-manifesto {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px 28px 0;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      position: relative;
+    }
+    .ps-manifesto::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 1px;
+      background: var(--grad-primary);
+      box-shadow: 0 0 16px rgba(0,217,255,0.5);
+    }
+    .ps-manifesto-body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--text-1);
+      letter-spacing: -0.01em;
+      margin: 0 0 16px;
+    }
+    .ps-multiplier {
+      font-style: italic;
+      font-weight: 700;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      padding: 0 2px;
+    }
+    .ps-manifesto-coda {
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.55;
+      color: var(--text-2);
+      margin: 0;
+      max-width: 600px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    /* =====================================================================
+       NOW — "Same fire." section: present-tense chapter + active focus.
+       Two cards (Building / Thinking) plus a huge gradient "Won't stop."
+       closing line. Uses a green accent for "now" to signal currency
+       without colliding with the cyan/gold/magenta system above.
+    ===================================================================== */
+    .eyebrow--now {
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+      border-color: rgba(74, 222, 128, 0.25);
+    }
+    .eyebrow--now .dot,
+    .eyebrow--now::before {
+      background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+    }
+
+    /* FinOps stance block — pull-quote treatment, gradient top hairline */
+    .now-stance {
+      max-width: 880px;
+      margin: 36px auto 28px;
+      padding: 28px 32px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(var(--bg-1), var(--bg-1)) padding-box,
+        linear-gradient(135deg, rgba(74,222,128,0.45), rgba(0,217,255,0.4) 60%, rgba(177,92,255,0.35)) border-box;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .now-stance::after {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 0% 100%, rgba(74,222,128,0.10), transparent 55%);
+    }
+    .now-stance > * { position: relative; z-index: 1; }
+    .now-stance-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4ade80;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(74,222,128,0.08);
+      border: 1px solid rgba(74,222,128,0.25);
+      margin-bottom: 14px;
+    }
+    .now-stance-body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.5;
+      color: var(--text-1);
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      margin: 0 0 12px;
+    }
+    .now-stance-em {
+      font-style: italic;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4ade80, #00d9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .now-stance-coda {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .now-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 32px 0 48px;
+    }
+    .now-card {
+      position: relative;
+      padding: 32px 28px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease;
+    }
+    .now-card::before {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 100% 0%, var(--now-glow, rgba(74,222,128,0.18)), transparent 55%);
+      opacity: 0.7;
+      transition: opacity 0.35s ease;
+    }
+    .now-card > * { position: relative; z-index: 1; }
+    .now-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--glass-border-strong);
+    }
+    .now-card:hover::before { opacity: 1; }
+
+    .now-card--building { --now-glow: rgba(0, 217, 255, 0.20); }
+    .now-card--thinking { --now-glow: rgba(177, 92, 255, 0.20); }
+
+    .now-card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .now-pip {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(0,217,255,0.12);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 18px rgba(0,217,255,0.25);
+    }
+    .now-pip svg { width: 18px; height: 18px; }
+    .now-pip--alt {
+      background: rgba(177,92,255,0.14);
+      color: var(--accent-purple);
+      box-shadow: 0 0 18px rgba(177,92,255,0.30);
+    }
+    .now-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-1);
+      margin: 0;
+    }
+    .now-card-desc {
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0 0 18px;
+    }
+    .now-tags {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .now-tags li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      color: var(--text-2);
+    }
+
+    .now-coda {
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(48px, 9vw, 96px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 12px 0 0;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 12px 40px rgba(0,217,255,0.15)) drop-shadow(0 12px 40px rgba(255,46,200,0.10));
+    }
+
+    /* =====================================================================
+       RESPONSIVE — Mobile-first overrides
+    ===================================================================== */
+    @media (max-width: 960px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .bento-card.span-3,
+      .bento-card.span-2,
+      .bento-card.span-4 { grid-column: span 2; }
+      .bento-card.row-2 { grid-row: auto; }
+      .testimonials { grid-template-columns: 1fr; }
+      .lessons-grid { grid-template-columns: 1fr; gap: 18px; }
+      .ps-grid { grid-template-columns: 1fr; gap: 18px; margin: 28px 0 36px; }
+      .lesson-card { padding: 28px 24px; }
+      .lesson-summary { padding: 32px 28px; }
+      .ps-divider { margin: 44px auto 36px; }
+      .ps-manifesto { padding: 28px 16px 0; }
+      .now-grid { grid-template-columns: 1fr; gap: 18px; }
+      .now-card { padding: 26px 22px; }
+      .now-stance { padding: 24px 22px; margin: 28px auto 24px; }
+      /* Tighten navbar so the longer "Recommendations" link still fits
+         before we collapse to the hamburger at 720px. Hide the wordmark
+         beside the BM logo and shrink link padding. */
+      .brand > span:not(.brand-mark) { display: none; }
+      .nav-links { gap: 2px; }
+      .nav-links a { padding: 8px 10px; font-size: 13px; }
+      .nav-cta { padding: 9px 14px; font-size: 12px; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .hero-floats { display: none; }
+      .timeline { padding-left: 32px; }
+      .timeline::before { left: 8px; }
+      .tl-item::before { left: -30px; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .about-stat { padding: 14px 10px; }
+      .about-stat-num { font-size: 22px; }
+      .about-stat-label { font-size: 11px; }
+      .contact-form-card { padding: 24px; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.span-3, .bento-card.span-2, .bento-card.span-4 { grid-column: span 1; }
+    }
+
+    /* Accessibility fallback: if background-clip:text isn't supported
+       (very old browsers, some assistive contexts), all gradient-text
+       would render transparent and disappear. This re-paints those
+       elements with a solid high-contrast accent so headings stay
+       legible. Cyan #00d9ff on #050510 ≈ 11.5:1 contrast (WCAG AAA). */
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .hero-name,
+      .section-title,
+      .stat-number,
+      .stat-num,
+      .about-stat-num,
+      .profile-name,
+      .bento-feature-title,
+      .feature-num,
+      .tl-company {
+        background: none !important;
+        color: var(--accent-cyan) !important;
+        -webkit-text-fill-color: var(--accent-cyan) !important;
+      }
+    }
+
+    /* High-contrast preference: drop the gradient entirely for users
+       on prefers-contrast: more (Windows High Contrast, macOS Increase
+       Contrast). Solid white reads more reliably for low-vision users. */
+    @media (prefers-contrast: more) {
+      .hero-name,
+      .section-title,
+      .profile-name,
+      .bento-feature-title {
+        background: none !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
+    }
+
+    /* Reduced motion: respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background layers -->
+  <div class="bg-layer bg-base"></div>
+  <div class="bg-layer bg-grid"></div>
+  <div class="bg-layer bg-orbs"></div>
+  <div class="bg-layer bg-noise"></div>
+
+  <!-- =========================================================
+       NAVBAR
+  ========================================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand" aria-label="Home">
+        <span class="brand-mark">BM</span>
+        <span>Bimal Mohanan</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#testimonials">Recommendations</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="nav-cta">
+        Let's Talk
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="navIcon"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile slide-down menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" data-close>About</a></li>
+      <li><a href="#skills" data-close>Skills</a></li>
+      <li><a href="#experience" data-close>Experience</a></li>
+      <li><a href="#testimonials" data-close>Recommendations</a></li>
+      <li><a href="#schedule" data-close>Schedule a Call</a></li>
+      <li><a href="#contact" data-close>Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- =========================================================
+       HERO
+       CUSTOMIZE: Name, role, tagline, floating tech chips.
+  ========================================================== -->
+  <section class="hero" id="home">
+    <div class="hero-floats" aria-hidden="true">
+      <div class="float-chip"><span>~</span> azure</div>
+      <div class="float-chip"><span>~</span> cost-optimisation</div>
+      <div class="float-chip"><span>~</span> delivery</div>
+      <div class="float-chip"><span>~</span> emea</div>
+    </div>
+
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-badge reveal">
+          <span class="hero-badge-dot"></span>
+          Available for new engagements · UK
+        </div>
+
+        <h1 class="hero-title reveal delay-1">
+          <span class="line-1">Bimal</span>
+          <span class="line-2">Mohanan</span>
+        </h1>
+
+        <div class="hero-role reveal delay-2">
+          Cloud Transformation Leader <span class="sep">/</span> Azure &amp; Hybrid Cloud <span class="sep">/</span> Pre-Sales · Delivery
+        </div>
+
+        <p class="hero-tagline reveal delay-3">
+          13+ years turning Microsoft Azure strategy into measurable business outcomes — across pre-sales, delivery, cost optimisation and managed-services leadership for UK and EMEA enterprises.
+        </p>
+
+        <div class="hero-ctas reveal delay-4">
+          <a href="#experience" class="btn btn-primary">
+            View Experience
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#schedule" class="btn btn-ghost">
+            Book a Call
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ABOUT
+       CUSTOMIZE: Bio paragraphs + the three stat tiles.
+  ========================================================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Profile card -->
+        <div class="profile-card reveal">
+          <div class="profile-avatar">
+            <!-- Photo overlays the initials when /tmp/portfolio/photo.jpg exists.
+                 onerror gracefully hides the broken-image icon if the file is missing,
+                 falling back to the gradient initials underneath. -->
+            <img src="./photo.jpg" alt="Bimal Mohanan" class="profile-img" onerror="this.remove()" />
+            <div class="profile-initials">BM</div>
+          </div>
+          <div class="profile-meta">
+            <div class="profile-meta-item">
+              <span class="profile-meta-label">Based</span>
+              <span class="profile-meta-val">London, UK</span>
+            </div>
+            <div class="profile-meta-item">
+              <span class="profile-meta-label">Focus</span>
+              <span class="profile-meta-val">Azure · Delivery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio + stats -->
+        <div class="about-text reveal delay-1">
+          <div class="eyebrow">About me</div>
+          <h2>Cloud, delivered.</h2>
+          <p>
+            I'm Bimal — an accomplished technology leader with a 13+ year track record across cloud
+            transformation, technical pre-sales and delivery leadership in Microsoft Azure and hybrid
+            cloud. I've built my career at the intersection of deep platform fluency and the commercial
+            conversations that move enterprise buyers — at Microsoft itself, at major partners
+            (SoftwareONE, BCN, Akkodis), and at customers (Oracle, BT) across the UK and EMEA.
+          </p>
+          <p>
+            What I do best is lead cross-functional teams to deliver enterprise-scale cloud with
+            measurable business impact: accelerating Azure adoption, optimising consumption and cost,
+            embedding governance, and turning managed-services portfolios into something customers
+            genuinely renew. I'm equally comfortable in a CXO conversation, a technical design
+            workshop, a pipeline review or a delivery escalation.
+          </p>
+
+          <div class="about-stats">
+            <div class="about-stat">
+              <div class="about-stat-num">13+</div>
+              <div class="about-stat-label">Years in cloud</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-num">125%</div>
+              <div class="about-stat-label">FY revenue target</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-num">3×</div>
+              <div class="about-stat-label">Pipeline target</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SKILLS — Bento grid
+       CUSTOMIZE: Each .bento-card can be edited freely.
+       Layout is controlled by .span-N and .row-2 classes.
+  ========================================================== -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Core competencies</div>
+        <h2 class="section-title">What I bring to the table</h2>
+        <p class="section-sub">Strategy, delivery and the commercial fluency to make Microsoft Azure pay back its promise.</p>
+      </div>
+
+      <div class="bento">
+        <!-- Feature card: Cloud transformation -->
+        <div class="bento-card bento-feature span-3 row-2 reveal">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/><path d="M12 14v-2"/><path d="M9 11l3 3 3-3"/></svg>
+          </div>
+          <h3 class="bento-title">Cloud Transformation &amp; Strategy</h3>
+          <p class="bento-desc">
+            Designing and delivering enterprise Azure landing zones, migration plans and adoption
+            programmes that survive contact with reality. Comfortable on both sides of the table —
+            having sold cloud at Microsoft and the partner channel, then run delivery for customers.
+          </p>
+          <div class="bento-tags">
+            <span class="tag">Azure</span>
+            <span class="tag">Hybrid Cloud</span>
+            <span class="tag">Landing Zones</span>
+            <span class="tag">Migration</span>
+            <span class="tag">EMEA</span>
+            <span class="tag">Oracle Cloud</span>
+          </div>
+        </div>
+
+        <!-- Pre-sales tile -->
+        <div class="bento-card span-3 reveal delay-1">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          </div>
+          <h3 class="bento-title">Technical Pre-Sales &amp; Cloud Adoption</h3>
+          <p class="bento-desc">
+            Tailored demos, RFPs and solution design — turning customer business outcomes into
+            credible Azure proposals and shipping them through to consumption growth.
+          </p>
+          <div class="bento-tags">
+            <span class="tag">Demos</span>
+            <span class="tag">RFP</span>
+            <span class="tag">Adoption</span>
+            <span class="tag">Consumption</span>
+          </div>
+        </div>
+
+        <!-- Cost optimisation big number -->
+        <div class="bento-card span-2 reveal delay-2">
+          <div class="bento-big-num">125%</div>
+          <div>
+            <h3 class="bento-title" style="font-size: 16px;">FY revenue target</h3>
+            <p class="bento-desc">Microsoft UK · hybrid cloud &amp; OMS go-to-market.</p>
+          </div>
+        </div>
+
+        <!-- Cross-functional leadership tile -->
+        <div class="bento-card span-2 reveal delay-3">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 class="bento-title">Cross-Functional Leadership</h3>
+          <p class="bento-desc">Building, mentoring and running multi-disciplinary delivery teams.</p>
+        </div>
+
+        <!-- Stakeholder engagement tile -->
+        <div class="bento-card span-2 reveal delay-4">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3 class="bento-title">Stakeholder &amp; Partner Engagement</h3>
+          <div class="bento-tags">
+            <span class="tag">Microsoft</span>
+            <span class="tag">C-Level</span>
+            <span class="tag">Partners</span>
+            <span class="tag">Trusted Advisor</span>
+          </div>
+        </div>
+
+        <!-- Azure cost optimisation & governance -->
+        <div class="bento-card span-3 reveal">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+          </div>
+          <h3 class="bento-title">Azure Cost Optimisation &amp; Governance</h3>
+          <p class="bento-desc">Burn-rate monitoring, consumption forecasting, FinOps governance and the guardrails that keep Azure spend honest as it scales.</p>
+          <div class="bento-tags">
+            <span class="tag">FinOps</span>
+            <span class="tag">Governance</span>
+            <span class="tag">Forecasting</span>
+            <span class="tag">Budget</span>
+          </div>
+        </div>
+
+        <!-- Managed services delivery -->
+        <div class="bento-card span-3 reveal delay-1">
+          <div class="bento-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="bento-title">Managed Services &amp; Operational Excellence</h3>
+          <p class="bento-desc">Aligning Azure resources with client KPIs, SLAs and budget constraints. Refining service delivery models to lift customer satisfaction and renewal economics.</p>
+          <div class="bento-tags">
+            <span class="tag">SLAs</span>
+            <span class="tag">Service Improvement</span>
+            <span class="tag">KPIs</span>
+            <span class="tag">Renewals</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           SKILLS &amp; ENDORSEMENTS — peer-validated detail
+           Three LinkedIn-style categories. Pills are tiered by
+           endorsement count (20+, 10-19, 3-9, 1-2, 0). Special
+           flags: ★ = highly-skilled endorser, ✓ = LinkedIn Skill
+           Assessment passed, BCN = current-role skill.
+      ========================================================== -->
+      <div class="endorsements-block">
+        <div class="endorsements-head reveal">
+          <h3>Endorsed across the network</h3>
+          <p>50 skills · validated by colleagues at Microsoft, SoftwareONE, BT, BCN and beyond</p>
+        </div>
+
+        <div class="endorsements-legend reveal delay-1">
+          <span><span class="legend-dot tier-1"></span>20+ endorsements</span>
+          <span><span class="legend-dot tier-2"></span>10–19</span>
+          <span><span class="legend-dot tier-3"></span>3–9</span>
+          <span><span class="legend-dot tier-4"></span>1–2</span>
+          <span><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent-gold);"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>highly-skilled endorser</span>
+          <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>LinkedIn Skill Assessment</span>
+        </div>
+
+        <div class="skill-cats">
+
+          <!-- ============ Industry Knowledge ============ -->
+          <div class="skill-cat reveal">
+            <div class="skill-cat-head">
+              <div class="skill-cat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-7"/></svg>
+              </div>
+              <div class="skill-cat-meta">
+                <h4>Industry Knowledge</h4>
+                <p>Domain depth and commercial fluency</p>
+              </div>
+              <div class="skill-cat-count">36 skills</div>
+            </div>
+            <div class="skill-list">
+
+              <span class="skill-pill tier-1" title="36 endorsements · Endorsed by Gurmail Singh (highly skilled) and 4 colleagues at Microsoft">
+                <span class="skill-name">Pre-sales</span>
+                <span class="skill-count">36</span>
+                <span class="skill-flag skill-flag--top" title="Endorsed by a highly-skilled peer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-1" title="31 endorsements · Endorsed by Gurmail Singh (highly skilled) and 4 colleagues at Microsoft">
+                <span class="skill-name">Enterprise Software</span>
+                <span class="skill-count">31</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-1" title="21 endorsements · Endorsed by Gurmail Singh and 2 others (highly skilled) and 2 colleagues at Microsoft">
+                <span class="skill-name">Solution Selling</span>
+                <span class="skill-count">21</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-1" title="20 endorsements · 7 colleagues at SoftwareONE">
+                <span class="skill-name">CRM</span>
+                <span class="skill-count">20</span>
+              </span>
+
+              <span class="skill-pill tier-2" title="18 endorsements · 4 colleagues at Microsoft">
+                <span class="skill-name">SaaS</span>
+                <span class="skill-count">18</span>
+              </span>
+
+              <span class="skill-pill tier-2" title="13 endorsements · Endorsed by Ross Macdonald (highly skilled) and 6 colleagues at SoftwareONE">
+                <span class="skill-name">Software Licensing</span>
+                <span class="skill-count">13</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-2" title="12 endorsements · 5 colleagues at SoftwareONE">
+                <span class="skill-name">Sales</span>
+                <span class="skill-count">12</span>
+              </span>
+
+              <span class="skill-pill tier-2" title="11 endorsements · 4 colleagues at SoftwareONE">
+                <span class="skill-name">Management</span>
+                <span class="skill-count">11</span>
+              </span>
+
+              <span class="skill-pill tier-2" title="11 endorsements · Endorsed by Lord Mervin Soh (highly skilled) and 3 colleagues at Microsoft">
+                <span class="skill-name">Microsoft Technologies</span>
+                <span class="skill-count">11</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-1" title="Cloud Consultant at BCN · Endorsed by Gurmail Singh and 1 other (highly skilled) and 4 colleagues at BT Group">
+                <span class="skill-name">Cloud Computing</span>
+                <span class="skill-flag skill-flag--bcn" title="Skill from current role">@BCN</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-3" title="8 endorsements · 3 colleagues at SoftwareONE">
+                <span class="skill-name">Account Management</span>
+                <span class="skill-count">8</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="7 endorsements · 3 colleagues at SoftwareONE">
+                <span class="skill-name">Microsoft Products</span>
+                <span class="skill-count">7</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="6 endorsements · 3 colleagues at SoftwareONE">
+                <span class="skill-name">Business Development</span>
+                <span class="skill-count">6</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="5 endorsements · 3 colleagues at SoftwareONE">
+                <span class="skill-name">Partner Management</span>
+                <span class="skill-count">5</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="5 endorsements · 2 colleagues at SoftwareONE">
+                <span class="skill-name">Professional Services</span>
+                <span class="skill-count">5</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="4 endorsements">
+                <span class="skill-name">Customer Service</span>
+                <span class="skill-count">4</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="4 endorsements">
+                <span class="skill-name">Sales Process</span>
+                <span class="skill-count">4</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements">
+                <span class="skill-name">ITIL</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements · 2 colleagues at SoftwareONE">
+                <span class="skill-name">IT Service Management</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements">
+                <span class="skill-name">Data Center</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements">
+                <span class="skill-name">Software as a Service (SaaS)</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements · 2 colleagues at SoftwareONE">
+                <span class="skill-name">Customer Relationship Management (CRM)</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="2 endorsements">
+                <span class="skill-name">Security</span>
+                <span class="skill-count">2</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Microsoft Licensing</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Managed Services</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Channel Partners</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Strategy</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">IT Strategy</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Consulting</span>
+                <span class="skill-count">1</span>
+              </span>
+
+              <span class="skill-pill tier-5"><span class="skill-name">Direct Sales</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Business Intelligence</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Information Technology</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Software Industry</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Resellers</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">PaaS</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Microsoft Certified Professional</span></span>
+            </div>
+          </div>
+
+          <!-- ============ Tools & Technologies ============ -->
+          <div class="skill-cat reveal delay-1">
+            <div class="skill-cat-head">
+              <div class="skill-cat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="skill-cat-meta">
+                <h4>Tools &amp; Technologies</h4>
+                <p>Platforms, products, certifications</p>
+              </div>
+              <div class="skill-cat-count">11 skills</div>
+            </div>
+            <div class="skill-list">
+
+              <span class="skill-pill tier-2" title="15 endorsements · 2 colleagues at Microsoft">
+                <span class="skill-name">VMware</span>
+                <span class="skill-count">15</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="7 endorsements · Passed LinkedIn Skill Assessment · 2 colleagues at Microsoft">
+                <span class="skill-name">Windows Server</span>
+                <span class="skill-count">7</span>
+                <span class="skill-flag skill-flag--check" title="Passed LinkedIn Skill Assessment">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-3" title="5 endorsements · 3 colleagues at SoftwareONE">
+                <span class="skill-name">Citrix</span>
+                <span class="skill-count">5</span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements · Endorsed by Devesh Mardania (highly skilled)">
+                <span class="skill-name">Networking</span>
+                <span class="skill-count">3</span>
+                <span class="skill-flag skill-flag--top">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-3" title="3 endorsements">
+                <span class="skill-name">Microsoft Office</span>
+                <span class="skill-count">3</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="2 endorsements">
+                <span class="skill-name">Network Administration</span>
+                <span class="skill-count">2</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="2 endorsements">
+                <span class="skill-name">Office 365</span>
+                <span class="skill-count">2</span>
+              </span>
+
+              <span class="skill-pill tier-4" title="Cloud Consultant at BCN · Passed LinkedIn Skill Assessment · 1 endorsement">
+                <span class="skill-name">Microsoft Azure</span>
+                <span class="skill-count">1</span>
+                <span class="skill-flag skill-flag--bcn" title="Skill from current role">@BCN</span>
+                <span class="skill-flag skill-flag--check" title="Passed LinkedIn Skill Assessment">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </span>
+
+              <span class="skill-pill tier-5"><span class="skill-name">Computer Hardware</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Hyper-V</span></span>
+              <span class="skill-pill tier-5"><span class="skill-name">Storage</span></span>
+            </div>
+          </div>
+
+          <!-- ============ Interpersonal Skills ============ -->
+          <div class="skill-cat reveal delay-2">
+            <div class="skill-cat-head">
+              <div class="skill-cat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div class="skill-cat-meta">
+                <h4>Interpersonal Skills</h4>
+                <p>How I show up with people</p>
+              </div>
+              <div class="skill-cat-count">2 skills</div>
+            </div>
+            <div class="skill-list">
+              <span class="skill-pill tier-4" title="2 endorsements">
+                <span class="skill-name">Team Leadership</span>
+                <span class="skill-count">2</span>
+              </span>
+              <span class="skill-pill tier-4" title="1 endorsement">
+                <span class="skill-name">Leadership</span>
+                <span class="skill-count">1</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       EXPERIENCE — Timeline
+       CUSTOMIZE: Add / edit .tl-item blocks.
+       Pull dates, titles and descriptions from LinkedIn here.
+  ========================================================== -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Experience</div>
+        <h2 class="section-title">Selected roles &amp; engagements</h2>
+        <p class="section-sub">14+ years across Microsoft, the partner ecosystem and global enterprises — selling, building, delivering and now leading cloud at scale.</p>
+      </div>
+
+      <div class="timeline">
+        <!-- Akkodis: current role. Yasir Masood quote inline below the description. -->
+        <div class="tl-item reveal">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Nov 2025 — Present</span>
+              <span class="dot"></span>
+              <span class="loc">United Kingdom</span>
+            </div>
+            <h3 class="tl-role">Practice Lead &middot; TechOps</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--akkodis" aria-label="Akkodis">AK</div>
+              <span>Akkodis</span>
+            </div>
+            <p class="tl-desc">
+              Leading the TechOps Practice &mdash; modernising how enterprise clients run cloud
+              operations, automation and delivery at scale. Building teams around three things in
+              parallel: technical excellence, deliberate culture (psychological safety, shared
+              accountability, continuous learning) and FinOps maturity &mdash; cost allocation,
+              unit economics, rightsizing and forecasting embedded into how engineers think, not
+              bolted on after. Partnering with C-suite to redesign operating models that turn
+              cloud spend into strategic advantage. Multi-cloud, multi-operating-model exposure
+              over 13+ years has sharpened how I read both the technology and the business
+              &mdash; and made this the chapter I&rsquo;m built for right now. I mentor practice
+              leaders, build internal tooling, and push what TechOps can be. Won&rsquo;t stop.
+            </p>
+            <blockquote class="tl-quote">
+              <p>&ldquo;Working with Bimal as my manager was transformative. He creates real psychological safety while driving high standards.&rdquo;</p>
+              <cite>Yasir Masood &middot; Direct Report</cite>
+            </blockquote>
+            <div class="tl-tags">
+              <span class="tag">TechOps</span>
+              <span class="tag">Practice Leadership</span>
+              <span class="tag">FinOps</span>
+              <span class="tag">Unit Economics</span>
+              <span class="tag">Cost Allocation</span>
+              <span class="tag">Psychological Safety</span>
+              <span class="tag">Culture Design</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-1">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Nov 2023 — Mar 2024</span>
+              <span class="dot"></span>
+              <span class="loc">Manchester, UK</span>
+            </div>
+            <h3 class="tl-role">Senior Cloud Consultant</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--bcn" aria-label="BCN Group">BCN</div>
+              <span>BCN Group</span>
+            </div>
+            <p class="tl-desc">
+              Key Microsoft liaison bridging strategic engagement, technical alignment and delivery
+              excellence for mid-market clients undergoing cloud transformation. Led Azure cost
+              management across multiple clients &mdash; implementing FinOps practices including
+              cost allocation, rightsizing and forecasting that delivered material spend
+              optimisation. Aligned Azure environments to client KPIs, SLAs and business outcomes
+              while embedding financial accountability into cloud operations.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Azure</span>
+              <span class="tag">FinOps</span>
+              <span class="tag">Cost Allocation</span>
+              <span class="tag">Rightsizing</span>
+              <span class="tag">Microsoft Liaison</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-2">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Jun 2022 — Jun 2023</span>
+              <span class="dot"></span>
+              <span class="loc">Reading, UK</span>
+            </div>
+            <h3 class="tl-role">Cloud Adoption Manager</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--oracle" aria-label="Oracle">O</div>
+              <span>Oracle</span>
+            </div>
+            <p class="tl-desc">
+              Drove EMEA-wide customer engagement strategies to accelerate Oracle Cloud consumption
+              and deliver measurable business value &mdash; pairing solution design and Landing
+              Zone implementation with consumption forecasting and value-per-resource thinking
+              to mitigate churn and lift production readiness. Backed direct engagements with
+              enablement assets (whitepapers, demos, solution blueprints) that scaled the
+              playbook across the region.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Oracle Cloud</span>
+              <span class="tag">EMEA</span>
+              <span class="tag">Adoption</span>
+              <span class="tag">Landing Zone</span>
+              <span class="tag">Consumption</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-3">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Oct 2020 — May 2022</span>
+              <span class="dot"></span>
+              <span class="loc">Reading, UK</span>
+            </div>
+            <h3 class="tl-role">Managing Consultant</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--livingstone" aria-label="Livingstone Group">LG</div>
+              <span>Livingstone Group</span>
+            </div>
+            <p class="tl-desc">
+              Directed end-to-end delivery for major enterprise accounts, leading multi-disciplinary
+              teams through cloud migration and optimisation strategies. Trusted advisor to C-level
+              stakeholders while building consulting talent through structured mentoring and
+              performance development.
+            </p>
+            <blockquote class="tl-quote">
+              <p>&ldquo;Bimal is an outstanding leader who builds high-performing teams and delivers exceptional results. His ability to mentor and develop consultants is second to none.&rdquo;</p>
+              <cite>David Gemuenden &middot; Former Manager</cite>
+            </blockquote>
+            <div class="tl-tags">
+              <span class="tag">Delivery Leadership</span>
+              <span class="tag">C-Level Advisory</span>
+              <span class="tag">Cloud Migration</span>
+              <span class="tag">Mentoring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-4">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Nov 2019 — Oct 2020</span>
+              <span class="dot"></span>
+              <span class="loc">London, UK</span>
+            </div>
+            <h3 class="tl-role">Senior Sales Specialist · Digital Technology Services</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--bt" aria-label="BT Enterprise">BT</div>
+              <span>BT Enterprise</span>
+            </div>
+            <p class="tl-desc">
+              Sold security and managed-services solutions into enterprise and public-sector accounts.
+              Built strategic account plans, engaged C-level stakeholders, and ran enablement for
+              internal and partner teams &mdash; consistently exceeding quarterly targets and
+              holding pipeline at 3&times; quota.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Security</span>
+              <span class="tag">Enterprise Sales</span>
+              <span class="tag">C-Level</span>
+              <span class="tag">3× Pipeline</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Jun 2019 — Nov 2019</span>
+              <span class="dot"></span>
+              <span class="loc">Reading, UK</span>
+            </div>
+            <h3 class="tl-role">Premier Field Engineer · Azure IaaS</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--ms" aria-label="Microsoft UK">
+                <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="#F25022"/><rect x="13" width="10" height="10" fill="#7FBA00"/><rect y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+              </div>
+              <span>Microsoft UK</span>
+            </div>
+            <p class="tl-desc">
+              Delivered proactive engineering support and workshops to strengthen Azure environments
+              for Microsoft Premier customers &mdash; lifting environment health and accelerating
+              transformation across the UK.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Azure IaaS</span>
+              <span class="tag">Premier</span>
+              <span class="tag">Engineering</span>
+              <span class="tag">Workshops</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-1">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Aug 2017 — May 2019</span>
+              <span class="dot"></span>
+              <span class="loc">London, UK</span>
+            </div>
+            <h3 class="tl-role">Azure Pre-Sales Consultant</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--softwareone" aria-label="SoftwareONE UK">S1</div>
+              <span>SoftwareONE UK</span>
+            </div>
+            <p class="tl-desc">
+              Drove Azure consumption through technical pre-sales &mdash; tailored demos, RFP
+              responses, proposals and full solution design. Partnered with Microsoft and SoftwareONE
+              sales teams on customer engagements spanning cost estimation, architecture and Global
+              Managed Services positioning.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Azure</span>
+              <span class="tag">Pre-Sales</span>
+              <span class="tag">RFPs</span>
+              <span class="tag">GMS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-2">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Oct 2015 — Jul 2017</span>
+              <span class="dot"></span>
+              <span class="loc">Reading, UK</span>
+            </div>
+            <h3 class="tl-role">Technology Solutions Specialist</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--ms" aria-label="Microsoft UK">
+                <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="#F25022"/><rect x="13" width="10" height="10" fill="#7FBA00"/><rect y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+              </div>
+              <span>Microsoft UK</span>
+            </div>
+            <p class="tl-desc">
+              Executed go-to-market strategies for Microsoft hybrid cloud and OMS, achieving 125% of
+              FY revenue targets. Guided partners and internal teams on Windows Server, System Center
+              and cloud adoption &mdash; embedding technical sales readiness across assigned
+              territories.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">125% FY target</span>
+              <span class="tag">Hybrid Cloud</span>
+              <span class="tag">OMS</span>
+              <span class="tag">Partner GTM</span>
+              <span class="tag">Windows Server</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal delay-3">
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span>Oct 2012 — Oct 2015</span>
+              <span class="dot"></span>
+              <span class="loc">London, UK</span>
+            </div>
+            <h3 class="tl-role">Microsoft Cloud Consultant</h3>
+            <div class="tl-company">
+              <div class="tl-logo tl-logo--softwareone" aria-label="SoftwareONE UK">S1</div>
+              <span>SoftwareONE UK</span>
+            </div>
+            <p class="tl-desc">
+              Supported long-term account growth and cloud migration planning through consultative
+              engagement &mdash; led cloud-readiness assessments and migration roadmaps that moved
+              customers onto Microsoft cloud services. The foundation of everything that followed.
+            </p>
+            <div class="tl-tags">
+              <span class="tag">Consultative Sales</span>
+              <span class="tag">Cloud Readiness</span>
+              <span class="tag">Migration</span>
+              <span class="tag">Account Growth</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LEADERSHIP LESSONS
+       Personal philosophy section — the human layer between the
+       role timeline and the recommendations. Pairs lessons learned
+       from great managers with those learned from difficult ones,
+       then closes with the standard he holds himself to as a leader.
+  ========================================================== -->
+  <section id="leadership">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Leadership lessons</div>
+        <h2 class="section-title">Forged in the trenches.</h2>
+        <p class="section-sub">My leadership philosophy was shaped by watching both exceptional and deeply flawed managers in action. Here are the lessons I carry forward — the good ones, and the ones learned the hard way.</p>
+      </div>
+
+      <div class="lessons-grid">
+        <article class="lesson-card lesson-card--positive reveal delay-1">
+          <div class="lesson-eyebrow">
+            <span class="lesson-pip lesson-pip--up" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l7-7 7 7M12 5v14"/></svg>
+            </span>
+            From great managers
+          </div>
+          <ul class="lesson-list">
+            <li>
+              <strong>Spot potential early.</strong>
+              The best leaders see talent and drive before people see it in themselves. They invest, challenge, and give stretch opportunities. I now make it a priority to identify and nurture hidden potential in my teams.
+            </li>
+            <li>
+              <strong>Build confidence through trust.</strong>
+              They gave autonomy and backed me up, even when I stumbled. Psychological safety accelerates growth far more than micromanagement ever will.
+            </li>
+          </ul>
+        </article>
+
+        <article class="lesson-card lesson-card--shadow reveal delay-2">
+          <div class="lesson-eyebrow">
+            <span class="lesson-pip lesson-pip--alert" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            </span>
+            From difficult managers
+          </div>
+          <ul class="lesson-list">
+            <li>
+              <strong>Clarity and respect are non-negotiable.</strong>
+              Ambiguity, favouritism or public criticism destroys morale. I refuse to lead through fear or ego — my standard is radical candour, delivered with respect.
+            </li>
+            <li>
+              <strong>Own your mistakes.</strong>
+              Leaders who couldn't admit fault or deflected blame taught me the power of accountability. I create environments where people feel safe to own outcomes.
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="lesson-summary reveal delay-3">
+        <div class="lesson-summary-head">
+          <div class="lesson-summary-eyebrow">The standard I set</div>
+        </div>
+        <p class="lesson-summary-body">I lead by combining high expectations with genuine belief in people. My goal is to be the kind of manager who accelerates careers, not one whom people endure. Every team member should leave stronger, clearer about their strengths, and more confident than when they joined.</p>
+        <p class="lesson-summary-coda">Seeing potential <span class="lesson-plus">+</span> rejecting toxic patterns &mdash; that&rsquo;s how I define effective leadership.</p>
+      </article>
+
+      <!-- =====================================================
+           Deep-dive: Psychological Safety
+           A four-block expansion of the leadership theme. Three
+           parallel cards (observed-good / observed-bad / what
+           I do) over a centred manifesto. The third card uses
+           the magenta accent so "what I commit to" reads as
+           forward-looking rather than historical.
+      ===================================================== -->
+      <div class="ps-divider reveal" aria-hidden="true"></div>
+
+      <div class="ps-head reveal">
+        <div class="eyebrow eyebrow--soft">Deep dive</div>
+        <h3 class="ps-title">Psychological safety.</h3>
+        <p class="ps-intro"><strong class="ps-lede">The foundation of every high-performing team I&rsquo;ve been part of</strong> &mdash; and the silent killer of those that struggled. It&rsquo;s the shared belief that you can take risks, admit mistakes, ask questions, and voice ideas without fear of embarrassment, punishment, or rejection. When it exists, people bring their full selves and best thinking. When it&rsquo;s absent, they play it safe, hide problems, and innovation dies.</p>
+      </div>
+
+      <div class="ps-grid">
+        <article class="lesson-card lesson-card--positive reveal delay-1">
+          <div class="lesson-eyebrow">
+            <span class="lesson-pip lesson-pip--up" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l7-7 7 7M12 5v14"/></svg>
+            </span>
+            What great managers taught me
+          </div>
+          <ul class="lesson-list lesson-list--terse">
+            <li>Created environments where failing forward was expected, not punished.</li>
+            <li>Responded to mistakes with curiosity instead of criticism.</li>
+            <li>Admitted their own errors openly, modelling vulnerability at the top.</li>
+            <li>Celebrated smart risks, even when outcomes weren&rsquo;t perfect.</li>
+          </ul>
+        </article>
+
+        <article class="lesson-card lesson-card--shadow reveal delay-2">
+          <div class="lesson-eyebrow">
+            <span class="lesson-pip lesson-pip--alert" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            </span>
+            What difficult managers showed me
+          </div>
+          <ul class="lesson-list lesson-list--terse">
+            <li>Public call-outs, blame-shifting and inconsistent standards destroy trust instantly.</li>
+            <li>When people feel judged rather than supported, they stop speaking up &mdash; even when they see major risks.</li>
+            <li>Ego-driven leadership makes teams performative instead of productive.</li>
+          </ul>
+        </article>
+
+        <article class="lesson-card lesson-card--commit reveal delay-3">
+          <div class="lesson-eyebrow">
+            <span class="lesson-pip lesson-pip--commit" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            My commitment as a leader
+          </div>
+          <ul class="lesson-list lesson-list--terse">
+            <li>Ask for feedback regularly and respond to it without defensiveness.</li>
+            <li>Frame mistakes as learning opportunities &mdash; &ldquo;what did we learn?&rdquo;, not &ldquo;who messed up?&rdquo;</li>
+            <li>Encourage dissent and reward people who challenge the status quo constructively.</li>
+            <li>Be transparent about my own uncertainties and decisions.</li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="ps-manifesto reveal delay-4">
+        <p class="ps-manifesto-body">Psychological safety isn&rsquo;t softness &mdash; it&rsquo;s the <em class="ps-multiplier">multiplier</em> that turns talented individuals into an unstoppable team.</p>
+        <p class="ps-manifesto-coda">My goal is to create the kind of environment where people feel safe enough to be bold.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       NOW — current chapter + active focus
+       Sits between the leadership philosophy and the social proof.
+       Opens with the through-line from 2012 to today, then two
+       cards on what I'm actively building and thinking about,
+       and closes on the manifesto line: "Won't stop."
+  ========================================================== -->
+  <section id="now">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow eyebrow--now">Now</div>
+        <h2 class="section-title">Same fire.</h2>
+        <p class="section-sub">From my first Microsoft Cloud Consultant role in 2012, through Azure cost initiatives at BCN and EMEA consumption work at Oracle, to leading the TechOps Practice at Akkodis today &mdash; every chapter has sharpened how I read the cloud and the business it funds. This one is where I&rsquo;m built for right now: turning cloud spend into strategic advantage while continuously refining who I am as a leader.</p>
+      </div>
+
+      <!-- FinOps stance — short pull-quote-style block between the
+           intro and the cards. Reuses the existing manifesto pattern so
+           it visually echoes the leadership section without competing. -->
+      <aside class="now-stance reveal delay-1">
+        <div class="now-stance-label">FinOps stance</div>
+        <p class="now-stance-body">Cloud cost work isn&rsquo;t about cutting spend &mdash; it&rsquo;s about <em class="now-stance-em">shared ownership and business accountability</em>. Cost allocation, unit economics and automation paired with psychological safety move teams from fearing cost conversations to confidently optimising for innovation <span class="lesson-plus">+</span> profitability.</p>
+        <p class="now-stance-coda">Finance, engineering and leadership speaking the same language. Owning outcomes together.</p>
+      </aside>
+
+      <div class="now-grid">
+        <article class="now-card now-card--building reveal delay-2">
+          <div class="now-card-head">
+            <span class="now-pip" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <h3 class="now-card-title">Building</h3>
+          </div>
+          <p class="now-card-desc">Practical tooling for the day-to-day work &mdash; the gaps I keep finding in Azure cost governance and FinOps enablement, turned into things teams can actually run.</p>
+          <ul class="now-tags">
+            <li>Cost allocation automation</li>
+            <li>Anomaly detection</li>
+            <li>Unit-economics reporting</li>
+            <li>AEP / AEM integrations</li>
+          </ul>
+        </article>
+
+        <article class="now-card now-card--thinking reveal delay-3">
+          <div class="now-card-head">
+            <span class="now-pip now-pip--alt" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10zM2 12h20"/></svg>
+            </span>
+            <h3 class="now-card-title">Thinking</h3>
+          </div>
+          <p class="now-card-desc">How the human layer multiplies the technical one &mdash; and where AI is rewriting both at the same time.</p>
+          <ul class="now-tags">
+            <li>AI-enhanced FinOps</li>
+            <li>Psychological safety</li>
+            <li>Systems thinking</li>
+            <li>Multi-cloud unit economics</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="now-coda reveal delay-4">Won&rsquo;t&nbsp;stop.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TESTIMONIALS / RECOMMENDATIONS
+       CUSTOMIZE: Replace each <p class="quote-body"> and author block
+       with a real LinkedIn recommendation. LinkedIn → your profile →
+       Recommendations section → copy each one verbatim and paste below.
+       Initials in .quote-avatar can be replaced with an <img> if preferred.
+  ========================================================== -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Recommendations</div>
+        <h2 class="section-title">What people say</h2>
+        <p class="section-sub">Selected recommendations from colleagues, customers and partners across Microsoft, SoftwareONE, Oracle, BT, Livingstone, BCN and beyond.</p>
+      </div>
+
+      <div class="testimonials">
+        <!-- 1. Yasir Masood — Akkodis, line manager, April 2026 -->
+        <div class="quote-card reveal">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal consistently demonstrates a calm and composed management style — easy to work with
+            while maintaining high standards across the team. He builds strong relationships,
+            encourages open communication, and fosters a culture of trust and collaboration. I'd
+            highly recommend him as a dependable and effective manager.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">YM</div>
+            <div class="quote-meta">
+              <span class="quote-name">Yasir Masood</span>
+              <span class="quote-role">DevOps Engineer · reported to Bimal at Akkodis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Max Blakemore — peer, October 2023 -->
+        <div class="quote-card reveal delay-1">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal was a great colleague who brought experience and knowledge. He was always keen to
+            share experiences and solutions, with mentoring-like actions to myself having less
+            experience. I highly recommend Bimal as a leader and colleague — someone looking to
+            advance others' skills as well as his own.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">MB</div>
+            <div class="quote-meta">
+              <span class="quote-name">Max Blakemore</span>
+              <span class="quote-role">Cloud Engineer / TAM · Wiz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. David Gemuenden — Livingstone, line manager, December 2021 -->
+        <div class="quote-card reveal delay-2">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal is a rare combination of technical proficiency and business savvy that you look
+            for in a stellar employee. He has a passion for what he does, is a self-starter and
+            requires very little direction. He handles pressure and adversity well, keeps his cool
+            under fire — I highly recommend him.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">DG</div>
+            <div class="quote-meta">
+              <span class="quote-name">David Gemuenden</span>
+              <span class="quote-role">Executive Leader · managed Bimal at Livingstone Group</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Saqib Khwaja — peer, April 2020 -->
+        <div class="quote-card reveal">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal and I worked together for 2½ years. The main reason we were successful on almost
+            every project is his ability to dive into the details with digital transformation. He is
+            the link between a customer's diverse and complex technical requirements — extremely
+            successful in driving adoption for modern workplace, cloud, Azure and M365.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">SK</div>
+            <div class="quote-meta">
+              <span class="quote-name">Saqib Khwaja</span>
+              <span class="quote-role">Enterprise Account Manager · Software Consultant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Ivo Vybiral — Microsoft same team, May 2019 -->
+        <div class="quote-card reveal delay-1">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            It is rare to come across a person one understands from the first moment. Bimal is one
+            of them — absolutely fantastic to work with. For him it is natural to navigate the
+            complexities of business, customer relationships and colleagues. He always goes the
+            extra mile.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">IV</div>
+            <div class="quote-meta">
+              <span class="quote-name">Ivo Vybiral</span>
+              <span class="quote-role">Ex-Microsoft Pre-Sales · same team</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Hugh Pope — peer, September 2017 -->
+        <div class="quote-card reveal delay-2">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Would recommend! Great breadth of technical and commercial knowledge as well as a keen
+            grasp of the Microsoft ecosystem.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">HP</div>
+            <div class="quote-meta">
+              <span class="quote-name">Hugh Pope</span>
+              <span class="quote-role">Enterprise Cyber Security · same team</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Amelia Bannerman — peer, September 2015 -->
+        <div class="quote-card reveal">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            His Microsoft product knowledge is second to none — incredibly agile and competent,
+            particularly across System Center, O365 and Azure. He gauges his audience and delivers
+            the appropriate level of information. One of the best Solution Sales consultants I've
+            worked with.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">AB</div>
+            <div class="quote-meta">
+              <span class="quote-name">Amelia Bannerman</span>
+              <span class="quote-role">Customer Success Manager · Flexera</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Jacob Neil — peer, June 2015 -->
+        <div class="quote-card reveal delay-1">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal is a great Microsoft specialist. He understands the data centre inside and out,
+            with great knowledge around System Center and Cloud. Hard-working, detail-oriented and
+            great with customers — point him in a direction and he takes off. I'd work with him
+            again without question.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">JN</div>
+            <div class="quote-meta">
+              <span class="quote-name">Jacob Neil</span>
+              <span class="quote-role">Presales Architect · Bytes Software Services</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Harry Lowton — peer, November 2014 -->
+        <div class="quote-card reveal delay-2">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="quote-body">
+            Bimal is consistently progressing as a solution professional, helping companies
+            understand the value of technology to reach their business goals. He has shown great
+            determination to learn across multiple technology vendors, resulting in consultative
+            opinions on what's best fit for the company in hand.
+          </p>
+          <div class="quote-author">
+            <div class="quote-avatar">HL</div>
+            <div class="quote-meta">
+              <span class="quote-name">Harry Lowton</span>
+              <span class="quote-role">Helping customers navigate Microsoft Azure</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SCHEDULE — Cal.com inline booking widget
+       Visitors pick a slot here; bookings auto-create iCloud
+       calendar events for Bimal (via Cal.com → Apple Calendar
+       integration, set up once in Cal.com's settings).
+
+       SETUP (one-time):
+         1. Sign up at https://cal.com (free)
+         2. Settings → Connected calendars → Apple Calendar
+            → Sign in with your Apple ID + app-specific password
+         3. Create a "30 minute meeting" event type
+         4. Note your booking link slug (e.g. "bimal-mohanan/30min")
+         5. Replace YOUR-CAL-USERNAME/30min in data-cal-link below
+  ========================================================== -->
+  <section id="schedule">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Book a call</div>
+        <h2 class="section-title">Find a time that works</h2>
+        <p class="section-sub">Pick a slot below — the meeting drops straight into my iCloud calendar and you'll get a confirmation with the dial-in or location.</p>
+      </div>
+
+      <div class="schedule-perks reveal delay-1">
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="perk-text">
+            <span class="perk-title">Live availability</span>
+            <span class="perk-sub">No back-and-forth emails</span>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="perk-text">
+            <span class="perk-title">Auto time-zone</span>
+            <span class="perk-sub">Adjusts to where you are</span>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="perk-text">
+            <span class="perk-title">Instant confirmation</span>
+            <span class="perk-sub">Calendar invite on both sides</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-card reveal delay-2">
+        <!-- Cal.com inline target. data-cal-link / data-cal-origin / data-cal-embed-src
+             are read by the vendored loader script. Wired to the EU instance. -->
+        <div class="cal-frame">
+          <div id="cal-inline"
+               data-cal-link="mohanan/30-catch-up"
+               data-cal-origin="https://www.cal.eu"
+               data-cal-embed-src="https://app.cal.eu/embed/embed.js"
+               style="width:100%;height:100%;min-height:640px;">
+            <div class="cal-loading">
+              <div class="cal-loading-spinner"></div>
+              <span>Loading calendar…</span>
+            </div>
+          </div>
+        </div>
+        <p class="cal-fallback reveal delay-3">
+          Embed not loading?
+          <a href="https://cal.com/mohanan/30-catch-up" target="_blank" rel="noopener noreferrer">Book a 30-min call directly &rarr;</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT
+       CUSTOMIZE: Phone, email, LinkedIn, web URLs.
+       The phone uses tel: which dials directly on mobile.
+  ========================================================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Get in touch</div>
+        <h2 class="section-title">Let's build something resilient.</h2>
+        <p class="section-sub">Open to cloud leadership, advisory and senior consulting engagements across Microsoft Azure, hybrid cloud and enterprise managed services.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact cards (direct links) -->
+        <div class="contact-cards">
+
+          <!-- Mobile — tel: opens dialler on iOS / Android -->
+          <a href="tel:+447301288711" class="contact-card reveal">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="contact-body">
+              <span class="contact-label">Mobile</span>
+              <span class="contact-val">+44 7301 288 711</span>
+            </div>
+          </a>
+
+          <a href="/cdn-cgi/l/email-protection#ceaca7a3afa28ea3a1a6afa0afa0e0bba5" class="contact-card reveal delay-1">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-body">
+              <span class="contact-label">Email</span>
+              <span class="contact-val"><span class="__cf_email__" data-cfemail="22404b4f434e624f4d4a434c434c0c5749">[email&#160;protected]</span></span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/bimalmohanan/" target="_blank" rel="noopener" class="contact-card reveal delay-2">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 11.01-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            </div>
+            <div class="contact-body">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">/in/bimalmohanan</span>
+            </div>
+          </a>
+
+          <a href="https://mohanan.uk" class="contact-card reveal delay-3">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div class="contact-body">
+              <span class="contact-label">Web</span>
+              <span class="contact-val">mohanan.uk</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Contact form — wired to Web3Forms.
+             Submissions are POSTed to Web3Forms which then emails Bimal at
+             bimal@mohanan.uk. No backend / server required.
+
+             SETUP (one-time, 90 seconds):
+               1. Go to https://web3forms.com/
+               2. Enter bimal@mohanan.uk → "Create Access Key"
+               3. Check your email, copy the access key
+               4. Replace WEB3FORMS_ACCESS_KEY below with the key
+             Free tier: 250 submissions / month. Spam protection included. -->
+        <form class="contact-form-card reveal delay-2"
+              id="contactForm"
+              action="https://api.web3forms.com/submit"
+              method="POST">
+
+          <!-- Web3Forms config — keyed to bimal@mohanan.uk -->
+          <input type="hidden" name="access_key" value="114fc5a6-55ac-4e98-88f3-d92abdea0f11" />
+          <input type="hidden" name="subject" value="New message from mohanan.uk" />
+          <input type="hidden" name="from_name" value="mohanan.uk portfolio" />
+          <input type="hidden" name="redirect" value="false" />
+
+          <!-- Honeypot — invisible to humans, bots auto-fill it -->
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" />
+
+          <h3>Send a message</h3>
+          <p>Drop a few lines and I'll come back to you within 48 hours.</p>
+
+          <div class="field">
+            <label for="cname">Name</label>
+            <input id="cname" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="cemail">Email</label>
+            <input id="cemail" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" name="message" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="contactSubmit" style="width: 100%; justify-content: center;">
+            Send Message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          © <span id="year">2026</span> Bimal Mohanan · Crafted in the UK
+        </div>
+        <div class="footer-socials">
+          <a class="social" href="https://www.linkedin.com/in/bimalmohanan/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 11.01-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a class="social" href="/cdn-cgi/l/email-protection#cdafa4a0aca18da0a2a5aca3aca3e3b8a6" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a class="social" href="tel:+447301288711" aria-label="Phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // =====================================================================
+    // INTERACTIONS — kept lightweight, vanilla, no dependencies.
+    // =====================================================================
+
+    // 1) Sticky nav: darken on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 2) Mobile menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navIcon = document.getElementById('navIcon');
+    const ICON_MENU = '<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>';
+    const ICON_X    = '<line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>';
+
+    const setMenu = (open) => {
+      mobileMenu.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navIcon.innerHTML = open ? ICON_X : ICON_MENU;
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    navToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+    mobileMenu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+    // 3) Reveal-on-scroll using IntersectionObserver.
+    //    Any element with class .reveal fades in when 12% visible.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // 4) Auto-update the footer year so we never serve stale copyright.
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 5) Smooth-scroll for in-page anchors — built-in via CSS,
+    //    but we also close the mobile menu when navigating.
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) setMenu(false);
+      });
+    });
+
+    // 6) Subtle magnetic effect for primary CTAs on desktop.
+    //    Skipped on touch devices to avoid jank.
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    if (!isTouch) {
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px) translateY(-2px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+      });
+    }
+
+    // 7) Contact form — async submit to Web3Forms with inline status.
+    //    Falls back gracefully on network errors (user can email directly).
+    const contactForm = document.getElementById('contactForm');
+    const formStatus  = document.getElementById('formStatus');
+    const submitBtn   = document.getElementById('contactSubmit');
+
+    if (contactForm && formStatus && submitBtn) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Refuse to submit if the access key is still the placeholder.
+        const accessKey = contactForm.querySelector('input[name="access_key"]').value;
+        if (accessKey === 'WEB3FORMS_ACCESS_KEY') {
+          formStatus.className = 'form-status is-error';
+          formStatus.textContent = 'Contact form not yet configured. Email bimal@mohanan.uk directly.';
+          return;
+        }
+
+        const originalLabel = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending…';
+        formStatus.className = 'form-status is-pending';
+        formStatus.textContent = 'Sending your message…';
+
+        try {
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' },
+          });
+          const data = await res.json().catch(() => ({}));
+
+          if (res.ok && data.success) {
+            formStatus.className = 'form-status is-success';
+            formStatus.textContent = "Thanks — your message is on its way. I'll reply within 48 hours.";
+            contactForm.reset();
+          } else {
+            formStatus.className = 'form-status is-error';
+            formStatus.textContent = (data && data.message) || 'Something went wrong. Email bimal@mohanan.uk directly.';
+          }
+        } catch (err) {
+          formStatus.className = 'form-status is-error';
+          formStatus.textContent = 'Network error. Email bimal@mohanan.uk directly.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalLabel;
+        }
+      });
+    }
+
+    // 8) Cal.com inline embed loader (vendored). Booted only when the
+    //    Schedule section is in view, so first paint isn't blocked.
+    //    Origin + embed-src are read from data attributes so the embed
+    //    works equally with cal.com or the EU instance cal.eu.
+    //    Bookings sync to iCloud calendar via Cal.com's Apple Calendar
+    //    integration (set up once in Cal.com settings).
+    const calEl = document.getElementById('cal-inline');
+    if (calEl) {
+      const CAL_USERNAME  = calEl.dataset.calLink;       // e.g. "mohanan/30-catch-up"
+      const CAL_ORIGIN    = calEl.dataset.calOrigin    || 'https://cal.com';
+      const CAL_EMBED_SRC = calEl.dataset.calEmbedSrc || 'https://app.cal.com/embed/embed.js';
+
+      const bootCal = () => {
+        if (window.__calBooted) return;
+        window.__calBooted = true;
+
+        // If the placeholder is still in place, bail and show the help message.
+        if (!CAL_USERNAME || CAL_USERNAME.includes('YOUR-CAL-USERNAME')) {
+          const loading = calEl.querySelector('.cal-loading');
+          if (loading) {
+            loading.innerHTML = '<div style="text-align:center;padding:0 24px;line-height:1.6;">' +
+              '<div style="color:var(--accent-cyan); font-weight:600; margin-bottom:8px;">Cal.com not yet configured</div>' +
+              '<div style="color:var(--text-3); font-size:12px;">Sign up at cal.com and set <code style="background:rgba(0,217,255,0.1);padding:2px 6px;border-radius:4px;">data-cal-link</code> on this element.</div>' +
+              '</div>';
+          }
+          return;
+        }
+
+        (function (C, A, L) {
+          let p = function (a, ar) { a.q.push(ar); };
+          let d = C.document;
+          C.Cal = C.Cal || function () {
+            let cal = C.Cal; let ar = arguments;
+            if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+            if (ar[0] === L) {
+              const api = function () { p(api, arguments); };
+              const namespace = ar[1]; api.q = api.q || [];
+              if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); }
+              else p(cal, ar); return;
+            }
+            p(cal, ar);
+          };
+        })(window, CAL_EMBED_SRC, 'init');
+
+        Cal('init', 'mohanan-call', { origin: CAL_ORIGIN });
+        Cal.ns['mohanan-call']('inline', {
+          elementOrSelector: '#cal-inline',
+          config: { layout: 'month_view', theme: 'dark' },
+          calLink: CAL_USERNAME,
+        });
+        Cal.ns['mohanan-call']('ui', {
+          theme: 'dark',
+          cssVarsPerTheme: {
+            dark: { 'cal-brand': '#00d9ff' },
+          },
+          hideEventTypeDetails: false,
+          layout: 'month_view',
+        });
+
+        // Watch for the iframe Cal injects, then mark the frame ready so the
+        // loading spinner fades out. Cal manages height via postMessage; we
+        // just need to reveal the iframe once it's in the DOM.
+        const frameEl = calEl.closest('.cal-frame');
+        const watcher = new MutationObserver(() => {
+          if (calEl.querySelector('iframe')) {
+            frameEl?.classList.add('is-ready');
+            watcher.disconnect();
+          }
+        });
+        watcher.observe(calEl, { childList: true, subtree: true });
+        // Safety: also flip ready after 4s in case the iframe loads silently.
+        setTimeout(() => frameEl?.classList.add('is-ready'), 4000);
+      };
+
+      // Lazy-boot when the embed scrolls into view.
+      const calObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            bootCal();
+            calObserver.disconnect();
+          }
+        });
+      }, { rootMargin: '200px 0px' });
+      calObserver.observe(calEl);
+    }
+  </script>
+</body>
+</html>
