@@ -35,6 +35,10 @@ node_modules/
 .wrangler/
 .dev.vars
 
+# Claude Code per-project config (preview server, hooks, permissions)
+# Local-only; not part of the deployed site.
+.claude/
+
 # Build artifacts
 dist/
 build/

@@ -1,0 +1,52 @@
+# Cloudflare Pages — response headers.
+# Reference: https://developers.cloudflare.com/pages/configuration/headers/
+# Pages already sets: server, content-type, cf-ray, x-content-type-options:nosniff,
+# referrer-policy:strict-origin-when-cross-origin. This file layers on the rest.
+
+# ---------- Global (every response) ----------
+/*
+  # Force HTTPS for two years; safe — every subdomain is already on Cloudflare.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  # Block clickjacking — the portfolio is never legitimately embedded.
+  X-Frame-Options: SAMEORIGIN
+  # Belt-and-braces (modern equivalent of the above).
+  Content-Security-Policy: frame-ancestors 'self'
+  # Deny browser APIs the site never asks for. Quiet for users, signal for auditors.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  # Same-origin isolation, so window.opener etc. can't leak across origins.
+  Cross-Origin-Opener-Policy: same-origin
+
+# ---------- Static assets — cache for one week ----------
+# Pages defaults to 4h. Photo / favicons / brand kit only change on deploy, and the
+# deploy script now triggers a Cloudflare cache purge, so a longer max-age is safe.
+# 604800 = 7 days.
+
+/*.svg
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.png
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.jpg
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.jpeg
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.webp
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.ico
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.js
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.woff
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/*.woff2
+  Cache-Control: public, max-age=2592000, must-revalidate

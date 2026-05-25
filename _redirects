@@ -1,0 +1,8 @@
+# Cloudflare Pages — redirect rules.
+# Reference: https://developers.cloudflare.com/pages/configuration/redirects/
+# Format: <source> <destination> <status>   ( "!" makes it force-apply over a real file )
+
+# Canonicalise www → apex so search engines don't split link equity between
+# https://mohanan.uk/ and https://www.mohanan.uk/. The apex is the canonical
+# everywhere on the portfolio (nav, OG metadata, JSON-LD, share links).
+https://www.mohanan.uk/*  https://mohanan.uk/:splat  301!
