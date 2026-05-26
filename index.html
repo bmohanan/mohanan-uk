@@ -1119,24 +1119,10 @@
        (configured one-time inside Cal.com → Apps → Apple Calendar).
     ===================================================================== */
     .schedule-card {
-      padding: 12px;
-      border-radius: var(--radius-lg);
-      background: var(--glass-bg-strong);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border-strong);
-      box-shadow: var(--shadow-card);
+      /* No outer chrome — the cal-frame carries its own background and
+         the section already breathes via #schedule padding. Keeping the
+         element so the .reveal animation has its target. */
       position: relative;
-      overflow: hidden;
-    }
-    .schedule-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0,217,255,0.08), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(177,92,255,0.08), transparent 60%);
-      pointer-events: none;
     }
     .cal-frame {
       position: relative;
