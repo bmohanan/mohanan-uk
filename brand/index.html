@@ -261,6 +261,65 @@
   .mini-logos > div.d { background: var(--bmc-bg); }
   .mini-logos > div.p { background: var(--bmc-paper); border-color: var(--bmc-line-ink); }
 
+  /* native-files download band */
+  .native {
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    overflow: hidden;
+  }
+  .native > header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255,255,255,.02);
+    gap: 16px;
+  }
+  .native > header h3 {
+    margin: 0;
+    font-family: var(--bmc-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--bmc-fg-muted); font-weight: 500;
+  }
+  .native > header h3 b { color: var(--bmc-fg); font-weight: 600; }
+  .native .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--bmc-line);
+  }
+  .native .file {
+    padding: 24px;
+    border-right: 1px solid var(--bmc-line);
+    display: flex; flex-direction: column; gap: 12px;
+    text-decoration: none; color: inherit;
+    transition: background .15s;
+    min-height: 200px;
+  }
+  .native .file:last-child { border-right: none; }
+  .native .file:hover { background: var(--bmc-surface-2); }
+  .native .file .top { display: flex; align-items: center; justify-content: space-between; }
+  .native .file .ext {
+    font-family: var(--bmc-mono); font-size: 10px;
+    padding: 3px 9px; border-radius: 4px;
+    letter-spacing: .06em; font-weight: 600;
+  }
+  .native .file .ext.docx { background: rgba(46,108,168,.18); color: #7ab8ff; border: 1px solid rgba(46,108,168,.3); }
+  .native .file .ext.xlsx { background: rgba(34,134,58,.18); color: #6ddc8a; border: 1px solid rgba(34,134,58,.3); }
+  .native .file .ext.pptx { background: rgba(196,87,40,.18); color: #ffa477; border: 1px solid rgba(196,87,40,.3); }
+  .native .file .dl {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--bmc-mono); font-size: 11px;
+    color: var(--bmc-cyan);
+  }
+  .native .file h4 {
+    margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em;
+  }
+  .native .file p {
+    margin: 0; font-size: 13px; color: var(--bmc-fg-muted); line-height: 1.5;
+  }
+  .native .file .app-note {
+    font-family: var(--bmc-mono); font-size: 10px; color: var(--bmc-fg-dim);
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--bmc-line-soft);
+  }
+
   /* —— footer —— */
   footer.kit {
     margin-top: 96px;
@@ -269,9 +328,23 @@
     display: flex; justify-content: space-between;
     font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim);
   }
+
+  /* BMC convention — Centered Title + Justified Paragraph (2026-05-26) */
+  h1, h2 { text-align: center; }
+  p { text-align: justify; hyphens: auto; text-wrap: pretty; }
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="tile-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6a3df5"/>
+      <stop offset="55%"  stop-color="#d136e6"/>
+      <stop offset="100%" stop-color="#3a7df5"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <main>
 
@@ -451,10 +524,52 @@
     </div>
   </section>
 
-  <!-- ============== 05 TEMPLATES ============== -->
+  <!-- ============== 05 NATIVE FILES ============== -->
   <section class="sec">
     <header>
-      <h2>// 05 — Templates</h2>
+      <h2>// 05 — Native files</h2>
+      <span class="idx">brand/native</span>
+    </header>
+    <div class="native">
+      <header>
+        <h3>// <b>Open straight in Word, PowerPoint & Excel</b> · branded, formulas live, logo embedded</h3>
+      </header>
+      <div class="grid">
+        <a class="file" href="BMC Master Letter.docx" download>
+          <div class="top">
+            <span class="ext docx">.DOCX</span>
+            <span class="dl">⤓ download →</span>
+          </div>
+          <h4>BMC Master Letter</h4>
+          <p>A4 letterhead with the ~bmc logo embedded, sender block, scope-of-work box, commercial summary table and italic sign-off. Edit text directly in Word.</p>
+          <span class="app-note">// opens in Microsoft Word · Apple Pages · Google Docs</span>
+        </a>
+        <a class="file" href="BMC Master Deck.pptx" download>
+          <div class="top">
+            <span class="ext pptx">.PPTX</span>
+            <span class="dl">⤓ download →</span>
+          </div>
+          <h4>BMC Master Deck</h4>
+          <p>7-slide pitch deck — title, divider, practices, two-clouds, numbers, quote, close. Editable text, speaker notes attached, 1920 × 1080.</p>
+          <span class="app-note">// opens in Microsoft PowerPoint · Apple Keynote · Google Slides</span>
+        </a>
+        <a class="file" href="BMC Master Cost Model.xlsx" download>
+          <div class="top">
+            <span class="ext xlsx">.XLSX</span>
+            <span class="dl">⤓ download →</span>
+          </div>
+          <h4>BMC Master Cost Model</h4>
+          <p>Branded Azure + AWS cost-review workbook. Live formulas (annual = monthly × 12, % of spend, totals). KPIs, recommendations, RIs &amp; Savings Plans.</p>
+          <span class="app-note">// opens in Microsoft Excel · Apple Numbers · Google Sheets</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 06 TEMPLATES (HTML versions) ============== -->
+  <section class="sec">
+    <header>
+      <h2>// 06 — Templates</h2>
       <span class="idx">brand/templates</span>
     </header>
     <div class="templates">
@@ -559,6 +674,58 @@
         <div class="tag">// demo</div>
         <h3>Company Overview</h3>
         <p>One-pager profile for prospects — practices, platforms, engagement models, contact. Print-to-PDF ready.</p>
+        <div class="open"><span>open</span><span>→</span></div>
+      </a>
+
+      <a class="tpl" href="Icons.html">
+        <div class="tpl-art">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:86%;height:78%;">
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#tile-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-1.7-7.6A5 5 0 0 1 15.1 9a4 4 0 0 1 .9 7.9"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#tile-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M9.5 9.5a2.5 2.5 0 0 1 2.5-1c1.5 0 2.5.8 2.5 2s-1 1.8-2.5 1.8c-1.5 0-2.5.8-2.5 2s1 2 2.5 2a2.5 2.5 0 0 0 2.5-1"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#tile-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#tile-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M21 7h-5"/><path d="M21 7v5"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-gradient);display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-gradient);display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 0 5 2 5 6"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-gradient);display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M9 10v10"/></svg>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-gradient);display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c4 3 6 6 6 10v6l-3-2-3 2-3-2-3 2v-6c0-4 2-7 6-10z"/><circle cx="12" cy="10" r="1.5"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="tag">// system</div>
+        <h3>Icon Set</h3>
+        <p>~120 stroke icons covering cloud, FinOps, delivery, security, data &amp; more. Three render modes (line / gradient / badge). Click to copy SVG.</p>
+        <div class="open"><span>open</span><span>→</span></div>
+      </a>
+
+      <a class="tpl" href="Wallpapers.html">
+        <div class="tpl-art">
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:6px;width:86%;height:78%;">
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+              <div style="font-family:var(--bmc-serif);font-style:italic;font-weight:500;font-size:18px;line-height:.95;text-align:center;background:var(--bmc-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;">pay back<br/>the promise.</div>
+            </div>
+            <div style="border-radius:5px;background:var(--bmc-bg);border:1px solid var(--bmc-line);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--bmc-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--bmc-mono);font-weight:500;font-size:11px;letter-spacing:-.04em;"><span style="opacity:.72;">~</span>bmc</div>
+            </div>
+          </div>
+        </div>
+        <div class="tag">// daily shuffle</div>
+        <h3>Wallpapers</h3>
+        <p>Six wallpaper designs at full Mac &amp; iPhone resolution. Quote-style typography on the BMC gradient — shuffle a fresh one every day.</p>
         <div class="open"><span>open</span><span>→</span></div>
       </a>
 

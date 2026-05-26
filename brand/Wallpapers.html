@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Wallpapers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-bg); color: var(--bmc-fg); font-family: var(--bmc-sans); }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 56px 48px 96px; }
+
+  /* breadcrumb */
+  .crumb {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 24px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 56px;
+    font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-dim);
+  }
+  .crumb a { color: var(--bmc-cyan); text-decoration: none; }
+  .crumb .here { color: var(--bmc-fg); }
+
+  h1.page {
+    font-size: 48px; font-weight: 700; letter-spacing: -.025em;
+    margin: 0 0 14px; line-height: 1.05;
+  }
+  h1.page em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; }
+  .lede { color: var(--bmc-fg-muted); font-size: 17px; max-width: 60ch; line-height: 1.55; margin: 0 0 48px; }
+
+  /* device tabs */
+  .tabs {
+    display: flex; gap: 6px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--bmc-line);
+    padding-bottom: 16px;
+  }
+  .tab {
+    font-family: var(--bmc-mono); font-size: 13px;
+    color: var(--bmc-fg-muted);
+    background: transparent;
+    border: 1px solid var(--bmc-line);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tab:hover { color: var(--bmc-fg); }
+  .tab.active {
+    background: var(--bmc-surface);
+    color: var(--bmc-fg);
+    border-color: rgba(255,255,255,.18);
+  }
+  .tab .dim { color: var(--bmc-fg-dim); margin-left: 8px; }
+
+  /* gallery */
+  .gallery { display: grid; gap: 24px; }
+  body[data-device="mac"]    .gallery { grid-template-columns: repeat(2, 1fr); }
+  body[data-device="iphone"] .gallery { grid-template-columns: repeat(3, 1fr); }
+
+  .card {
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .preview {
+    position: relative;
+    border-radius: var(--bmc-r);
+    overflow: hidden;
+    background: var(--bmc-bg);
+    width: 100%;
+  }
+  body[data-device="mac"]    .preview { aspect-ratio: 3456/2234; }
+  body[data-device="iphone"] .preview { aspect-ratio: 1320/2868; }
+
+  /* the actual wallpaper renders at native res; preview scales it via transform */
+  .preview .wp {
+    position: absolute; top: 0; left: 0;
+    transform-origin: top left;
+  }
+
+  .card-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px;
+  }
+  .card-foot .meta {
+    display: flex; flex-direction: column; gap: 2px;
+    font-family: var(--bmc-mono); font-size: 11px;
+  }
+  .card-foot .meta b { color: var(--bmc-fg); font-weight: 500; font-size: 13px; font-family: var(--bmc-sans); }
+  .card-foot .meta span { color: var(--bmc-fg-dim); }
+  .dl-btn {
+    font-family: var(--bmc-mono); font-size: 12px;
+    color: #fff;
+    background: var(--bmc-gradient);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    box-shadow: 0 6px 20px -8px rgba(170,60,230,.5);
+  }
+  .dl-btn:disabled { opacity: .5; cursor: wait; }
+
+  /* offscreen render area used for the high-res capture */
+  .render-stage {
+    position: fixed;
+    left: -200vw;
+    top: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ===================================================
+     WALLPAPER STYLES (sized via container's width/height)
+     =================================================== */
+
+  /* shared */
+  .wp {
+    font-family: var(--bmc-sans);
+    color: var(--bmc-fg);
+    background: var(--bmc-bg);
+    overflow: hidden;
+    position: relative;
+  }
+  .wp .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 0);
+    background-size: 2.4% 2.4%;
+    pointer-events: none;
+  }
+  .wp .chrome-tl {
+    position: absolute;
+    top: 4%; left: 4%;
+    display: flex; align-items: center; gap: 1.2%;
+    z-index: 2;
+  }
+  .wp .chrome-tl .name {
+    font-family: var(--bmc-sans);
+    font-weight: 600;
+    font-size: 1.6cqi;
+    letter-spacing: -.01em;
+  }
+  .wp .chrome-tl .tag {
+    font-family: var(--bmc-mono);
+    font-size: 1.0cqi;
+    color: var(--bmc-fg-muted);
+  }
+  .wp .chrome-br {
+    position: absolute; bottom: 4%; right: 4%;
+    display: flex; gap: 1.5%; align-items: center;
+    font-family: var(--bmc-mono); font-size: 1.0cqi;
+    color: var(--bmc-fg-dim);
+    z-index: 2;
+  }
+  .wp .chrome-br .dot {
+    width: .8cqi; height: .8cqi; border-radius: 50%;
+    background: var(--bmc-green); box-shadow: 0 0 1cqi var(--bmc-green);
+  }
+  .wp .grad-rule {
+    position: absolute; bottom: 4%; left: 4%; right: 28%;
+    height: .1cqi;
+    background: linear-gradient(90deg, var(--bmc-grad-1), var(--bmc-grad-2) 50%, var(--bmc-grad-3));
+    opacity: .35;
+  }
+
+  /* on the wallpaper, scale the bmc-badge based on container size */
+  .wp .bmc-badge {
+    width: 5.5cqi; height: 5.5cqi; border-radius: 1.2cqi;
+    font-size: 1.6cqi; font-family: var(--bmc-mono);
+    font-weight: 500; letter-spacing: -.04em;
+    box-shadow: 0 1cqi 3cqi -.5cqi rgba(170, 60, 230, .55), 0 0 0 .1cqi rgba(255,255,255,.06) inset;
+  }
+
+  /* ===== 01 — Pay Back (big phrase, centered) ===== */
+  .wp-payback {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wp-payback h1 {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: .95;
+    font-size: 12cqi;
+    max-width: 90%;
+  }
+  .wp-payback h1 em {
+    font-family: var(--bmc-serif); font-style: italic; font-weight: 500;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .wp-payback h1 .small {
+    display: block;
+    margin-top: 3cqi;
+    font-family: var(--bmc-mono);
+    font-weight: 500;
+    font-size: 1.4cqi;
+    color: var(--bmc-cyan);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  /* portrait override */
+  body[data-device="iphone"] .wp-payback h1 { font-size: 18cqi; }
+  body[data-device="iphone"] .wp-payback h1 .small { font-size: 2.4cqi; margin-top: 5cqi; }
+
+  /* ===== 02 — Monogram ===== */
+  .wp-mono {
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(60% 60% at 50% 50%, rgba(106,61,245,.18) 0%, transparent 70%),
+      var(--bmc-bg);
+  }
+  .wp-mono .mega {
+    width: 50cqi; height: 50cqi;
+    border-radius: 10cqi;
+    background: var(--bmc-gradient);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--bmc-mono); font-weight: 500;
+    font-size: 14cqi; letter-spacing: -.04em;
+    box-shadow:
+      0 4cqi 16cqi -2cqi rgba(170, 60, 230, .6),
+      0 0 0 .2cqi rgba(255,255,255,.08) inset;
+    position: relative; overflow: hidden;
+  }
+  .wp-mono .mega::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+  }
+  .wp-mono .mega .t { opacity: .72; margin-right: .08em; }
+  body[data-device="iphone"] .wp-mono .mega { width: 70cqi; height: 70cqi; font-size: 20cqi; border-radius: 16cqi; }
+
+  /* ===== 03 — Big C ===== */
+  .wp-c {
+    display: flex; align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 6% 4%;
+    box-sizing: border-box;
+  }
+  .wp-c .c {
+    font-family: var(--bmc-mono);
+    font-weight: 500;
+    font-size: 88cqi;
+    line-height: .8;
+    letter-spacing: -.04em;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 4cqi 8cqi rgba(170,60,230,.25));
+    margin: 0;
+  }
+  .wp-c .copy {
+    position: absolute; top: 12%; left: 6%;
+    font-family: var(--bmc-serif); font-style: italic; font-weight: 500;
+    font-size: 6cqi;
+    line-height: 1.05;
+    max-width: 50%;
+    text-wrap: balance;
+  }
+  .wp-c .copy span { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  body[data-device="iphone"] .wp-c { align-items: center; justify-content: center; }
+  body[data-device="iphone"] .wp-c .c { font-size: 120cqi; }
+  body[data-device="iphone"] .wp-c .copy { top: 14%; left: 8%; right: 8%; max-width: none; font-size: 9cqi; }
+
+  /* ===== 04 — Triad (Strategy / Delivery / Fluency) ===== */
+  .wp-triad {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 6%;
+    box-sizing: border-box;
+  }
+  .wp-triad .line {
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: .95;
+    font-size: 13cqi;
+    margin: 0;
+  }
+  .wp-triad .line em {
+    font-family: var(--bmc-serif); font-style: italic; font-weight: 500;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .wp-triad .line.r { text-align: right; color: var(--bmc-fg-muted); }
+  .wp-triad .line.l { text-align: left; }
+  body[data-device="iphone"] .wp-triad .line { font-size: 18cqi; text-align: left !important; }
+  body[data-device="iphone"] .wp-triad { gap: 3cqi; }
+
+  /* ===== 05 — Terminal scroll ===== */
+  .wp-term {
+    padding: 6% 6% 4%;
+    box-sizing: border-box;
+    font-family: var(--bmc-mono);
+  }
+  .wp-term pre {
+    margin: 0;
+    font-size: 2cqi;
+    line-height: 1.55;
+    color: var(--bmc-fg-2);
+    font-family: var(--bmc-mono);
+    white-space: pre-wrap;
+  }
+  .wp-term .prompt { color: var(--bmc-cyan); }
+  .wp-term .out    { color: var(--bmc-fg-muted); }
+  .wp-term .grad-line {
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-weight: 600;
+  }
+  .wp-term .blink {
+    display: inline-block; width: 1cqi; height: 2cqi;
+    background: var(--bmc-cyan);
+    animation: blink 1s steps(2) infinite;
+    vertical-align: -.25cqi;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  body[data-device="iphone"] .wp-term pre { font-size: 3.4cqi; }
+
+  /* ===== 06 — Chip cloud ===== */
+  .wp-chips {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .wp-chips .chip {
+    position: absolute;
+    font-family: var(--bmc-mono);
+    font-size: 1.4cqi;
+    color: var(--bmc-fg-2);
+    padding: .6cqi 1.6cqi;
+    border-radius: 999px;
+    background: rgba(255,255,255,.02);
+    border: 1px solid var(--bmc-line);
+  }
+  body[data-device="iphone"] .wp-chips .chip { font-size: 2.6cqi; padding: 1.2cqi 2.6cqi; }
+  .wp-chips .center {
+    max-width: 60%;
+    text-align: center;
+    font-family: var(--bmc-serif); font-style: italic; font-weight: 500;
+    font-size: 6cqi;
+    line-height: 1.1;
+    z-index: 1;
+    background: var(--bmc-gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  body[data-device="iphone"] .wp-chips .center { font-size: 10cqi; max-width: 80%; }
+  .wp-chips .center-sub {
+    display: block;
+    margin-top: 2cqi;
+    font-family: var(--bmc-mono);
+    font-style: normal;
+    font-size: 1.2cqi;
+    color: var(--bmc-cyan);
+    -webkit-text-fill-color: var(--bmc-cyan);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  body[data-device="iphone"] .wp-chips .center-sub { font-size: 2.2cqi; }
+
+  /* Make the wallpapers use container queries (for cqi units) */
+  .wp { container-type: size; }
+
+
+  /* BMC convention — Centered Title + Justified Paragraph (2026-05-26) */
+  h1, h2 { text-align: center; }
+  p { text-align: justify; hyphens: auto; text-wrap: pretty; }
+</style>
+</head>
+<body data-device="mac">
+
+<main>
+
+  <div class="crumb">
+    <span><a href="Brand Kit.html">brand-kit</a> / <span class="here">wallpapers</span></span>
+    <span>v1.0 · 25 May 2026</span>
+  </div>
+
+  <h1 class="page">Daily-shuffle <em>wallpapers</em>.</h1>
+  <p class="lede">Six BMC wallpapers — one per weekday plus a spare. Mac MBP-M5 native at 3456 × 2234, iPhone 17 Pro Max native at 1320 × 2868. Click <b style="color:var(--bmc-fg)">Download</b> on any preview to get the full-resolution PNG.</p>
+
+  <div class="tabs">
+    <button class="tab active" data-device="mac">MacBook Pro M5 <span class="dim">// 3456 × 2234</span></button>
+    <button class="tab" data-device="iphone">iPhone 17 Pro Max <span class="dim">// 1320 × 2868</span></button>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <p style="margin-top:32px;font-family:var(--bmc-mono);font-size:12px;color:var(--bmc-fg-dim);max-width:60ch;line-height:1.6;">
+    // Tip: on macOS, drop the six Mac files into <b style="color:var(--bmc-fg-2)">System Settings → Wallpaper → Add Photos &amp; Folder</b>, set the rotation to <b style="color:var(--bmc-fg-2)">every day</b>. On iOS, use <b style="color:var(--bmc-fg-2)">Settings → Wallpaper → Photo Shuffle</b> with the six iPhone images.
+  </p>
+
+</main>
+
+<!-- offscreen high-res render stage -->
+<div class="render-stage" id="renderStage"></div>
+
+<!-- html-to-image for canvas capture -->
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js"></script>
+
+<script>
+(() => {
+  const SIZES = {
+    mac:    { w: 3456, h: 2234, label: 'MBP-M5',           short: 'mac'    },
+    iphone: { w: 1320, h: 2868, label: 'iPhone 17 Pro Max', short: 'iphone' },
+  };
+
+  // Wallpaper designs — each returns HTML string for the wallpaper interior
+  const designs = [
+    {
+      id: 'payback',
+      title: 'Pay back.',
+      sub:   'Brand phrase · Fraunces italic gradient',
+      html: `
+        <div class="dots"></div>
+        <div class="chrome-tl">
+          <div class="bmc-badge"><span class="t">~</span>bmc</div>
+          <div><div class="name">Bimal Mohanan Consulting</div><div class="tag">// cloud · finops · ops</div></div>
+        </div>
+        <h1>Make the cloud<br/><em>pay back</em><br/>the promise.
+          <span class="small">// London · UK · open to the world</span>
+        </h1>
+        <div class="chrome-br"><span class="dot"></span><span>available · q3 2026</span></div>
+        <div class="grad-rule"></div>
+      `,
+      cls: 'wp-payback'
+    },
+    {
+      id: 'monogram',
+      title: '~bmc monogram',
+      sub:   'Primary mark, oversized & glowing',
+      html: `
+        <div class="dots"></div>
+        <div class="chrome-tl">
+          <div style="font-family:var(--bmc-mono);font-size:1.2cqi;color:var(--bmc-fg-muted);letter-spacing:.1em;">// PRIMARY MARK</div>
+        </div>
+        <div class="mega"><span class="t">~</span>bmc</div>
+        <div class="chrome-br"><span>Bimal Mohanan Consulting · mohanan.uk</span></div>
+        <div class="grad-rule"></div>
+      `,
+      cls: 'wp-mono'
+    },
+    {
+      id: 'big-c',
+      title: 'C (sub-mark)',
+      sub:   'Cloud · Consulting · in one letter',
+      html: `
+        <div class="dots"></div>
+        <div class="chrome-tl">
+          <div class="bmc-badge"><span class="t">~</span>bmc</div>
+          <div><div class="name">Bimal Mohanan Consulting</div><div class="tag">// the C is for cloud · consulting · commercial fluency</div></div>
+        </div>
+        <p class="copy">A cloud<br/>you can <span>afford</span><br/>to scale.</p>
+        <div class="c">C</div>
+        <div class="chrome-br"><span>mohanan.uk</span></div>
+      `,
+      cls: 'wp-c'
+    },
+    {
+      id: 'triad',
+      title: 'Strategy / Delivery / Fluency',
+      sub:   'Three-word manifesto, staggered',
+      html: `
+        <div class="dots"></div>
+        <div class="chrome-tl">
+          <div class="bmc-badge"><span class="t">~</span>bmc</div>
+          <div><div class="name">Bimal Mohanan Consulting</div><div class="tag">// three words on the desk every day</div></div>
+        </div>
+        <h2 class="line l">Strategy.</h2>
+        <h2 class="line r">Delivery.</h2>
+        <h2 class="line l"><em>Fluency.</em></h2>
+        <div class="chrome-br"><span class="dot"></span><span>available · q3 2026</span></div>
+        <div class="grad-rule"></div>
+      `,
+      cls: 'wp-triad'
+    },
+    {
+      id: 'terminal',
+      title: 'Terminal',
+      sub:   'Mock ~bmc shell session',
+      html: `
+        <div class="chrome-tl">
+          <div class="bmc-badge"><span class="t">~</span>bmc</div>
+          <div><div class="name">Bimal Mohanan Consulting</div><div class="tag">// zsh · bmc · 25 may 2026</div></div>
+        </div>
+        <pre>
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> whoami
+<span class="out">  →</span> Bimal Mohanan — principal · cloud transformation
+
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> cat ./mission.md
+<span class="out">  →</span> <span class="grad-line">Make hyperscalers pay back their promise.</span>
+
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> ls ./practice
+<span class="out">  →</span> strategy/   finops/   delivery/   leadership/
+
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> uptime
+<span class="out">  →</span> 15+ years in IT · £40m advised · 28% avg saving
+
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> echo $STATUS
+<span class="out">  →</span> available · q3 2026 · open to the world
+
+<span class="prompt">bmc@mohanan</span> ~ <span class="prompt">%</span> <span class="blink"></span></pre>
+        <div class="chrome-br"><span>mohanan.uk</span></div>
+      `,
+      cls: 'wp-term'
+    },
+    {
+      id: 'chips',
+      title: 'Chip cloud',
+      sub:   '~tags floating around the mission',
+      html: `
+        <div class="dots"></div>
+        <div class="chrome-tl">
+          <div class="bmc-badge"><span class="t">~</span>bmc</div>
+          <div><div class="name">Bimal Mohanan Consulting</div><div class="tag">// the surface area</div></div>
+        </div>
+        <span class="chip" style="top:18%; left:8%;">~ aws</span>
+        <span class="chip" style="top:24%; right:10%;">~ azure</span>
+        <span class="chip" style="top:36%; left:14%;">~ finops</span>
+        <span class="chip" style="top:62%; left:6%;">~ cost-optimisation</span>
+        <span class="chip" style="top:74%; right:8%;">~ delivery</span>
+        <span class="chip" style="top:46%; right:6%;">~ managed-services</span>
+        <span class="chip" style="bottom:18%; left:16%;">~ unit-economics</span>
+        <span class="chip" style="bottom:24%; right:16%;">~ leadership</span>
+        <span class="chip" style="top:38%; right:18%;">~ incident-review</span>
+        <span class="chip" style="top:80%; left:36%;">~ emea</span>
+        <span class="chip" style="top:14%; left:38%;">~ oracle</span>
+        <div class="center">
+          Make hyperscalers <br/>pay back their <br/>promise.
+          <span class="center-sub">// the bmc mission</span>
+        </div>
+        <div class="chrome-br"><span class="dot"></span><span>available · q3 2026</span></div>
+      `,
+      cls: 'wp-chips'
+    },
+  ];
+
+  const stage = document.getElementById('renderStage');
+  const gallery = document.getElementById('gallery');
+
+  function buildWallpaperElement(design, w, h) {
+    const wrap = document.createElement('div');
+    wrap.className = `wp ${design.cls}`;
+    wrap.style.width = w + 'px';
+    wrap.style.height = h + 'px';
+    wrap.innerHTML = design.html;
+    return wrap;
+  }
+
+  function renderGallery() {
+    const device = document.body.dataset.device;
+    const { w, h } = SIZES[device];
+    gallery.innerHTML = '';
+
+    designs.forEach((d, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="preview" data-id="${d.id}"></div>
+        <div class="card-foot">
+          <div class="meta"><b>${String(idx+1).padStart(2,'0')} · ${d.title}</b><span>${d.sub}</span></div>
+          <button class="dl-btn" data-id="${d.id}">⤓ Download</button>
+        </div>
+      `;
+      gallery.appendChild(card);
+
+      // build the wallpaper inside the preview at full size, then scale down
+      const previewBox = card.querySelector('.preview');
+      const wp = buildWallpaperElement(d, w, h);
+      previewBox.appendChild(wp);
+      // measure preview width once layout settles
+      requestAnimationFrame(() => {
+        const previewW = previewBox.clientWidth;
+        const scale = previewW / w;
+        wp.style.transform = `scale(${scale})`;
+      });
+
+      // download handler
+      card.querySelector('.dl-btn').addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true;
+        btn.textContent = '… rendering';
+        try {
+          // build a fresh wallpaper at full size in the offscreen stage
+          stage.innerHTML = '';
+          const renderWp = buildWallpaperElement(d, w, h);
+          stage.appendChild(renderWp);
+          // wait one frame for fonts/layout
+          await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+          // capture
+          const dataUrl = await htmlToImage.toPng(renderWp, {
+            width: w,
+            height: h,
+            pixelRatio: 1,
+            cacheBust: true,
+            backgroundColor: '#07070b',
+          });
+          // download
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `bmc-${d.id}-${SIZES[device].short}-${w}x${h}.png`;
+          a.click();
+          btn.textContent = '✓ Saved';
+          setTimeout(() => { btn.textContent = '⤓ Download'; btn.disabled = false; }, 1400);
+        } catch (err) {
+          console.error(err);
+          btn.textContent = '! retry';
+          btn.disabled = false;
+        }
+      });
+    });
+  }
+
+  // window resize -> rescale previews
+  window.addEventListener('resize', () => {
+    const device = document.body.dataset.device;
+    const { w } = SIZES[device];
+    document.querySelectorAll('.preview .wp').forEach(wp => {
+      const previewW = wp.parentElement.clientWidth;
+      wp.style.transform = `scale(${previewW / w})`;
+    });
+  });
+
+  // tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.body.dataset.device = t.dataset.device;
+      renderGallery();
+    });
+  });
+
+  // initial render — wait for fonts
+  document.fonts.ready.then(() => renderGallery());
+})();
+</script>
+</body>
+</html>

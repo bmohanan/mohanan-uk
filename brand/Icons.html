@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMC · Icon Set</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bmc-bg); color: var(--bmc-fg); font-family: var(--bmc-sans); }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 0);
+    background-size: 28px 28px; pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 56px 48px 96px; }
+
+  .crumb {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 24px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 56px;
+    font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-dim);
+  }
+  .crumb a { color: var(--bmc-cyan); text-decoration: none; }
+  .crumb .here { color: var(--bmc-fg); }
+
+  h1.page {
+    font-size: 48px; font-weight: 700; letter-spacing: -.025em;
+    margin: 0 0 14px; line-height: 1.05;
+  }
+  h1.page em { font-family: var(--bmc-serif); font-style: italic; font-weight: 500; }
+  h1.page .g { background: var(--bmc-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede { color: var(--bmc-fg-muted); font-size: 17px; max-width: 64ch; line-height: 1.55; margin: 0 0 36px; }
+
+  /* —— top controls —— */
+  .controls {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding-bottom: 24px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 36px;
+  }
+  .search {
+    flex: 1; min-width: 260px;
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--bmc-fg);
+    font-family: var(--bmc-mono);
+    font-size: 13px;
+    outline: none;
+  }
+  .search::placeholder { color: var(--bmc-fg-dim); }
+  .search:focus { border-color: rgba(70,217,200,.4); }
+
+  .style-toggle, .size-toggle {
+    display: flex; gap: 0;
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: 8px;
+    padding: 4px;
+  }
+  .style-toggle button, .size-toggle button {
+    font-family: var(--bmc-mono); font-size: 11px;
+    color: var(--bmc-fg-muted);
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .style-toggle button:hover, .size-toggle button:hover { color: var(--bmc-fg); }
+  .style-toggle button.active, .size-toggle button.active {
+    background: var(--bmc-bg);
+    color: var(--bmc-fg);
+    box-shadow: 0 0 0 1px var(--bmc-line);
+  }
+
+  .count {
+    font-family: var(--bmc-mono); font-size: 12px; color: var(--bmc-fg-dim);
+  }
+  .count b { color: var(--bmc-cyan); }
+
+  /* —— category section —— */
+  .cat { margin-bottom: 56px; }
+  .cat > header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 14px; border-bottom: 1px solid var(--bmc-line); margin-bottom: 24px;
+  }
+  .cat > header h2 {
+    margin: 0; font-family: var(--bmc-mono); font-size: 12px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--bmc-fg-muted);
+    font-weight: 500;
+  }
+  .cat > header h2 b { color: var(--bmc-fg); font-weight: 600; }
+  .cat > header .meta { font-family: var(--bmc-mono); font-size: 11px; color: var(--bmc-fg-dim); }
+
+  /* —— icon grid —— */
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .icon-card {
+    aspect-ratio: 1 / 1.1;
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r);
+    padding: 16px 12px 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    transition: all .15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .icon-card:hover {
+    border-color: rgba(255,255,255,.18);
+    transform: translateY(-2px);
+    background: var(--bmc-surface-2);
+  }
+  .icon-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--bmc-gradient);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .25s;
+  }
+  .icon-card:hover::before { transform: scaleX(1); }
+
+  .icon-card .glyph {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%;
+    padding: 8px 0;
+  }
+  .icon-card .glyph svg {
+    width: 44px; height: 44px;
+    color: var(--bmc-fg);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    stroke: currentColor;
+    transition: all .15s;
+  }
+  .icon-card .name {
+    font-family: var(--bmc-mono);
+    font-size: 10px;
+    color: var(--bmc-fg-dim);
+    text-align: center;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  /* style: gradient stroke */
+  body[data-style="gradient"] .icon-card .glyph svg {
+    stroke: url(#bmc-grad);
+    color: transparent;
+  }
+  /* style: gradient fill (filled icons) */
+  body[data-style="filled"] .icon-card .glyph svg {
+    fill: url(#bmc-grad);
+    stroke: url(#bmc-grad);
+    color: transparent;
+  }
+  /* style: on badge */
+  body[data-style="badge"] .icon-card .glyph {
+    background: var(--bmc-gradient);
+    border-radius: 12px;
+    padding: 0;
+    width: 64px; height: 64px;
+    flex: 0 0 auto;
+    box-shadow: 0 6px 20px -8px rgba(170,60,230,.5);
+    position: relative; overflow: hidden;
+  }
+  body[data-style="badge"] .icon-card .glyph::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.22), transparent 55%);
+    pointer-events: none;
+  }
+  body[data-style="badge"] .icon-card .glyph svg {
+    width: 36px; height: 36px;
+    color: #fff;
+    stroke-width: 1.75;
+  }
+
+  /* size toggle */
+  body[data-size="lg"] .icon-card .glyph svg { width: 56px; height: 56px; }
+  body[data-size="lg"] .icon-card { aspect-ratio: 1 / 1.05; }
+  body[data-size="sm"] .icon-card .glyph svg { width: 32px; height: 32px; }
+  body[data-size="sm"] .icon-card { aspect-ratio: 1 / 1.15; }
+
+  /* toast on copy */
+  .toast {
+    position: fixed;
+    bottom: 32px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--bmc-ink);
+    color: var(--bmc-fg);
+    font-family: var(--bmc-mono);
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--bmc-line);
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,.6);
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    pointer-events: none;
+    z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .check {
+    display: inline-block; color: var(--bmc-cyan); margin-right: 6px;
+  }
+
+  /* usage helper at bottom */
+  /* —— per-card hover actions —— */
+  .icon-card { position: relative; }
+  .icon-card .actions {
+    position: absolute;
+    top: 6px; right: 6px;
+    display: flex; gap: 3px;
+    opacity: 0;
+    transition: opacity .15s;
+    z-index: 2;
+  }
+  .icon-card:hover .actions { opacity: 1; }
+  .icon-card .actions button {
+    font-family: var(--bmc-mono);
+    font-size: 9px;
+    background: var(--bmc-bg);
+    color: var(--bmc-fg-muted);
+    border: 1px solid var(--bmc-line);
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .icon-card .actions button:hover {
+    color: var(--bmc-cyan);
+    border-color: rgba(70,217,200,.4);
+  }
+
+  /* —— how-to band —— */
+  .howto {
+    margin-bottom: 36px;
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    overflow: hidden;
+  }
+  .howto > header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255,255,255,.02);
+    gap: 16px;
+  }
+  .howto > header h3 {
+    margin: 0;
+    font-family: var(--bmc-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--bmc-fg-muted); font-weight: 500;
+  }
+  .howto > header h3 b { color: var(--bmc-fg); font-weight: 600; }
+  .howto > header .bulk-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .howto > header button {
+    font-family: var(--bmc-mono); font-size: 11px;
+    background: var(--bmc-bg); color: var(--bmc-fg);
+    border: 1px solid var(--bmc-line);
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: all .15s;
+  }
+  .howto > header button:hover { border-color: rgba(255,255,255,.18); }
+  .howto > header button.primary {
+    background: var(--bmc-gradient); border: none; color: #fff;
+    box-shadow: 0 4px 14px -4px rgba(170,60,230,.5);
+  }
+  .howto > header button:disabled { opacity: .5; cursor: wait; }
+  .howto .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--bmc-line);
+  }
+  .howto .cell {
+    padding: 18px 20px;
+    border-right: 1px solid var(--bmc-line);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .howto .cell:last-child { border-right: none; }
+  .howto .cell .app {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 14px;
+    color: var(--bmc-fg);
+  }
+  .howto .cell .app .badge {
+    font-family: var(--bmc-mono); font-size: 9px;
+    color: var(--bmc-cyan);
+    border: 1px solid rgba(70,217,200,.3);
+    padding: 2px 6px; border-radius: 3px;
+    letter-spacing: .04em;
+    font-weight: 400;
+  }
+  .howto .cell .app .badge.png { color: #f59e0b; border-color: rgba(245,158,11,.3); }
+  .howto .cell .step {
+    font-family: var(--bmc-mono); font-size: 10px;
+    color: var(--bmc-fg-muted); line-height: 1.55;
+  }
+  .howto .cell .step b { color: var(--bmc-fg-2); font-weight: 500; }
+  .usage {
+    margin-top: 32px;
+    background: var(--bmc-surface);
+    border: 1px solid var(--bmc-line);
+    border-radius: var(--bmc-r-lg);
+    padding: 28px;
+  }
+  .usage h3 {
+    margin: 0 0 14px;
+    font-family: var(--bmc-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--bmc-fg-muted); font-weight: 500;
+  }
+  .usage pre {
+    margin: 0;
+    background: var(--bmc-bg);
+    border: 1px solid var(--bmc-line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: var(--bmc-mono);
+    font-size: 12px;
+    color: var(--bmc-fg-2);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+  .usage .tip { margin-top: 14px; font-size: 13px; color: var(--bmc-fg-muted); line-height: 1.6; }
+  .usage .tip b { color: var(--bmc-fg); font-weight: 500; }
+
+  /* BMC convention — Centered Title + Justified Paragraph (2026-05-26) */
+  h1, h2 { text-align: center; }
+  p { text-align: justify; hyphens: auto; text-wrap: pretty; }
+</style>
+</head>
+<body data-style="line" data-size="md">
+
+<!-- gradient defs for icons (referenced by stroke: url(#bmc-grad)) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bmc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6a3df5"/>
+      <stop offset="55%"  stop-color="#d136e6"/>
+      <stop offset="100%" stop-color="#3a7df5"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main>
+
+  <div class="crumb">
+    <span><a href="Brand Kit.html">brand-kit</a> / <span class="here">icon-set</span></span>
+    <span>v1.0 · 26 May 2026</span>
+  </div>
+
+  <h1 class="page">A <em>uniform</em> icon system.</h1>
+  <p class="lede"><b style="color:var(--bmc-cyan);">~250 icons</b> across 16 categories — cloud, AWS, Azure, M365, ITSM, DevOps, identity, AI, maps and more. Three render modes (line / gradient / badge). <b style="color:var(--bmc-fg);">Click any icon to copy</b> its SVG to the clipboard, ready to drop straight into a slide, page, or doc. All on a 24px grid with consistent stroke — they'll sit cleanly alongside `~bmc` type, the brand gradient and the rest of the system.</p>
+
+  <div class="controls">
+    <input class="search" id="search" placeholder="// search · e.g. cloud, savings, finops, server …" />
+
+    <div class="style-toggle" role="tablist" aria-label="icon style">
+      <button class="active" data-style="line">// line</button>
+      <button data-style="gradient">// gradient</button>
+      <button data-style="badge">// badge</button>
+    </div>
+
+    <div class="size-toggle" role="tablist" aria-label="icon size">
+      <button data-size="sm">sm</button>
+      <button class="active" data-size="md">md</button>
+      <button data-size="lg">lg</button>
+    </div>
+
+    <div class="count"><b id="count">—</b> icons</div>
+  </div>
+
+  <!-- how-to band -->
+  <section class="howto">
+    <header>
+      <h3>// <b>Drop into anything</b> · Word · PowerPoint · Pages · Keynote · Web</h3>
+      <div class="bulk-actions">
+        <button id="dl-all-svg">⤓ all SVG <span style="color:var(--bmc-fg-dim)">.zip</span></button>
+        <button class="primary" id="dl-all-png">⤓ all PNG <span style="opacity:.8">512px</span></button>
+      </div>
+    </header>
+    <div class="grid">
+      <div class="cell">
+        <div class="app">PowerPoint <span class="badge">SVG</span></div>
+        <div class="step">→ <b>Insert · Pictures · This Device</b> · pick the <b>.svg</b><br/>→ right-click · <b>Convert to Shape</b> to recolour</div>
+      </div>
+      <div class="cell">
+        <div class="app">Keynote <span class="badge">SVG</span></div>
+        <div class="step">→ drag the <b>.svg</b> onto a slide<br/>→ <b>Format · Image · Replace</b> swaps it</div>
+      </div>
+      <div class="cell">
+        <div class="app">Word <span class="badge">SVG</span></div>
+        <div class="step">→ <b>Insert · Pictures · From File</b><br/>→ Microsoft 365: tints follow the text colour</div>
+      </div>
+      <div class="cell">
+        <div class="app">Pages <span class="badge">SVG</span></div>
+        <div class="step">→ drag the <b>.svg</b> into the canvas<br/>→ resize at any scale (vector)</div>
+      </div>
+      <div class="cell">
+        <div class="app">Web / Email <span class="badge png">PNG</span></div>
+        <div class="step">→ paste the <b>SVG</b> inline in HTML<br/>→ or use the <b>512 PNG</b> for email signatures</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="catalogue"></div>
+
+  <div class="usage">
+    <h3>// usage</h3>
+    <pre>// copy an icon, paste into your slide / page, then style:
+&lt;svg ... class="bmc-icon"&gt;...&lt;/svg&gt;
+
+.bmc-icon {
+  width: 24px; height: 24px;
+  stroke: currentColor;       /* tints from text colour */
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* tint with the brand gradient */
+.bmc-icon--grad { stroke: url(#bmc-grad); }
+/* drop into a badge */
+.bmc-icon--badge { color: #fff; background: var(--bmc-gradient); padding: 8px; border-radius: 8px; }</pre>
+    <p class="tip">// <b>Tip:</b> include the <code style="font-family:var(--bmc-mono);color:var(--bmc-cyan);">&lt;linearGradient id="bmc-grad"&gt;</code> definition once at the top of any page that uses the gradient mode. The defs block at the top of this file is reusable verbatim.</p>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"><span class="check">✓</span><span id="toast-msg">copied</span></div>
+
+<script>
+/* suppress benign ResizeObserver loop warning (browser quirk, no impact) — must be first */
+window.addEventListener('error', (e) => {
+  if (e.message && e.message.includes('ResizeObserver loop')) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
+
+<script>
+/* ===========================================================
+   ICON LIBRARY · BMC v1.0
+   Each icon is plain SVG path data on a 24×24 grid.
+   No fills — stroke-based so the page styles control colour.
+   =========================================================== */
+
+const icons = {
+
+  // ====== CLOUD & PLATFORMS ======
+  "cloud":              `<path d="M7 18a4 4 0 0 1-1.7-7.6A5 5 0 0 1 15.1 9a4 4 0 0 1 .9 7.9"/>`,
+  "cloud-up":           `<path d="M7 17.5a4 4 0 0 1-1.7-7.6 5 5 0 0 1 9.8-1.4A4 4 0 0 1 16 16"/><path d="M12 21V11.5"/><path d="m9 14 3-3 3 3"/>`,
+  "cloud-down":         `<path d="M7 17.5a4 4 0 0 1-1.7-7.6 5 5 0 0 1 9.8-1.4A4 4 0 0 1 16 16"/><path d="M12 11.5V21"/><path d="m9 18 3 3 3-3"/>`,
+  "multi-cloud":        `<path d="M6 14a3 3 0 0 1-.8-5.9 4 4 0 0 1 7.6-1.5A3 3 0 0 1 14 13"/><path d="M12 19a3 3 0 0 1-.8-5.9 4 4 0 0 1 7.6-1.5A3 3 0 0 1 18 18"/>`,
+  "aws":                `<path d="M3 13.5c0-3 2.5-5.5 5.5-5.5h.5"/><path d="M21 13.5c0-3-2.5-5.5-5.5-5.5h-.5"/><path d="M12 4v6"/><circle cx="12" cy="13" r="1.5"/><path d="M5 18h14"/><path d="M7 16l-1 4"/><path d="M17 16l1 4"/>`,
+  "azure":              `<path d="M9 4 3 18h6l8-14H9z" opacity=".4"/><path d="M9 4 3 18h6l8-14H9z"/><path d="m11 12 4 8H7l4-8z"/>`,
+  "server":             `<rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01"/><path d="M7 17h.01"/><path d="M11 7h6"/><path d="M11 17h6"/>`,
+  "database":           `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>`,
+  "kubernetes":         `<path d="M12 3 3 8v8l9 5 9-5V8l-9-5z"/><path d="M12 8v8"/><path d="m8 10 8 4"/><path d="m8 14 8-4"/>`,
+  "container":          `<rect x="3" y="6" width="18" height="12" rx="1"/><path d="M9 6v12"/><path d="M15 6v12"/>`,
+  "function":           `<path d="M5 4h4v16H5z"/><path d="m13 4 6 16"/><path d="m19 4-6 16"/>`,
+  "edge":               `<path d="M12 22c-5 0-9-4-9-9 0-3 2-5 4-5"/><path d="M12 22c5 0 9-4 9-9 0-3-2-5-4-5"/><path d="M3 13a9 9 0 0 1 18 0"/><circle cx="12" cy="4" r="2"/>`,
+  "region":             `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 4 9 14 14 0 0 1-4 9"/><path d="M12 3a14 14 0 0 0-4 9 14 14 0 0 0 4 9"/>`,
+  "vpc":                `<rect x="3" y="5" width="18" height="14" rx="2"/><rect x="7" y="9" width="4" height="6" rx=".5"/><rect x="13" y="9" width="4" height="6" rx=".5"/>`,
+  "load-balancer":      `<rect x="9" y="3" width="6" height="6" rx="1"/><rect x="3" y="15" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M12 9v3"/><path d="M12 12H6v3"/><path d="M12 12h6v3"/>`,
+
+  // ====== FINOPS & COMMERCIAL ======
+  "savings":            `<circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M9.5 9.5a2.5 2.5 0 0 1 2.5-1c1.5 0 2.5.8 2.5 2s-1 1.8-2.5 1.8c-1.5 0-2.5.8-2.5 2s1 2 2.5 2a2.5 2.5 0 0 0 2.5-1"/>`,
+  "pound":              `<circle cx="12" cy="12" r="9"/><path d="M16 16h-7c.5-1 .5-2 .5-3v-1H9"/><path d="M9 12h5"/><path d="M9 12V9a3 3 0 0 1 6 0"/>`,
+  "chart-up":           `<path d="M3 17 9 11l4 4 8-8"/><path d="M21 7h-5"/><path d="M21 7v5"/>`,
+  "chart-bar":          `<path d="M3 20h18"/><rect x="5" y="12" width="3" height="8"/><rect x="11" y="6" width="3" height="14"/><rect x="17" y="9" width="3" height="11"/>`,
+  "chart-pie":          `<path d="M12 3v9h9"/><path d="M12 3a9 9 0 1 0 9 9"/>`,
+  "trend-down":         `<path d="M3 7 9 13l4-4 8 8"/><path d="M21 17h-5"/><path d="M21 17v-5"/>`,
+  "invoice":            `<path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2V2z"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h4"/>`,
+  "receipt":            `<path d="M4 4h16v17l-2-1-2 1-2-1-2 1-2-1-2 1-2-1-2 1V4z"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/>`,
+  "contract":           `<path d="M5 3h11l4 4v14H5z"/><path d="M16 3v4h4"/><path d="M9 13h6"/><path d="M9 17h4"/><path d="M9 9h2"/>`,
+  "stamp":              `<path d="M8 14v-3a4 4 0 1 1 8 0v3"/><path d="M5 14h14v3H5z"/><path d="M5 19h14"/>`,
+  "tag":                `<path d="M3 12V3h9l9 9-9 9-9-9z"/><circle cx="8" cy="8" r="1.5"/>`,
+  "calculator":         `<rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3"/><path d="M9 13h.01"/><path d="M12 13h.01"/><path d="M15 13h.01"/><path d="M9 17h.01"/><path d="M12 17h.01"/><path d="M15 17h.01"/>`,
+  "bag":                `<path d="M7 8V6a5 5 0 0 1 10 0v2"/><path d="M5 8h14l-1 13H6L5 8z"/>`,
+  "scale":              `<path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 8 2 16h6L5 8z"/><path d="M19 8l-3 8h6l-3-8z"/><path d="M9 21h6"/>`,
+  "spark":              `<path d="m12 3 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z"/>`,
+  "target":             `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>`,
+
+  // ====== DELIVERY & PROCESS ======
+  "kanban":             `<rect x="3" y="4" width="6" height="16" rx="1"/><rect x="11" y="4" width="6" height="10" rx="1"/><rect x="19" y="4" width="2" height="6" rx="1" opacity="0"/>`,
+  "checklist":          `<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m8 11 2 2 4-4"/><path d="M14 16h2"/>`,
+  "milestone":          `<path d="M4 6h12l4 3-4 3H4z"/><path d="M4 4v17"/>`,
+  "flag":               `<path d="M5 3v18"/><path d="M5 4h12l-3 4 3 4H5"/>`,
+  "git-branch":         `<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 7v10"/><path d="M6 12c0-2.5 2-4 5-4h5"/>`,
+  "deploy":             `<path d="M4 14h16"/><path d="M8 14V8a4 4 0 0 1 8 0v6"/><path d="m7 14-2 7"/><path d="m17 14 2 7"/><path d="M12 2v3"/>`,
+  "rocket":             `<path d="M12 2c4 3 6 6 6 10v6l-3-2-3 2-3-2-3 2v-6c0-4 2-7 6-10z"/><circle cx="12" cy="10" r="1.5"/>`,
+  "pipe":               `<rect x="3" y="9" width="4" height="6" rx="1"/><rect x="10" y="9" width="4" height="6" rx="1"/><rect x="17" y="9" width="4" height="6" rx="1"/><path d="M7 12h3"/><path d="M14 12h3"/>`,
+  "loop":               `<path d="M21 12a9 9 0 1 1-3.5-7.1"/><path d="m17 2 4 3-4 3"/>`,
+  "calendar":           `<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/>`,
+  "clock":              `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`,
+  "timer":              `<circle cx="12" cy="14" r="7"/><path d="M9 3h6"/><path d="M12 14v-4"/>`,
+
+  // ====== PEOPLE & TEAM ======
+  "person":             `<circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>`,
+  "team":               `<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 0 5 2 5 6"/>`,
+  "handshake":          `<path d="M3 12 7 8l3 3-1 1 4 4 3-3-1-1 3-3 4 4"/><path d="m11 14 2 2"/>`,
+  "lightbulb":          `<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3v2h5v-2c0-1 .5-2 1.5-3a6 6 0 0 0-4-10z"/>`,
+  "compass":            `<circle cx="12" cy="12" r="9"/><path d="m15 9-3 8-3-8 3-1z" opacity=".4"/><path d="m15 9-3 8-3-8 3-1z"/>`,
+  "trophy":             `<path d="M7 4h10v5a5 5 0 1 1-10 0V4z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/><path d="M9 21h6"/><path d="M12 14v7"/>`,
+  "speech":             `<path d="M21 12c0 4-4 7-9 7-1.5 0-3-.3-4-1l-5 2 1.5-4.5C3.5 14.3 3 13.2 3 12c0-4 4-7 9-7s9 3 9 7z"/>`,
+  "meeting":            `<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8.5" cy="11" r="1.5"/><circle cx="15.5" cy="11" r="1.5"/><path d="M6 16h12"/>`,
+  "video":              `<rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/>`,
+
+  // ====== DATA & ANALYTICS ======
+  "data":               `<path d="M3 6c0-1.7 4-3 9-3s9 1.3 9 3v12c0 1.7-4 3-9 3s-9-1.3-9-3z"/><path d="M3 6c0 1.7 4 3 9 3s9-1.3 9-3"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>`,
+  "dashboard":          `<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M9 10v10"/>`,
+  "filter":             `<path d="M3 5h18l-7 9v6l-4-2v-4z"/>`,
+  "search":             `<circle cx="11" cy="11" r="6"/><path d="m20 20-4.3-4.3"/>`,
+  "table":              `<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18"/><path d="M3 14h18"/><path d="M9 4v16"/><path d="M15 4v16"/>`,
+  "code":               `<path d="m8 6-6 6 6 6"/><path d="m16 6 6 6-6 6"/><path d="m13 4-2 16"/>`,
+  "terminal":           `<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M12 15h5"/>`,
+  "api":                `<path d="M4 11h2"/><path d="M18 11h2"/><circle cx="11" cy="11" r="4"/><path d="M11 7V4"/><path d="M11 18v-3"/>`,
+  "queue":              `<rect x="3" y="9" width="3" height="6"/><rect x="8" y="9" width="3" height="6"/><rect x="13" y="9" width="3" height="6"/><rect x="18" y="9" width="3" height="6"/>`,
+  "schema":             `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6h4"/><path d="M10 17h4"/><path d="M6 10v4"/><path d="M17 10v4"/>`,
+
+  // ====== SECURITY & GOVERNANCE ======
+  "shield":             `<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/>`,
+  "shield-check":       `<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/>`,
+  "lock":               `<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>`,
+  "key":                `<circle cx="8" cy="14" r="4"/><path d="m11 11 9-9"/><path d="m17 5 2 2"/><path d="m14 8 2 2"/>`,
+  "fingerprint":        `<path d="M5 11a7 7 0 0 1 14 0v3"/><path d="M8 13c0-2 2-4 4-4s4 2 4 4v3"/><path d="M11 13v6"/><path d="M14 16v3"/>`,
+  "incident":           `<path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5"/><path d="M12 18h.01"/>`,
+  "alert":              `<circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/>`,
+  "audit":              `<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="m9 18 2 2 4-4"/>`,
+  "policy":             `<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="m10 14 2 2 4-4"/>`,
+
+  // ====== AWS-STYLE SERVICES ======
+  "ec2":                `<rect x="3" y="3" width="18" height="18" rx="1"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/>`,
+  "s3":                 `<path d="M3 6v12c0 1.5 4 3 9 3s9-1.5 9-3V6"/><ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 12c0 1.5 4 3 9 3s9-1.5 9-3"/><circle cx="17" cy="17" r="1" fill="currentColor"/>`,
+  "lambda":             `<path d="M5 4h5l8 16"/><path d="m13 11-5 9"/>`,
+  "rds":                `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="m9 16 2 2 4-4"/>`,
+  "aurora":             `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v12c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11c0 1.7 3.6 3 8 3s8-1.3 8-3"/><path d="M9 19c0-1.5 1.5-2 3-2s3 .5 3 2"/>`,
+  "dynamodb":           `<path d="M3 5v14c0 1 4 2 9 2s9-1 9-2V5"/><ellipse cx="12" cy="5" rx="9" ry="2"/><path d="M3 12c0 1 4 2 9 2s9-1 9-2"/><path d="m6 8 3 3"/><path d="m6 16 3 3"/>`,
+  "sqs":                `<rect x="3" y="7" width="4" height="10" rx="1"/><rect x="9" y="7" width="4" height="10" rx="1"/><rect x="15" y="7" width="4" height="10" rx="1"/><path d="M7 12h2"/><path d="M13 12h2"/>`,
+  "sns":                `<circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><path d="m5.6 5.6 2.1 2.1"/><path d="m16.3 16.3 2.1 2.1"/><path d="m5.6 18.4 2.1-2.1"/><path d="m16.3 7.7 2.1-2.1"/>`,
+  "cloudfront":         `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>`,
+  "route53":            `<circle cx="12" cy="12" r="9"/><path d="M8 8h3v3H8z"/><path d="M11 11l3 3"/><path d="M14 14h3v3h-3z"/><path d="M8 16h3v-3"/>`,
+  "iam":                `<circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><path d="m16 18 2 2 4-4"/>`,
+  "vpc-aws":            `<rect x="2" y="5" width="20" height="14" rx="2"/><rect x="5" y="8" width="6" height="8" rx="1"/><rect x="13" y="8" width="6" height="8" rx="1"/><path d="M2 5v14"/>`,
+  "eks":                `<path d="M12 3 3 8v8l9 5 9-5V8l-9-5z"/><path d="M12 8v8"/><path d="m8 10 8 4"/><path d="m8 14 8-4"/><circle cx="12" cy="12" r="2" fill="currentColor"/>`,
+  "fargate":            `<rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="m10 12 2 2 4-4"/>`,
+  "glue":               `<path d="M12 3v18"/><path d="M3 7h18"/><path d="M3 17h18"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><circle cx="17" cy="17" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="2"/>`,
+  "redshift":           `<path d="M3 6v12c0 1 4 2 9 2s9-1 9-2V6"/><ellipse cx="12" cy="6" rx="9" ry="2"/><path d="M9 12l3-3 3 3"/><path d="M12 9v8"/>`,
+  "sagemaker":          `<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/><circle cx="12" cy="16" r="1.5"/><path d="M8 10h8"/><path d="M8 10l4 6"/><path d="M16 10l-4 6"/>`,
+  "cloudwatch":         `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M21 12h-2"/><path d="M5 12H3"/>`,
+  "cloudformation":     `<path d="M5 21V9l7-6 7 6v12z"/><path d="M9 21v-6h6v6"/><path d="M5 9h14"/>`,
+
+  // ====== AZURE-STYLE SERVICES ======
+  "az-vm":              `<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M9 20h6"/><path d="M12 16v4"/><circle cx="7" cy="10" r="1.5"/><path d="M11 9h7"/><path d="M11 12h5"/>`,
+  "az-blob":            `<path d="M12 3a6 6 0 0 0-6 6c0 3 2 4 2 6s-1 3 1 4c1 .5 3 1 5 1s4-.5 5-1c2-1 1-2 1-4s2-3 2-6a6 6 0 0 0-6-6z"/><circle cx="10" cy="10" r="1" fill="currentColor"/>`,
+  "az-functions":       `<path d="M14 4 8 20"/><path d="M6 8h6"/><path d="M12 12h6"/>`,
+  "az-sql":             `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M8 10h6"/><path d="M8 14h8"/><path d="M8 18h4"/>`,
+  "az-cosmos":          `<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3" transform="rotate(-45 12 12)"/>`,
+  "az-aks":             `<path d="M12 3 3 8v8l9 5 9-5V8l-9-5z"/><path d="M12 21V12"/><path d="m3 8 9 4 9-4"/>`,
+  "az-containers":      `<rect x="3" y="4" width="18" height="7" rx="1"/><rect x="3" y="13" width="18" height="7" rx="1"/><path d="M7 7.5h.01"/><path d="M7 16.5h.01"/>`,
+  "az-storage":         `<rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18"/><path d="M3 14h18"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="7" cy="12" r="1" fill="currentColor"/><circle cx="7" cy="16" r="1" fill="currentColor"/>`,
+  "az-frontdoor":       `<path d="M3 12h18"/><path d="M6 8v8"/><path d="M18 8v8"/><circle cx="12" cy="12" r="3"/><path d="M12 5v2"/><path d="M12 17v2"/>`,
+  "az-cdn":             `<circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/><path d="M5.5 5.5l13 13"/><path d="M18.5 5.5l-13 13"/>`,
+  "az-monitor":         `<rect x="3" y="4" width="18" height="13" rx="1"/><path d="M9 21h6"/><path d="M12 17v4"/><path d="m7 11 3-3 3 3 4-4"/>`,
+  "az-keyvault":        `<rect x="5" y="10" width="14" height="11" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.5"/><path d="M12 16.5V18"/>`,
+  "az-ad":              `<circle cx="12" cy="7" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><path d="M19 5l2 2"/><path d="M19 7l2-2"/>`,
+  "az-devops":          `<path d="M3 12 12 3l9 9-9 9z"/><circle cx="12" cy="12" r="3"/>`,
+  "az-logic":           `<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="3" y="15" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6"/><path d="M9 18h6"/><path d="M6 9v6"/><path d="M18 9v6"/>`,
+  "az-eventgrid":       `<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M6 9l5 6"/><path d="M18 9l-5 6"/>`,
+  "az-synapse":         `<path d="M12 3 3 12l9 9 9-9z"/><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="2"/>`,
+  "az-fabric":          `<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/>`,
+
+  // ====== MICROSOFT 365 / WORKPLACE ======
+  "teams":              `<rect x="3" y="5" width="12" height="14" rx="2"/><path d="M5 9h8"/><circle cx="9" cy="9" r=".01"/><path d="M9 9v8"/><circle cx="18" cy="9" r="3"/><path d="M15 21a4 4 0 0 1 6 0"/>`,
+  "outlook":            `<rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/><circle cx="8" cy="12" r="2"/>`,
+  "sharepoint":         `<circle cx="9" cy="9" r="5"/><circle cx="15" cy="15" r="5"/><circle cx="15" cy="15" r="2" fill="currentColor"/>`,
+  "onedrive":           `<path d="M5 17a4 4 0 0 1 .5-8 5 5 0 0 1 9 .5 4 4 0 0 1 4 7.5"/><path d="M5 17h13"/>`,
+  "word":               `<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8l1 8 2-6 2 6 1-8"/>`,
+  "excel":              `<rect x="4" y="3" width="16" height="18" rx="1"/><path d="m9 8 6 8"/><path d="m15 8-6 8"/>`,
+  "powerpoint":         `<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h4a2.5 2.5 0 0 1 0 5H9z"/><path d="M9 8v9"/>`,
+  "onenote":            `<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8v8"/><path d="m9 8 5 8V8"/>`,
+  "power-bi":           `<rect x="3" y="15" width="4" height="6"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="3" width="4" height="18"/>`,
+  "power-automate":     `<path d="M14 3 4 14h6l-1 7L20 10h-7z"/>`,
+  "power-apps":         `<path d="m3 12 9-9 9 9-9 9z"/><circle cx="12" cy="12" r="3"/>`,
+  "dynamics":           `<path d="M5 5h10l4 4v10H5z"/><path d="M5 5l14 14"/>`,
+  "intune":             `<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 18h4"/><circle cx="12" cy="7" r="1.5"/>`,
+  "copilot":            `<path d="M12 3 8 8H4l3 4-3 4h4l4 5 4-5h4l-3-4 3-4h-4z"/><circle cx="12" cy="12" r="2"/>`,
+  "entra":              `<path d="M12 3 3 8v8l9 5 9-5V8z"/><path d="M12 12 3 8"/><path d="M12 12l9-4"/><path d="M12 12v9"/>`,
+  "defender":           `<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="M12 8v5"/><path d="M12 16h.01"/>`,
+
+  // ====== IT SERVICES / ITIL / ITSM ======
+  "ticket":             `<path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M10 5v14" stroke-dasharray="2 2"/>`,
+  "helpdesk":           `<path d="M5 19a8 8 0 0 1 14 0"/><rect x="3" y="14" width="4" height="6" rx="1"/><rect x="17" y="14" width="4" height="6" rx="1"/><path d="M12 3v3"/><circle cx="12" cy="8" r="2"/>`,
+  "change":             `<path d="M21 12a9 9 0 1 1-3.5-7.1"/><path d="m17 2 4 3-4 3"/><path d="M9 12h6"/><path d="m12 9 3 3-3 3"/>`,
+  "runbook":            `<rect x="4" y="3" width="15" height="18" rx="1"/><path d="M4 6h15"/><path d="M8 11h7"/><path d="M8 15h7"/><path d="M8 19h4"/>`,
+  "sla":                `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/><path d="M19 5l-1.5 1.5"/>`,
+  "escalate":           `<path d="M5 21h14"/><path d="M12 21V8"/><path d="m7 13 5-5 5 5"/><path d="M9 4h6"/>`,
+  "cmdb":               `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4"/><path d="M10 17.5h4"/><path d="M6.5 10v4"/><path d="M17.5 10v4"/>`,
+  "asset":              `<path d="M12 3 3 8v8l9 5 9-5V8z"/><circle cx="12" cy="12" r="3"/><path d="M11 12h.01"/>`,
+  "licence":            `<rect x="4" y="4" width="16" height="16" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M10 13v6l2-2 2 2v-6"/>`,
+  "patch":              `<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="3"/>`,
+  "backup-tape":        `<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="12" r="3"/><circle cx="15" cy="12" r="3"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/>`,
+  "recovery":           `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="m3 12 3-3 3 3"/><path d="M6 9V3"/>`,
+  "maintenance":        `<path d="M14 7a4 4 0 1 1-5 5L4 17l3 3 5-5a4 4 0 0 1 5-5z"/>`,
+  "workorder":          `<path d="M5 3h11l3 3v15H5z"/><path d="M16 3v3h3"/><path d="M9 11h6"/><path d="M9 14h6"/><path d="m9 18 1 1 3-3"/>`,
+  "workflow":           `<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M9 6h6"/><path d="M6 9l4 6"/><path d="M18 9l-4 6"/>`,
+  "escalation":         `<circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><path d="m9 10 3-3 3 3"/><path d="M12 17h.01"/>`,
+
+  // ====== MAPS / GEO / LOCATION ======
+  "map":                `<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2z"/><path d="M9 3v16"/><path d="M15 5v16"/>`,
+  "map-pin":            `<path d="M12 22s7-7 7-13a7 7 0 0 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/>`,
+  "location":           `<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/>`,
+  "route":              `<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 0 0 6h8"/>`,
+  "compass-rose":       `<circle cx="12" cy="12" r="9"/><path d="m12 4 2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>`,
+  "flag-pin":           `<path d="M5 21V3"/><path d="M5 4h12l-3 4 3 4H5"/><circle cx="5" cy="21" r="1" fill="currentColor"/>`,
+  "globe-pin":          `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/><circle cx="17" cy="7" r="2" fill="currentColor"/>`,
+  "navigation":         `<path d="M3 11 21 3l-8 18-2-8z"/>`,
+  "layers":             `<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>`,
+  "satellite":          `<rect x="10" y="3" width="4" height="6" rx="1" transform="rotate(45 12 6)"/><path d="M14 10l3 3-2 2-3-3"/><path d="M7 21a7 7 0 0 0 7-7"/><path d="M3 21a11 11 0 0 0 11-11"/>`,
+  "datacentre":         `<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18"/><path d="M3 14h18"/><circle cx="7" cy="6.5" r=".5" fill="currentColor"/><circle cx="7" cy="11.5" r=".5" fill="currentColor"/><circle cx="7" cy="16.5" r=".5" fill="currentColor"/><path d="M10 6.5h6"/><path d="M10 11.5h6"/><path d="M10 16.5h6"/>`,
+  "edge-region":        `<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r=".5" fill="currentColor"/>`,
+  "availability-zone":  `<circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="2"/><circle cx="16" cy="9" r="2"/><circle cx="12" cy="16" r="2"/>`,
+
+  // ====== DEVOPS / TOOLING ======
+  "github":             `<circle cx="12" cy="12" r="9"/><path d="M9 18c-3 .5-3-2-4-2"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 1.8 5.4 2.1 5.4 2.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 8.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V20"/>`,
+  "gitlab":             `<path d="m12 21-9-13 3-7 2 8h8l2-8 3 7z"/>`,
+  "jira":               `<path d="M12 3 6 9l6 6 6-6z"/><path d="M6 9c0 3.3 2.7 6 6 6"/><path d="M18 15c0-3.3-2.7-6-6-6"/>`,
+  "jenkins":            `<circle cx="12" cy="9" r="4"/><path d="M8 13c-1 1-2 4-2 7h12c0-3-1-6-2-7"/><circle cx="10.5" cy="8.5" r=".5" fill="currentColor"/><circle cx="13.5" cy="8.5" r=".5" fill="currentColor"/>`,
+  "docker":             `<rect x="3" y="10" width="3" height="3"/><rect x="7" y="10" width="3" height="3"/><rect x="11" y="10" width="3" height="3"/><rect x="7" y="6" width="3" height="3"/><rect x="11" y="6" width="3" height="3"/><path d="M3 14c0 4 4 6 9 6 6 0 9-3 10-7-2 1-4 0-4 0"/>`,
+  "terraform":          `<path d="M4 3 12 7v8l-8-4z"/><path d="M12 7l8-4v8l-8 4z"/><path d="M4 13l8 4v4l-8-4z"/>`,
+  "ansible":            `<circle cx="12" cy="12" r="9"/><path d="m12 5 6 14h-4l-2-5-4 5H6z"/>`,
+  "kafka":              `<circle cx="12" cy="6" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="12" cy="18" r="2"/><path d="M12 8v8"/><path d="M8 12h8"/>`,
+  "redis":              `<ellipse cx="12" cy="5" rx="8" ry="2"/><path d="M4 5v6c0 1 3.5 2 8 2s8-1 8-2V5"/><path d="M4 13c0 1 3.5 2 8 2s8-1 8-2"/><path d="M4 11v8c0 1 3.5 2 8 2s8-1 8-2v-8"/>`,
+  "elastic":            `<path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9"/><path d="M7 6h10"/><path d="M5 10h14"/><path d="M5 14h12"/><path d="M7 18h6"/>`,
+  "grafana":            `<path d="M12 3a9 9 0 0 0-9 9c0 4 3 6 6 6 1 0 2-1 2-2 0-1-1-1-1-2 0-3 3-4 6-3 0 1 0 3 1 3 3 0 4-3 4-5 0-4-4-6-9-6z"/><circle cx="15" cy="10" r="1.5"/>`,
+  "prometheus":         `<circle cx="12" cy="12" r="9"/><path d="M8 8c2-3 6-3 8 0"/><path d="M9 12c1.5-2 4.5-2 6 0"/><path d="M10 16c1-1 3-1 4 0"/>`,
+  "datadog":            `<path d="M3 17 18 3l3 3-3 15-3-3-3 3-3-3-3 3-3-3z"/><circle cx="15" cy="6" r="1.5" fill="currentColor"/>`,
+  "new-relic":          `<path d="M4 4l8 16 8-16-8 8z"/>`,
+  "servicenow":         `<circle cx="12" cy="12" r="9"/><path d="M7 9c2-2 6-2 8 0M9 15c2 2 6 2 8 0"/><circle cx="12" cy="12" r="3"/>`,
+  "slack":              `<rect x="10" y="3" width="4" height="10" rx="2"/><rect x="3" y="10" width="10" height="4" rx="2"/><rect x="10" y="11" width="4" height="10" rx="2"/><rect x="11" y="10" width="10" height="4" rx="2"/>`,
+  "confluence":         `<path d="M3 16c2-4 7-5 9-2s7 2 9-2"/><path d="M3 8c2 4 7 5 9 2s7-2 9 2"/>`,
+  "figma":              `<circle cx="15" cy="12" r="3"/><path d="M9 3h3v6H9a3 3 0 0 1 0-6z"/><path d="M12 3h3a3 3 0 0 1 0 6h-3z"/><path d="M9 9h3v6H9a3 3 0 0 1 0-6z"/><path d="M9 15h3v3a3 3 0 0 1-3 0z"/>`,
+
+  // ====== IDENTITY / ACCESS / SSO ======
+  "sso":                `<circle cx="12" cy="8" r="3"/><path d="M6 21c0-3 3-6 6-6s6 3 6 6"/><path d="M20 8h-4"/><path d="m18 6 2 2-2 2"/>`,
+  "mfa":                `<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/><circle cx="12" cy="13" r="3"/><path d="m11 13 1 1 2-2"/>`,
+  "identity":           `<circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><rect x="4" y="4" width="16" height="16" rx="1" stroke-dasharray="3 3"/>`,
+  "role":               `<circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/><rect x="15" y="14" width="6" height="4" rx="1"/><path d="M17 14v-1a1 1 0 0 1 2 0v1"/>`,
+  "group":              `<circle cx="7" cy="8" r="2.5"/><circle cx="17" cy="8" r="2.5"/><circle cx="12" cy="8" r="2.5"/><path d="M2 18c0-3 2-4 5-4M22 18c0-3-2-4-5-4M7 18c0-3 2-4 5-4s5 1 5 4"/>`,
+  "permission":         `<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><circle cx="12" cy="11" r="2"/><path d="M12 13v3"/>`,
+  "token":              `<circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M9 10h6"/><path d="M9 14h6"/>`,
+  "federation":         `<circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M9 7l3 8M15 7l-3 8"/>`,
+
+  // ====== AI / ML / CONTENT ======
+  "ai":                 `<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9v6M9 12h3M9 9h3a1.5 1.5 0 0 1 0 3M9 12h3a1.5 1.5 0 0 1 0 3"/><path d="M15 9v6"/>`,
+  "ml":                 `<circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="20" r="2"/><path d="M8 6h2.5"/><path d="M8 18h2.5"/><path d="M12 6v4"/><path d="M12 14v4"/><path d="M14 12h2.5"/><path d="M10 10l6 2"/><path d="M10 14l6-2"/>`,
+  "chat":               `<path d="M21 12c0 4-4 7-9 7-1.5 0-3-.3-4-1l-5 2 1.5-4.5C3.5 14.3 3 13.2 3 12c0-4 4-7 9-7s9 3 9 7z"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/>`,
+  "bot":                `<rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="13" r="1.5" fill="currentColor"/><circle cx="15" cy="13" r="1.5" fill="currentColor"/><path d="M10 17h4"/>`,
+  "brain":              `<path d="M9.5 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 0 4 3 3 0 0 0 2 5 3 3 0 0 0 6 0V3.5A3 3 0 0 0 9.5 3z"/><path d="M14.5 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1 0 4 3 3 0 0 1-2 5 3 3 0 0 1-6 0V3.5a3 3 0 0 1 3-.5z"/>`,
+  "prompt":             `<rect x="3" y="6" width="18" height="12" rx="1"/><path d="m7 10 3 2-3 2"/><path d="M12 14h6"/>`,
+  "vector":             `<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/><circle cx="12" cy="12" r="1"/><path d="M8 8h8M8 16h8M8 8v8M16 8v8"/>`,
+  "model":              `<circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><path d="M8 6c3 0 5 2 8 6"/><path d="M8 18c3 0 5-2 8-6"/>`,
+
+  "network":            `<circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="m6.5 6.5 4 4"/><path d="m17.5 6.5-4 4"/><path d="m6.5 17.5 4-4"/><path d="m17.5 17.5-4-4"/>`,
+  "dns":                `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 4 9 14 14 0 0 1-4 9"/><path d="M12 3a14 14 0 0 0-4 9 14 14 0 0 0 4 9"/>`,
+  "router":             `<rect x="3" y="13" width="18" height="6" rx="1"/><path d="M7 16h.01"/><path d="M11 16h.01"/><path d="m12 13-3-5"/><path d="m12 13 3-5"/><path d="M9 5h6"/>`,
+  "vpn":                `<rect x="3" y="10" width="18" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/>`,
+  "storage":            `<rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01"/><path d="M7 17h.01"/><path d="M12 7h.01"/><path d="M12 17h.01"/>`,
+  "backup":             `<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/>`,
+  "sync":               `<path d="M21 12a9 9 0 0 1-15.7 6"/><path d="M3 12a9 9 0 0 1 15.7-6"/><path d="m18 2 3 4-4 3"/><path d="M6 22l-3-4 4-3"/>`,
+  "scale-up":           `<path d="M5 21V11"/><path d="m2 14 3-3 3 3"/><path d="M19 21V7"/><path d="m16 10 3-3 3 3"/><path d="M12 21V3"/><path d="m9 6 3-3 3 3"/>`,
+  "monitor":            `<rect x="3" y="4" width="18" height="13" rx="1"/><path d="M9 21h6"/><path d="M12 17v4"/><path d="m7 12 3-3 2 2 5-5"/>`,
+
+  // ====== BUSINESS / GENERIC ======
+  "office":             `<path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 9h.01"/><path d="M9 13h.01"/><path d="M9 17h.01"/><path d="M14 9h.01"/><path d="M14 13h.01"/><path d="M14 17h.01"/>`,
+  "globe":              `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/>`,
+  "world":              `<circle cx="12" cy="12" r="9"/><path d="M8 9c1 2 7 2 8 0"/><path d="M8 15c1-2 7-2 8 0"/><path d="M12 3v18"/>`,
+  "pin":                `<path d="M12 22s7-7 7-13a7 7 0 0 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/>`,
+  "mail":               `<rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/>`,
+  "phone":              `<path d="M5 4h4l2 5-2 1c1 2.5 3 4.5 5.5 5.5l1-2 5 2v4c0 1-1 2-2 2-9 0-16-7-16-16 0-1 1-2 2-2z"/>`,
+  "send":               `<path d="m22 2-11 11"/><path d="m22 2-7 20-4-9-9-4z"/>`,
+  "link":               `<path d="M9 17H7a5 5 0 1 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><path d="M8 12h8"/>`,
+  "external":           `<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M16 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h6"/>`,
+  "download":           `<path d="M12 3v14"/><path d="m7 12 5 5 5-5"/><path d="M3 21h18"/>`,
+  "upload":             `<path d="M12 21V7"/><path d="m7 12 5-5 5 5"/><path d="M3 3h18"/>`,
+  "doc":                `<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 13h6"/><path d="M9 17h6"/><path d="M9 9h2"/>`,
+  "doc-pdf":            `<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M8 12h2c1 0 1.5.5 1.5 1.5S11 15 10 15H8v-3z"/><path d="M14 12h3"/><path d="M14 12v6"/><path d="M14 15h2"/>`,
+  "folder":             `<path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>`,
+  "settings":           `<circle cx="12" cy="12" r="3"/><path d="M19 12c0 .4 0 .8-.1 1.2l2 1.5-2 3.5-2.4-1a7 7 0 0 1-2.1 1.2l-.4 2.6h-4l-.4-2.6a7 7 0 0 1-2.1-1.2l-2.4 1-2-3.5 2-1.5C5 12.8 5 12.4 5 12s0-.8.1-1.2l-2-1.5 2-3.5 2.4 1a7 7 0 0 1 2.1-1.2L10 3h4l.4 2.6a7 7 0 0 1 2.1 1.2l2.4-1 2 3.5-2 1.5c.1.4.1.8.1 1.2z"/>`,
+  "filter-cost":        `<path d="M3 5h18l-7 9v6l-4-2v-4z"/><circle cx="18" cy="6" r="3"/><path d="M16.5 6h3"/><path d="M18 4.5v3"/>`,
+  "play":               `<path d="m6 4 14 8-14 8V4z"/>`,
+  "pause":              `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`,
+  "plus":               `<path d="M12 5v14"/><path d="M5 12h14"/>`,
+  "minus":              `<path d="M5 12h14"/>`,
+  "check":              `<path d="m5 13 4 4L19 7"/>`,
+  "x":                  `<path d="M6 6l12 12"/><path d="M18 6 6 18"/>`,
+  "arrow-right":        `<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>`,
+  "arrow-up-right":     `<path d="M7 17 17 7"/><path d="M8 7h9v9"/>`,
+  "info":               `<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 8h.01"/>`,
+  "question":           `<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 1.5-2.5 3.5"/><path d="M12 17h.01"/>`,
+  "star":               `<path d="m12 3 2.5 6 6.5.5-5 4.5 1.5 6.5L12 17l-5.5 3.5L8 14 3 9.5 9.5 9z"/>`,
+  "heart":              `<path d="M12 21c-1-1-9-7-9-13a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-8 12-9 13z"/>`,
+};
+
+/* ============= CATEGORY MAP ============= */
+const categories = [
+  { id: 'cloud',   title: 'Cloud & Platforms',     keys: ['cloud','cloud-up','cloud-down','multi-cloud','aws','azure','region','vpc','edge','load-balancer','server','database','kubernetes','container','function'] },
+  { id: 'aws',     title: 'AWS Services',          keys: ['ec2','s3','lambda','rds','aurora','dynamodb','sqs','sns','cloudfront','route53','iam','vpc-aws','eks','fargate','glue','redshift','sagemaker','cloudwatch','cloudformation'] },
+  { id: 'azure',   title: 'Azure Services',        keys: ['az-vm','az-blob','az-functions','az-sql','az-cosmos','az-aks','az-containers','az-storage','az-frontdoor','az-cdn','az-monitor','az-keyvault','az-ad','az-devops','az-logic','az-eventgrid','az-synapse','az-fabric'] },
+  { id: 'm365',    title: 'Microsoft 365 & Workplace', keys: ['teams','outlook','sharepoint','onedrive','word','excel','powerpoint','onenote','power-bi','power-automate','power-apps','dynamics','intune','copilot','entra','defender'] },
+  { id: 'finops',  title: 'FinOps & Commercial',   keys: ['savings','pound','chart-up','chart-bar','chart-pie','trend-down','invoice','receipt','contract','stamp','tag','calculator','bag','scale','spark','target','filter-cost'] },
+  { id: 'itsm',    title: 'IT Services & ITSM',    keys: ['ticket','helpdesk','change','runbook','sla','escalate','cmdb','asset','licence','patch','backup-tape','recovery','maintenance','workorder','workflow','escalation'] },
+  { id: 'devops',  title: 'DevOps & Tooling',      keys: ['github','gitlab','jira','jenkins','docker','terraform','ansible','kafka','redis','elastic','grafana','prometheus','datadog','new-relic','servicenow','slack','confluence','figma'] },
+  { id: 'identity',title: 'Identity & Access',     keys: ['sso','mfa','identity','role','group','permission','token','federation'] },
+  { id: 'ai',      title: 'AI & ML',               keys: ['ai','ml','chat','bot','brain','prompt','vector','model'] },
+  { id: 'delivery',title: 'Delivery & Process',    keys: ['kanban','checklist','milestone','flag','git-branch','deploy','rocket','pipe','loop','calendar','clock','timer','play','pause'] },
+  { id: 'people',  title: 'People & Team',         keys: ['person','team','handshake','lightbulb','compass','trophy','speech','meeting','video'] },
+  { id: 'data',    title: 'Data & Engineering',    keys: ['data','dashboard','filter','search','table','code','terminal','api','queue','schema'] },
+  { id: 'security',title: 'Security & Governance', keys: ['shield','shield-check','lock','key','fingerprint','incident','alert','audit','policy'] },
+  { id: 'infra',   title: 'Infrastructure & Network', keys: ['network','dns','router','vpn','storage','backup','sync','scale-up','monitor'] },
+  { id: 'maps',    title: 'Maps & Geo',            keys: ['map','map-pin','location','route','compass-rose','flag-pin','globe-pin','navigation','layers','satellite','datacentre','edge-region','availability-zone'] },
+  { id: 'biz',     title: 'Business & Generic',    keys: ['office','globe','world','pin','mail','phone','send','link','external','download','upload','doc','doc-pdf','folder','settings','plus','minus','check','x','arrow-right','arrow-up-right','info','question','star','heart'] },
+];
+
+/* ============= RENDER ============= */
+const catalogue = document.getElementById('catalogue');
+const counter   = document.getElementById('count');
+const toast     = document.getElementById('toast');
+const toastMsg  = document.getElementById('toast-msg');
+
+function wrapSvg(body) {
+  return `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+}
+
+function build() {
+  catalogue.innerHTML = '';
+  let total = 0;
+  categories.forEach(cat => {
+    const section = document.createElement('section');
+    section.className = 'cat';
+    section.dataset.cat = cat.id;
+    section.innerHTML = `
+      <header>
+        <h2>// <b>${cat.title}</b></h2>
+        <span class="meta">${cat.keys.length} icons · icons/${cat.id}</span>
+      </header>
+      <div class="icons"></div>
+    `;
+    const grid = section.querySelector('.icons');
+    cat.keys.forEach(k => {
+      if (!icons[k]) return;
+      const card = document.createElement('div');
+      card.className = 'icon-card';
+      card.dataset.name = k;
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <div class="actions">
+          <button data-act="svg"  title="download SVG">⤓ svg</button>
+          <button data-act="png"  title="download PNG 512px">⤓ png</button>
+        </div>
+        <div class="glyph">${wrapSvg(icons[k])}</div>
+        <div class="name">${k}</div>
+      `;
+      // primary click — copy SVG (but not when clicking the action buttons)
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.actions')) return;
+        copyIcon(k);
+      });
+      card.querySelector('[data-act="svg"]').addEventListener('click', (e) => { e.stopPropagation(); downloadSvg(k); });
+      card.querySelector('[data-act="png"]').addEventListener('click', (e) => { e.stopPropagation(); downloadPng(k, 512); });
+      grid.appendChild(card);
+      total++;
+    });
+    catalogue.appendChild(section);
+  });
+  counter.textContent = total;
+}
+
+function copyIcon(name) {
+  const svg = wrapSvg(icons[name]);
+  navigator.clipboard.writeText(svg).then(() => {
+    showToast(`${name}.svg · copied to clipboard`);
+  }).catch(() => {
+    showToast(`copy blocked — use the ⤓ svg button instead`);
+  });
+}
+
+function showToast(msg) {
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 1700);
+}
+
+/* ============= EXPORT HELPERS ============= */
+
+// build the standalone SVG file content (with gradient def baked in, so it works alone)
+function svgFileContent(name) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="bmc-${name}">
+  <title>BMC · ${name}</title>
+  ${icons[name]}
+</svg>`;
+}
+
+// gradient version, suitable for slides / Word where colour can't be set later
+function svgFileContentGradient(name) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256" fill="none" stroke="url(#bmc-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-icon="bmc-${name}">
+  <title>BMC · ${name}</title>
+  <defs>
+    <linearGradient id="bmc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#6a3df5"/>
+      <stop offset="55%"  stop-color="#d136e6"/>
+      <stop offset="100%" stop-color="#3a7df5"/>
+    </linearGradient>
+  </defs>
+  ${icons[name]}
+</svg>`;
+}
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function downloadSvg(name) {
+  const content = svgFileContentGradient(name);
+  downloadBlob(new Blob([content], { type: 'image/svg+xml' }), `bmc-${name}.svg`);
+  showToast(`bmc-${name}.svg · downloaded`);
+}
+
+// rasterise an SVG string to PNG at the given size
+function rasterise(svgString, size = 512) {
+  return new Promise((resolve, reject) => {
+    const blob = new Blob([svgString], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('SVG load failed')); };
+    img.src = url;
+  });
+}
+
+async function downloadPng(name, size = 512) {
+  try {
+    const blob = await rasterise(svgFileContentGradient(name), size);
+    downloadBlob(blob, `bmc-${name}-${size}.png`);
+    showToast(`bmc-${name}-${size}.png · downloaded`);
+  } catch (e) {
+    showToast('PNG export failed — try the SVG download instead');
+  }
+}
+
+/* ============= BULK EXPORT (lightweight ZIP) ============= */
+// minimal store-only zip (no compression) — built in pure JS, no external library
+function makeZip(files) {
+  // files: [{ name: string, data: Uint8Array }]
+  const encoder = new TextEncoder();
+  let offset = 0;
+  const fileRecords = [];
+  const centralDirectoryRecords = [];
+
+  // CRC-32 lookup table
+  const crcTable = (() => {
+    const tbl = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+      tbl[n] = c >>> 0;
+    }
+    return tbl;
+  })();
+  const crc32 = (buf) => {
+    let crc = 0xffffffff;
+    for (let i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ crcTable[(crc ^ buf[i]) & 0xff];
+    return (crc ^ 0xffffffff) >>> 0;
+  };
+
+  for (const f of files) {
+    const nameBytes = encoder.encode(f.name);
+    const data = f.data;
+    const crc = crc32(data);
+    const localHeader = new Uint8Array(30 + nameBytes.length);
+    const dv = new DataView(localHeader.buffer);
+    dv.setUint32(0, 0x04034b50, true);     // local file header sig
+    dv.setUint16(4, 20, true);             // version
+    dv.setUint16(6, 0, true);              // flags
+    dv.setUint16(8, 0, true);              // method (0 = store)
+    dv.setUint16(10, 0, true);             // mod time
+    dv.setUint16(12, 0, true);             // mod date
+    dv.setUint32(14, crc, true);           // crc-32
+    dv.setUint32(18, data.length, true);   // compressed size
+    dv.setUint32(22, data.length, true);   // uncompressed size
+    dv.setUint16(26, nameBytes.length, true); // name length
+    dv.setUint16(28, 0, true);             // extra length
+    localHeader.set(nameBytes, 30);
+
+    const fileRecord = new Uint8Array(localHeader.length + data.length);
+    fileRecord.set(localHeader, 0);
+    fileRecord.set(data, localHeader.length);
+    fileRecords.push(fileRecord);
+
+    const central = new Uint8Array(46 + nameBytes.length);
+    const cdv = new DataView(central.buffer);
+    cdv.setUint32(0, 0x02014b50, true);    // central directory sig
+    cdv.setUint16(4, 20, true);            // version made by
+    cdv.setUint16(6, 20, true);            // version needed
+    cdv.setUint16(8, 0, true);             // flags
+    cdv.setUint16(10, 0, true);            // method
+    cdv.setUint16(12, 0, true);            // mod time
+    cdv.setUint16(14, 0, true);            // mod date
+    cdv.setUint32(16, crc, true);
+    cdv.setUint32(20, data.length, true);
+    cdv.setUint32(24, data.length, true);
+    cdv.setUint16(28, nameBytes.length, true);
+    cdv.setUint16(30, 0, true);            // extra
+    cdv.setUint16(32, 0, true);            // comment
+    cdv.setUint16(34, 0, true);            // disk
+    cdv.setUint16(36, 0, true);            // internal attrs
+    cdv.setUint32(38, 0, true);            // external attrs
+    cdv.setUint32(42, offset, true);       // local header offset
+    central.set(nameBytes, 46);
+    centralDirectoryRecords.push(central);
+
+    offset += fileRecord.length;
+  }
+
+  const centralSize = centralDirectoryRecords.reduce((s, r) => s + r.length, 0);
+  const eocd = new Uint8Array(22);
+  const edv = new DataView(eocd.buffer);
+  edv.setUint32(0, 0x06054b50, true);
+  edv.setUint16(4, 0, true);
+  edv.setUint16(6, 0, true);
+  edv.setUint16(8, files.length, true);
+  edv.setUint16(10, files.length, true);
+  edv.setUint32(12, centralSize, true);
+  edv.setUint32(16, offset, true);
+  edv.setUint16(20, 0, true);
+
+  // assemble
+  const total = offset + centralSize + 22;
+  const out = new Uint8Array(total);
+  let p = 0;
+  for (const r of fileRecords) { out.set(r, p); p += r.length; }
+  for (const r of centralDirectoryRecords) { out.set(r, p); p += r.length; }
+  out.set(eocd, p);
+  return new Blob([out], { type: 'application/zip' });
+}
+
+async function exportAll(format) {
+  const btn = format === 'svg' ? document.getElementById('dl-all-svg') : document.getElementById('dl-all-png');
+  const orig = btn.innerHTML;
+  btn.disabled = true;
+
+  const files = [];
+  const allKeys = Object.keys(icons);
+  let i = 0;
+  for (const k of allKeys) {
+    i++;
+    btn.innerHTML = `… ${i}/${allKeys.length}`;
+    if (format === 'svg') {
+      const enc = new TextEncoder();
+      // line variant
+      files.push({ name: `line/bmc-${k}.svg`, data: enc.encode(svgFileContent(k)) });
+      // gradient variant
+      files.push({ name: `gradient/bmc-${k}.svg`, data: enc.encode(svgFileContentGradient(k)) });
+    } else {
+      // PNG at 512
+      try {
+        const blob = await rasterise(svgFileContentGradient(k), 512);
+        const buf = new Uint8Array(await blob.arrayBuffer());
+        files.push({ name: `png-512/bmc-${k}-512.png`, data: buf });
+      } catch (e) {
+        // skip on failure
+      }
+      // yield so UI updates
+      if (i % 10 === 0) await new Promise(r => setTimeout(r, 0));
+    }
+  }
+
+  // also include a README + the brand gradient defs file
+  const enc = new TextEncoder();
+  files.push({
+    name: 'README.txt',
+    data: enc.encode(
+      `BMC · Icon Set · v1.0\n` +
+      `Bimal Mohanan Consulting · mohanan.uk\n\n` +
+      `Two folders:\n` +
+      `  line/      — currentColor stroke (recolour in app)\n` +
+      `  gradient/  — pre-tinted with the BMC brand gradient\n\n` +
+      `PowerPoint / Keynote / Pages / Word:\n` +
+      `  Insert → Pictures → pick the SVG.\n` +
+      `  In modern Microsoft 365 you can right-click → "Convert to Shape" then recolour individual paths.\n\n` +
+      `Web / Email:\n` +
+      `  Paste the SVG inline, or use the PNG-512 export for email signatures.\n\n` +
+      `All icons on a 24x24 grid, stroke-width 1.5, round caps/joins.\n` +
+      `Brand gradient: #6a3df5 → #d136e6 (55%) → #3a7df5 at 135°.\n`
+    )
+  });
+
+  btn.innerHTML = '… zipping';
+  const zip = makeZip(files);
+  downloadBlob(zip, `bmc-icons-${format}-v1.zip`);
+  showToast(`bmc-icons-${format}-v1.zip · downloaded (${files.length} files)`);
+  btn.innerHTML = orig;
+  btn.disabled = false;
+}
+
+document.getElementById('dl-all-svg').addEventListener('click', () => exportAll('svg'));
+document.getElementById('dl-all-png').addEventListener('click', () => exportAll('png'));
+
+/* suppress benign ResizeObserver loop warning (browser quirk, no impact) */
+window.addEventListener('error', (e) => {
+  if (e.message && e.message.includes('ResizeObserver loop')) e.stopImmediatePropagation();
+});
+
+/* ============= CONTROLS ============= */
+document.querySelectorAll('.style-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.style-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.style = btn.dataset.style;
+  });
+});
+
+document.querySelectorAll('.size-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.size = btn.dataset.size;
+  });
+});
+
+document.getElementById('search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  let shown = 0;
+  document.querySelectorAll('.icon-card').forEach(card => {
+    const match = !q || card.dataset.name.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) shown++;
+  });
+  // hide sections with no visible icons
+  document.querySelectorAll('.cat').forEach(sec => {
+    const any = [...sec.querySelectorAll('.icon-card')].some(c => c.style.display !== 'none');
+    sec.style.display = any ? '' : 'none';
+  });
+  counter.textContent = shown;
+});
+
+build();
+</script>
+</body>
+</html>

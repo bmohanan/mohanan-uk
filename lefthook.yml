@@ -31,6 +31,7 @@ pre-commit:
       glob: "*.{html,css,js,json,yml,yaml,md}"
       exclude:
         - "index.html" # hand-tuned, keep
+        - "404.html" # hand-tuned (compact CSS), keep
         - "insights/itam-finops-self-funding/index.html" # hand-tuned, keep
         - "brand/**" # claude-design output, keep as-is
         - "og-image.html" # gitignored anyway
