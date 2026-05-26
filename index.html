@@ -1188,6 +1188,22 @@
       position: relative;
       z-index: 2;
     }
+    /* Cal.com's free-plan "Cal.com" branding strip sits at the very bottom
+       of the iframe on a white background and resists theming via the
+       cssVarsPerTheme surface. Lay a gradient mask over the bottom of the
+       frame so it fades into the page background. pointer-events:none keeps
+       clicks pass-through in case the calendar's last row sits underneath. */
+    .cal-frame::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 96px;
+      background: linear-gradient(to bottom, transparent 0%, var(--bg-1) 35%, var(--bg-1) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
     .cal-loading-spinner {
       width: 32px;
       height: 32px;
@@ -4301,7 +4317,28 @@
         Cal.ns['mohanan-call']('ui', {
           theme: 'dark',
           cssVarsPerTheme: {
-            dark: { 'cal-brand': '#00d9ff' },
+            // Push our dark palette through Cal.com's CSS variable surface
+            // so the iframe (including the "Cal.com" footer strip) matches
+            // the site instead of flashing white at the bottom.
+            dark: {
+              'cal-brand': '#00d9ff',
+              'cal-bg-emphasis': '#0e1024',
+              'cal-bg': '#0a0a1a',
+              'cal-bg-subtle': '#0e1024',
+              'cal-bg-muted': '#050510',
+              'cal-bg-info': '#0e1024',
+              'cal-bg-success': '#0e1024',
+              'cal-bg-attention': '#0e1024',
+              'cal-bg-error': '#0e1024',
+              'cal-text-emphasis': '#ffffff',
+              'cal-text': 'rgba(255,255,255,0.96)',
+              'cal-text-subtle': 'rgba(255,255,255,0.7)',
+              'cal-text-muted': 'rgba(255,255,255,0.5)',
+              'cal-border-emphasis': 'rgba(255,255,255,0.18)',
+              'cal-border': 'rgba(255,255,255,0.1)',
+              'cal-border-subtle': 'rgba(255,255,255,0.06)',
+              'cal-border-booker': 'rgba(255,255,255,0.06)',
+            },
           },
           hideEventTypeDetails: false,
           layout: 'month_view',
