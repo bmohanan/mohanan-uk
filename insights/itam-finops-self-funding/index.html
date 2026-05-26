@@ -214,6 +214,38 @@ figure.viz figcaption{font-family:var(--mono);font-size:.74rem;color:var(--text-
 .status{display:inline-flex;align-items:center;gap:8px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
 
+/* about */
+.about-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:start}
+.eyebrow-line{font-family:var(--mono);font-size:.8rem;color:var(--mint);margin-bottom:16px}
+.about-h{font-size:clamp(2rem,4.4vw,3rem);letter-spacing:-.03em;margin-bottom:14px}
+.about-tag{font-size:1.02rem;color:var(--text-dim);margin-bottom:24px;max-width:30ch}
+.about-card-mark{display:flex;align-items:center;gap:13px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;position:relative;overflow:hidden}
+.about-card-mark::before{content:"";position:absolute;inset:0;background:var(--grad-soft);opacity:.5;pointer-events:none}
+.about-card-mark>*{position:relative}
+.about-card-mark .squircle{width:46px;height:46px;font-size:12px}
+.amk-name{font-weight:700;font-size:1rem}
+.amk-role{font-family:var(--mono);font-size:.76rem;color:var(--mint)}
+.about-body p{font-size:1.05rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0 0}
+.ast{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:20px 14px;text-align:center}
+.ast-n{font-weight:900;font-size:1.9rem;line-height:1;letter-spacing:-.02em;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;width:fit-content;margin:0 auto}
+.ast-l{font-family:var(--mono);font-size:.69rem;color:var(--text-dim);margin-top:8px}
+/* what I deliver */
+.deliver{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 24px 8px;margin:30px 0;position:relative;overflow:hidden}
+.deliver::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad)}
+.deliver-label{font-family:var(--mono);font-size:.74rem;color:var(--mint);display:block;margin-bottom:12px}
+.deliver-lead{font-size:1rem;color:#ccd1de;margin-bottom:16px}
+.deliver-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.deliver-list li{display:flex;gap:12px;font-size:.98rem;color:var(--text);line-height:1.5}
+.dl-mark{font-family:var(--mono);font-weight:700;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;flex:0 0 auto}
+.about-surface{margin-top:8px}
+.asf-label{font-family:var(--mono);font-size:.74rem;color:var(--text-dim);display:block;margin-bottom:12px}
+.asf-tags{display:flex;flex-wrap:wrap;gap:9px}
+@media(max-width:860px){
+  .about-grid{grid-template-columns:1fr;gap:30px}
+  .about-stats{gap:10px}
+}
+
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -557,6 +589,66 @@ figure.viz figcaption{font-family:var(--mono);font-size:.74rem;color:var(--text-
       </svg>
       <figcaption>When licence optimisation hits a wall, pivot to cloud; when cloud plateaus, move to renegotiation. Breadth is what gives the programme durability.</figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="block alt about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-intro reveal">
+        <div class="eyebrow-line">// about</div>
+        <h2 class="about-h">Cloud, <em class="ti">delivered.</em></h2>
+        <p class="about-tag">Technology leader &amp; cloud transformation specialist.</p>
+        <div class="about-card-mark">
+          <span class="squircle"><span class="t">~</span>bmc</span>
+          <div>
+            <div class="amk-name">Bimal Mohanan</div>
+            <div class="amk-role">principal · cloud transformation</div>
+          </div>
+        </div>
+        <div class="about-stats reveal">
+          <div class="ast"><div class="ast-n">13+</div><div class="ast-l">years in cloud</div></div>
+          <div class="ast"><div class="ast-n">125%</div><div class="ast-l">FY revenue target</div></div>
+          <div class="ast"><div class="ast-n">3×</div><div class="ast-l">pipeline target</div></div>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <p class="reveal">With <strong>13+ years</strong> driving cloud transformation across the UK and EMEA, I specialise in bridging deep technical expertise with the commercial outcomes that matter to enterprise buyers.</p>
+        <p class="reveal">My career began on <strong>Microsoft Azure</strong> — where I built my foundation — and now spans large-scale multi-cloud estates running across <strong>AWS and Azure</strong>. I've held senior roles at Microsoft and at global partners including SoftwareONE, BCN and Akkodis, and worked directly with major enterprises such as Oracle and BT.</p>
+        <p class="reveal">I've also <strong>contracted directly with AWS</strong>, leading FinOps and TCO engagements — helping organisations gain clarity on cost models, ownership boundaries, licensing optimisation and <em class="ti">sustainable cloud economics</em>.</p>
+
+        <div class="deliver reveal">
+          <span class="deliver-label">// what I deliver</span>
+          <p class="deliver-lead">I lead cross-functional teams to design, deliver and optimise enterprise-scale cloud programmes with measurable business impact:</p>
+          <ul class="deliver-list">
+            <li><span class="dl-mark">~</span> Accelerating secure cloud adoption</li>
+            <li><span class="dl-mark">~</span> Driving significant cost optimisation and consumption efficiency</li>
+            <li><span class="dl-mark">~</span> Embedding robust governance, compliance and operating models</li>
+            <li><span class="dl-mark">~</span> Turning managed-services portfolios into high-renewal, value-driven offerings</li>
+          </ul>
+        </div>
+
+        <p class="reveal">Equally comfortable in the boardroom or the server room, I move seamlessly between CXO-level strategy, technical design workshops, pipeline reviews and delivery escalations. Whether you're starting a cloud-first journey, optimising an existing estate, or you need trusted leadership to de-risk transformation, I bring the platform fluency, commercial insight and delivery rigour to make it happen.</p>
+
+        <div class="about-surface reveal">
+          <span class="asf-label">// the surface area</span>
+          <div class="asf-tags">
+            <span class="tag"><span class="t">~</span> aws</span>
+            <span class="tag"><span class="t">~</span> azure</span>
+            <span class="tag"><span class="t">~</span> oracle</span>
+            <span class="tag"><span class="t">~</span> finops</span>
+            <span class="tag"><span class="t">~</span> cost-optimisation</span>
+            <span class="tag"><span class="t">~</span> governance</span>
+            <span class="tag"><span class="t">~</span> managed-services</span>
+            <span class="tag"><span class="t">~</span> delivery</span>
+            <span class="tag"><span class="t">~</span> leadership</span>
+            <span class="tag"><span class="t">~</span> emea</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
