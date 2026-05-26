@@ -35,9 +35,13 @@ node_modules/
 .wrangler/
 .dev.vars
 
-# Claude Code per-project config (preview server, hooks, permissions)
-# Local-only; not part of the deployed site.
-.claude/
+# Claude Code per-project config — track permissions allowlist (shared),
+# but ignore the local preview server config (per-machine).
+.claude/launch.json
+.claude/settings.local.json
+
+# Lychee link-checker cache — regenerated on every run, no need to commit
+.lycheecache
 
 # Build artifacts
 dist/

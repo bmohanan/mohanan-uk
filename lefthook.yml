@@ -1,0 +1,82 @@
+# Lefthook — local git hooks that mirror what GitHub Actions runs.
+# Reference: https://lefthook.dev/configuration/
+#
+# Install hooks into .git/hooks/ with:    lefthook install
+# Run a hook on demand with:              lefthook run pre-commit
+# Bypass once with:                       LEFTHOOK=0 git commit ...
+
+# Make ~/.local/bin and the node toolchain visible to all hook commands —
+# git launches hooks with a stripped PATH, so absolute paths matter.
+env:
+  PATH: "/Users/bimalmohanan/.local/bin:/Users/bimalmohanan/.local/node/bin:/usr/local/bin:/usr/bin:/bin"
+
+# ─────────────────────────────────────────────────────────────
+# pre-commit — fast, runs on every commit
+# Only checks staged files so it stays under ~2s.
+# ─────────────────────────────────────────────────────────────
+pre-commit:
+  parallel: true
+  commands:
+    # Lint shell scripts (they live outside the repo but if any get added)
+    shellcheck:
+      glob: "*.{sh,bash}"
+      run: /Users/bimalmohanan/.local/bin/shellcheck {staged_files}
+      stage_fixed: false
+
+    # Format check on HTML/CSS/JS — fails if anything would change.
+    # We don't auto-format on commit (the single-file portfolio has
+    # hand-tuned indentation we want to keep). Run `prettier --write`
+    # manually when you want it.
+    prettier-check:
+      glob: "*.{html,css,js,json,yml,yaml,md}"
+      exclude:
+        - "index.html" # hand-tuned, keep
+        - "insights/itam-finops-self-funding/index.html" # hand-tuned, keep
+        - "brand/**" # claude-design output, keep as-is
+        - "og-image.html" # gitignored anyway
+      # node has to be on PATH because prettier's shebang is #!/usr/bin/env node
+      run: PATH="/Users/bimalmohanan/.local/node/bin:$PATH" prettier --check {staged_files}
+
+# ─────────────────────────────────────────────────────────────
+# pre-push — slower, runs only on `git push`
+# Mirrors the GitHub Actions lychee step so broken links don't
+# sneak in. ~5s on a warm cache.
+# ─────────────────────────────────────────────────────────────
+pre-push:
+  commands:
+    lychee:
+      # Same args as .github/workflows/deploy.yml's link-check job.
+      # Always runs — not file-filtered — because a refactor of one HTML
+      # could break links in another.
+      glob: "*" # match anything, so lefthook doesn't skip with "no files"
+      run: |
+        /Users/bimalmohanan/.local/bin/lychee \
+          --no-progress \
+          --cache \
+          --max-cache-age 1d \
+          --root-dir "$PWD" \
+          --base-url "https://mohanan.uk" \
+          --accept '200,201,202,204,206,301,302,304,307,308,403,405,429,999' \
+          --exclude '^mailto:' \
+          --exclude '^tel:' \
+          --exclude 'localhost' \
+          --exclude '/cdn-cgi/' \
+          --exclude 'linkedin\.com' \
+          index.html \
+          404.html \
+          insights/itam-finops-self-funding/index.html
+
+# Note: brand/index.html is intentionally NOT checked here. Its links to
+# sibling templates ("Logo System.html" etc.) resolve correctly in the
+# browser via Cloudflare Pages' .html-stripping, but lychee resolves them
+# against --base which mis-prefixes the host. Until lychee learns per-file
+# base resolution, the brand kit is checked via the live site only.
+
+# Lychee accept-codes legend:
+#   - 405: Web3Forms (POST-only endpoint, returns 405 to GET probes)
+#   - 999: LinkedIn returns this to bots — known false positive
+#   - 403/429: rate-limited or anti-scrape responses worth ignoring
+# Lychee excludes legend:
+#   - /cdn-cgi/: Cloudflare's email-obfuscation links (auto-injected)
+#   - linkedin.com: even with 999 accept, lychee redirects through these
+#     and tries again — easier to skip the host entirely
