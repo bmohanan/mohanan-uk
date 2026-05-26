@@ -409,6 +409,17 @@
       letter-spacing: -0.04em;
       box-shadow: 0 0 24px rgba(177, 92, 255, 0.4);
     }
+    /* Navbar variant — width auto-sizes to the text content
+       (left-to-right pill) instead of a forced 38px square. Gives
+       "~bmc" breathing room and avoids cramping on small viewports.
+       Scoped to .nav so the footer's brand-mark--lg stays a square. */
+    .nav .brand .brand-mark {
+      width: auto;
+      min-width: 38px;
+      padding: 0 10px;
+      font-size: 13px;
+      letter-spacing: -0.02em;
+    }
     .brand-mark--lg {
       width: 56px; height: 56px;
       border-radius: 14px;
