@@ -494,18 +494,62 @@
       line-height: 0.95;
       letter-spacing: -0.04em;
       margin-bottom: 24px;
+      /* Footer-style horizontal lockup: gradient mark on the left,
+         wordmark stacked on the right. Wraps on narrow viewports. */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 2.5vw, 36px);
+      flex-wrap: wrap;
     }
-    .hero-title .line-1 {
-      display: block;
-      color: var(--text-1);
+    /* Legacy .line-1 / .line-2 spans no longer used (old "Bimal" /
+       "Mohanan" stacked layout). Rules kept commented as a marker. */
+
+    /* Hero brand mark — large gradient square with "~bmc",
+       proportionally scaled with the surrounding type. Mirrors the
+       footer brand-mark--lg pattern at hero size. */
+    .hero-title .hero-mark {
+      flex: 0 0 auto;
+      width: clamp(72px, 14vw, 180px);
+      height: clamp(72px, 14vw, 180px);
+      border-radius: clamp(18px, 3vw, 36px);
+      background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(20px, 3vw, 42px);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      box-shadow: 0 0 60px rgba(177, 92, 255, 0.5);
     }
-    .hero-title .line-2 {
-      display: block;
+    .hero-title .hero-mark .tilde { opacity: 0.72; }
+    /* Wordmark column: big name (gradient) + Consulting subtitle. */
+    .hero-title .hero-wordmark {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05em;
+      line-height: 0.95;
+      text-align: left;
+    }
+    .hero-title .hero-name {
       background: var(--grad-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      position: relative;
+      white-space: nowrap;
+    }
+    .hero-title .hero-sub {
+      font-size: 0.32em;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    @media (max-width: 560px) {
+      .hero-title { justify-content: center; }
+      .hero-title .hero-wordmark { text-align: center; }
+      .hero-title .hero-name { white-space: normal; }
     }
 
     .hero-role {
@@ -2453,8 +2497,11 @@
     <div class="container">
       <div class="hero-inner">
         <h1 class="hero-title reveal delay-1">
-          <span class="line-1">Bimal</span>
-          <span class="line-2">Mohanan</span>
+          <span class="hero-mark" aria-hidden="true"><span class="tilde">~</span>bmc</span>
+          <span class="hero-wordmark">
+            <span class="hero-name">Bimal Mohanan</span>
+            <span class="hero-sub">Consulting</span>
+          </span>
         </h1>
 
         <div class="hero-role reveal delay-2">
