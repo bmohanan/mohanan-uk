@@ -811,6 +811,7 @@
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      text-align: center;
     }
     .about-stat-num {
       font-family: 'Space Grotesk', sans-serif;
@@ -1091,6 +1092,46 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
+    /* Progressive disclosure: only the first row (3 cards) is visible
+       on load. The "Show more" button below toggles .expanded on the
+       parent .testimonials, revealing the rest. */
+    .testimonials:not(.expanded) > .quote-card:nth-child(n+4) {
+      display: none;
+    }
+    .testimonials-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .testimonials-toggle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-pill);
+      padding: 12px 22px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .testimonials-toggle:hover {
+      color: var(--text-1);
+      background: var(--glass-bg-strong);
+      border-color: rgba(0, 217, 255, 0.4);
+      transform: translateY(-1px);
+    }
+    .testimonials-toggle svg {
+      width: 14px; height: 14px;
+      transition: transform 0.25s ease;
+    }
+    .testimonials.expanded ~ .testimonials-toggle-wrap .testimonials-toggle svg {
+      transform: rotate(180deg);
+    }
     .quote-card {
       position: relative;
       padding: 32px 28px 28px;
@@ -1335,8 +1376,9 @@
     ===================================================================== */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
+      align-items: stretch;
     }
 
     .contact-cards { display: flex; flex-direction: column; gap: 12px; }
@@ -3482,7 +3524,7 @@
         <p class="section-sub">Selected recommendations from colleagues, customers and partners across Microsoft, SoftwareONE, Oracle, BT, Livingstone, BCN and beyond.</p>
       </div>
 
-      <div class="testimonials">
+      <div class="testimonials" id="testimonialsGrid">
         <!-- 1. Yasir Masood — Akkodis, line manager, April 2026 -->
         <div class="quote-card reveal">
           <div class="quote-mark">&ldquo;</div>
@@ -3642,6 +3684,17 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Show-more toggle: hides recommendations 4-9 by default.
+           Wired up in the main interactions script at the bottom of
+           the page; uses .testimonials.expanded as the state hook. -->
+      <div class="testimonials-toggle-wrap">
+        <button type="button" class="testimonials-toggle" id="testimonialsToggle"
+                aria-expanded="false" aria-controls="testimonialsGrid">
+          <span data-toggle-label>Show 6 more</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -4021,6 +4074,30 @@
     };
     navToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
     mobileMenu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+    // 2b) Recommendations: progressive disclosure. CSS hides cards 4+
+    //     when .testimonials lacks .expanded; toggle the class on click.
+    (() => {
+      const grid = document.getElementById('testimonialsGrid');
+      const btn = document.getElementById('testimonialsToggle');
+      if (!grid || !btn) return;
+      const label = btn.querySelector('[data-toggle-label]');
+      const hiddenCount = Math.max(0, grid.children.length - 3);
+      // Initialise label with the actual hidden count.
+      if (label) label.textContent = `Show ${hiddenCount} more`;
+      btn.addEventListener('click', () => {
+        const expanded = grid.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', String(expanded));
+        if (label) label.textContent = expanded ? 'Show fewer' : `Show ${hiddenCount} more`;
+        // Re-fire the IntersectionObserver on newly-revealed cards so
+        // their .reveal opacity transition plays (instead of popping in).
+        if (expanded) {
+          grid.querySelectorAll('.quote-card.reveal:not(.in)').forEach(el => {
+            requestAnimationFrame(() => el.classList.add('in'));
+          });
+        }
+      });
+    })();
 
     // 3) Reveal-on-scroll using IntersectionObserver.
     //    Any element with class .reveal fades in when 12% visible.
