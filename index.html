@@ -753,6 +753,19 @@
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--glass-border);
     }
+    /* Name plate — sits at the top of the meta lockup, set off from
+       the small uppercase labels below by a hairline separator. */
+    .profile-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--glass-border);
+    }
     .profile-meta-item { display: flex; flex-direction: column; gap: 4px; }
     .profile-meta-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.15em; font-family: 'JetBrains Mono', monospace; }
     .profile-meta-val   { font-size: 13px; color: var(--text-1); font-weight: 500; }
@@ -2496,6 +2509,7 @@
             <div class="profile-initials">~bmc</div>
           </div>
           <div class="profile-meta">
+            <div class="profile-name">Bimal Mohanan</div>
             <div class="profile-meta-item">
               <span class="profile-meta-label">Based</span>
               <span class="profile-meta-val">London, UK</span>
