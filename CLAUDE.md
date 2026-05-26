@@ -12,6 +12,7 @@ This file is loaded automatically by any Claude Code session opened in this repo
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `index.html`                                                                         | The whole portfolio site (~3,800 lines, single file). Edit in place — no build step.                                                                                                                                                       |
 | `footer.js`                                                                          | Canonical 4-column site footer. Self-contained — injects scoped HTML + CSS into any page containing `<div data-bmc-footer></div>`. **Single source of truth** for all new content pages. See the "Canonical site footer" convention below. |
+| `scripts/`                                                                           | Ship + deploy automation (`ship-mohanan-uk.sh`, `deploy-mohanan-uk.sh`, `install-symlinks.sh`). Version-controlled; symlinked into `~/.local/bin/` on this Mac. See `scripts/README.md`.                                                   |
 | `_headers`                                                                           | Cloudflare Pages response headers (security + asset caching).                                                                                                                                                                              |
 | `_redirects`                                                                         | Cloudflare Pages redirects (currently: 301 `www.mohanan.uk → mohanan.uk`).                                                                                                                                                                 |
 | `brand/`                                                                             | BMC visual identity kit (Brand Kit hub, templates, `brand/brand.css` tokens). Served at `mohanan.uk/brand/`. **Use these tokens for all new BMC artefacts.**                                                                               |
@@ -41,7 +42,9 @@ ship-mohanan-uk.sh        # git push + wrangler pages deploy + cache purge
 deploy-mohanan-uk.sh      # just the wrangler deploy + cache purge (if already pushed)
 ```
 
-Both scripts live in `~/.local/bin/` and authenticate via:
+Both scripts are version-controlled at [`scripts/ship-mohanan-uk.sh`](scripts/ship-mohanan-uk.sh) and [`scripts/deploy-mohanan-uk.sh`](scripts/deploy-mohanan-uk.sh). On this Mac they're surfaced on `PATH` via symlinks in `~/.local/bin/` — re-create them on a fresh machine with `./scripts/install-symlinks.sh`. **Edit the in-repo versions** — the symlinks pick up changes instantly. (Historical: the scripts used to live solely in `~/.local/bin/` untracked, which let a deploy-allowlist change for `footer.js` silently miss CI; moved into the repo on 2026-05-26.)
+
+They authenticate via:
 
 - `git`: macOS Keychain (`github.com` / `bmohanan`) — current PAT lacks `workflow` scope; updates to `.github/workflows/*.yml` need the GitHub web UI or `gh auth login` with a richer token.
 - `wrangler` + Cloudflare API: macOS Keychain (`security find-generic-password -s "cloudflare-api-token-bmohanan"`)
@@ -69,10 +72,12 @@ A **GitHub Actions workflow** at `.github/workflows/deploy.yml` mirrors the loca
 The preview server is sandboxed to `/tmp/portfolio-fetch/` (TCC limits browser access to `~/Documents`). After editing `index.html` here, sync with:
 
 ```bash
-cp -R ~/Documents/GitHub/mohanan-uk/. /tmp/portfolio-fetch/
+rsync -a --delete --exclude='.git/' ~/Documents/GitHub/mohanan-uk/ /tmp/portfolio-fetch/
 ```
 
 Then browse at `http://localhost:8765/`.
+
+> `cp -R …/. /tmp/portfolio-fetch/` looks shorter but fails with `Permission denied` on `.git/objects/*` files once they've been packed (read-only mode bits). `rsync --exclude='.git/'` avoids both the perm errors and the wasted cycles copying ~50 MB of git objects on every sync. For a single touched file, just `cp ~/Documents/GitHub/mohanan-uk/index.html /tmp/portfolio-fetch/index.html`.
 
 ---
 

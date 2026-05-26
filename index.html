@@ -774,14 +774,9 @@
     }
 
     .about-text { display: flex; flex-direction: column; gap: 20px; }
-    .about-text h2 {
-      font-size: clamp(34px, 5vw, 52px);
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 8px;
-    }
+    /* (Removed orphan .about-text h2 rule — the eyebrow + h2 now live
+       in a .section-head above the .about-grid and inherit the shared
+       .section-title gradient styling.) */
     /* Long-form body copy: flush both edges (left + right). */
     .about-text p {
       color: var(--text-2);
