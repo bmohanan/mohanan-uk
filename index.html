@@ -530,18 +530,35 @@
     }
     .hero-title .hero-mark .tilde { opacity: 0.72; }
 
-    /* "Consulting" — brand-gradient wordmark sitting beside the mark.
-       Was previously stacked under "Bimal Mohanan" in a wordmark
-       column; the name was removed so the mark is the single brand
-       identifier. Sub now sits inline next to the mark and reads as
-       "[~bmc] Consulting". */
+    /* Wordmark column — stretched to the row height (= mark height)
+       so "Bimal Mohanan" caps the top and "Consulting" sits flush at
+       the bottom of the logo. Children together never exceed the
+       mark's height by construction: 0.85em + 0.42em + line-heights
+       ≈ 1.23em, well under the 1.83× ratio of mark vs. h1 font-size
+       at every clamp step. */
+    .hero-title .hero-wordmark {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 0.95;
+      text-align: left;
+      padding: 0.05em 0;
+    }
+    /* "Bimal Mohanan" — white, scaled to about 85% of the h1 size so
+       it visually pairs with the mark without out-running its height. */
+    .hero-title .hero-name {
+      font-size: 0.85em;
+      color: var(--text-1);
+      white-space: nowrap;
+      line-height: 0.95;
+    }
+    /* "Consulting" — brand-gradient subtitle below the name. */
     .hero-title .hero-sub {
-      align-self: end;
-      font-size: clamp(28px, 5vw, 64px);
+      font-size: 0.42em;
       font-weight: 600;
       letter-spacing: -0.015em;
       line-height: 1;
-      padding-bottom: 0.1em;
       background: var(--grad-primary);
       -webkit-background-clip: text;
       background-clip: text;
@@ -549,7 +566,8 @@
     }
     @media (max-width: 560px) {
       .hero-title { justify-content: center; }
-      .hero-title .hero-sub { align-self: auto; padding-bottom: 0; }
+      .hero-title .hero-wordmark { text-align: center; align-self: auto; gap: 8px; }
+      .hero-title .hero-name { white-space: normal; }
     }
 
     .hero-role {
@@ -2514,12 +2532,10 @@
           <span class="hero-mark" aria-hidden="true">
             <span class="tilde">~</span><span class="bmc">bmc</span>
           </span>
-          <span class="hero-sub">Consulting</span>
-          <!-- The "Bimal Mohanan" wordmark was removed (2026-05-26).
-               The ~bmc mark is now the single brand identifier across
-               the site (navbar + hero + profile card). The full
-               lockup with the personal name lives only in the
-               footer — see footer.js. -->
+          <span class="hero-wordmark">
+            <span class="hero-name">Bimal Mohanan</span>
+            <span class="hero-sub">Consulting</span>
+          </span>
         </h1>
 
         <div class="hero-role reveal delay-2">
