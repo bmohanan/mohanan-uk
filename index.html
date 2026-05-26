@@ -530,31 +530,18 @@
     }
     .hero-title .hero-mark .tilde { opacity: 0.72; }
 
-    /* Wordmark column — fills the full height of the mark square so
-       "Bimal Mohanan" caps the top and "Consulting" sits flush with the
-       bottom of the logo. */
-    .hero-title .hero-wordmark {
-      align-self: stretch;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      line-height: 0.95;
-      text-align: left;
-      padding: 0.05em 0;
-    }
-    /* "Bimal Mohanan" — white, scaled to match the logo's visual
-       weight. Inherits the h1's clamp(48-120px) size. */
-    .hero-title .hero-name {
-      color: var(--text-1);
-      white-space: nowrap;
-    }
-    /* "Consulting" — now wears the brand gradient (was: dim text-2);
-       sized up so it reads as a proper second line, not a caption. */
+    /* "Consulting" — brand-gradient wordmark sitting beside the mark.
+       Was previously stacked under "Bimal Mohanan" in a wordmark
+       column; the name was removed so the mark is the single brand
+       identifier. Sub now sits inline next to the mark and reads as
+       "[~bmc] Consulting". */
     .hero-title .hero-sub {
-      font-size: 0.42em;
+      align-self: end;
+      font-size: clamp(28px, 5vw, 64px);
       font-weight: 600;
       letter-spacing: -0.015em;
       line-height: 1;
+      padding-bottom: 0.1em;
       background: var(--grad-primary);
       -webkit-background-clip: text;
       background-clip: text;
@@ -562,8 +549,7 @@
     }
     @media (max-width: 560px) {
       .hero-title { justify-content: center; }
-      .hero-title .hero-wordmark { text-align: center; align-self: auto; gap: 8px; }
-      .hero-title .hero-name { white-space: normal; }
+      .hero-title .hero-sub { align-self: auto; padding-bottom: 0; }
     }
 
     .hero-role {
@@ -2528,10 +2514,12 @@
           <span class="hero-mark" aria-hidden="true">
             <span class="tilde">~</span><span class="bmc">bmc</span>
           </span>
-          <span class="hero-wordmark">
-            <span class="hero-name">Bimal Mohanan</span>
-            <span class="hero-sub">Consulting</span>
-          </span>
+          <span class="hero-sub">Consulting</span>
+          <!-- The "Bimal Mohanan" wordmark was removed (2026-05-26).
+               The ~bmc mark is now the single brand identifier across
+               the site (navbar + hero + profile card). The full
+               lockup with the personal name lives only in the
+               footer — see footer.js. -->
         </h1>
 
         <div class="hero-role reveal delay-2">
@@ -2586,7 +2574,10 @@
             <div class="profile-initials">~bmc</div>
           </div>
           <div class="profile-meta">
-            <div class="profile-name">Bimal Mohanan</div>
+            <!-- The "Bimal Mohanan" name plate that lived here was
+                 removed (2026-05-26). The ~bmc mark in nav + hero is
+                 now the single brand identifier; the profile card
+                 leads with the photo and the Founder / Focus chips. -->
             <div class="profile-meta-item">
               <span class="profile-meta-label">Based</span>
               <span class="profile-meta-val">London, UK</span>
