@@ -794,7 +794,9 @@
       letter-spacing: -0.005em;
       text-align: left;
     }
-    .about-deliver { margin-top: -4px; }
+    /* ul.about-deliver, not .about-deliver, so we beat the later
+       .lesson-list { margin: 0 } rule on specificity. */
+    ul.about-deliver { margin-top: -4px; margin-left: 32px; }
 
     .about-stats {
       display: grid;
