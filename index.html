@@ -853,7 +853,16 @@
     .bento-icon svg { width: 22px; height: 22px; }
 
     .bento-title { font-size: 18px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
-    .bento-desc { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+    .bento-desc {
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.6;
+      /* Justified body fills each card edge to edge so cards of
+         different widths share a consistent left/right rhythm. */
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
 
     .bento-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
     .tag {
@@ -2533,7 +2542,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <h3 class="bento-title">Cross-Functional Leadership</h3>
-          <p class="bento-desc">Building, mentoring and running multi-disciplinary delivery teams.</p>
+          <p class="bento-desc">Building, mentoring and running multi-disciplinary teams across consulting, customer and partner orgs &mdash; bridging the language of engineering, finance and sales so commitments survive contact with reality.</p>
+          <div class="bento-tags">
+            <span class="tag">Mentoring</span>
+            <span class="tag">Hiring</span>
+            <span class="tag">Psych Safety</span>
+            <span class="tag">Coaching</span>
+          </div>
         </div>
 
         <!-- Stakeholder engagement tile -->
@@ -2542,6 +2557,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           </div>
           <h3 class="bento-title">Stakeholder &amp; Partner Engagement</h3>
+          <p class="bento-desc">Trusted-advisor relationships with Microsoft, channel partners and customer C-suites &mdash; translating cloud roadmaps into commercial outcomes both sides can underwrite.</p>
           <div class="bento-tags">
             <span class="tag">Microsoft</span>
             <span class="tag">C-Level</span>
@@ -2557,6 +2573,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <h3 class="bento-title">Incident Review &amp; Postmortems</h3>
+          <p class="bento-desc">Blameless postmortems on the production fires that mattered &mdash; root cause, evidence chain and the operational fix that stops it happening twice. Honest tone, not defensive.</p>
           <div class="bento-tags">
             <span class="tag">Postmortems</span>
             <span class="tag">RCA</span>
@@ -2571,7 +2588,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 6v2m0 8v2"/></svg>
           </div>
           <h3 class="bento-title">FinOps &amp; Cloud Cost Optimisation</h3>
-          <p class="bento-desc">Cross-cloud FinOps practice on <strong>AWS and Azure</strong>: tagging taxonomies, cost allocation, unit economics, Savings Plans / Reservations &amp; Commitments, Cost Explorer + Cost Management, anomaly detection, rightsizing and the guardrails that keep multi-cloud spend honest as it scales.</p>
+          <p class="bento-desc">Cross-cloud FinOps on <strong>AWS and Azure</strong> &mdash; tagging, allocation, unit economics, Savings Plans &amp; Reservations, anomaly detection and rightsizing. The guardrails that keep multi-cloud spend honest as it scales, paired with the shared-ownership culture that makes finance and engineering speak the same language.</p>
           <div class="bento-tags">
             <span class="tag">FinOps</span>
             <span class="tag">Governance</span>
