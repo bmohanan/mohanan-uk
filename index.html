@@ -846,11 +846,22 @@
       transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
       display: flex;
       flex-direction: column;
-      /* Vertically centre the card's content so cards of mismatched
-         heights in the same row read as balanced rather than
-         top-justified with whitespace below. */
-      justify-content: center;
+      /* Top-align card content so every bento-icon lands at the
+         same top-left position across every card (regardless of how
+         much copy sits underneath). Cards with less content show
+         whitespace at the bottom — accepted trade-off for icon
+         alignment consistency. Stat-style cards (.bento-card--stat)
+         opt back into vertical centring below. */
+      justify-content: flex-start;
       gap: 14px;
+    }
+    /* Stat-style cards: big number + short caption, centred in the
+       card on both axes. Use for the 125% / 24/7 / "FY revenue"
+       style tiles where the number is the message. */
+    .bento-card--stat {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
     .bento-card::before {
       content: "";
@@ -2310,7 +2321,6 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#home" class="brand" aria-label="Home — BMC, Bimal Mohanan Consulting">
-        <span class="brand-mark">~bmc</span>
         <span>Bimal Mohanan</span>
       </a>
 
@@ -2606,7 +2616,7 @@
         </div>
 
         <!-- Cost optimisation big number -->
-        <div class="bento-card span-3 reveal delay-2">
+        <div class="bento-card bento-card--stat span-3 reveal delay-2">
           <div class="bento-big-num">125%</div>
           <div>
             <h3 class="bento-title" style="font-size: 16px;">FY revenue target</h3>
@@ -2757,7 +2767,7 @@
         </div>
 
         <!-- 24/7 managed-service stat card -->
-        <div class="bento-card span-2 reveal">
+        <div class="bento-card bento-card--stat span-2 reveal">
           <div class="bento-big-num">24/7</div>
           <div>
             <h3 class="bento-title" style="font-size: 16px;">Managed Service Operations</h3>
@@ -2910,7 +2920,7 @@
         </div>
 
         <!-- 4 engineering pillars stat card -->
-        <div class="bento-card span-2 reveal delay-2">
+        <div class="bento-card bento-card--stat span-2 reveal delay-2">
           <div class="bento-big-num">4</div>
           <div>
             <h3 class="bento-title" style="font-size: 16px;">Engineering Pillars Led</h3>
