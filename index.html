@@ -1169,6 +1169,7 @@
       pointer-events: none;
       transition: opacity 0.4s ease;
     }
+    .cal-loading[hidden] { display: none; }
     /* When the iframe is present, fade the loading state out so the
        Cal.com widget shows through. Class is added by the loader JS. */
     .cal-frame.is-ready .cal-loading { opacity: 0; }
@@ -1196,6 +1197,43 @@
       animation: spin 0.9s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Calendar failure card — replaces the spinner when the embed script
+       never loads (tracker blocking, network failure). Stays inside the
+       cal-frame so the visual rhythm of the section is preserved. */
+    .cal-failed {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .cal-failed[hidden] { display: none; }
+    .cal-failed-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.01em;
+    }
+    .cal-failed-sub {
+      max-width: 460px;
+      margin: 0;
+      color: var(--text-3);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .cal-failed-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .cal-failed-actions .btn { min-height: 44px; }
 
     /* Belt-and-braces escape hatch for the Cal embed.
        Always visible beneath the iframe so visitors on strict-tracker
@@ -1596,6 +1634,31 @@
     .reveal.delay-2 { transition-delay: 0.2s; }
     .reveal.delay-3 { transition-delay: 0.3s; }
     .reveal.delay-4 { transition-delay: 0.4s; }
+
+    /* Hero is above the fold. Show its content immediately rather than
+       gating visibility on the IntersectionObserver firing — otherwise
+       a slow JS parse leaves the most important text blank on first paint.
+       A short CSS-only keyframe provides the subtle entrance flair; the
+       element's resting state stays visible so if the animation is
+       suppressed (reduced motion, animation disabled) the content is
+       still there. */
+    .hero .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: heroEntrance 0.5s ease-out backwards;
+    }
+    .hero .reveal.delay-1 { animation-delay: 0s; }
+    .hero .reveal.delay-2 { animation-delay: 0.05s; }
+    .hero .reveal.delay-3 { animation-delay: 0.1s; }
+    .hero .reveal.delay-4 { animation-delay: 0.15s; }
+    @keyframes heroEntrance {
+      from { opacity: 0.55; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero .reveal { animation: none; }
+    }
 
     /* =====================================================================
        LEADERSHIP LESSONS
@@ -3812,10 +3875,27 @@
               <div class="cal-loading-spinner"></div>
               <span>Loading calendar…</span>
             </div>
+            <!-- Shown by JS if the embed script never loads (tracker
+                 blocking, network failure). Hidden by default so a working
+                 embed never sees it. -->
+            <div class="cal-failed" hidden>
+              <div class="cal-failed-title">Calendar didn't load</div>
+              <p class="cal-failed-sub">Some browsers block the embed. Pick a slot directly or drop me a line — both reach me the same way.</p>
+              <div class="cal-failed-actions">
+                <a class="btn btn-primary" href="https://cal.eu/mohanan/30-catch-up" target="_blank" rel="noopener noreferrer">
+                  Book on Cal.com
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="mailto:bimal@mohanan.uk?subject=Catch-up%20call">
+                  Email me a time
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l8 8 8-8"/></svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <p class="cal-fallback reveal delay-3">
-          Embed not loading?
+          Prefer not to use the embed?
           <a href="https://cal.eu/mohanan/30-catch-up" target="_blank" rel="noopener noreferrer">Book a 30-min call directly &rarr;</a>
         </p>
       </div>
@@ -4149,11 +4229,26 @@
     //    works equally with cal.com or the EU instance cal.eu.
     //    Bookings sync to iCloud calendar via Cal.com's Apple Calendar
     //    integration (set up once in Cal.com settings).
+    //
+    //    Failure model: tracker blockers (Brave shields, Firefox strict,
+    //    uBlock, etc.) sometimes block app.cal.eu/embed/embed.js. If the
+    //    iframe never appears we swap the spinner for a "calendar didn't
+    //    load" card with direct cal.eu + mailto links so the booking
+    //    path is never a dead end.
     const calEl = document.getElementById('cal-inline');
     if (calEl) {
       const CAL_USERNAME  = calEl.dataset.calLink;       // e.g. "mohanan/30-catch-up"
       const CAL_ORIGIN    = calEl.dataset.calOrigin    || 'https://cal.com';
       const CAL_EMBED_SRC = calEl.dataset.calEmbedSrc || 'https://app.cal.com/embed/embed.js';
+      const frameEl       = calEl.closest('.cal-frame');
+      const loadingEl     = calEl.querySelector('.cal-loading');
+      const failedEl      = calEl.querySelector('.cal-failed');
+
+      const showFailure = () => {
+        if (!failedEl || !failedEl.hasAttribute('hidden')) return;
+        if (loadingEl) loadingEl.hidden = true;
+        failedEl.hidden = false;
+      };
 
       const bootCal = () => {
         if (window.__calBooted) return;
@@ -4161,9 +4256,8 @@
 
         // If the placeholder is still in place, bail and show the help message.
         if (!CAL_USERNAME || CAL_USERNAME.includes('YOUR-CAL-USERNAME')) {
-          const loading = calEl.querySelector('.cal-loading');
-          if (loading) {
-            loading.innerHTML = '<div style="text-align:center;padding:0 24px;line-height:1.6;">' +
+          if (loadingEl) {
+            loadingEl.innerHTML = '<div style="text-align:center;padding:0 24px;line-height:1.6;">' +
               '<div style="color:var(--accent-cyan); font-weight:600; margin-bottom:8px;">Cal.com not yet configured</div>' +
               '<div style="color:var(--text-3); font-size:12px;">Sign up at cal.com and set <code style="background:rgba(0,217,255,0.1);padding:2px 6px;border-radius:4px;">data-cal-link</code> on this element.</div>' +
               '</div>';
@@ -4171,12 +4265,23 @@
           return;
         }
 
+        // Cal.com's standard queueing shim, lightly modified so the
+        // injected script tag carries an onerror handler — this is the
+        // single hook that tells us the embed.js was blocked (Brave
+        // shields, Firefox strict, uBlock, corporate proxy, etc.).
         (function (C, A, L) {
           let p = function (a, ar) { a.q.push(ar); };
           let d = C.document;
           C.Cal = C.Cal || function () {
             let cal = C.Cal; let ar = arguments;
-            if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+            if (!cal.loaded) {
+              cal.ns = {}; cal.q = cal.q || [];
+              const s = d.createElement('script');
+              s.src = A;
+              s.onerror = () => { window.__calScriptFailed = true; showFailure(); };
+              d.head.appendChild(s);
+              cal.loaded = true;
+            }
             if (ar[0] === L) {
               const api = function () { p(api, arguments); };
               const namespace = ar[1]; api.q = api.q || [];
@@ -4205,16 +4310,23 @@
         // Watch for the iframe Cal injects, then mark the frame ready so the
         // loading spinner fades out. Cal manages height via postMessage; we
         // just need to reveal the iframe once it's in the DOM.
-        const frameEl = calEl.closest('.cal-frame');
         const watcher = new MutationObserver(() => {
           if (calEl.querySelector('iframe')) {
             frameEl?.classList.add('is-ready');
+            window.__calIframeReady = true;
             watcher.disconnect();
           }
         });
         watcher.observe(calEl, { childList: true, subtree: true });
-        // Safety: also flip ready after 4s in case the iframe loads silently.
-        setTimeout(() => frameEl?.classList.add('is-ready'), 4000);
+
+        // Belt-and-braces: if the iframe never appears within 8s, surface
+        // the fallback card even if onerror didn't fire (some blockers
+        // silently drop the request without throwing a load error).
+        setTimeout(() => {
+          if (!window.__calIframeReady && !calEl.querySelector('iframe')) {
+            showFailure();
+          }
+        }, 8000);
       };
 
       // Lazy-boot when the embed scrolls into view.
