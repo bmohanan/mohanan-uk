@@ -505,50 +505,64 @@
     /* Legacy .line-1 / .line-2 spans no longer used (old "Bimal" /
        "Mohanan" stacked layout). Rules kept commented as a marker. */
 
-    /* Hero brand mark — large gradient square with "~bmc",
-       proportionally scaled with the surrounding type. Mirrors the
-       footer brand-mark--lg pattern at hero size. */
+    /* Hero brand mark — large gradient square with the "~ bmc" lockup
+       laid out as a single horizontal row (tilde left, "bmc" right —
+       never stacked). Mirrors the footer brand-mark--lg pattern at
+       hero size. */
     .hero-title .hero-mark {
       flex: 0 0 auto;
-      width: clamp(72px, 14vw, 180px);
-      height: clamp(72px, 14vw, 180px);
-      border-radius: clamp(18px, 3vw, 36px);
+      width: clamp(96px, 16vw, 220px);
+      height: clamp(96px, 16vw, 220px);
+      border-radius: clamp(20px, 3.4vw, 44px);
       background: linear-gradient(135deg, #b15cff 0%, #ff2ec8 100%);
-      display: grid; place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.05em;
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(20px, 3vw, 42px);
+      font-size: clamp(22px, 3.4vw, 48px);
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.04em;
       line-height: 1;
-      box-shadow: 0 0 60px rgba(177, 92, 255, 0.5);
+      white-space: nowrap;
+      box-shadow: 0 0 72px rgba(177, 92, 255, 0.55);
     }
     .hero-title .hero-mark .tilde { opacity: 0.72; }
-    /* Wordmark column: big name (gradient) + Consulting subtitle. */
+
+    /* Wordmark column — fills the full height of the mark square so
+       "Bimal Mohanan" caps the top and "Consulting" sits flush with the
+       bottom of the logo. */
     .hero-title .hero-wordmark {
+      align-self: stretch;
       display: flex;
       flex-direction: column;
-      gap: 0.05em;
+      justify-content: space-between;
       line-height: 0.95;
       text-align: left;
+      padding: 0.05em 0;
     }
+    /* "Bimal Mohanan" — white, scaled to match the logo's visual
+       weight. Inherits the h1's clamp(48-120px) size. */
     .hero-title .hero-name {
+      color: var(--text-1);
+      white-space: nowrap;
+    }
+    /* "Consulting" — now wears the brand gradient (was: dim text-2);
+       sized up so it reads as a proper second line, not a caption. */
+    .hero-title .hero-sub {
+      font-size: 0.42em;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1;
       background: var(--grad-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      white-space: nowrap;
-    }
-    .hero-title .hero-sub {
-      font-size: 0.32em;
-      font-weight: 500;
-      color: var(--text-2);
-      letter-spacing: -0.01em;
-      line-height: 1;
     }
     @media (max-width: 560px) {
       .hero-title { justify-content: center; }
-      .hero-title .hero-wordmark { text-align: center; }
+      .hero-title .hero-wordmark { text-align: center; align-self: auto; gap: 8px; }
       .hero-title .hero-name { white-space: normal; }
     }
 
@@ -869,6 +883,12 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       text-align: center;
+      /* Flex column so number + label are centred on BOTH axes,
+         even if the row stretches one tile taller than its content. */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     .about-stat-num {
       font-family: 'Space Grotesk', sans-serif;
@@ -2428,7 +2448,7 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#home" class="brand" aria-label="Home — BMC, Bimal Mohanan Consulting">
-        <span>Bimal Mohanan</span>
+        <span class="brand-mark">~bmc</span>
       </a>
 
       <ul class="nav-links">
@@ -2505,7 +2525,9 @@
     <div class="container">
       <div class="hero-inner">
         <h1 class="hero-title reveal delay-1">
-          <span class="hero-mark" aria-hidden="true"><span class="tilde">~</span>bmc</span>
+          <span class="hero-mark" aria-hidden="true">
+            <span class="tilde">~</span><span class="bmc">bmc</span>
+          </span>
           <span class="hero-wordmark">
             <span class="hero-name">Bimal Mohanan</span>
             <span class="hero-sub">Consulting</span>
@@ -2570,7 +2592,7 @@
               <span class="profile-meta-val">London, UK</span>
             </div>
             <div class="profile-meta-item">
-              <span class="profile-meta-label">CEO</span>
+              <span class="profile-meta-label">Founder</span>
               <span class="profile-meta-val">BMC &mdash; Bimal Mohanan Consulting</span>
             </div>
             <div class="profile-meta-item">
