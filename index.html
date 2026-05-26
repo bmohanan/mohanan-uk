@@ -151,7 +151,7 @@
       /* Layout */
       --container-max: 1240px;
       --container-max-xl: 1440px;
-      --section-py: clamp(80px, 12vw, 140px);
+      --section-py: clamp(44px, 6.5vw, 80px);
     }
 
     /* Widen the canvas on large desktop displays — the user wanted
@@ -278,8 +278,8 @@
     /* Recommendations → Schedule is a tight thematic flow (proof points
        → take the next step). Halve the default section gap so it reads
        as continuous instead of stranded across a cavernous break. */
-    #testimonials { padding-bottom: clamp(40px, 5vw, 60px); }
-    #schedule { padding-top: clamp(40px, 5vw, 60px); }
+    #testimonials { padding-bottom: clamp(24px, 3.5vw, 44px); }
+    #schedule { padding-top: clamp(24px, 3.5vw, 44px); }
 
     .section-head {
       text-align: center;
@@ -343,7 +343,27 @@
       width: calc(100% - 32px);
       max-width: 1200px;
       z-index: 50;
-      transition: top 0.3s ease;
+      transition:
+        top 0.3s ease,
+        transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 0.35s ease;
+      will-change: transform, opacity;
+    }
+    /* Auto-hide on idle. Combine with the existing translateX(-50%)
+       centering — never set transform without it or the navbar jumps
+       to the left edge mid-transition. */
+    .nav.nav-hidden {
+      transform: translateX(-50%) translateY(calc(-100% - 28px));
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav { transition: none; }
+      .nav.nav-hidden {
+        transform: translateX(-50%);
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
 
     .nav-inner {
@@ -771,6 +791,15 @@
       hyphens: auto;
       -webkit-hyphens: auto;
     }
+
+    .about-subhead {
+      font-size: 20px;
+      color: var(--text-1);
+      margin-top: 8px;
+      letter-spacing: -0.005em;
+      text-align: left;
+    }
+    .about-deliver { margin-top: -4px; }
 
     .about-stats {
       display: grid;
@@ -2264,7 +2293,11 @@
       }
       .reveal { opacity: 1; transform: none; }
     }
-  </style>
+  
+  /* BMC convention — Centered Title + Justified Paragraph (2026-05-26) */
+  h1, h2 { text-align: center; }
+  p { text-align: justify; hyphens: auto; text-wrap: pretty; }
+</style>
 </head>
 
 <body>
@@ -2395,6 +2428,14 @@
   ========================================================== -->
   <section id="about">
     <div class="container">
+      <!-- Hoisted heading: eyebrow + h2 live in a centered .section-head
+           above the 2-col grid so the title reads in the middle of the
+           page rather than being pinned to the right (about-text) column. -->
+      <div class="section-head reveal">
+        <div class="eyebrow">About me</div>
+        <h2 class="section-title">Technology Leader &amp; Cloud Transformation Specialist</h2>
+      </div>
+
       <div class="about-grid">
         <!-- Profile card -->
         <div class="profile-card reveal">
@@ -2431,29 +2472,56 @@
           </div>
         </div>
 
-        <!-- Bio + stats -->
+        <!-- Bio + stats. The eyebrow + h2 used to live here; they were
+             hoisted into a centered .section-head above the grid so the
+             title aligns with the rest of the page. -->
         <div class="about-text reveal delay-1">
-          <div class="eyebrow">About me</div>
-          <h2>Cloud, delivered.</h2>
           <p>
-            I'm Bimal — an accomplished technology leader with a 13+ year track record across cloud
-            transformation, technical pre-sales and delivery leadership. Microsoft Azure heritage,
-            now operating across AWS and Azure at scale. I've built my career at the intersection of
-            deep platform fluency and the commercial conversations that move enterprise buyers — at
-            Microsoft itself, at major partners (SoftwareONE, BCN, Akkodis), and at customers
-            (Oracle, BT) across the UK and EMEA.
+            With over 15 years' experience driving cloud transformation across the UK and EMEA, I
+            specialise in bridging deep technical expertise with the commercial outcomes that matter
+            to enterprise buyers.
           </p>
           <p>
-            What I do best is lead cross-functional teams to deliver enterprise-scale cloud with
-            measurable business impact: accelerating Azure adoption, optimising consumption and cost,
-            embedding governance, and turning managed-services portfolios into something customers
-            genuinely renew. I'm equally comfortable in a CXO conversation, a technical design
-            workshop, a pipeline review or a delivery escalation.
+            My career spans Microsoft Azure — where I built my foundation — through to the
+            large-scale, multi-cloud environments I operate across AWS and Azure today, alongside
+            platform-native estates built on Pega and Kubernetes. I've held senior roles at
+            Microsoft and with global partners including SoftwareONE, BCN, and Akkodis, and worked
+            directly with major enterprises such as Oracle and BT. I've also contracted directly
+            with AWS, leading FinOps and TCO engagements across Azure, AWS, and Oracle — helping
+            organisations gain clarity on cost models, ownership boundaries, licensing optimisation,
+            and sustainable cloud economics.
+          </p>
+          <p>
+            Today I lead a Platform and Engineering practice spanning production engineering,
+            DevOps, service management, and security and compliance — delivering managed services
+            into regulated and public-sector environments where governance, data residency, and
+            assurance are non-negotiable.
+          </p>
+
+          <h3 class="about-subhead">What I deliver</h3>
+          <p>
+            I lead cross-functional teams to design, deliver, and optimise enterprise-scale cloud
+            programmes that produce measurable business impact. My focus areas include:
+          </p>
+          <ul class="lesson-list lesson-list--terse about-deliver">
+            <li>Accelerating secure cloud adoption across multi-cloud and platform-native estates</li>
+            <li>Driving significant cost optimisation and consumption efficiency through FinOps and TCO discipline</li>
+            <li>Embedding robust governance, compliance, and operating models — anchored to standards such as ISO 27001, Cyber Essentials Plus, and NCSC guidance</li>
+            <li>Hardening security posture through privileged access management, identity controls, and continuous monitoring</li>
+            <li>Transforming managed services portfolios into high-renewal, value-driven offerings</li>
+          </ul>
+
+          <p>
+            Equally comfortable in the boardroom or the server room, I move seamlessly between
+            CXO-level strategy, technical design workshops, pipeline reviews, and delivery
+            escalations. Whether you're embarking on a cloud-first journey, optimising an existing
+            estate, or needing trusted leadership to de-risk transformation, I bring the platform
+            fluency, commercial insight, and delivery rigour to make it happen.
           </p>
 
           <div class="about-stats">
             <div class="about-stat">
-              <div class="about-stat-num">13+</div>
+              <div class="about-stat-num">15+</div>
               <div class="about-stat-label">Years in cloud</div>
             </div>
             <div class="about-stat">
@@ -3867,11 +3935,63 @@
     // INTERACTIONS — kept lightweight, vanilla, no dependencies.
     // =====================================================================
 
-    // 1) Sticky nav: darken on scroll
+    // 1) Sticky nav: darken on scroll + auto-hide after 1.5s idle.
+    //    Reveals immediately on scroll, mousemove, touch, or keydown.
+    //    Stays visible while the cursor is over the nav itself, and
+    //    while the mobile menu is open. Honours prefers-reduced-motion.
     const nav = document.getElementById('nav');
-    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 16);
+    const NAV_IDLE_MS = 1500;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let navIdleTimer = null;
+    let lastMouseShowAt = 0;
+
+    const hideNav = () => {
+      // Don't hide while the mobile drawer is open or motion is reduced.
+      const mm = document.getElementById('mobileMenu');
+      if (mm && mm.classList.contains('open')) return;
+      if (prefersReducedMotion.matches) return;
+      // Don't hide if the cursor is currently over the nav.
+      if (nav.matches(':hover')) return;
+      nav.classList.add('nav-hidden');
+    };
+    const showNav = () => {
+      nav.classList.remove('nav-hidden');
+      if (navIdleTimer) clearTimeout(navIdleTimer);
+      navIdleTimer = setTimeout(hideNav, NAV_IDLE_MS);
+    };
+
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 16);
+      showNav();
+    };
     onScroll();
+    showNav();
+
     window.addEventListener('scroll', onScroll, { passive: true });
+    // Throttle mousemove — it can fire dozens of times per second.
+    window.addEventListener('mousemove', () => {
+      const now = performance.now();
+      if (now - lastMouseShowAt < 100) return;
+      lastMouseShowAt = now;
+      showNav();
+    }, { passive: true });
+    window.addEventListener('touchstart', showNav, { passive: true });
+    window.addEventListener('keydown', showNav);
+    // Hovering the nav itself keeps it pinned open.
+    nav.addEventListener('mouseenter', () => {
+      if (navIdleTimer) clearTimeout(navIdleTimer);
+      nav.classList.remove('nav-hidden');
+    });
+    nav.addEventListener('mouseleave', showNav);
+    // Pause the idle timer when the tab is backgrounded so the nav doesn't
+    // flash hidden the moment the user returns.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (navIdleTimer) clearTimeout(navIdleTimer);
+      } else {
+        showNav();
+      }
+    });
 
     // 2) Mobile menu toggle
     const navToggle = document.getElementById('navToggle');
