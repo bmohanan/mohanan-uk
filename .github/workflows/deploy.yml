@@ -1,4 +1,5 @@
 # GitHub Actions deploy for mohanan.uk
+# (Pushed directly from local for the first time on 2026-05-26 after wiring gh as git credential helper — the keychain PAT lacked workflow scope.)
 #
 # Mirrors what `ship-mohanan-uk.sh` does locally, so a push to `main`
 # ships the site even if the laptop isn't around. The local script
