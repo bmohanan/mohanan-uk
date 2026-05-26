@@ -1149,18 +1149,28 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
-    /* Progressive disclosure: only the first row (3 cards) is visible
-       on load. The "Show more" button below toggles .expanded on the
-       parent .testimonials, revealing the rest. */
-    .testimonials:not(.expanded) > .quote-card:nth-child(n+4) {
-      display: none;
-    }
-    .testimonials-toggle-wrap {
+    /* =====================================================================
+       Generic "show more" toggle pattern. Hide the tail of a collection
+       behind a pill button. Two consumers right now:
+         - .testimonials  → hide cards 4+ (keeps the first row of 3)
+         - .timeline      → hide tl-items 2+ (keeps the current role only)
+       Add a new consumer by:
+         1. Adding a `<div class="toggle-wrap">…<button class="toggle-pill"
+            data-toggle-target="GRID_ID" data-toggle-keep="N">…</button></div>`
+            after the grid
+         2. Adding a CSS rule `#GRID_ID:not(.expanded) > .CHILD:nth-child(n+M)
+            { display: none }` (where M = keep + 1)
+       The shared JS at the bottom wires up every .toggle-pill automatically.
+       ===================================================================== */
+    .testimonials:not(.expanded) > .quote-card:nth-child(n+4) { display: none; }
+    .timeline:not(.expanded) > .tl-item:nth-child(n+2) { display: none; }
+
+    .toggle-wrap {
       display: flex;
       justify-content: center;
       margin-top: 28px;
     }
-    .testimonials-toggle {
+    .toggle-pill {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       letter-spacing: 0.14em;
@@ -1176,19 +1186,17 @@
       gap: 10px;
       transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
-    .testimonials-toggle:hover {
+    .toggle-pill:hover {
       color: var(--text-1);
       background: var(--glass-bg-strong);
       border-color: rgba(0, 217, 255, 0.4);
       transform: translateY(-1px);
     }
-    .testimonials-toggle svg {
+    .toggle-pill svg {
       width: 14px; height: 14px;
       transition: transform 0.25s ease;
     }
-    .testimonials.expanded ~ .testimonials-toggle-wrap .testimonials-toggle svg {
-      transform: rotate(180deg);
-    }
+    .toggle-pill[aria-expanded="true"] svg { transform: rotate(180deg); }
     .quote-card {
       position: relative;
       padding: 32px 28px 28px;
@@ -3085,7 +3093,7 @@
         <p class="section-sub">14+ years across Microsoft, the partner ecosystem and global enterprises — selling, building, delivering and now leading cloud at scale across AWS and Azure. Every chapter shaped the next.</p>
       </div>
 
-      <div class="timeline">
+      <div class="timeline" id="experienceTimeline">
         <!-- Akkodis: current role. Yasir Masood quote inline below the description. -->
         <div class="tl-item reveal">
           <div class="tl-card">
@@ -3368,6 +3376,20 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Show-more toggle: only the current Akkodis role is visible by
+           default; this pill reveals the full historical timeline.
+           Wired up by the generic toggle script at the bottom of the page. -->
+      <div class="toggle-wrap">
+        <button type="button" class="toggle-pill"
+                aria-expanded="false" aria-controls="experienceTimeline"
+                data-toggle-target="experienceTimeline" data-toggle-keep="1"
+                data-toggle-label-collapsed="Show {n} earlier roles"
+                data-toggle-label-expanded="Show current role only">
+          <span data-toggle-label></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -3748,12 +3770,14 @@
       </div>
 
       <!-- Show-more toggle: hides recommendations 4-9 by default.
-           Wired up in the main interactions script at the bottom of
-           the page; uses .testimonials.expanded as the state hook. -->
-      <div class="testimonials-toggle-wrap">
-        <button type="button" class="testimonials-toggle" id="testimonialsToggle"
-                aria-expanded="false" aria-controls="testimonialsGrid">
-          <span data-toggle-label>Show 6 more</span>
+           Wired up by the generic toggle script at the bottom of the page. -->
+      <div class="toggle-wrap">
+        <button type="button" class="toggle-pill"
+                aria-expanded="false" aria-controls="testimonialsGrid"
+                data-toggle-target="testimonialsGrid" data-toggle-keep="3"
+                data-toggle-label-collapsed="Show {n} more recommendations"
+                data-toggle-label-expanded="Show fewer recommendations">
+          <span data-toggle-label></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
       </div>
@@ -4136,29 +4160,42 @@
     navToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
     mobileMenu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
-    // 2b) Recommendations: progressive disclosure. CSS hides cards 4+
-    //     when .testimonials lacks .expanded; toggle the class on click.
-    (() => {
-      const grid = document.getElementById('testimonialsGrid');
-      const btn = document.getElementById('testimonialsToggle');
-      if (!grid || !btn) return;
-      const label = btn.querySelector('[data-toggle-label]');
-      const hiddenCount = Math.max(0, grid.children.length - 3);
-      // Initialise label with the actual hidden count.
-      if (label) label.textContent = `Show ${hiddenCount} more`;
+    // 2b) Generic "show more" toggle — wires up every .toggle-pill.
+    //     Each pill carries:
+    //       data-toggle-target = id of the grid to toggle
+    //       data-toggle-keep   = how many children stay visible when collapsed
+    //       data-toggle-label-collapsed / -expanded = label templates
+    //         (use {n} for the hidden count in the collapsed label)
+    //     The matching CSS rule does the actual hiding.
+    document.querySelectorAll('.toggle-pill').forEach((btn) => {
+      const grid = document.getElementById(btn.dataset.toggleTarget);
+      if (!grid) return;
+      const keep = parseInt(btn.dataset.toggleKeep || '0', 10);
+      const hiddenCount = Math.max(0, grid.children.length - keep);
+      const labelEl = btn.querySelector('[data-toggle-label]');
+      const collapsedTpl = btn.dataset.toggleLabelCollapsed || 'Show {n} more';
+      const expandedTpl  = btn.dataset.toggleLabelExpanded  || 'Show fewer';
+      const setLabel = (expanded) => {
+        if (!labelEl) return;
+        labelEl.textContent = expanded
+          ? expandedTpl
+          : collapsedTpl.replace('{n}', String(hiddenCount));
+      };
+      // If nothing would actually be hidden, drop the button entirely.
+      if (hiddenCount === 0) { btn.closest('.toggle-wrap')?.remove(); return; }
+      setLabel(false);
       btn.addEventListener('click', () => {
         const expanded = grid.classList.toggle('expanded');
         btn.setAttribute('aria-expanded', String(expanded));
-        if (label) label.textContent = expanded ? 'Show fewer' : `Show ${hiddenCount} more`;
-        // Re-fire the IntersectionObserver on newly-revealed cards so
-        // their .reveal opacity transition plays (instead of popping in).
+        setLabel(expanded);
+        // Re-play the .reveal fade on newly-shown children (so they don't pop).
         if (expanded) {
-          grid.querySelectorAll('.quote-card.reveal:not(.in)').forEach(el => {
+          grid.querySelectorAll('.reveal:not(.in)').forEach((el) => {
             requestAnimationFrame(() => el.classList.add('in'));
           });
         }
       });
-    })();
+    });
 
     // 3) Reveal-on-scroll using IntersectionObserver.
     //    Any element with class .reveal fades in when 12% visible.
