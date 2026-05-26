@@ -42,10 +42,14 @@ deploy-mohanan-uk.sh      # just the wrangler deploy + cache purge (if already p
 
 Both scripts live in `~/.local/bin/` and authenticate via:
 
-- `git`: macOS Keychain (`github.com` / `bmohanan`)
+- `git`: macOS Keychain (`github.com` / `bmohanan`) — current PAT lacks `workflow` scope; updates to `.github/workflows/*.yml` need the GitHub web UI or `gh auth login` with a richer token.
 - `wrangler` + Cloudflare API: macOS Keychain (`security find-generic-password -s "cloudflare-api-token-bmohanan"`)
 
-Required token scopes: **Account · Cloudflare Pages:Edit**, **Account · Workers Scripts:Edit**, **Zone · DNS:Edit**, **Zone · Cache Purge:Purge**. If a deploy fails with `code 10000 Authentication error`, the token is missing a scope — see Cloudflare → Profile → API Tokens.
+Required CF token scopes: **Account · Cloudflare Pages:Edit**, **Account · Workers Scripts:Edit**, **Zone · DNS:Edit**, **Zone · Cache Purge:Purge**. The deploy script fail-fasts with a scope hint if a probe to the Pages API returns non-200.
+
+**Push goes to two places** (configured 2026-05-26): a regular `git push` writes to both GitHub (canonical) and an iCloud bare-repo mirror at `~/Library/Mobile Documents/com~apple~CloudDocs/git-mirror/mohanan-uk.git`. The mirror is backup-only; recovery is `git clone` from that path.
+
+A **GitHub Actions workflow** at `.github/workflows/deploy.yml` mirrors the local ship script as a CI fallback. Triggers on push to main; runs link-check (lychee) on PRs; needs repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (already set).
 
 ---
 
@@ -66,6 +70,27 @@ cp -R ~/Documents/GitHub/mohanan-uk/. /tmp/portfolio-fetch/
 Then browse at `http://localhost:8765/`.
 
 ---
+
+## Local dev tools (in `~/.local/bin/` unless noted)
+
+Standalone binaries — no Homebrew, no sudo needed.
+
+| Tool | What it's for |
+|---|---|
+| `gh` | GitHub API — repo metadata, PRs, releases, secrets. Use this before reaching for Chrome. Auth via `gh auth login` (one-time). |
+| `lychee` | Link checker. Also runs in CI; lefthook fires it on `git push`. |
+| `shellcheck` | Bash linter. Wired into lefthook for any `*.sh` / `*.bash` change. |
+| `lefthook` | Git-hooks runner. Config in repo's `lefthook.yml`; install with `lefthook install` (writes to `.git/hooks/`). |
+| `jq` | JSON pretty-printer — replaces the `python3 -m json.tool` workaround. |
+| `mise` | Runtime version manager. Successor to the hand-rolled `~/.local/node/` setup; not yet activated here. |
+| `prettier` | Formatter for HTML/CSS/JS/YAML/MD. Installed via `~/.local/node/bin/prettier` (npm global). Runs in lefthook pre-commit on non-hand-tuned files. |
+
+**Hook config (`lefthook.yml`):**
+- `pre-commit`: shellcheck on staged `.sh`, prettier-check on staged `.yml/.json/.md/.css/.js` (skips the hand-tuned `index.html` + insights + brand/).
+- `pre-push`: lychee with the same args as CI (skip linkedin / cdn-cgi / mailto / tel; accept 307/308/405/999).
+- Skip hooks for one commit with `LEFTHOOK=0 git commit ...`.
+
+Tools resolved via **absolute paths** in `lefthook.yml` because git launches hooks with a stripped `PATH`. For `prettier` specifically, the hook prefixes `PATH=$HOME/.local/node/bin:$PATH` because prettier's shebang is `#!/usr/bin/env node`.
 
 ## Conventions
 
