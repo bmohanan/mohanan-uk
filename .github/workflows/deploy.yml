@@ -52,11 +52,6 @@ jobs:
       - name: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          # Pin to a version where --root-dir + --base-url cooperate. v0.23
-          # mangles root-relative paths into URLs like
-          # `https://mohanan.uk/home/runner/work/.../photo.jpg`, fails every
-          # asset. v0.24+ resolves to the local file as intended.
-          lycheeVersion: v0.24.2
           # Check index, the rebranded insights article, the brand kit hub,
           # and the 404 page. Skip mailto: (false positives) and the local
           # tel: link. Cache results between runs.
@@ -64,15 +59,19 @@ jobs:
           #   405 = Web3Forms (POST-only); 999 = LinkedIn anti-bot;
           #   307/308 = Cloudflare Pages .html-stripping redirects;
           #   /cdn-cgi/ = Cloudflare email obfuscation; linkedin.com = anti-scrape
-          # --root-dir lets lychee resolve root-relative links (/foo) against the repo.
+          # --root-dir lets lychee resolve root-relative links (/foo) against
+          # the repo's local files. `--base-url` is intentionally NOT set:
+          # lychee v0.23 (the action's default) mis-combines the two, turning
+          # /photo.jpg into https://mohanan.uk/home/runner/.../photo.jpg and
+          # failing every asset. With root-dir alone, root-relative paths
+          # resolve to local files; absolute URLs go over HTTP as normal.
           # brand/index.html intentionally skipped ‚Äî its sibling links don't
-          # resolve cleanly under --base (works in browser, breaks in lychee).
+          # resolve cleanly under lychee (works in browser).
           args: >-
             --no-progress
             --cache
             --max-cache-age 1d
             --root-dir ${{ github.workspace }}
-            --base-url https://mohanan.uk
             --accept '200,201,202,204,206,301,302,304,307,308,403,405,429,999'
             --exclude '^mailto:'
             --exclude '^tel:'
