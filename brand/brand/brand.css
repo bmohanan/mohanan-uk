@@ -182,3 +182,37 @@
   background-clip: text;
   color: transparent;
 }
+
+/* =========================================================
+   Brand-kit footer — shared across every brand/* page.
+   Previously defined inline as .kit / .cm / .ov / inline style;
+   consolidated here on 2026-05-26 so the brand sub-site has one
+   consistent footer treatment. Markup contract:
+     <footer class="bmc-foot">
+       <span>BMC · [page label] · YYYY</span>
+       <span>mohanan.uk · London · Open to the world</span>
+     </footer>
+   ========================================================= */
+footer.bmc-foot {
+  margin-top: 80px;
+  padding-top: 28px;
+  border-top: 1px solid var(--bmc-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--bmc-mono);
+  font-size: 11px;
+  color: var(--bmc-fg-dim);
+}
+footer.bmc-foot a {
+  color: var(--bmc-cyan);
+  text-decoration: none;
+}
+footer.bmc-foot a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 640px) {
+  footer.bmc-foot { justify-content: center; text-align: center; }
+}
