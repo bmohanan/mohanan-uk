@@ -208,11 +208,8 @@ figure.viz figcaption{font-family:var(--mono);font-size:.74rem;color:var(--text-
 .btn-ghost{border:1px solid var(--border);color:var(--text)}
 .btn-ghost:hover{border-color:var(--g1);color:#fff}
 
-/* footer */
-.foot{border-top:1px solid var(--border);padding:30px 0;font-family:var(--mono);font-size:.8rem;color:var(--text-dim);position:relative;z-index:1}
-.foot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.status{display:inline-flex;align-items:center;gap:8px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+/* (Old .foot / .status / .dot styles removed — page now uses the
+   canonical site footer via /footer.js.) */
 
 /* about */
 .about-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:start}
@@ -265,7 +262,6 @@ figure.viz figcaption{font-family:var(--mono);font-size:.74rem;color:var(--text-
   .stat{border-right:none}
   .sec-head{flex-wrap:wrap;gap:12px}
   .brand .bt .s{display:none}
-  .foot .wrap{justify-content:center;text-align:center}
 }
 </style>
 </head>
@@ -665,12 +661,10 @@ figure.viz figcaption{font-family:var(--mono);font-size:.74rem;color:var(--text-
   </div>
 </section>
 
-<footer class="foot">
-  <div class="wrap">
-    <span>By Bimal Mohanan · CEO, BMC — Bimal Mohanan Consulting</span>
-    <span class="status"><span class="dot"></span> available · q3 2026 · <a href="https://www.mohanan.uk/">← mohanan.uk</a></span>
-  </div>
-</footer>
+<!-- Canonical BMC footer — single source of truth in /footer.js.
+     Replaces the older minimal byline-only footer (Apr 2026). -->
+<div data-bmc-footer></div>
+<script defer src="/footer.js"></script>
 
 <script>
 const bar=document.getElementById('progress');
