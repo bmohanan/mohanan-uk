@@ -1,0 +1,131 @@
+# GitHub Actions deploy for mohanan.uk
+#
+# Mirrors what `ship-mohanan-uk.sh` does locally, so a push to `main`
+# ships the site even if the laptop isn't around. The local script
+# remains the primary path for everyday use; this workflow is the
+# always-available fallback.
+#
+# One-time setup (already done if this file is committed):
+#   1. Cloudflare ‚Üí Profile ‚Üí API Tokens ‚Äî copy the "Token rotation steps" token.
+#   2. GitHub repo ‚Üí Settings ‚Üí Secrets and variables ‚Üí Actions ‚Üí New secret:
+#        CLOUDFLARE_API_TOKEN   ‚Üê paste the token
+#        CLOUDFLARE_ACCOUNT_ID  ‚Üê 9d4d510b52ad7e294fce5415f544c587
+#
+# What it does:
+#   - On push to main: stage the public files (same list as deploy-mohanan-uk.sh),
+#     deploy via wrangler, then purge the Cloudflare edge cache.
+#   - On pull request: run a link check (lychee) so broken links don't sneak in.
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:    # allow manual re-runs from the Actions tab
+
+# Don't run two deploys in parallel for the same branch.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # -------------------------------------------------------------
+  # Link check on every PR (and on push, as a sanity pass).
+  # Uses lychee ‚Äî a fast Rust link checker. Fails the run only if a
+  # link is genuinely broken (4xx/5xx); transient timeouts are skipped.
+  # -------------------------------------------------------------
+  link-check:
+    name: link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: lychee-${{ github.sha }}
+          restore-keys: lychee-
+
+      - name: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Check index, the rebranded insights article, the brand kit hub,
+          # and the 404 page. Skip mailto: (false positives) and the local
+          # tel: link. Cache results between runs.
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --exclude '^mailto:'
+            --exclude '^tel:'
+            --exclude 'localhost'
+            index.html
+            404.html
+            insights/itam-finops-self-funding/index.html
+            brand/index.html
+          fail: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  # -------------------------------------------------------------
+  # Deploy on push to main only. Skipped on PRs (link-check is enough).
+  # -------------------------------------------------------------
+  deploy:
+    name: deploy to Cloudflare Pages
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: link-check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Stage only the public files ‚Äî same list as deploy-mohanan-uk.sh.
+      # Anything not listed here stays out of the deployment (READMEs,
+      # CLAUDE.md, .github/, og-image.html, etc.).
+      - name: Stage public files
+        run: |
+          mkdir -p _stage
+          for f in index.html 404.html photo.jpg favicon.svg favicon-32.png apple-touch-icon.png og-image.png _headers _redirects; do
+            [ -f "$f" ] && cp "$f" "_stage/$f"
+          done
+          for d in brand insights; do
+            [ -d "$d" ] && cp -R "$d" "_stage/$d"
+          done
+          ls -la _stage
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _stage --project-name=mohanan-uk --branch=main --commit-dirty=true
+
+      # Purge edge cache so the new build is visible immediately, not after
+      # 30-60s. Token needs Zone ‚Üí Cache Purge:Purge (it does).
+      - name: Purge Cloudflare edge cache
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          curl -fsS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/05b4fd4ebaa7c8488749d4a695cdba82/purge_cache" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+            | grep -q '"success":true' \
+            && echo "cache purged" \
+            || (echo "WARN: cache purge failed"; exit 0)
+
+      - name: Verify apex
+        run: |
+          # Give Cloudflare a beat to roll the new deployment forward.
+          for i in 1 2 3 4 5 6; do
+            sleep 10
+            code=$(curl -s -o /dev/null -w '%{http_code}' https://mohanan.uk/)
+            echo "attempt $i: HTTP $code"
+            [ "$code" = "200" ] && exit 0
+          done
+          echo "ERROR: apex did not return 200 within 60s"
+          exit 1
