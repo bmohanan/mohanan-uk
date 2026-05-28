@@ -3843,17 +3843,17 @@
       <div class="section-head reveal">
         <div class="eyebrow">Book a call</div>
         <h2 class="section-title">Find a time that works</h2>
-        <p class="section-sub">Pick a slot below — the meeting drops straight into my iCloud calendar and you'll get a confirmation with the dial-in or location.</p>
+        <p class="section-sub">Pick a slot below — the meeting drops straight into my iCloud calendar and you'll get a confirmation with the <strong>FaceTime link</strong>. Already on Apple? Just <a href="facetime://+447301288711" style="color: var(--accent-cyan); border-bottom: 1px solid rgba(0,217,255,0.35);">FaceTime me now &rarr;</a></p>
       </div>
 
       <div class="schedule-perks reveal delay-1">
         <div class="perk">
           <div class="perk-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
           </div>
           <div class="perk-text">
-            <span class="perk-title">Live availability</span>
-            <span class="perk-sub">No back-and-forth emails</span>
+            <span class="perk-title">FaceTime call</span>
+            <span class="perk-sub">Apple-to-Apple, no extra app</span>
           </div>
         </div>
         <div class="perk">
@@ -3878,7 +3878,18 @@
 
       <div class="schedule-card reveal delay-2">
         <!-- Cal.com inline target. data-cal-link / data-cal-origin / data-cal-embed-src
-             are read by the vendored loader script. Wired to the EU instance. -->
+             are read by the vendored loader script. Wired to the EU instance.
+
+             ⚠️ FaceTime as the meeting medium has to be configured ONCE in
+             cal.eu, not here. Steps:
+               1. https://app.cal.eu → Event Types → "30 Min Catch Up"
+               2. Location → "Link meeting"
+               3. URL: facetime://+447301288711
+               4. Save.
+             The booking confirmation email then carries a FaceTime URL the
+             attendee taps at meeting time. Cal.com has no native FaceTime
+             integration (Google Meet / Zoom / Cal Video only), so the
+             "Link meeting" custom-URL workaround is the supported path. -->
         <div class="cal-frame">
           <div id="cal-inline"
                data-cal-link="mohanan/30-catch-up"
@@ -3899,6 +3910,10 @@
                 <a class="btn btn-primary" href="https://cal.eu/mohanan/30-catch-up" target="_blank" rel="noopener noreferrer">
                   Book on Cal.com
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="facetime://+447301288711" aria-label="Start a FaceTime call with Bimal">
+                  FaceTime now
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                 </a>
                 <a class="btn btn-ghost" href="mailto:bimal@mohanan.uk?subject=Catch-up%20call">
                   Email me a time
