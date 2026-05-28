@@ -65,7 +65,7 @@ fi
 
 # ---- Stage only public files ----
 echo "Staging public files -> $STAGE_DIR"
-for f in index.html 404.html footer.js photo.jpg favicon.svg favicon-32.png apple-touch-icon.png og-image.png _headers _redirects; do
+for f in index.html 404.html footer.js robots.txt photo.jpg favicon.svg favicon-32.png apple-touch-icon.png og-image.png _headers _redirects; do
   if [ -f "$REPO_DIR/$f" ]; then
     cp "$REPO_DIR/$f" "$STAGE_DIR/$f"
   else
@@ -73,8 +73,10 @@ for f in index.html 404.html footer.js photo.jpg favicon.svg favicon-32.png appl
   fi
 done
 
-# Stage public directories (BMC brand kit + long-form insights).
-for d in brand insights; do
+# Stage public directories (BMC brand kit + long-form insights + .well-known
+# for security.txt / future RFC 9116 assets). Hidden dirs are passed by name
+# so the leading dot is fine.
+for d in brand insights .well-known; do
   if [ -d "$REPO_DIR/$d" ]; then
     cp -R "$REPO_DIR/$d" "$STAGE_DIR/$d"
   fi

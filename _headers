@@ -50,3 +50,16 @@
 
 /*.woff2
   Cache-Control: public, max-age=2592000, must-revalidate
+
+# ---------- robots.txt + security.txt ----------
+# Both are advisory text resources crawlers / researchers fetch directly.
+# Force text/plain so no browser treats them as HTML, and a short cache
+# so policy changes propagate inside a day.
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400

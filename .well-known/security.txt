@@ -1,0 +1,12 @@
+# RFC 9116 — security policy for mohanan.uk
+# https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:bimal@mohanan.uk
+Expires: 2027-05-28T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://mohanan.uk/.well-known/security.txt
+
+# This is a single-page portfolio site running on Cloudflare Pages.
+# Please report security issues — broken auth, RCE on the contact form
+# (Web3Forms), abuse of the email/phone endpoints, or anything that
+# could harm a visitor — to the contact above. PGP key on request.
