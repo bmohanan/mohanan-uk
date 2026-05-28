@@ -60,6 +60,7 @@ pre-push:
           --accept '200,201,202,204,206,301,302,304,307,308,403,405,429,999' \
           --exclude '^mailto:' \
           --exclude '^tel:' \
+          --exclude '^facetime' \
           --exclude 'localhost' \
           --exclude '/cdn-cgi/' \
           --exclude 'linkedin\.com' \
